@@ -15,9 +15,13 @@ void Actor::OnStart() {
 }
 
 void Actor::OnUpdate() {
-
+	for( auto &component : container_.getAllComponents() ){
+		component->OnUpdate();
+	}
 }
 
 void Actor::OnStop() {
-
+	for( auto &component : container_.getAllComponents() ){
+		component->OnStop();
+	}
 }

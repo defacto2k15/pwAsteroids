@@ -7,7 +7,7 @@
 
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-function-mockers.h>
 #include "Component.h"
-#include <IActor.h>
+class IActor;
 
 class MockComponent : public Component {
 public:
