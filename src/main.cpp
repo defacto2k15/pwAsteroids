@@ -5,5 +5,5 @@
 #include <iostream>
 
 int main(int, char**){
-	std::cout << " END of program " << std::endl;
+	std::cout << " END of program " << std::endl;	//the most important part of the program - the beginning of the journey..
 }
