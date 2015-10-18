@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 project(pwAsteroids)
 
 FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
@@ -10,14 +10,17 @@ add_definitions(-Wextra -Wall)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
-file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/help/*.cpp" "src/help/*h")
+file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/help/*.cpp" "src/help/*.h" "src/PrimitiveTypes/*.cpp" "src/PrimitiveTypes/*.h"
+        "src/exceptions/*.cpp" "src/exceptions/*.h" " src/ModelDrawing/*.h" "src/ModelDrawing/*.cpp" "src/Observer/*.h" "src/Observer/*.cpp"
+        "src/ModelDrawing/IDrawablePrimitive.h" "src/modelInterfaces/*.cpp" "src/modelInterfaces/*.h"
+  )
 add_executable(WykopMainDataAlanyzer ${SRC_FILES}  )
 TARGET_LINK_LIBRARIES( WykopMainDataAlanyzer ${Boost_LIBRARIES} )
 
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
 if(BuildTests)
-    set(GMOCK_ROOT lib/gmock-1.7.0)
+    set(GMOCK_ROOT lib/gmock-1.7.0 )
     # Google Mock & Test
     ###############################################################################
     add_subdirectory(${GMOCK_ROOT})
@@ -26,7 +29,10 @@ if(BuildTests)
 
     set(TEST_EXECUTABLE_NAME "tests")
     # Test files
-    file(GLOB TEST_FILES "test/*.cpp" "test/*h"  "mock/*.cpp" "mock/*.h")
+    file(GLOB TEST_FILES "test/*.cpp" "test/*h"  "mock/*.cpp" "mock/*.h" "test/PrimitiveTypes/*.cpp" "test/PrimitiveTypes/*.h"
+            "test/EndToEndTests/*.cpp" "test/EndToEndTests/help/*.cpp" "test/EndToEndTests/help/*.h"
+            "test/EndToEndTests/expectations/*.cpp" "test/EndToEndTests/expectations/*.h" "test/EndToEndTests/when/*.h" "test/EndToEndTests/when/*.cpp"
+            )
 
     # Don't include Main.cpp from src
     file(GLOB MAIN_SRC "src/main.cpp")
