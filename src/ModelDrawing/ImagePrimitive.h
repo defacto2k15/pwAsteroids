@@ -6,13 +6,15 @@
 #define PWASTEROIDS_IMAGEPRIMITIVE_H
 
 #include "IDrawablePrimitive.h"
+#include "ImagePrimitiveType.h"
+
 class ImagePrimitive : public IDrawablePrimitive {
 	Point position_;
 	Rotation rotation_;
 	ScaleToScreen scale_;
-	ImagePath  path_;
+	ImagePrimitiveType imageType_;
 public:
-	ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ImagePath &path);
+	ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ImagePrimitiveType &imageType);
 
 	virtual Point getPosition() const;
 
@@ -20,7 +22,7 @@ public:
 
 	virtual ScaleToScreen getScale() const;
 
-	ImagePath getPathToImage() const;
+	ImagePrimitiveType getImageType() const;
 };
 
 

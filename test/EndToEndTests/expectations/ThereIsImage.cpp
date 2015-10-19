@@ -9,11 +9,11 @@ bool ThereIsImage::checkExpectation() {
 }
 
 std::string ThereIsImage::getExpectationDescription() {
-	return std::string("Expect that GameScreenModel will have image with path: "+imageFileName_);
+	return std::string("Expect that GameScreenModel will have image of type nr: "+std::to_string(imageType_));
 }
 
 std::string ThereIsImage::getFailureMessage() {
-	return std::string("Among "+std::to_string(lastLoopImageCount_)+" images there was no image with given path: " + imageFileName_);
+	return std::string("Among "+std::to_string(lastLoopImageCount_)+" images there was no image with given type nr: " + std::to_string(imageType_));
 }
 
 void ThereIsImage::beforeFirstUpdate(std::shared_ptr<Game> g) {
@@ -25,7 +25,7 @@ void ThereIsImage::notify() {
 	auto images = game_->getOutGameScreenModel().getImagePrimitives();
 	lastLoopImageCount_ = images.size();
 	for( auto &image : images){
-		if( image.getPathToImage() == imageFileName_ ){
+		if( image.getImageType() == imageType_ ){
 			wasThereSuchImageInLastLoop_ = true;
 			return;
 		}
@@ -34,4 +34,5 @@ void ThereIsImage::notify() {
 	return;
 }
 
-ThereIsImage::ThereIsImage(std::string imageFileName) : imageFileName_(imageFileName) {}
+
+ThereIsImage::ThereIsImage(ImagePrimitiveType imageType) : imageType_(imageType) {}

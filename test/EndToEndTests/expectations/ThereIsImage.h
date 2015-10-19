@@ -8,14 +8,15 @@
 
 #include <Observer/IObserver.h>
 #include "IEndToEndExpectation.h"
+#include "src/ModelDrawing/ImagePrimitiveType.h"
 
 class ThereIsImage : public IEndToEndExpectation, IObserver {
-	std::string imageFileName_;
+	ImagePrimitiveType imageType_;
 	bool wasThereSuchImageInLastLoop_ = false;
 	unsigned long lastLoopImageCount_ = 0;
 	std::shared_ptr<Game> game_;
 public:
-	ThereIsImage(std::string imageFileName);
+	ThereIsImage(ImagePrimitiveType imageType);;
 
 	virtual bool checkExpectation();
 

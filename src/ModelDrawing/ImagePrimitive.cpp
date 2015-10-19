@@ -18,9 +18,9 @@ ScaleToScreen ImagePrimitive::getScale() const {
 	return scale_;
 }
 
-ImagePath ImagePrimitive::getPathToImage() const {
-	return path_;
-}
+ImagePrimitive::ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ImagePrimitiveType &type)
+		: position_(position), rotation_(rotation), scale_(scale), imageType_(type) { }
 
-ImagePrimitive::ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ImagePath &path)
-		: position_(position), rotation_(rotation), scale_(scale), path_(path) { }
+ImagePrimitiveType ImagePrimitive::getImageType() const {
+	return imageType_;
+}
