@@ -3,7 +3,33 @@
 //
 
 #include <iostream>
+#include <allegro5\allegro5.h>
 
 int main(int, char**){
 	std::cout << " END of program " << std::endl;	//the most important part of the program - the beginning of the journey..
+	
+	{
+		//ALLEGRO example for test - works :D
+		ALLEGRO_DISPLAY *display = NULL;
+
+		if (!al_init()) {
+			fprintf(stderr, "failed to initialize allegro!\n");
+			return -1;
+		}
+
+		display = al_create_display(640, 480);
+		if (!display) {
+			fprintf(stderr, "failed to create display!\n");
+			return -1;
+		}
+
+		al_clear_to_color(al_map_rgb(255, 120, 0));
+
+		al_flip_display();
+
+		al_rest(3.0);
+
+		al_destroy_display(display);
+	}
+	return 0;
 }
