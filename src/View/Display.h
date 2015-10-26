@@ -1,0 +1,19 @@
+
+#ifndef PWASTEROIDS_DISPLAY_H
+#define PWASTEROIDS_DISPLAY_H
+
+#include <allegro5\allegro.h>
+#include <allegro5\allegro_image.h>
+#include <iostream>
+#include "Scene.h"
+
+class Display {
+public:
+	void drawSceneOnDisplay(Scene*);
+	Display(int = 640, int = 480);
+	~Display();
+private:
+	ALLEGRO_DISPLAY *display;
+};
+
+#endif

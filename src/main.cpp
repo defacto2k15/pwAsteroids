@@ -3,33 +3,23 @@
 //
 
 #include <iostream>
-#include <allegro5\allegro5.h>
+#include "View\ViewManager.h"
+//#include <allegro5\allegro5.h>
 
 int main(int, char**){
 	std::cout << " END of program " << std::endl;	//the most important part of the program - the beginning of the journey..
 	
-	{
-		//ALLEGRO example for test - works :D
-		ALLEGRO_DISPLAY *display = NULL;
-
-		if (!al_init()) {
-			fprintf(stderr, "failed to initialize allegro!\n");
-			return -1;
+	ViewManager* manager = new ViewManager();
+	Scene *scene = manager->createNewScene();
+	for (int i = 0; i < 10; ++i) {
+		for (int j = 0; j < 8; ++j) {
+			scene->addDrawableObject("aa.bmp", 65*i, 56*j);
 		}
-
-		display = al_create_display(640, 480);
-		if (!display) {
-			fprintf(stderr, "failed to create display!\n");
-			return -1;
-		}
-
-		al_clear_to_color(al_map_rgb(255, 120, 0));
-
-		al_flip_display();
-
-		al_rest(3.0);
-
-		al_destroy_display(display);
 	}
+	manager->drawSceneOnDisplay(scene);
+	system("pause");
+	delete manager;
+	system("pause");
+
 	return 0;
 }
