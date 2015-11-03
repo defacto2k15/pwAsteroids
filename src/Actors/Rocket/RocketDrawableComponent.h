@@ -6,7 +6,6 @@
 #define PWASTEROIDS_ROCKETDRAWABLECOMPONENT_H
 
 
-#include <Component.h>
 #include <components/PositionComponent.h>
 #include <ModelDrawing/DrawingSystem.h>
 #include "ModelDrawing/ImagePrimitiveType.h"

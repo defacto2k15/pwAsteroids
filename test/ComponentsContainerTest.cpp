@@ -5,9 +5,8 @@
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <mock/MockComponent.h>
 #include <memory>
-#include <ComponentsContainer.h>
 #include <help/StdContainers.h>
-#include <ComponentTypeChecker.h>
+#include <components/ComponentsContainer.h>
 #include "exceptions/ThereIsNotOneComponentOfGivenType.h"
 
 class  ComponentsContainerTest : public ::testing::Test

@@ -14,6 +14,7 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/help/*.cpp" "src/help/*.h" "src/P
         "src/exceptions/*.cpp" "src/exceptions/*.h" " src/ModelDrawing/*.h" "src/ModelDrawing/*.cpp" "src/Observer/*.h" "src/Observer/*.cpp"
         "src/ModelDrawing/IDrawablePrimitive.h" "src/modelInterfaces/*.cpp" "src/modelInterfaces/*.h" "src/Services/*.cpp"
         "src/Services/*.h" "src/components/*.h" "src/components/*.cpp" "src/Actors/Rocket/*.cpp" "src/Actors/Rocket/*.h"
+        "src/Actors/*.h" "src/Actors/*.cpp"
   )
 add_executable(pwAsteroids ${SRC_FILES}  )
 TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )

@@ -6,11 +6,11 @@
 #define PWASTEROIDS_ACTORSCONTAINER_H
 
 
-#include <IActor.h>
 #include "ServiceContainer.h"
 #include <memory>
 #include <algorithm>
 #include <exceptions/RemovingNotAddedActorException.h>
+#include <Actors/IActor.h>
 
 class ActorsContainer  : public ServiceContainer {
 	std::vector<std::shared_ptr<IActor>> actorsVec_;

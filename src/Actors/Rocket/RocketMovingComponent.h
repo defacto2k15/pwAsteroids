@@ -5,7 +5,6 @@
 #ifndef PWASTEROIDS_ROCKETMOVINGCOMPONENT_H
 #define PWASTEROIDS_ROCKETMOVINGCOMPONENT_H
 
-#include <Component.h>
 #include <components/PositionComponent.h>
 #include <modelInterfaces/IKeyboardStateProvider.h>
 #include <Services/IPhysicsService.h>

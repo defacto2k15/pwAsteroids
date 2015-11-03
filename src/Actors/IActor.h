@@ -7,10 +7,9 @@
 
 #include <memory>
 #include <Services/IService.h>
-#include "Component.h"
-#include "ComponentTypeChecker.h"
 #include <memory>
 #include <assert.h>
+#include <components/ComponentTypeChecker.h>
 
 class Component;
 

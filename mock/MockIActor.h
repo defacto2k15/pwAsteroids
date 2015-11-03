@@ -6,7 +6,7 @@
 #define PWASTEROIDS_MOCKIACTOR_H
 
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-function-mockers.h>
-#include <Component.h>
+#include <Actors/IActor.h>
 
 class MockIActor : public IActor {
 public:

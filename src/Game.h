@@ -14,7 +14,7 @@
 #include <components/PositionComponent.h>
 #include <Actors/Rocket/RocketDrawableComponent.h>
 #include <Actors/Rocket/RocketMovingComponent.h>
-#include "Actor.h"
+#include <Actors/Actor.h>
 
 class Game {
 private:
