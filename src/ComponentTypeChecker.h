@@ -17,7 +17,7 @@ class ComponentTypeChecker{
 
 public:
 	template<typename ComponentType>
-	ComponentTypeChecker( ComponentType *ptr) : checker_(&checker<ComponentType>){};
+	ComponentTypeChecker( ComponentType *) : checker_(&checker<ComponentType>){};
 
 	template<typename ComponentType>
 	static ComponentTypeChecker create(){

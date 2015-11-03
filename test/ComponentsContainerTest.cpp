@@ -104,12 +104,12 @@ TEST_F( ComponentsContainerTest, GetsCorrectComponentsUsingComponentsTypeChecker
 	inVec.push_back(componentWeWillCheck);
 
 	addComponents(inVec);
-    MockComponent *m;
+    MockComponent *m = nullptr;
 	ComponentTypeChecker checker = ComponentTypeChecker(m);
 	auto outVec = container.getComponents(checker);
 
 	ASSERT_TRUE(contains(outVec, componentWeWillCheck));
-	ASSERT_EQ(1, outVec.size());
+	ASSERT_EQ((unsigned)1, outVec.size());
 }
 
 TEST_F(ComponentsContainerTest, getOneComponentWorksAsIntended ){
