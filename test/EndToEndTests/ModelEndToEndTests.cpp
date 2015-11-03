@@ -3,7 +3,7 @@
 #include <test/EndToEndTests/help/GameRunner.h>
 #include <test/EndToEndTests/when/ForEveryLoop.h>
 #include <test/EndToEndTests/expectations/ThereIsImage.h>
-#include "src/ModelDrawing/ImagePrimitiveType.h"
+#include "src/Model/ModelDrawing/ImagePrimitiveType.h"
 //
 // Created by defacto on 16.10.15.
 //

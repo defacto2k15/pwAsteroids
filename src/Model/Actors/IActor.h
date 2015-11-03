@@ -6,10 +6,10 @@
 #define PWASTEROIDS_IACTOR_H
 
 #include <memory>
-#include <Services/IService.h>
+#include <Model/Services/IService.h>
 #include <memory>
 #include <assert.h>
-#include <components/ComponentTypeChecker.h>
+#include <Model/components/ComponentTypeChecker.h>
 
 class Component;
 

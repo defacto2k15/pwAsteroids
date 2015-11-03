@@ -5,12 +5,12 @@
 #ifndef PWASTEROIDS_ROOTSERVICECONTAINERTEST_H
 #define PWASTEROIDS_ROOTSERVICECONTAINERTEST_H
 
-#include <Services/IService.h>
+#include <Model/Services/IService.h>
 #include <memory>
 #include <vector>
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <mock/MockService.h>
-#include <Services/RootServiceContainer.h>
+#include <Model/Services/RootServiceContainer.h>
 #include <iostream>
 class RootServiceContainerTest : public ::testing::Test {
 public:

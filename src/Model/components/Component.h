@@ -4,7 +4,7 @@
 
 #ifndef PWASTEROIDS_COMPONENT_H
 #define PWASTEROIDS_COMPONENT_H
-#include "Actors/IActor.h"
+#include "Model/Actors/IActor.h"
 class IActor;
 
 class Component {

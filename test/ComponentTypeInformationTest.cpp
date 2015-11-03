@@ -4,7 +4,7 @@
 
 
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
-#include <components/Component.h>
+#include <Model/components/Component.h>
 
 
 class C1 : public Component{};

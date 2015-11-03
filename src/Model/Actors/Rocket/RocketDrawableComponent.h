@@ -6,9 +6,11 @@
 #define PWASTEROIDS_ROCKETDRAWABLECOMPONENT_H
 
 
-#include <components/PositionComponent.h>
-#include <ModelDrawing/DrawingSystem.h>
-#include "ModelDrawing/ImagePrimitiveType.h"
+#include <Model/components/PositionComponent.h>
+#include <Model/ModelDrawing/DrawingSystem.h>
+#include "Model/ModelDrawing/ImagePrimitiveType.h"
+#include <memory>
+
 class RocketDrawableComponent : public Component{
 
 public:

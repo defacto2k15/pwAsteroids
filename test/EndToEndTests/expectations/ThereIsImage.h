@@ -6,9 +6,9 @@
 #define PWASTEROIDS_THEREISIMAGE_H
 
 
-#include <Observer/IObserver.h>
+#include <Model/Observer/IObserver.h>
 #include "IEndToEndExpectation.h"
-#include "src/ModelDrawing/ImagePrimitiveType.h"
+#include "src/Model/ModelDrawing/ImagePrimitiveType.h"
 
 class ThereIsImage : public IEndToEndExpectation, IObserver {
 	ImagePrimitiveType imageType_;

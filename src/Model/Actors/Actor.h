@@ -6,7 +6,7 @@
 #define PWASTEROIDS_ACTOR_H
 
 
-#include <components/ComponentsContainer.h>
+#include <Model/components/ComponentsContainer.h>
 #include "IActor.h"
 class ComponentsContainer;
 

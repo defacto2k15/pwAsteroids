@@ -3,7 +3,7 @@
 //
 
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
-#include <Services/GameTimeProvider.h>
+#include <Model/Services/GameTimeProvider.h>
 #include <thread>
 #include <iostream>
 class GameTimeProviderTest : public ::testing::Test{

@@ -6,7 +6,7 @@
 #define PWASTEROIDS_MOCKSERVICE_H
 
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-function-mockers.h>
-#include <Services/IService.h>
+#include <Model/Services/IService.h>
 
 class MockIService : public IService {
 public:

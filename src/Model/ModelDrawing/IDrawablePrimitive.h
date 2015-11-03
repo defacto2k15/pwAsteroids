@@ -5,9 +5,9 @@
 #ifndef PWASTEROIDS_IDRAWABLEPRIMITIVE_H
 #define PWASTEROIDS_IDRAWABLEPRIMITIVE_H
 
-#include <PrimitiveTypes/AliasedTypes.h>
-#include <PrimitiveTypes/ScaleToScreen.h>
-#include "src/PrimitiveTypes/Point.h"
+#include <Model/PrimitiveTypes/AliasedTypes.h>
+#include <Model/PrimitiveTypes/ScaleToScreen.h>
+#include "src/Model/PrimitiveTypes/Point.h"
 
 class IDrawablePrimitive{
 public:

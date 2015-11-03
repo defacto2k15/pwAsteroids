@@ -6,9 +6,9 @@
 #define PWASTEROIDS_DRAWINGSYSTEM_H
 
 
-#include <PrimitiveTypes/Point.h>
-#include <PrimitiveTypes/AliasedTypes.h>
-#include <PrimitiveTypes/ScaleToScreen.h>
+#include <Model/PrimitiveTypes/Point.h>
+#include <Model/PrimitiveTypes/AliasedTypes.h>
+#include <Model/PrimitiveTypes/ScaleToScreen.h>
 #include "ImagePrimitiveType.h"
 #include "IPrimitivesToDrawContainer.h"
 

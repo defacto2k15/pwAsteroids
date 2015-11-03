@@ -5,9 +5,9 @@
 #ifndef PWASTEROIDS_ROCKETMOVINGCOMPONENT_H
 #define PWASTEROIDS_ROCKETMOVINGCOMPONENT_H
 
-#include <components/PositionComponent.h>
-#include <modelInterfaces/IKeyboardStateProvider.h>
-#include <Services/IPhysicsService.h>
+#include <Model/components/PositionComponent.h>
+#include <Model/modelInterfaces/IKeyboardStateProvider.h>
+#include <Model/Services/IPhysicsService.h>
 
 class RocketMovingComponent : public Component {
 

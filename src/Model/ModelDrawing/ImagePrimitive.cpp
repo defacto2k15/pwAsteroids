@@ -2,8 +2,8 @@
 // Created by defacto on 16.10.15.
 //
 
-#include <PrimitiveTypes/ScaleToScreen.h>
-#include <PrimitiveTypes/AliasedTypes.h>
+#include <Model/PrimitiveTypes/ScaleToScreen.h>
+#include <Model/PrimitiveTypes/AliasedTypes.h>
 #include "ImagePrimitive.h"
 
 Point ImagePrimitive::getPosition() const {

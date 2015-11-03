@@ -2,7 +2,7 @@
 // Created by defacto on 14.10.15.
 //
 
-#include <exceptions/ThereIsNotOneComponentOfGivenType.h>
+#include <Model/exceptions/ThereIsNotOneComponentOfGivenType.h>
 #include "ComponentsContainer.h"
 #include "Component.h"
 

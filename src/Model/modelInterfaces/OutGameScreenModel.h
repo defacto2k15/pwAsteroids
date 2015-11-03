@@ -5,11 +5,11 @@
 #ifndef PWASTEROIDS_OUTDRAWINGPRIMITIVESMODEL_H
 #define PWASTEROIDS_OUTDRAWINGPRIMITIVESMODEL_H
 
-#include <ModelDrawing/ImagePrimitive.h>
+#include <Model/ModelDrawing/ImagePrimitive.h>
 #include <vector>
-#include <Observer/Observable.h>
-#include <Services/IService.h>
-#include "ModelDrawing/IPrimitivesToDrawContainer.h"
+#include <Model/Observer/Observable.h>
+#include <Model/Services/IService.h>
+#include <Model/ModelDrawing/IPrimitivesToDrawContainer.h>
 
 class OutGameScreenModel : public Observable, public IService,  public IPrimitivesToDrawContainer {
 	std::vector<ImagePrimitive> imagePrimitives_;

@@ -6,15 +6,16 @@
 #define PWASTEROIDS_GAME_H
 
 
-#include <modelInterfaces/OutGameScreenModel.h>
+#include <Model/modelInterfaces/OutGameScreenModel.h>
 #include <stdexcept>
-#include <Services/ActorsContainer.h>
-#include <Services/GameTimeProvider.h>
-#include <Services/RootServiceContainer.h>
-#include <components/PositionComponent.h>
-#include <Actors/Rocket/RocketDrawableComponent.h>
-#include <Actors/Rocket/RocketMovingComponent.h>
-#include <Actors/Actor.h>
+#include <Model/Services/ActorsContainer.h>
+#include <Model/Services/GameTimeProvider.h>
+#include <Model/Services/RootServiceContainer.h>
+#include <Model/components/PositionComponent.h>
+#include <Model/Actors/Rocket/RocketDrawableComponent.h>
+#include <Model/Actors/Rocket/RocketMovingComponent.h>
+#include <Model/Actors/Actor.h>
+#include <Model/ModelDrawing/DrawingSystem.h>
 
 class Game {
 private:

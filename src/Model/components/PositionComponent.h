@@ -2,8 +2,8 @@
 // Created by defacto on 24.10.15.
 //
 
-#include <PrimitiveTypes/Point.h>
-#include <PrimitiveTypes/AliasedTypes.h>
+#include <Model/PrimitiveTypes/Point.h>
+#include <Model/PrimitiveTypes/AliasedTypes.h>
 #include "Component.h"
 
 #ifndef PWASTEROIDS_POSITIONCOMPONENT_H

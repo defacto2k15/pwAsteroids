@@ -10,11 +10,11 @@ add_definitions(-Wextra -Wall)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
-file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/help/*.cpp" "src/help/*.h" "src/PrimitiveTypes/*.cpp" "src/PrimitiveTypes/*.h"
-        "src/exceptions/*.cpp" "src/exceptions/*.h" " src/ModelDrawing/*.h" "src/ModelDrawing/*.cpp" "src/Observer/*.h" "src/Observer/*.cpp"
-        "src/ModelDrawing/IDrawablePrimitive.h" "src/modelInterfaces/*.cpp" "src/modelInterfaces/*.h" "src/Services/*.cpp"
-        "src/Services/*.h" "src/components/*.h" "src/components/*.cpp" "src/Actors/Rocket/*.cpp" "src/Actors/Rocket/*.h"
-        "src/Actors/*.h" "src/Actors/*.cpp"
+file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help/*.h" "src/Model/PrimitiveTypes/*.cpp" "src/Model/PrimitiveTypes/*.h"
+        "src/Model/exceptions/*.cpp" "src/Model/exceptions/*.h" "src/Model/ModelDrawing/*.h" "src/Model/ModelDrawing/*.cpp" "src/Model/Observer/*.h" "src/Model/Observer/*.cpp"
+        "src/Model/ModelDrawing/IDrawablePrimitive.h" "src/Model/modelInterfaces/*.cpp" "src/Model/modelInterfaces/*.h" "src/Model/Services/*.cpp"
+        "src/Model/Services/*.h" "src/Model/components/*.h" "src/Model/components/*.cpp" "src/Model/Actors/Rocket/*.cpp" "src/Model/Actors/Rocket/*.h"
+        "src/Model/Actors/*.h" "src/Model/Actors/*.cpp"
   )
 add_executable(pwAsteroids ${SRC_FILES}  )
 TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )

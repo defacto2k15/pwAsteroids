@@ -9,8 +9,8 @@
 #include "ServiceContainer.h"
 #include <memory>
 #include <algorithm>
-#include <exceptions/RemovingNotAddedActorException.h>
-#include <Actors/IActor.h>
+#include <Model/exceptions/RemovingNotAddedActorException.h>
+#include <Model/Actors/IActor.h>
 
 class ActorsContainer  : public ServiceContainer {
 	std::vector<std::shared_ptr<IActor>> actorsVec_;

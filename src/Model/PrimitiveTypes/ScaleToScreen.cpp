@@ -2,7 +2,7 @@
 // Created by defacto on 16.10.15.
 //
 
-#include <exceptions/BadScaleArgumentException.h>
+#include <Model/exceptions/BadScaleArgumentException.h>
 #include "ScaleToScreen.h"
 
 ScaleToScreen::ScaleToScreen(double x, double y) {

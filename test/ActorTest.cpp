@@ -6,7 +6,7 @@
 #include <mock/MockComponent.h>
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-matchers.h>
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-nice-strict.h>
-#include <Actors/Actor.h>
+#include <Model/Actors/Actor.h>
 
 using ::testing::Ge;
 using ::testing::Mock;
