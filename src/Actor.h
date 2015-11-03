@@ -13,6 +13,10 @@ class ComponentsContainer;
 class Actor : public IActor {
 	ComponentsContainer container_;
 public:
+
+
+	virtual std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker);
+
 	Actor(){}
 	virtual void OnStart();
 

@@ -12,10 +12,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
 file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/help/*.cpp" "src/help/*.h" "src/PrimitiveTypes/*.cpp" "src/PrimitiveTypes/*.h"
         "src/exceptions/*.cpp" "src/exceptions/*.h" " src/ModelDrawing/*.h" "src/ModelDrawing/*.cpp" "src/Observer/*.h" "src/Observer/*.cpp"
-        "src/ModelDrawing/IDrawablePrimitive.h" "src/modelInterfaces/*.cpp" "src/modelInterfaces/*.h"
+        "src/ModelDrawing/IDrawablePrimitive.h" "src/modelInterfaces/*.cpp" "src/modelInterfaces/*.h" "src/Services/*.cpp"
+        "src/Services/*.h" "src/components/*.h" "src/components/*.cpp" "src/Actors/Rocket/*.cpp" "src/Actors/Rocket/*.h"
   )
-add_executable(WykopMainDataAlanyzer ${SRC_FILES}  )
-TARGET_LINK_LIBRARIES( WykopMainDataAlanyzer ${Boost_LIBRARIES} )
+add_executable(pwAsteroids ${SRC_FILES}  )
+TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )
 
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
@@ -31,7 +32,8 @@ if(BuildTests)
     # Test files
     file(GLOB TEST_FILES "test/*.cpp" "test/*h"  "mock/*.cpp" "mock/*.h" "test/PrimitiveTypes/*.cpp" "test/PrimitiveTypes/*.h"
             "test/EndToEndTests/*.cpp" "test/EndToEndTests/help/*.cpp" "test/EndToEndTests/help/*.h"
-            "test/EndToEndTests/expectations/*.cpp" "test/EndToEndTests/expectations/*.h" "test/EndToEndTests/when/*.h" "test/EndToEndTests/when/*.cpp"
+            "test/EndToEndTests/expectations/*.cpp" "test/EndToEndTests/expectations/*.h" "test/EndToEndTests/when/*.h"
+            "test/EndToEndTests/when/*.cpp" "test/Services/*.cpp"
             )
 
     # Don't include Main.cpp from src

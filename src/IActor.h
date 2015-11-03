@@ -6,15 +6,31 @@
 #define PWASTEROIDS_IACTOR_H
 
 #include <memory>
+#include <Services/IService.h>
 #include "Component.h"
+#include "ComponentTypeChecker.h"
+#include <memory>
+#include <assert.h>
+
 class Component;
 
-class IActor{
+class IActor : public IService {
 public:
 	virtual void addComponent(std::shared_ptr<Component> component)=0;
-	virtual void OnStart()=0;
-	virtual void OnUpdate()=0;
-	virtual void OnStop()=0;
+
+	template<typename ComponentType>
+	std::shared_ptr<ComponentType> getOnlyComponent(){
+		auto componentBeforeCast = getOnlyComponent(ComponentTypeChecker::create<ComponentType>());
+		std::shared_ptr<ComponentType> afterCast;
+		afterCast = std::dynamic_pointer_cast<ComponentType>(componentBeforeCast);
+		assert(afterCast);
+		return afterCast;
+	}
+
 	virtual ~IActor(){};
+
+protected:
+	virtual std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker)=0;
+
 };
 #endif //PWASTEROIDS_IACTOR_H

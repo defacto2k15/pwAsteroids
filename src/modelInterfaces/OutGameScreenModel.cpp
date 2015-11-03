@@ -5,6 +5,15 @@
 #include "OutGameScreenModel.h"
 
 std::vector<ImagePrimitive> OutGameScreenModel::getImagePrimitives() {
-	throw std::runtime_error("OutGameScreenModel::getImagePrimitives not yet implemented!");
-	return std::vector<ImagePrimitive>();
+	std::vector<ImagePrimitive> vecToReturn(imagePrimitives_);
+	imagePrimitives_.clear();
+	return vecToReturn;
+}
+
+void OutGameScreenModel::AddImage(ImagePrimitive primitive) {
+	imagePrimitives_.push_back(primitive);
+}
+
+void OutGameScreenModel::OnUpdate() {
+	notifyObservers();
 }

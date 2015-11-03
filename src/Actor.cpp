@@ -25,3 +25,7 @@ void Actor::OnStop() {
 		component->OnStop();
 	}
 }
+
+std::shared_ptr<Component> Actor::getOnlyComponent(ComponentTypeChecker checker) {
+	return container_.getOnlyComponent(checker);
+}

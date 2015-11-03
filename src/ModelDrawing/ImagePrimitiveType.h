@@ -4,5 +4,5 @@
 
 #ifndef PWASTEROIDS_IMAGEPRIMITIVETYPES_H
 #define PWASTEROIDS_IMAGEPRIMITIVETYPES_H
-enum ImagePrimitiveType{BadType, Rocket};
+enum ImagePrimitiveType {BadType, Rocket};
 #endif //PWASTEROIDS_IMAGEPRIMITIVETYPES_H

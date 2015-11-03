@@ -8,6 +8,7 @@
 
 #include <memory>
 #include "Component.h"
+#include "ComponentTypeChecker.h"
 #include <vector>
 #include <algorithm>
 class Actor;
@@ -30,7 +31,11 @@ public:
 		return outVec;
 	}
 
+	std::vector<std::shared_ptr<Component>> getComponents( ComponentTypeChecker checker );
+
 	std::vector<std::shared_ptr<Component>> getAllComponents();
+
+	std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker);
 };
 
 
