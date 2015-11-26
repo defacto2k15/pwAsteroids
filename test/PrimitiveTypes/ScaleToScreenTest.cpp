@@ -3,8 +3,8 @@
 //
 
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
-#include <PrimitiveTypes/ScaleToScreen.h>
-#include <exceptions/BadScaleArgumentException.h>
+#include <Model/PrimitiveTypes/ScaleToScreen.h>
+#include <Model/exceptions/BadScaleArgumentException.h>
 
 TEST(ScaleTests, CanAddAndRetriveMembers ) {
 	double x = 0.65;

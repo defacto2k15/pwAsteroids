@@ -5,8 +5,10 @@
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <mock/MockComponent.h>
 #include <memory>
-#include <ComponentsContainer.h>
-#include <help/StdContainers.h>
+#include <Model/help/StdContainers.h>
+#include <Model/components/ComponentsContainer.h>
+#include "Model/exceptions/ThereIsNotOneComponentOfGivenType.h"
+
 class  ComponentsContainerTest : public ::testing::Test
 {
 public:
@@ -88,4 +90,52 @@ TEST_F( ComponentsContainerTest, GetAllComponentsWorksAsIntended ){
 	auto outVec = container.getAllComponents();
 	ASSERT_EQ(unsigned(4), outVec.size());
 	assertContainsComponents(outVec, inVec);
+}
+
+TEST_F( ComponentsContainerTest, GetsCorrectComponentsUsingComponentsTypeChecker ){
+	std::vector<std::shared_ptr<Component> > inVec{
+			std::make_shared<ComponentClass1>(),
+			std::make_shared<ComponentClass2>(),
+			std::make_shared<ComponentClass3>(),
+	};
+
+	std::shared_ptr<Component> componentWeWillCheck = std::make_shared<MockComponent>();
+	inVec.push_back(componentWeWillCheck);
+
+	addComponents(inVec);
+    MockComponent *m = nullptr;
+	ComponentTypeChecker checker = ComponentTypeChecker(m);
+	auto outVec = container.getComponents(checker);
+
+	ASSERT_TRUE(contains(outVec, componentWeWillCheck));
+	ASSERT_EQ((unsigned)1, outVec.size());
+}
+
+TEST_F(ComponentsContainerTest, getOneComponentWorksAsIntended ){
+	std::vector<std::shared_ptr<Component> > inVec{
+			std::make_shared<ComponentClass1>(),
+			std::make_shared<ComponentClass2>(),
+			std::make_shared<ComponentClass3>(),
+			std::make_shared<ComponentClass3>(),
+			std::make_shared<ComponentClass3>(),
+	};
+	auto componentWeAreLookingFor = std::make_shared<MockComponent>();
+	inVec.push_back(componentWeAreLookingFor);
+	addComponents(inVec);
+
+	auto component = container.getOnlyComponent( ComponentTypeChecker::create<MockComponent>());
+	ASSERT_EQ(component, componentWeAreLookingFor);
+}
+
+TEST_F(ComponentsContainerTest, getOnlyComponentThrowsIfThereIsMoreThanOneComponentOfGivenType ){
+
+	std::vector<std::shared_ptr<Component> > inVec{
+			std::make_shared<ComponentClass1>(),
+			std::make_shared<ComponentClass2>(),
+			std::make_shared<ComponentClass3>(),
+			std::make_shared<ComponentClass3>(),
+	};
+
+	ASSERT_THROW(container.getOnlyComponent(ComponentTypeChecker::create<ComponentClass3>()),
+	                ThereIsNotOneComponentOfGivenType);
 }

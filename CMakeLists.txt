@@ -10,12 +10,26 @@ add_definitions(-Wextra -Wall)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
-file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/help/*.cpp" "src/help/*.h" "src/PrimitiveTypes/*.cpp" "src/PrimitiveTypes/*.h"
-        "src/exceptions/*.cpp" "src/exceptions/*.h" " src/ModelDrawing/*.h" "src/ModelDrawing/*.cpp" "src/Observer/*.h" "src/Observer/*.cpp"
-        "src/ModelDrawing/IDrawablePrimitive.h" "src/modelInterfaces/*.cpp" "src/modelInterfaces/*.h"
+file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help/*.h" "src/Model/PrimitiveTypes/*.cpp" "src/Model/PrimitiveTypes/*.h"
+        "src/Model/exceptions/*.cpp" "src/Model/exceptions/*.h" "src/Model/ModelDrawing/*.h" "src/Model/ModelDrawing/*.cpp" "src/Model/Observer/*.h" "src/Model/Observer/*.cpp"
+        "src/Model/ModelDrawing/IDrawablePrimitive.h" "src/Model/modelInterfaces/*.cpp" "src/Model/modelInterfaces/*.h" "src/Model/Services/*.cpp"
+        "src/Model/Services/*.h" "src/Model/components/*.h" "src/Model/components/*.cpp" "src/Model/Actors/Rocket/*.cpp" "src/Model/Actors/Rocket/*.h"
+        "src/Model/Actors/*.h" "src/Model/Actors/*.cpp" "src/Model/box2d/*.cpp" "src/Model/box2d/*.h"
+        "src/View/*.cpp" "src/View/*.h"
   )
-add_executable(WykopMainDataAlanyzer ${SRC_FILES}  )
-TARGET_LINK_LIBRARIES( WykopMainDataAlanyzer ${Boost_LIBRARIES} )
+add_executable(pwAsteroids ${SRC_FILES}  )
+TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )
+
+set(BOX2D_VERSION 2.3.0)
+add_subdirectory(lib/Box2D)
+include_directories(${Box2D_SOURCE_DIR})
+TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
+
+# allegro - works on linux and only if allegro is installed- need to be changed
+if(UNIX)
+    include_directories(/usr/include/x86_64-linux-gnu)
+    TARGET_LINK_LIBRARIES( pwAsteroids allegro_image allegro)
+endif(UNIX)
 
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
@@ -31,7 +45,8 @@ if(BuildTests)
     # Test files
     file(GLOB TEST_FILES "test/*.cpp" "test/*h"  "mock/*.cpp" "mock/*.h" "test/PrimitiveTypes/*.cpp" "test/PrimitiveTypes/*.h"
             "test/EndToEndTests/*.cpp" "test/EndToEndTests/help/*.cpp" "test/EndToEndTests/help/*.h"
-            "test/EndToEndTests/expectations/*.cpp" "test/EndToEndTests/expectations/*.h" "test/EndToEndTests/when/*.h" "test/EndToEndTests/when/*.cpp"
+            "test/EndToEndTests/expectations/*.cpp" "test/EndToEndTests/expectations/*.h" "test/EndToEndTests/when/*.h"
+            "test/EndToEndTests/when/*.cpp" "test/Services/*.cpp"
             )
 
     # Don't include Main.cpp from src
@@ -41,7 +56,7 @@ if(BuildTests)
     add_executable("${TEST_EXECUTABLE_NAME}" ${TEST_FILES} ${SRC_FILES} )
     # Set link libraries (order matters)
     target_link_libraries("${TEST_EXECUTABLE_NAME}" gmock gtest pthread ${Boost_LIBRARIES} )
-
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" Box2D)
     # Include root directory
     include_directories(BEFORE ".")
     include_directories(BEFORE "src/")

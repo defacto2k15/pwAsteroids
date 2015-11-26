@@ -3,10 +3,10 @@
 //
 
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
-#include <Actor.h>
 #include <mock/MockComponent.h>
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-matchers.h>
 #include <lib/gmock-1.7.0/include/gmock/gmock-generated-nice-strict.h>
+#include <Model/Actors/Actor.h>
 
 using ::testing::Ge;
 using ::testing::Mock;
