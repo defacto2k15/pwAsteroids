@@ -1,0 +1,43 @@
+﻿Build started 2015-11-29 15:56:31.
+     1>Project "C:\Users\Rafal\Documents\GitHub\pwAsteroids\VSProject\pwAsteroids.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"C:\Program Files\boost\boost_1_59_0" /IC:\Users\Rafal\Documents\GitHub\pwAsteroids /IC:\Users\Rafal\Documents\GitHub\pwAsteroids\lib /IC:\Users\Rafal\Documents\GitHub\pwAsteroids\src /I"C:\allegro\allegro-5.0.10-msvc-11.0\include" /Zi /nologo /W0 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"pwAsteroids.dir\Debug\\" /Fd"pwAsteroids.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt  -std=c++14 C:\Users\Rafal\Documents\GitHub\pwAsteroids\src\main.cpp
+     1>cl : Command line warning D9002: ignoring unknown option '-std=c++14'
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Rafal\Documents\GitHub\pwAsteroids\build\Debug\pwAsteroids.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\boost\boost_1_59_0\stage\lib" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\Program Files\boost\boost_1_59_0\stage\lib\boost_program_options-vc140-mt-gd-1_59.lib" C:\Users\Rafal\Documents\GitHub\pwAsteroids\lib\Windows\Box2D.lib "C:\allegro\allegro-5.0.10-msvc-11.0\lib\allegro-5.0.10-monolith-mt.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:/Users/Rafal/Documents/GitHub/pwAsteroids/build/Debug/pwAsteroids.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Users/Rafal/Documents/GitHub/pwAsteroids/VSProject/Debug/pwAsteroids.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug pwAsteroids.dir\Debug\Game.obj
+         pwAsteroids.dir\Debug\main.obj
+         pwAsteroids.dir\Debug\Point.obj
+         pwAsteroids.dir\Debug\ScaleToScreen.obj
+         pwAsteroids.dir\Debug\BadScaleArgumentException.obj
+         pwAsteroids.dir\Debug\RemovingNotAddedActorException.obj
+         pwAsteroids.dir\Debug\ThereIsNotOneComponentOfGivenType.obj
+         pwAsteroids.dir\Debug\DrawingSystem.obj
+         pwAsteroids.dir\Debug\ImagePrimitive.obj
+         pwAsteroids.dir\Debug\Observable.obj
+         pwAsteroids.dir\Debug\KeyboardStateManager.obj
+         pwAsteroids.dir\Debug\OutGameScreenModel.obj
+         pwAsteroids.dir\Debug\ActorsContainer.obj
+         pwAsteroids.dir\Debug\GameTimeProvider.obj
+         pwAsteroids.dir\Debug\RootServiceContainer.obj
+         pwAsteroids.dir\Debug\ServiceContainer.obj
+         pwAsteroids.dir\Debug\Component.obj
+         pwAsteroids.dir\Debug\ComponentsContainer.obj
+         pwAsteroids.dir\Debug\PositionComponent.obj
+         pwAsteroids.dir\Debug\InitialRocketSettings.obj
+         pwAsteroids.dir\Debug\RocketBox2dComponent.obj
+         pwAsteroids.dir\Debug\RocketDrawableComponent.obj
+         pwAsteroids.dir\Debug\RocketMovingComponent.obj
+         pwAsteroids.dir\Debug\Actor.obj
+         pwAsteroids.dir\Debug\Box2dObject.obj
+         pwAsteroids.dir\Debug\Box2DService.obj
+         pwAsteroids.dir\Debug\Display.obj
+         pwAsteroids.dir\Debug\DrawableObject.obj
+         pwAsteroids.dir\Debug\Scene.obj
+         pwAsteroids.dir\Debug\ViewManager.obj
+         pwAsteroids.vcxproj -> C:\Users\Rafal\Documents\GitHub\pwAsteroids\build\Debug\pwAsteroids.exe
+     1>Done Building Project "C:\Users\Rafal\Documents\GitHub\pwAsteroids\VSProject\pwAsteroids.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:03.46

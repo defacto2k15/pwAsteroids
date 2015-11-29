@@ -1,0 +1,3 @@
+C:/Users/Rafal/Documents/GitHub/pwAsteroids/VSProject/CMakeFiles/pwAsteroids.dir
+C:/Users/Rafal/Documents/GitHub/pwAsteroids/VSProject/CMakeFiles/ALL_BUILD.dir
+C:/Users/Rafal/Documents/GitHub/pwAsteroids/VSProject/CMakeFiles/ZERO_CHECK.dir
