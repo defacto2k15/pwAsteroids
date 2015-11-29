@@ -9,8 +9,11 @@ class DrawableObject {
 public:
 	ALLEGRO_BITMAP* getBitmap();
 	int getPozX() { return pozX; }
+	void setPozX(int newX) { pozX = newX; }
 	int getPozY() { return pozY; }
+	void setPozY(int newY) { pozY = newY; }
 	float getAngle() { return angle; }
+	void setAngle(float newAngle) { angle = newAngle; }
 	DrawableObject(const char*, int, int, float = 0);
 private:
 	ALLEGRO_BITMAP* bitmap;

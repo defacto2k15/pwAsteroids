@@ -7,11 +7,11 @@
 #include <iostream>
 #include <stdexcept>
 #include "Scene.h"
-#include <boost/thread/thread.hpp>
 
 class Display {
 public:
 	void drawSceneOnDisplay(Scene*);
+	ALLEGRO_DISPLAY *getDisplay() { return display; }
 	Display(int = 640, int = 480);
 	~Display();
 private:

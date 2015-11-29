@@ -7,16 +7,15 @@
 #include "Display.h"
 #include <boost/thread/thread.hpp>
 
-const float FPS = 10;
+const float FPS = 60;
 
 class ViewManager {
 public:
 	int numberOfScenes();
 	void drawSceneOnDisplay(Scene* scene) { display->drawSceneOnDisplay(scene); }
 	void drawAllScenesOnDisplay();
-	void startTimer();
+	void start();
 	Scene* createNewScene();
-	ViewManager();
 	ViewManager(int, int);
 	~ViewManager();
 

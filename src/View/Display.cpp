@@ -2,6 +2,7 @@
 
 void Display::drawSceneOnDisplay(Scene *scene)
 {
+	al_clear_to_color(al_map_rgb(255, 120, 0));
 	std::vector<DrawableObject*> objectsToDisplay = scene->getSceneObjects();
 	if (objectsToDisplay.size() != 0) {
 		for (auto object : objectsToDisplay) {
@@ -23,6 +24,10 @@ Display::Display(int width, int height)
 	display = al_create_display(width, height);
 	if (!display) {
 		throw std::runtime_error("Failed to create display!");
+	}
+
+	if (!al_install_keyboard()) {
+		throw std::runtime_error("Failed to install keyboard!");
 	}
 
 	al_init_image_addon();
