@@ -10,11 +10,13 @@ public:
 	ALLEGRO_BITMAP* getBitmap();
 	int getPozX() { return pozX; }
 	int getPozY() { return pozY; }
-	DrawableObject(const char*, int, int);
+	float getAngle() { return angle; }
+	DrawableObject(const char*, int, int, float = 0);
 private:
 	ALLEGRO_BITMAP* bitmap;
 	int pozX;
 	int pozY;
+	float angle;
 };
 
 #endif

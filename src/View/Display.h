@@ -7,6 +7,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "Scene.h"
+#include <boost/thread/thread.hpp>
 
 class Display {
 public:

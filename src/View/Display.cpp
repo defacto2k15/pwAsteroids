@@ -3,15 +3,17 @@
 void Display::drawSceneOnDisplay(Scene *scene)
 {
 	std::vector<DrawableObject*> objectsToDisplay = scene->getSceneObjects();
-	for (auto object : objectsToDisplay) {
-		al_draw_bitmap(object->getBitmap(), object->getPozX(), object->getPozY(), 0);
+	if (objectsToDisplay.size() != 0) {
+		for (auto object : objectsToDisplay) {
+			al_draw_scaled_rotated_bitmap(object->getBitmap(), 0, 0, object->getPozX(), object->getPozY(), 1, 1, object->getAngle(), 0);
+		}
 	}
 	al_flip_display();
 }
 
+
 Display::Display(int width, int height)
 {
-	//ALLEGRO example for test - works :D
 	display = NULL;
 
 	if (!al_init()) {
@@ -29,7 +31,7 @@ Display::Display(int width, int height)
 
 	al_flip_display();
 
-	//al_rest(3.0);
+	std::cout << "Allegro created, current working directory: " << al_get_current_directory() << "\n";
 }
 
 Display::~Display()

@@ -5,6 +5,7 @@
 #ifndef PWASTEROIDS_SERVICECONTAINER_H
 #define PWASTEROIDS_SERVICECONTAINER_H
 
+#include <functional>
 #include <vector>
 #include <memory>
 #include "IService.h"

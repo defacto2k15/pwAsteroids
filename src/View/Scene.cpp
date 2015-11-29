@@ -1,8 +1,8 @@
 #include "Scene.h"
 
-void Scene::addDrawableObject(const char *path, int x, int y)
+void Scene::addDrawableObject(const char *path, int x, int y, float angle)
 {
-	DrawableObject* newObject = new DrawableObject(path, x, y);
+	DrawableObject* newObject = new DrawableObject(path, x, y, angle);
 	objects.push_back(newObject);
 }
 
@@ -19,5 +19,5 @@ void Scene::changeActiveState()
 
 Scene::Scene()
 {
-	active = false;
+	active = true;
 }

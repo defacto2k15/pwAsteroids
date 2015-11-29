@@ -1,12 +1,16 @@
 cmake_minimum_required(VERSION 3.1)
 project(pwAsteroids)
 
+SET(BOOST_ROOT "C:/Program Files/boost/boost_1_59_0")
+SET(BOOST_LIBRARYDIR "C:/Program Files/boost/boost_1_59_0/stage/lib")
+SET(BOX2D_SOURCE_DIR "C:/Box2D/Box2D_v2.3.0/Box2D")
+
 FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 add_definitions(-std=c++14)
 # Extra warnings
-add_definitions(-Wextra -Wall)
+add_definitions(-Wall)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
@@ -29,7 +33,24 @@ TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
 if(UNIX)
     include_directories(/usr/include/x86_64-linux-gnu)
     TARGET_LINK_LIBRARIES( pwAsteroids allegro_image allegro)
-endif(UNIX)
+else()
+    TARGET_LINK_LIBRARIES( pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/box2d.lib)
+endif()
+
+# security level
+if(MSVC)
+  # Force to always compile with W4
+  if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+    string(REGEX REPLACE "/W[0-4]" "/W0" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W0")
+  endif()
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  # Update if necessary
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
+endif()
+
+include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
