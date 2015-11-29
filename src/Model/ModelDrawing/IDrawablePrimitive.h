@@ -7,7 +7,7 @@
 
 #include <Model/PrimitiveTypes/AliasedTypes.h>
 #include <Model/PrimitiveTypes/ScaleToScreen.h>
-#include "src/Model/PrimitiveTypes/Point.h"
+#include "Model/PrimitiveTypes/Point.h"
 
 class IDrawablePrimitive{
 public:

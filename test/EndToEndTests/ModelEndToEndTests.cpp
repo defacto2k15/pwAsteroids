@@ -4,34 +4,36 @@
 #include <test/EndToEndTests/when/ForEveryLoop.h>
 #include <test/EndToEndTests/expectations/ThereIsImage.h>
 #include <test/EndToEndTests/expectations/LambdaExpectation.h>
+#include <test/EndToEndTests/expectations/NegativeExpectation.h>
 #include "src/Model/ModelDrawing/ImagePrimitiveType.h"
 
  //Created by defacto on 16.10.15.
 
-//TEST(EndToEndTests, RocketAppearsOnScreen ){
-//	GameRunner runner;
-//	runner.AddEachLoopExpectations(  std::make_shared<ThereIsImage>(ImagePrimitiveType::Rocket)) ;
-//	runner.RunForLoops(10);
-//}
-//
-//TEST(EndToEndTests, ThereIsOnlyOneImageOfRocketOnScreen){
-//	GameRunner runner;
-//	runner.AddEachLoopExpectations(std::make_shared<LambdaExpectation>( [](std::shared_ptr<Game> g) {
-//		auto images = g->getOutGameScreenModel().getImagePrimitives();
-//		int imageCount = 0;
-//		for( auto &image : images){
-//			if( image.getImageType() == ImagePrimitiveType::Rocket ){
-//				imageCount++;
-//			}
-//		}
-//		if( imageCount > 1){
-//			return LastCheck(false, "There is more than one rocket in outImages, there are rockets: "+std::to_string(imageCount));
-//		}
-//		return LastCheck(true, "");
-//	}));
-//	runner.RunForLoops(10);
-//}
-//
+TEST(EndToEndTests, RocketAppearsOnScreen ){
+	GameRunner runner;
+	runner.AddEachLoopExpectations(  std::make_shared<ThereIsImage>(ImagePrimitiveType::Rocket)) ;
+	runner.makeUncheckedUpdate();
+	runner.RunForLoops(10);
+}
+
+TEST(EndToEndTests, ThereIsOnlyOneImageOfRocketOnScreen){
+	GameRunner runner;
+	runner.AddEachLoopExpectations(std::make_shared<LambdaExpectation>( [](std::shared_ptr<Game> g) {
+		auto images = g->getOutGameScreenModel().getImagePrimitives();
+		int imageCount = 0;
+		for( auto &image : images){
+			if( image.getImageType() == ImagePrimitiveType::Rocket ){
+				imageCount++;
+			}
+		}
+		if( imageCount > 1){
+			return LastCheck(false, "There is more than one rocket in outImages, there are rockets: "+std::to_string(imageCount));
+		}
+		return LastCheck(true, "");
+	}));
+	runner.RunForLoops(10);
+}
+
 TEST(EndToEndTests, WhenNoButtonIsClickedRocketDontMovesForAtLeast15Frames){
 	GameRunner runner;
 	Point firstPositionOfRocket;
@@ -94,13 +96,13 @@ TEST(EndToEndTests, WhenPlayer1UpButtonIsPressedRocketMovesUp ){
 	runner.AddKeyPressed(Keys::Player1AccelerateKey);
 	runner.RunForLoops(10);
 
-	if( firstPositionOfRocket.getY() > lastPositionOfRocket.getY() ){
+	if( firstPositionOfRocket.getY() < lastPositionOfRocket.getY() ){
 		FAIL() << " after 10 loops still rocket didnt move up. First pos  " << firstPositionOfRocket.toString() << " second"
 			<< lastPositionOfRocket.toString() << std::endl;
 	}
 }
 
-/*TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
+TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
 	GameRunner runner;
 	bool firstLoopWasDone = false;
 	Point lastPositionOfRocket(0.0f, 0.0f);
@@ -126,9 +128,31 @@ TEST(EndToEndTests, WhenPlayer1UpButtonIsPressedRocketMovesUp ){
 	runner.RunForLoops(10);
 
 	if( (firstPositionOfRocket.getY() < lastPositionOfRocket.getY())
-	        ||( firstPositionOfRocket.getX() > lastPositionOfRocket.getY()) ){
+	        ||( firstPositionOfRocket.getX() > lastPositionOfRocket.getX()) ){
 		FAIL() << " after 10 loops  rocket didnt move up and left. First pos  "
 		       << firstPositionOfRocket.toString() << " second"
 		       << lastPositionOfRocket.toString() << std::endl;
 	}
+}
+
+/*TEST(EndToEndTests, ThereIsRocketTailImageWhenAccelerateKeyIsPressed ){
+	GameRunner runner;
+	auto tailVisibleExpectation = std::make_shared<ThereIsImage>(ImagePrimitiveType::RocketTail);
+	auto noTailExpectation = std::make_shared<NegativeExpectation>( tailVisibleExpectation );
+	runner.AddEachLoopExpectations( noTailExpectation ) ;
+	runner.makeUncheckedUpdate();
+	runner.RunForLoops(10);
+	runner.removeExpectation( noTailExpectation );
+	runner.AddEachLoopExpectations( tailVisibleExpectation );
+	runner.AddKeyPressed(Keys::Player1AccelerateKey);
+	runner.makeUncheckedUpdate();
+	runner.RunForLoops(10);
 }*/
+
+TEST(EndToEndTests, WhenAccelerationKeyIsNotPressedThereIsNoRocketTail ){
+	GameRunner runner;
+	std::shared_ptr<NegativeExpectation> noTailExpectation = std::make_shared<NegativeExpectation>( std::make_shared<ThereIsImage>(ImagePrimitiveType::RocketTail));
+	runner.AddEachLoopExpectations(  noTailExpectation) ;
+	runner.makeUncheckedUpdate();
+	runner.RunForLoops(10);
+}

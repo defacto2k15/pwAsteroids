@@ -1,3 +1,4 @@
+#include <Game.h>
 #include "ViewManager.h"
 
 enum MYKEYS {
@@ -21,9 +22,12 @@ void ViewManager::start()
 {
 	//timerThread = new boost::thread(boost::bind(&ViewManager::startTimerEvent, this));
 	Scene *scene = createNewScene();
-	DrawableObject* object = scene->addDrawableObject("resources/aa.bmp", 512, 300);	// example bitmap to be moved
+	DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
+	//DrawableObject* tail = scene->addDrawableObject("/home/defacto/ProgrammingProjects/pwAsteroidsFighting/pwAsteroidsOlderWorking/build/aa.bmp", 512, 300);	// example bitmap to be moved
 	bool key[4] = { false, false, false, false };
-	int speed = 20;
+	//int speed = 20;
+	Game g;
+	g.update();
 	while (1)
 	{
 		ALLEGRO_EVENT ev;
@@ -31,22 +35,35 @@ void ViewManager::start()
 
 		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			if (key[KEY_UP]) {
-				object->setPozY(object->getPozY() - speed/20);
+				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AccelerateKey);
 			}
 
 			if (key[KEY_DOWN]) {
-				object->setPozY(object->getPozY() + speed/20);
+				//object->setPozY(object->getPozY() + speed/20);
 			}
 
 			if (key[KEY_LEFT]) {
-				object->setPozX(object->getPozX() - speed/20);
+				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1LeftKey);
 			}
 
 			if (key[KEY_RIGHT]) {
-				object->setPozX(object->getPozX() + speed/20);
+				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1RightKey);
 			}
-			if(speed < 360) speed += 1;
-			if (!key[KEY_UP] && !key[KEY_DOWN] && !key[KEY_LEFT] && !key[KEY_RIGHT]) speed = 20;
+			//if(speed < 360) speed += 1;
+			//if (!key[KEY_UP] && !key[KEY_DOWN] && !key[KEY_LEFT] && !key[KEY_RIGHT]) speed = 20;
+			g.update();
+			auto primitivesVec = g.getOutGameScreenModel().getImagePrimitives();
+			if( primitivesVec.size() != 2){
+				assert( false && "There should be two objects: rocket and tail");
+			}
+			rocket->setPozX(primitivesVec[0].getPosition().getX()+200);
+			rocket->setPozY(primitivesVec[0].getPosition().getY() + 200);
+			rocket->setAngle((double(primitivesVec[0].getRotation())-90)*0.0174532925f);
+
+			/*tail->setPozX(primitivesVec[1].getPosition().getX());
+			tail->setPozY( primitivesVec[1].getPosition().getY() + 200);
+			tail->setAngle(( double(primitivesVec[1].getRotation())-90)*0.0174532925f);*/
+
 			drawAllScenesOnDisplay();	// refresh the screen
 		}
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {

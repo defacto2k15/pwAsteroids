@@ -6,15 +6,11 @@
 #define PWASTEROIDS_INKEYBOARDSTATEGETTER_H
 
 #include <Model/Services/IService.h>
-#include "src/Model/Observer/Observable.h"
+#include "Model/Observer/Observable.h"
 #include "Keys.h"
 
-class IInKeyboardStateGetter : public Observable, public IService {
+class IInKeyboardStateGetter :  public IService {
 public:
-	virtual void OnUpdate() override{
-		notifyObservers();
-	}
-
 	virtual void gameKeyIsPressed(Keys key)=0;
 };
 

@@ -22,7 +22,7 @@ struct LastCheck{
 	}
 };
 
-class LambdaExpectation : public IEndToEndExpectation, public IObserver {
+class LambdaExpectation : public IEndToEndExpectation {
 private:
 	LastCheck lastCheck_;
 	std::shared_ptr<Game> game_;
@@ -35,6 +35,8 @@ public:
 	}
 
 	virtual bool checkExpectation(){
+		lastCheck_ = checkingFunction_(game_);
+		lastLoopCount_++;
 		return lastCheck_.wasCheckOk;
 	}
 
@@ -49,13 +51,8 @@ public:
 
 	virtual void beforeFirstUpdate(std::shared_ptr<Game> g){
 		game_ = g;
-		game_->getOutGameScreenModel().addObserver(this);
 	}
 
-	virtual void notify(){
-		lastCheck_ = checkingFunction_(game_);
-		lastLoopCount_++;
-	}
 };
 
 

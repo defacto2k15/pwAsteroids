@@ -5,7 +5,16 @@
 #include "ThereIsImage.h"
 
 bool ThereIsImage::checkExpectation() {
-	return wasThereSuchImageInLastLoop_;
+	auto images = game_->getOutGameScreenModel().getImagePrimitives();
+	lastLoopImageCount_ = images.size();
+	for( auto &image : images){
+		if( image.getImageType() == imageType_ ){
+			wasThereSuchImageInLastLoop_ = true;
+			return true;
+		}
+	}
+	wasThereSuchImageInLastLoop_ = false;
+	return false;
 }
 
 std::string ThereIsImage::getExpectationDescription() {
@@ -18,21 +27,8 @@ std::string ThereIsImage::getFailureMessage() {
 
 void ThereIsImage::beforeFirstUpdate(std::shared_ptr<Game> g) {
 	game_ = g;
-	game_->getOutGameScreenModel().addObserver(this);
 }
 
-void ThereIsImage::notify() {
-	auto images = game_->getOutGameScreenModel().getImagePrimitives();
-	lastLoopImageCount_ = images.size();
-	for( auto &image : images){
-		if( image.getImageType() == imageType_ ){
-			wasThereSuchImageInLastLoop_ = true;
-			return;
-		}
-	}
-	wasThereSuchImageInLastLoop_ = false;
-	return;
-}
 
 
 ThereIsImage::ThereIsImage(ImagePrimitiveType imageType) : imageType_(imageType) {}

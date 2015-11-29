@@ -14,6 +14,5 @@ void OutGameScreenModel::AddImage(ImagePrimitive primitive) {
 }
 
 void OutGameScreenModel::OnUpdate() {
-	notifyObservers();
 	imagePrimitives_.clear();
 }

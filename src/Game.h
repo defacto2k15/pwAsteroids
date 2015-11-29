@@ -18,6 +18,9 @@
 #include <Model/ModelDrawing/DrawingSystem.h>
 #include <Model/modelInterfaces/IInKeyboardStateGetter.h>
 #include <Model/modelInterfaces/KeyboardStateManager.h>
+#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/components/DrawingComponent.h>
+#include <Model/Actors/RocketTail/RocketTailPositionComponent.h>
 
 class Game {
 private:
@@ -26,10 +29,12 @@ private:
 	DrawingSystem drawingSystem_;
 	std::shared_ptr<KeyboardStateManager> keyboardManager_ = std::make_shared<KeyboardStateManager>();
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>();
+
+	std::shared_ptr<ActorsConfiguration> actorsConfiguration_ = std::make_shared<ActorsConfiguration>();
 public:
 	Game() : drawingSystem_(outGameScreenModel_)
 	{
-		rootServiceContainer_.addService(keyboardManager_);
+
 		std::shared_ptr<ActorsContainer> actorsContainer (new ActorsContainer);
 		rootServiceContainer_.addService(actorsContainer);
 		std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
@@ -37,12 +42,23 @@ public:
 
 		rootServiceContainer_.addService(boxService_);
 		auto rocket = std::make_shared<Actor>();
-		rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_));
+
+		rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
 		rocket->addComponent(std::make_shared<PositionComponent>());
-		rocket->addComponent(std::make_shared<RocketDrawableComponent>(drawingSystem_));
-		rocket->addComponent(std::make_shared<RocketMovingComponent>(keyboardManager_));
+		rocket->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Rocket));
+		auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_);
+		rocket->addComponent(rocketMovingComponent);
+
+		auto rocketTail = std::make_shared<Actor>();
+		rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
+		rocketTail->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::RocketTail));
+		rocketTail->addComponent(std::make_shared<PositionComponent>());
 
 		actorsContainer->addActor(rocket);
+		actorsContainer->addActor(rocketTail);
+		rocketMovingComponent->setRocketTail(rocketTail);
+
+		rootServiceContainer_.addService(keyboardManager_); // MUST BE ONE OF LAST!
 		rootServiceContainer_.OnStart();
 		outGameScreenModel_.OnStart();
 	}
@@ -55,8 +71,9 @@ public:
 	}
 
 	void update(){
-		rootServiceContainer_.OnUpdate(); // ugly but works!
 		outGameScreenModel_.OnUpdate();
+		rootServiceContainer_.OnUpdate(); // ugly but works!
+
 	};
 };
 

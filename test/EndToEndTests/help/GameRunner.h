@@ -9,6 +9,7 @@
 #include <Game.h>
 #include <memory>
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
+#include <Model/help/StdContainers.h>
 #include "test/EndToEndTests/expectations/IEndToEndExpectation.h"
 
 class GameRunner {
@@ -32,6 +33,25 @@ public:
 	void RunForLoops(int loopsToRun);
 
 	void AddKeyPressed(Keys keyPressed);
+
+	void makeUncheckedUpdate();
+
+	void removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove ){
+		bool someExpectationWasRemoved = false;
+		std::vector< std::vector<std::shared_ptr<IEndToEndExpectation> > >vectorsOfExpectations {
+				eachLoopExpectations_, afterTestExpectations_, firstLoopExpectations_
+		};
+		for( auto &oneVec : vectorsOfExpectations ){
+			if ( contains(oneVec, expectationToRemove)){
+				someExpectationWasRemoved = true;
+				removeItem(oneVec, expectationToRemove);
+			}
+		}
+		if( someExpectationWasRemoved ){
+			assert(false && " No item was removed");
+		}
+
+	}
 };
 
 

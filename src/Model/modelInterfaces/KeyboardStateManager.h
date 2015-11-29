@@ -9,6 +9,7 @@
 #include "IKeyboardStateProvider.h"
 #include "IInKeyboardStateGetter.h"
 #include <map>
+#include <iostream>
 
 class KeyboardStateManager : public IKeyboardStateProvider, public IInKeyboardStateGetter {
 	std::map<Keys, bool> previousPressedKeysMap_;
@@ -37,7 +38,6 @@ public:
 	virtual void OnUpdate() override{
 		previousPressedKeysMap_ = pressedKeysMap_;
 		pressedKeysMap_.clear();
-		IInKeyboardStateGetter::notifyObservers();
 	}
 };
 

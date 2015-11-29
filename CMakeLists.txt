@@ -1,13 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 project(pwAsteroids)
 
-SET(BOOST_ROOT "C:/Program Files/boost/boost_1_59_0")
-SET(BOOST_LIBRARYDIR "C:/Program Files/boost/boost_1_59_0/stage/lib")
-SET(BOX2D_SOURCE_DIR "C:/Box2D/Box2D_v2.3.0/Box2D")
-
-FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
-INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
-
 add_definitions(-std=c++14)
 # Extra warnings
 add_definitions(-Wall)
@@ -19,15 +12,33 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/Model/ModelDrawing/IDrawablePrimitive.h" "src/Model/modelInterfaces/*.cpp" "src/Model/modelInterfaces/*.h" "src/Model/Services/*.cpp"
         "src/Model/Services/*.h" "src/Model/components/*.h" "src/Model/components/*.cpp" "src/Model/Actors/Rocket/*.cpp" "src/Model/Actors/Rocket/*.h"
         "src/Model/Actors/*.h" "src/Model/Actors/*.cpp" "src/Model/box2d/*.cpp" "src/Model/box2d/*.h"
-        "src/View/*.cpp" "src/View/*.h"
+        "src/View/*.cpp" "src/View/*.h" "src/Model/configuration/*.cpp" "src/Model/configuration/*.h"
+        "src/Model/Actors/RocketTail/*.cpp" "src/Model/Actors/RocketTail/*.h"
   )
 add_executable(pwAsteroids ${SRC_FILES}  )
 TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )
+
+if(UNIX)
+    FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
+    INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )
+    TARGET_LINK_LIBRARIES( pwAsteroids boost_system )
+    TARGET_LINK_LIBRARIES( pwAsteroids boost_thread )
+else()
+    #SET(BOOST_ROOT "C:/Program Files/boost/boost_1_59_0")
+    #SET(BOOST_LIBRARYDIR "C:/Program Files/boost/boost_1_59_0/stage/lib")
+    #SET(BOX2D_SOURCE_DIR "C:/Box2D/Box2D_v2.3.0/Box2D")
+    #FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
+    #INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+
+endif()
 
 set(BOX2D_VERSION 2.3.0)
 add_subdirectory(lib/Box2D)
 include_directories(${Box2D_SOURCE_DIR})
 TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
+
+include_directories(src)
 
 # allegro - works on linux and only if allegro is installed- need to be changed
 if(UNIX)
@@ -47,7 +58,7 @@ if(MSVC)
   endif()
 elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   # Update if necessary
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long ")
 endif()
 
 include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
@@ -78,6 +89,10 @@ if(BuildTests)
     # Set link libraries (order matters)
     target_link_libraries("${TEST_EXECUTABLE_NAME}" gmock gtest pthread ${Boost_LIBRARIES} )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" Box2D)
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" ${Boost_LIBRARIES} )
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_system )
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_thread)
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" allegro_image allegro)
     # Include root directory
     include_directories(BEFORE ".")
     include_directories(BEFORE "src/")

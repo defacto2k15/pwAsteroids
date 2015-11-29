@@ -9,14 +9,18 @@
 #include <Model/modelInterfaces/IKeyboardStateProvider.h>
 #include <Model/Services/IPhysicsService.h>
 #include <Model/box2d/Box2DService.h>
+#include <Model/components/DrawingComponent.h>
 #include "RocketBox2dComponent.h"
 #include "Model/modelInterfaces/Keys.h"
+#include "IRocketConfigurableValues.h"
 
 class RocketMovingComponent : public Component {
 	std::shared_ptr<RocketBox2dComponent> box2dComponent_;
 	std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
+	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
+
 public:
-	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider )
+	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider)
 			: keyboardStateProvider_(keyboardStateProvider){
 	}
 
@@ -25,13 +29,26 @@ public:
 	}
 
 	virtual void OnUpdate() override{
-		if(keyboardStateProvider_->isPressed(Keys::Player1AccelerateKey)){
+		if( rocketTailDrawing_ == false){
+			assert(false && "The rocket tail actor was not set! Shared ptr is null!") ;
+		}
+
+		if(keyboardStateProvider_->isPressed(Keys::Player1AccelerateKey)){ /* UGLY AS HELL, my eyes bleed but works*/
 			box2dComponent_->accelerate();
-		} else if (keyboardStateProvider_->isPressed(Keys::Player1LeftKey)){
+			rocketTailDrawing_->setVisibility(true);
+		}  else {
+			rocketTailDrawing_->setVisibility(false);
+		}
+		if (keyboardStateProvider_->isPressed(Keys::Player1LeftKey)){
 			box2dComponent_->turnLeft();
-		} else if (keyboardStateProvider_->isPressed(Keys::Player1RightKey)){
+		}
+		if (keyboardStateProvider_->isPressed(Keys::Player1RightKey)){
 			box2dComponent_->turnRight();
 		}
+	}
+
+	void setRocketTail( std::shared_ptr<IActor> tailActor){
+		rocketTailDrawing_ = tailActor->getOnlyComponent<DrawingComponent>();
 	}
 
 	virtual void OnStop() override{};

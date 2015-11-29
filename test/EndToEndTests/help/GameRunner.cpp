@@ -28,7 +28,6 @@ void GameRunner::AddAfterRunExpectations( std::shared_ptr<IEndToEndExpectation> 
 }
 
 void GameRunner::RunForLoops(int loopsToRun) {
-	keyboard_.connectToGame();
 	for( auto &expectation  : eachLoopExpectations_){
 		expectation->beforeFirstUpdate(g_);
 	}
@@ -42,6 +41,7 @@ void GameRunner::RunForLoops(int loopsToRun) {
 	}
 
 	for( int i = 0; i < loopsToRun; i++ ){
+		keyboard_.sendKeysPressedToGame();
 		g_->update();
 		if( i == 0){
 			for( auto& expectation : firstLoopExpectations_){
@@ -70,5 +70,9 @@ void GameRunner::RunForLoops(int loopsToRun) {
 
 void GameRunner::AddKeyPressed(Keys keyPressed) {
 	keyboard_.addKeyToPress(keyPressed);
+}
+
+void GameRunner::makeUncheckedUpdate() {
+	g_->update();
 }
 

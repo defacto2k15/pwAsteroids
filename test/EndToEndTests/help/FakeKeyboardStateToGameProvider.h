@@ -9,16 +9,15 @@
 #include <memory>
 #include "src/Model/Observer/IObserver.h"
 
-class FakeKeyboardStateToGameProvider : public IObserver{
+class FakeKeyboardStateToGameProvider {
 	std::shared_ptr<Game> g_;
 	std::vector<Keys> keysBeingPressed_;
 public:
 	FakeKeyboardStateToGameProvider(std::shared_ptr<Game> g);
 
-	void connectToGame();
+	void sendKeysPressedToGame();
 
 	void addKeyToPress(Keys key);
 
-	virtual void notify();
 };
 #endif //PWASTEROIDS_FAKEKEYBOARDSTATETOKAMEPROVIDER_H

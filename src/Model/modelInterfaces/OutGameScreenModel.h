@@ -11,7 +11,7 @@
 #include <Model/Services/IService.h>
 #include <Model/ModelDrawing/IPrimitivesToDrawContainer.h>
 
-class OutGameScreenModel : public Observable, public IService,  public IPrimitivesToDrawContainer {
+class OutGameScreenModel :  public IService,  public IPrimitivesToDrawContainer {
 	std::vector<ImagePrimitive> imagePrimitives_;
 public:
 	virtual void AddImage(ImagePrimitive image);

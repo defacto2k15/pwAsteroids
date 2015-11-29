@@ -7,6 +7,8 @@
 
 #include <string>
 
-using Rotation = double;
+ //using Rotation = double; //WAS in past, but now is:
+#include "Model/PrimitiveTypes/Rotation.h"
+
 using ImagePath = std::string;
 #endif //PWASTEROIDS_ALIASEDTYPES_H

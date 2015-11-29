@@ -10,7 +10,7 @@
 #include "IEndToEndExpectation.h"
 #include "src/Model/ModelDrawing/ImagePrimitiveType.h"
 
-class ThereIsImage : public IEndToEndExpectation, IObserver {
+class ThereIsImage : public IEndToEndExpectation {
 	ImagePrimitiveType imageType_;
 	bool wasThereSuchImageInLastLoop_ = false;
 	unsigned long lastLoopImageCount_ = 0;
@@ -25,8 +25,6 @@ public:
 	virtual std::string getFailureMessage();;
 
 	virtual void beforeFirstUpdate(std::shared_ptr<Game> g);;
-
-	virtual void notify();
 };
 
 
