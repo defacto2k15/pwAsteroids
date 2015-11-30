@@ -6,6 +6,7 @@
 #define PWASTEROIDS_COMPONENTTYPECHECKER_H
 
 #include <assert.h>
+#include <functional>
 
 class Component;
 

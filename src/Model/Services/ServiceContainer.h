@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <memory>
+#include <functional>
 #include "IService.h"
 
 class ServiceContainer : public IService { // wzorzec kompozyt???

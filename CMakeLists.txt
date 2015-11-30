@@ -3,7 +3,7 @@ project(pwAsteroids)
 
 add_definitions(-std=c++14)
 # Extra warnings
-add_definitions(-Wall)
+# add_definitions(-Wall)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
@@ -25,18 +25,31 @@ if(UNIX)
     TARGET_LINK_LIBRARIES( pwAsteroids boost_system )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_thread )
 else()
-    #SET(BOOST_ROOT "C:/Program Files/boost/boost_1_59_0")
-    #SET(BOOST_LIBRARYDIR "C:/Program Files/boost/boost_1_59_0/stage/lib")
-    #SET(BOX2D_SOURCE_DIR "C:/Box2D/Box2D_v2.3.0/Box2D")
-    #FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
-    #INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
+    SET_TARGET_PROPERTIES(pwAsteroids PROPERTIES ENVIRONMENT_DEBUG "PATH=${allegropath}/bin;%PATH%")
+    INCLUDE_DIRECTORIES( ${boostpath} )
+    INCLUDE_DIRECTORIES( ${allegropath}/include )
+    INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} )
 
+    TARGET_LINK_LIBRARIES( pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/Box2D.lib )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/boost_program_options-vc140-mt-gd-1_59.lib )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/libboost_thread-vc140-mt-gd-1_59.lib )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/libboost_date_time-vc140-mt-gd-1_59.lib )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/libboost_system-vc140-mt-gd-1_59.lib )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/libboost_chrono-vc140-mt-gd-1_59.lib )
+    TARGET_LINK_LIBRARIES( pwAsteroids ${allegropath}/lib/allegro-5.0.10-monolith-mt.lib )
+
+    SET(BOOST_ROOT ${boostpath} )
+    SET(BOOST_LIBRARYDIR ${boostpath}/stage/lib )
+    FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
+    #INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 endif()
 
 set(BOX2D_VERSION 2.3.0)
 add_subdirectory(lib/Box2D)
 include_directories(${Box2D_SOURCE_DIR})
-TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
+if(UNIX)
+    TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
+endif()
 
 include_directories(src)
 
@@ -45,21 +58,21 @@ if(UNIX)
     include_directories(/usr/include/x86_64-linux-gnu)
     TARGET_LINK_LIBRARIES( pwAsteroids allegro_image allegro)
 else()
-    TARGET_LINK_LIBRARIES( pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/box2d.lib)
+    # TARGET_LINK_LIBRARIES(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/Box2D.lib )
 endif()
 
 # security level
-if(MSVC)
-  # Force to always compile with W4
-  if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
-    string(REGEX REPLACE "/W[0-4]" "/W0" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-  else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W0")
-  endif()
-elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
-  # Update if necessary
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long ")
-endif()
+# if(MSVC)
+#  # Force to always compile with W4
+#   if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+#     string(REGEX REPLACE "/W[0-4]" "/W0" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+#   else()
+#     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W0")
+#   endif()
+# elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+#   # Update if necessary
+#   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long ")
+# endif()
 
 include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
