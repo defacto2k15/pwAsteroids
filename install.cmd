@@ -1,6 +1,6 @@
 @ECHO OFF
 :: Location for the project:
-SET projectplace=VSPROJECT
+SET projectplace=VSProject
 ::
 ECHO *********************************************************************
 ECHO ** This script will prepare a project for Visual Studio with CMake **
@@ -24,8 +24,16 @@ ECHO Running CMake:
 cmake -Dboostpath:string="%boostpath%" -Dallegropath:string="%allegropath%" .. -G "Visual Studio 14"
 CD ..
 ECHO *********************************************************************
-ECHO Remember: before building the project, add
-ECHO       PATH=%allegropath%/bin;*PATH* (replace '*' with '%%')
-ECHO "in Properties -> Configuration Properties -> Debugging -> Environment"
+ECHO.> %projectplace%\pwAsteroids.vcxproj.user
+(
+ECHO ^<?xml version="1.0" encoding="utf-8"?^>
+ECHO ^<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"^>
+ECHO   ^<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'"^>
+ECHO     ^<LocalDebuggerEnvironment^>PATH=%allegropath%\^bin;%%PATH%%^</LocalDebuggerEnvironment^>
+ECHO     ^<DebuggerFlavor^>WindowsLocalDebugger^</DebuggerFlavor^>
+ECHO   ^</PropertyGroup^>
+ECHO ^</Project^>
+)> "%projectplace%\pwAsteroids.vcxproj.user"
+ECHO Added environment variable to %projectplace%\pwAsteroids.vcxproj.user
 :end
 :: install.cmd "C:\Program Files\boost\boost_1_59_0" "C:\allegro\allegro-5.0.10-msvc-11.0"
