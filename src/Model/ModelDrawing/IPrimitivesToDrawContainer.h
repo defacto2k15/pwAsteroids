@@ -9,7 +9,7 @@
 
 class IPrimitivesToDrawContainer {
 public:
-	virtual void AddImage(ImagePrimitive primitive)=0;
+	virtual void AddImage(ImagePrimitive image)=0;
 	virtual ~IPrimitivesToDrawContainer(){};
 };
 

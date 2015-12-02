@@ -5,17 +5,9 @@
 #include "DrawingSystem.h"
 #include "ImagePrimitive.h"
 
-ScaleToScreen DrawingSystem::getScale(ImagePrimitiveType type) {
-	if(type==ImagePrimitiveType::Rocket){ // TODO repair later
-		return ScaleToScreen(0.1,0.1);
-	} else {
-		return ScaleToScreen(1,1);
-	}
+void DrawingSystem::drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale) {
+	primitivesContainer_->AddImage(ImagePrimitive(position, rotation, scale, type));
 }
 
-void DrawingSystem::drawImage(ImagePrimitiveType type, Point position, Rotation rotation) {
-	primitivesContainer_.AddImage(ImagePrimitive(position, rotation, getScale(type), type));
-}
-
-DrawingSystem::DrawingSystem( IPrimitivesToDrawContainer &primitivesContainer)
+DrawingSystem::DrawingSystem( std::shared_ptr<IPrimitivesToDrawContainer> primitivesContainer)
 		: primitivesContainer_(primitivesContainer) {}

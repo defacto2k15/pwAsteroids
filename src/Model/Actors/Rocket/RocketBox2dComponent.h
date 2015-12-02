@@ -63,9 +63,8 @@ public:
 	}
 
 	void accelerate(){ // LOL allways force to the same angle!
-		b2Vec2 accVec =  b2Vec2(configurableValues_->getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())),
+		b2Vec2 accVec =  b2Vec2((-1)*(configurableValues_->getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
 		                        configurableValues_->getRocketAccelerationRate() * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
-		std::cout<< "Acc vector is x " << accVec.x << " and y is " << accVec.y << std::endl;
 		rocketBox2dObject_->getBody()->ApplyForce(accVec,
 		                                           rocketBox2dObject_->getBody()->GetWorldCenter(), true);
 	}

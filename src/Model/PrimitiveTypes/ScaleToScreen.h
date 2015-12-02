@@ -18,6 +18,8 @@ public:
 	double getX() const;
 
 	double getY() const;;
+
+	Point scalePoint(Point p) const;
 private:
 	void assertArgumentsAreAcceptable(double x, double y);
 };

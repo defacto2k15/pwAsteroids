@@ -4,10 +4,11 @@
 
 #include "DegreesCalculations.h"
 
-Rotation DegreesCalculations::radiansToDegrees( float32 rad) {
+Rotation DegreesCalculations::radiansToDegrees( double rad) {
 	return rad * 57.295779513082320876f; // ugly but works!
 }
 
-float DegreesCalculations::degreesToRadians( Rotation degrees ) {
-	return degrees *0.0174532925199432957f;
+double DegreesCalculations::degreesToRadians( Rotation degrees ) {
+	double newDegrees =  degrees *0.0174532925199432957f;
+	return newDegrees;
 }

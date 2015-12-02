@@ -8,8 +8,13 @@
 
 #include <Model/Actors/Rocket/IRocketConfigurableValues.h>
 #include <Model/Actors/RocketTail/IRocketTailConfigurableValues.h>
+#include "IScreenScallingConfiguration.h"
+#include "IImageCenteringConfiguration.h"
 
-class ActorsConfiguration : public IRocketConfigurableValues, public IRocketTailConfigurableValues {
+class ActorsConfiguration : public IRocketConfigurableValues,
+                            public IRocketTailConfigurableValues,
+                            public IScreenScalingConfiguration,
+							public IImageCenteringConfiguration {
 
 public:
 	virtual Point getInitialPosition() const;
@@ -24,6 +29,10 @@ public:
 
 
 	virtual int getDistanceBetweenRocketAndTail();
+
+	virtual ScaleToScreen getBox2dToAllegroScale()const override;
+
+	virtual Point getBox2dScreenDimensions() const;
 };
 
 

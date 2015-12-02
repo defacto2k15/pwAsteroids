@@ -21,8 +21,8 @@ double ScaleToScreen::getY() const {
 }
 
 void ScaleToScreen::assertArgumentsAreAcceptable(double x, double y) {
-	if( x < 0 || x > 1 || y < 0 || y > 1){
-		throw BadScaleArgumentException("Both parameters of scaleToScreen shoulb be between 0 and 1, but they are: "
+	if( x < 0 ||  y < 0 ){
+		throw BadScaleArgumentException("Both parameters of scaleToScreen shoulb be positibe: "
 		                                +std::to_string(x)+std::to_string(y));
 	}
 }
@@ -30,4 +30,9 @@ void ScaleToScreen::assertArgumentsAreAcceptable(double x, double y) {
 std::ostream &operator<<(std::ostream& stream, const ScaleToScreen& scale) {
 	stream << "<"<<scale.getX()<<","<<scale.getY()<<">";
 	return stream;
+}
+
+Point ScaleToScreen::scalePoint(Point p) const {
+	Point newPoint( p.getX()*p_.getX(), p.getY()*p_.getY());
+	return newPoint;
 }

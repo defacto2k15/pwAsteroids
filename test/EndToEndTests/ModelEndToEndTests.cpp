@@ -19,7 +19,7 @@ TEST(EndToEndTests, RocketAppearsOnScreen ){
 TEST(EndToEndTests, ThereIsOnlyOneImageOfRocketOnScreen){
 	GameRunner runner;
 	runner.AddEachLoopExpectations(std::make_shared<LambdaExpectation>( [](std::shared_ptr<Game> g) {
-		auto images = g->getOutGameScreenModel().getImagePrimitives();
+		auto images = g->getOutGameScreenModel()->getImagePrimitives();
 		int imageCount = 0;
 		for( auto &image : images){
 			if( image.getImageType() == ImagePrimitiveType::Rocket ){
@@ -39,7 +39,7 @@ TEST(EndToEndTests, WhenNoButtonIsClickedRocketDontMovesForAtLeast15Frames){
 	Point firstPositionOfRocket;
 
 	runner.AddFirstLoopExpectations(std::make_shared<LambdaExpectation>( [&firstPositionOfRocket](std::shared_ptr<Game> g) {
-		auto images = g->getOutGameScreenModel().getImagePrimitives();
+		auto images = g->getOutGameScreenModel()->getImagePrimitives();
 		for( auto &image : images){
 			if(image.getImageType() == ImagePrimitiveType::Rocket ){
 				firstPositionOfRocket = image.getPosition();
@@ -51,7 +51,7 @@ TEST(EndToEndTests, WhenNoButtonIsClickedRocketDontMovesForAtLeast15Frames){
 	std::vector<Point> rocketPoints;
 
 	runner.AddEachLoopExpectations(std::make_shared<LambdaExpectation>( [&firstPositionOfRocket, &rocketPoints](std::shared_ptr<Game> g) {
-		auto images = g->getOutGameScreenModel().getImagePrimitives();
+		auto images = g->getOutGameScreenModel()->getImagePrimitives();
 			for( auto &image : images){
 			if(image.getImageType() == ImagePrimitiveType::Rocket ){
 				rocketPoints.push_back(image.getPosition());
@@ -79,7 +79,7 @@ TEST(EndToEndTests, WhenPlayer1UpButtonIsPressedRocketMovesUp ){
 	Point firstPositionOfRocket(0.0f, 0.0f);
 	runner.AddEachLoopExpectations(std::make_shared<LambdaExpectation>(
 			[&lastPositionOfRocket, &firstLoopWasDone, &firstPositionOfRocket](std::shared_ptr<Game> g) {
-		auto images = g->getOutGameScreenModel().getImagePrimitives();
+		auto images = g->getOutGameScreenModel()->getImagePrimitives();
 			for( auto &image : images){
 
 			if(image.getImageType() == ImagePrimitiveType::Rocket ){
@@ -109,7 +109,7 @@ TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
 	Point firstPositionOfRocket(0.0f, 0.0f);
 	runner.AddEachLoopExpectations(std::make_shared<LambdaExpectation>(
 			[&lastPositionOfRocket, &firstLoopWasDone, &firstPositionOfRocket](std::shared_ptr<Game> g) {
-				auto images = g->getOutGameScreenModel().getImagePrimitives();
+				auto images = g->getOutGameScreenModel()->getImagePrimitives();
 				for( auto &image : images){
 
 					if(image.getImageType() == ImagePrimitiveType::Rocket ){

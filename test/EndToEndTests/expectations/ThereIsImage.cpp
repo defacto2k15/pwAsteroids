@@ -5,7 +5,7 @@
 #include "ThereIsImage.h"
 
 bool ThereIsImage::checkExpectation() {
-	auto images = game_->getOutGameScreenModel().getImagePrimitives();
+	auto images = game_->getOutGameScreenModel()->getImagePrimitives();
 	lastLoopImageCount_ = images.size();
 	for( auto &image : images){
 		if( image.getImageType() == imageType_ ){

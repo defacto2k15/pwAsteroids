@@ -11,15 +11,15 @@
 #include <Model/PrimitiveTypes/ScaleToScreen.h>
 #include "ImagePrimitiveType.h"
 #include "IPrimitivesToDrawContainer.h"
+#include <memory>
 
 class DrawingSystem {
-	IPrimitivesToDrawContainer &primitivesContainer_;
+	std::shared_ptr<IPrimitivesToDrawContainer> primitivesContainer_;
 public:
-	DrawingSystem( IPrimitivesToDrawContainer &primitivesContainer);
+	DrawingSystem( std::shared_ptr<IPrimitivesToDrawContainer> primitivesContainer);
 
-	void drawImage(ImagePrimitiveType type, Point position, Rotation rotation);
-private:
-	ScaleToScreen getScale(ImagePrimitiveType type);
+	void drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale);
+
 };
 
 

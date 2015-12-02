@@ -11,9 +11,9 @@
 
 class DegreesCalculations {
 public:
-	static Rotation radiansToDegrees( float32 rad);
+	static Rotation radiansToDegrees( double rad);
 
-	static float degreesToRadians( Rotation degrees );
+	static double degreesToRadians( Rotation degrees );
 };
 
 
