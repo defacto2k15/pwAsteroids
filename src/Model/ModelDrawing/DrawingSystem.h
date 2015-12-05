@@ -18,7 +18,7 @@ class DrawingSystem {
 public:
 	DrawingSystem( std::shared_ptr<IPrimitivesToDrawContainer> primitivesContainer);
 
-	void drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale);
+	void drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale, ActorId actorId);
 
 };
 

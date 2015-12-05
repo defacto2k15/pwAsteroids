@@ -18,11 +18,14 @@ public:
 
 	virtual void OnStart(IActor &actor) override{
 		positionComponent_ = actor.getOnlyComponent<PositionComponent>();
+		actorId_ = actor.getActorId();
 	};
 
 	virtual void OnUpdate() override{
-		drawingSystem_->drawImage(imageType_,
-		                         positionComponent_->getPosition(), positionComponent_->getRotation(), scaleToScreen_);
+		if( isVisible_ ) {
+			drawingSystem_->drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
+			                          scaleToScreen_, actorId_);
+		}
 	};
 
 	void setVisibility(bool visibility ){
@@ -34,6 +37,7 @@ private:
 	std::shared_ptr<PositionComponent> positionComponent_;
 	ImagePrimitiveType imageType_;
 	bool isVisible_ = true;
+	ActorId actorId_;
 };
 
 #endif //PWASTEROIDS_DRAWINGCOMPONENT_H

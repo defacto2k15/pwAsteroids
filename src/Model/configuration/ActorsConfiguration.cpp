@@ -5,7 +5,7 @@
 #include "ActorsConfiguration.h"
 
 Point ActorsConfiguration::getInitialPosition() const {
-	return Point(0.0f, 0.0f);
+	return Point( getBox2dScreenDimensions().getX()/2, getBox2dScreenDimensions().getY()/2);
 }
 
 Rotation ActorsConfiguration::getInitialRotation() const {
@@ -24,8 +24,8 @@ ScaleToScreen ActorsConfiguration::getRocketScaleToScreen() const {
 	return ScaleToScreen(0.05f, 0.05f);
 }
 
-int ActorsConfiguration::getDistanceBetweenRocketAndTail() {
-	return 20;
+float ActorsConfiguration::getDistanceBetweenRocketAndTail() {
+	return 0.5f;
 }
 
 ScaleToScreen ActorsConfiguration::getBox2dToAllegroScale() const {

@@ -23,6 +23,7 @@
 #include <Model/Actors/RocketTail/RocketTailPositionComponent.h>
 #include <Model/modelInterfaces/OutGameScreenModelScaler.h>
 #include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
+#include <Model/Actors/ActorIdGenerator.h>
 
 class Game {
 private:
@@ -31,6 +32,7 @@ private:
 	std::shared_ptr<DrawingSystem> drawingSystem_;
 	std::shared_ptr<KeyboardStateManager> keyboardManager_ = std::make_shared<KeyboardStateManager>();
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>();
+	ActorIdGenerator idGenerator;
 
 	std::shared_ptr<ActorsConfiguration> actorsConfiguration_ = std::make_shared<ActorsConfiguration>();
 public:
@@ -45,7 +47,7 @@ public:
 		rootServiceContainer_.addService(gameTimeProvider);
 
 		rootServiceContainer_.addService(boxService_);
-		auto rocket = std::make_shared<Actor>();
+		auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
 
 		rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
 		rocket->addComponent(std::make_shared<PositionComponent>());
@@ -53,9 +55,9 @@ public:
 		auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_);
 		rocket->addComponent(rocketMovingComponent);
 
-		auto rocketTail = std::make_shared<Actor>();
+		auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 		rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
-		rocketTail->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::RocketTail, ScaleToScreen(0.02, 0.02)));
+		rocketTail->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::RocketTail, ScaleToScreen(0.053, 0.1)));
 		rocketTail->addComponent(std::make_shared<PositionComponent>());
 
 		actorsContainer->addActor(rocket);

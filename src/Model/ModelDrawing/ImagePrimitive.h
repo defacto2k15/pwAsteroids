@@ -13,8 +13,9 @@ class ImagePrimitive : public IDrawablePrimitive {
 	Rotation rotation_;
 	ScaleToScreen scale_;
 	ImagePrimitiveType imageType_;
+	ActorId actorId_;
 public:
-	ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ImagePrimitiveType &imageType);
+	ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ActorId &actorId, const ImagePrimitiveType &imageType);
 
 	virtual Point getPosition() const;
 
@@ -23,6 +24,8 @@ public:
 	virtual ScaleToScreen getScale() const;
 
 	ImagePrimitiveType getImageType() const;
+
+	virtual ActorId getActorId() const;
 };
 
 

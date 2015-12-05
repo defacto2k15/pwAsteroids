@@ -29,7 +29,7 @@ public:
 		ScaleToScreen scale = configuration_->getBox2dToAllegroScale();
 		for( auto &onePrimitive : oldPrimitives ){
 			Point newPos( onePrimitive.getPosition().getX() * scale.getX(), onePrimitive.getPosition().getY() * scale.getY());
-			newPrimitives.push_back(ImagePrimitive(newPos, onePrimitive.getRotation(), onePrimitive.getScale(), onePrimitive.getImageType()));
+			newPrimitives.push_back(ImagePrimitive(newPos, onePrimitive.getRotation(), onePrimitive.getScale(), onePrimitive.getActorId(), onePrimitive.getImageType()));
 		}
 		return newPrimitives;
 	}

@@ -14,6 +14,7 @@ public:
 	virtual Point getPosition() const =0;
 	virtual Rotation getRotation() const =0;
 	virtual ScaleToScreen getScale() const = 0;
+	virtual ActorId getActorId() const = 0;
 	virtual ~IDrawablePrimitive(){};
 };
 #endif //PWASTEROIDS_IDRAWABLEPRIMITIVE_H

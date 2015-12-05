@@ -6,6 +6,6 @@
 #define PWASTEROIDS_IROCKETTAILCONFIGURABLEVALUES_H
 class IRocketTailConfigurableValues{
 public:
-	virtual int getDistanceBetweenRocketAndTail( )=0;
+	virtual float getDistanceBetweenRocketAndTail( )=0;
 };
 #endif //PWASTEROIDS_IROCKETTAILCONFIGURABLEVALUES_H

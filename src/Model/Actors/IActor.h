@@ -10,6 +10,7 @@
 #include <memory>
 #include <assert.h>
 #include <Model/components/ComponentTypeChecker.h>
+#include <Model/PrimitiveTypes/AliasedTypes.h>
 
 class Component;
 
@@ -25,6 +26,8 @@ public:
 		assert(afterCast);
 		return afterCast;
 	}
+
+	virtual ActorId getActorId() const=0;
 
 	virtual ~IActor(){};
 

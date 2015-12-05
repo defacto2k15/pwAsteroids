@@ -28,7 +28,7 @@ public:
 	virtual ScaleToScreen getRocketScaleToScreen() const;
 
 
-	virtual int getDistanceBetweenRocketAndTail();
+	virtual float getDistanceBetweenRocketAndTail();
 
 	virtual ScaleToScreen getBox2dToAllegroScale()const override;
 

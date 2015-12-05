@@ -4,6 +4,7 @@
 #ifndef PWASTEROIDS_STDCONTAINERS_H
 #define PWASTEROIDS_STDCONTAINERS_H
 #include <algorithm>
+#include <iostream>
 
 template<typename ContainerType>
 bool contains(ContainerType &container , decltype(*(container.begin())) item ){

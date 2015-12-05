@@ -11,6 +11,7 @@
 #include "IRocketTailConfigurableValues.h"
 #include <cmath>
 #include <Model/help/DegreesCalculations.h>
+#include <Model/help/myMath.h>
 
 class RocketTailPositionComponent : public Component {
 	std::shared_ptr<IActor> rocketActor_;
@@ -28,13 +29,11 @@ public:
 	}
 
 	virtual void OnUpdate(){
-		Rotation tailRotation = DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation());
-
 		Point newPos(
 				rocketPositionComponent_->getPosition().getX()
-						- configurableValues_->getDistanceBetweenRocketAndTail()*sin(tailRotation),
+						- configurableValues_->getDistanceBetweenRocketAndTail()*myMath::sinDeg(rocketPositionComponent_->getRotation()),
 				rocketPositionComponent_->getPosition().getY()
-						- configurableValues_->getDistanceBetweenRocketAndTail()*cos(tailRotation));
+						+ configurableValues_->getDistanceBetweenRocketAndTail()*myMath::cosDeg(rocketPositionComponent_->getRotation()));
 		tailPositionComponent_->setPosition(newPos);
 		tailPositionComponent_->setRotation(rocketPositionComponent_->getRotation());
 	}

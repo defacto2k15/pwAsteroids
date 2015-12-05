@@ -38,16 +38,21 @@ public:
 
 	void removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove ){
 		bool someExpectationWasRemoved = false;
-		std::vector< std::vector<std::shared_ptr<IEndToEndExpectation> > >vectorsOfExpectations {
-				eachLoopExpectations_, afterTestExpectations_, firstLoopExpectations_
-		};
-		for( auto &oneVec : vectorsOfExpectations ){
-			if ( contains(oneVec, expectationToRemove)){
+
+		if ( contains(eachLoopExpectations_, expectationToRemove)){
 				someExpectationWasRemoved = true;
-				removeItem(oneVec, expectationToRemove);
-			}
+				removeItem(eachLoopExpectations_, expectationToRemove);
 		}
-		if( someExpectationWasRemoved ){
+		if ( contains(afterTestExpectations_, expectationToRemove)){
+			someExpectationWasRemoved = true;
+			removeItem(afterTestExpectations_, expectationToRemove);
+		}
+		if ( contains(firstLoopExpectations_, expectationToRemove)){
+			someExpectationWasRemoved = true;
+			removeItem(firstLoopExpectations_, expectationToRemove);
+		}
+
+		if( !someExpectationWasRemoved ){
 			assert(false && " No item was removed");
 		}
 

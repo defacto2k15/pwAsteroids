@@ -40,7 +40,7 @@ public:
 					newPos.getY() - (0.5f)*imageSize.getY() * myMath::sinDeg( oldPrimitive.getRotation() )
 			);
 
-			outPrimitives.push_back( ImagePrimitive(newPos2, oldPrimitive.getRotation(), oldPrimitive.getScale(), oldPrimitive.getImageType()));
+			outPrimitives.push_back( ImagePrimitive(newPos2, oldPrimitive.getRotation(), oldPrimitive.getScale(), oldPrimitive.getActorId(), oldPrimitive.getImageType()));
 		}
 		//std::cout << std::endl;
 		return outPrimitives;

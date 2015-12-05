@@ -11,4 +11,5 @@
 #include "Model/PrimitiveTypes/Rotation.h"
 
 using ImagePath = std::string;
+using ActorId = unsigned int;
 #endif //PWASTEROIDS_ALIASEDTYPES_H

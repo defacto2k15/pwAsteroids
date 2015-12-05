@@ -12,12 +12,13 @@ class ComponentsContainer;
 
 class Actor : public IActor {
 	ComponentsContainer container_;
+	ActorId  actorId_;
 public:
 
 
 	virtual std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker);
 
-	Actor(){}
+	Actor(ActorId id) : actorId_(id){}
 	virtual void OnStart();
 
 	virtual void OnUpdate();
@@ -25,6 +26,8 @@ public:
 	virtual void OnStop();
 
 	virtual void addComponent(std::shared_ptr<Component> component) override;
+
+	virtual ActorId getActorId() const;
 };
 
 

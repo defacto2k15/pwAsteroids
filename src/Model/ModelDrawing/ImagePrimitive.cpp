@@ -18,9 +18,13 @@ ScaleToScreen ImagePrimitive::getScale() const {
 	return scale_;
 }
 
-ImagePrimitive::ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ImagePrimitiveType &type)
-		: position_(position), rotation_(rotation), scale_(scale), imageType_(type) { }
+ImagePrimitive::ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale,  const ActorId &actorId, const ImagePrimitiveType &type)
+		: position_(position), rotation_(rotation), scale_(scale), actorId_(actorId), imageType_(type) { }
 
 ImagePrimitiveType ImagePrimitive::getImageType() const {
 	return imageType_;
+}
+
+ActorId ImagePrimitive::getActorId() const {
+	return actorId_;
 }

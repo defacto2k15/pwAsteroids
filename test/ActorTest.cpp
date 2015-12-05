@@ -16,6 +16,10 @@ class ActorTests : public ::testing::Test{
 public:
 	Actor actor;
 
+	ActorTests() :actor(1){
+
+	}
+
 	std::vector<std::shared_ptr<MockComponent>> createStrictMockComponentsVector() {
 		std::vector<std::shared_ptr<MockComponent>> outVec;
 		for(int i = 0; i < 10; i++){

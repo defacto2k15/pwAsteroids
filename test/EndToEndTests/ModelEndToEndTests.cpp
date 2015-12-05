@@ -5,6 +5,7 @@
 #include <test/EndToEndTests/expectations/ThereIsImage.h>
 #include <test/EndToEndTests/expectations/LambdaExpectation.h>
 #include <test/EndToEndTests/expectations/NegativeExpectation.h>
+#include <test/EndToEndTests/expectations/ImagePrimitiveExpectation.h>
 #include "src/Model/ModelDrawing/ImagePrimitiveType.h"
 
  //Created by defacto on 16.10.15.
@@ -128,14 +129,14 @@ TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
 	runner.RunForLoops(10);
 
 	if( (firstPositionOfRocket.getY() < lastPositionOfRocket.getY())
-	        ||( firstPositionOfRocket.getX() > lastPositionOfRocket.getX()) ){
+	        ||( firstPositionOfRocket.getX() < lastPositionOfRocket.getX()) ){
 		FAIL() << " after 10 loops  rocket didnt move up and left. First pos  "
-		       << firstPositionOfRocket.toString() << " second"
+		       << firstPositionOfRocket.toString() << " second "
 		       << lastPositionOfRocket.toString() << std::endl;
 	}
 }
 
-/*TEST(EndToEndTests, ThereIsRocketTailImageWhenAccelerateKeyIsPressed ){
+TEST(EndToEndTests, ThereIsRocketTailImageWhenAccelerateKeyIsPressed ){
 	GameRunner runner;
 	auto tailVisibleExpectation = std::make_shared<ThereIsImage>(ImagePrimitiveType::RocketTail);
 	auto noTailExpectation = std::make_shared<NegativeExpectation>( tailVisibleExpectation );
@@ -147,7 +148,28 @@ TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
 	runner.AddKeyPressed(Keys::Player1AccelerateKey);
 	runner.makeUncheckedUpdate();
 	runner.RunForLoops(10);
-}*/
+}
+
+TEST(EndToEndTests, RocketImagePrimitiveHasTheSameActorId ){
+	GameRunner runner;
+	ActorId id = 9999;
+	runner.AddFirstLoopExpectations(
+			std::make_shared<ImagePrimitiveExpectation>(
+					[](ImagePrimitive &primitite){ return primitite.getImageType() == ImagePrimitiveType::Rocket; },
+					[&id](ImagePrimitive &primitive){ id = primitive.getActorId(); 	}
+			));
+
+	runner.AddEachLoopExpectations(
+			std::make_shared<ImagePrimitiveExpectation>(
+					[](ImagePrimitive &primitite){ return primitite.getImageType() == ImagePrimitiveType::Rocket; },
+			         [&id](ImagePrimitive &primitive){
+				         if( primitive.getActorId() != id ){
+					         FAIL() << "Actor id changed. It was "<< id<<" but now is " << primitive.getActorId();
+				         }
+			         }));
+	runner.makeUncheckedUpdate();
+	runner.RunForLoops(10);
+}
 
 TEST(EndToEndTests, WhenAccelerationKeyIsNotPressedThereIsNoRocketTail ){
 	GameRunner runner;
