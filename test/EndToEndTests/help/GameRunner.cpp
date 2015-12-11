@@ -12,39 +12,33 @@ std::string GameRunner::createErrorMessage(std::shared_ptr<IEndToEndExpectation>
 	return "FAILED:\n"+failedExpectation->getExpectationDescription()+"\n BECOUSE OF: \n " + failedExpectation->getFailureMessage();
 }
 
-GameRunner::GameRunner() : g_(std::make_shared<Game>()), keyboard_(g_) {}
+GameRunner::GameRunner() : g_(std::make_shared<Game>()), keyboard_(g_) ,  allExpectations_(3){}
 
 void GameRunner::AddEachLoopExpectations(std::shared_ptr<IEndToEndExpectation> newExpectation) {
-	eachLoopExpectations_.push_back(newExpectation);
+	getExpectations(ExpectationType::EachLoop).push_back(newExpectation);
 }
 
 void GameRunner::AddFirstLoopExpectations(std::shared_ptr<IEndToEndExpectation> newExpectation) {
-	firstLoopExpectations_.push_back(newExpectation);
+	getExpectations(ExpectationType::FirstLoop).push_back(newExpectation);
 }
 
 
 void GameRunner::AddAfterRunExpectations( std::shared_ptr<IEndToEndExpectation> newExpectation){
-	afterTestExpectations_.push_back(newExpectation);
+	getExpectations(ExpectationType::AfterTest).push_back(newExpectation);
 }
 
 void GameRunner::RunForLoops(int loopsToRun) {
-	for( auto &expectation  : eachLoopExpectations_){
-		expectation->beforeFirstUpdate(g_);
-	}
-
-	for( auto &expectation  : afterTestExpectations_){
-		expectation->beforeFirstUpdate(g_);
-	}
-
-	for( auto &expectation  : firstLoopExpectations_){
-		expectation->beforeFirstUpdate(g_);
+	for( auto &expectationVec : allExpectations_ ){
+		for( auto &expectation : expectationVec){
+			expectation->beforeFirstUpdate(g_);
+		}
 	}
 
 	for( int i = 0; i < loopsToRun; i++ ){
 		keyboard_.sendKeysPressedToGame();
 		g_->update();
 		if( i == 0){
-			for( auto& expectation : firstLoopExpectations_){
+			for( auto& expectation : getExpectations(ExpectationType::FirstLoop)){
 				if(!expectation->checkExpectation()){
 					std::string errorMessage = createErrorMessage(expectation);
 					FAIL() << errorMessage;
@@ -52,7 +46,7 @@ void GameRunner::RunForLoops(int loopsToRun) {
 			}
 		}
 
-		for( auto& expectation : eachLoopExpectations_){
+		for( auto& expectation : getExpectations(ExpectationType::EachLoop)){
 			if(!expectation->checkExpectation()){
 				std::string errorMessage = createErrorMessage(expectation);
 				FAIL() << errorMessage;
@@ -60,7 +54,7 @@ void GameRunner::RunForLoops(int loopsToRun) {
 		}
 	}
 
-	for( auto& expectation : afterTestExpectations_){
+	for( auto& expectation : getExpectations(ExpectationType::AfterTest)){
 		if(!expectation->checkExpectation()){
 			std::string errorMessage = createErrorMessage(expectation);
 			FAIL() << "After all loops " << std::endl<< errorMessage;
@@ -76,3 +70,6 @@ void GameRunner::makeUncheckedUpdate() {
 	g_->update();
 }
 
+void GameRunner::AddInPythonCommand(std::string commandText) {
+	g_->getInPythonModule()->addCommand(commandText);
+}

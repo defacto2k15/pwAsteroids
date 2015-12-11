@@ -24,6 +24,7 @@
 #include <Model/modelInterfaces/OutGameScreenModelScaler.h>
 #include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
 #include <Model/Actors/ActorIdGenerator.h>
+#include <Model/python/PythonModule.h>
 
 class Game {
 private:
@@ -32,6 +33,7 @@ private:
 	std::shared_ptr<DrawingSystem> drawingSystem_;
 	std::shared_ptr<KeyboardStateManager> keyboardManager_ = std::make_shared<KeyboardStateManager>();
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>();
+	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
 	ActorIdGenerator idGenerator;
 
 	std::shared_ptr<ActorsConfiguration> actorsConfiguration_ = std::make_shared<ActorsConfiguration>();
@@ -45,6 +47,8 @@ public:
 		rootServiceContainer_.addService(actorsContainer);
 		std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 		rootServiceContainer_.addService(gameTimeProvider);
+
+		rootServiceContainer_.addService(pythonModule_);
 
 		rootServiceContainer_.addService(boxService_);
 		auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
@@ -74,6 +78,14 @@ public:
 
 	std::shared_ptr<IInKeyboardStateGetter> getInKeyboardStateGetter(){
 		return keyboardManager_;
+	}
+
+	std::shared_ptr<IInPythonModule> getInPythonModule(){
+		return pythonModule_;
+	}
+
+	std::shared_ptr<IOutPythonModule> getOutPythonModule(){
+		return pythonModule_;
 	}
 
 	void update(){

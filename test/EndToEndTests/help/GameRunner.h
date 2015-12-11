@@ -12,11 +12,11 @@
 #include <Model/help/StdContainers.h>
 #include "test/EndToEndTests/expectations/IEndToEndExpectation.h"
 
+enum ExpectationType{ FirstLoop = 0, EachLoop = 1, AfterTest = 2 };
+
 class GameRunner {
 	std::shared_ptr<Game> g_;
-	std::vector<std::shared_ptr<IEndToEndExpectation>> eachLoopExpectations_;
-	std::vector<std::shared_ptr<IEndToEndExpectation>> afterTestExpectations_;
-	std::vector<std::shared_ptr<IEndToEndExpectation>> firstLoopExpectations_;
+	std::vector<std::vector<std::shared_ptr<IEndToEndExpectation>>> allExpectations_;
 	FakeKeyboardStateToGameProvider keyboard_;
 
 public:
@@ -39,23 +39,23 @@ public:
 	void removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove ){
 		bool someExpectationWasRemoved = false;
 
-		if ( contains(eachLoopExpectations_, expectationToRemove)){
+		for( std::vector<std::shared_ptr<IEndToEndExpectation>> oneVec : allExpectations_){
+			if( contains(oneVec, expectationToRemove ) ){
 				someExpectationWasRemoved = true;
-				removeItem(eachLoopExpectations_, expectationToRemove);
-		}
-		if ( contains(afterTestExpectations_, expectationToRemove)){
-			someExpectationWasRemoved = true;
-			removeItem(afterTestExpectations_, expectationToRemove);
-		}
-		if ( contains(firstLoopExpectations_, expectationToRemove)){
-			someExpectationWasRemoved = true;
-			removeItem(firstLoopExpectations_, expectationToRemove);
+				removeItem(oneVec, expectationToRemove);
+			}
 		}
 
 		if( !someExpectationWasRemoved ){
 			assert(false && " No item was removed");
 		}
 
+	}
+
+	void AddInPythonCommand(std::string command);
+private:
+	std::vector<std::shared_ptr<IEndToEndExpectation>> &getExpectations(ExpectationType type){
+		return allExpectations_[type];
 	}
 };
 
