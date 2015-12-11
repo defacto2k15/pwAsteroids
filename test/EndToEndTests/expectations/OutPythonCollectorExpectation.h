@@ -16,7 +16,10 @@ public:
 	}
 
 	virtual bool checkExpectation(){
-		lastCheck_ = checkingFunction_(game_->getOutPythonModule()->getOutput());
+		auto a1 = game_->getOutPythonModule();
+		auto a2 = a1->getOutput();
+
+		lastCheck_ = checkingFunction_(a2);
 		lastLoopCount_++;
 		return lastCheck_.wasCheckOk;
 	}

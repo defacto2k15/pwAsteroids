@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 2.6)
 project(pwAsteroids)
 
 add_definitions(-std=c++14)
@@ -15,31 +15,20 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/View/*.cpp" "src/View/*.h" "src/Model/configuration/*.cpp" "src/Model/configuration/*.h"
         "src/Model/Actors/RocketTail/*.cpp" "src/Model/Actors/RocketTail/*.h" "src/Model/python/*.cpp" "src/Model/python/*.h"
   )
+
 add_executable(pwAsteroids ${SRC_FILES}  )
 
-
-SET(ENV{BOOST_ROOT} "/home/defacto/ProgrammingApps/boost/boost_1_59_0")
-
-find_package(Boost 1.48  REQUIRED COMPONENTS python)
-
 # Including python things...
-INCLUDE_DIRECTORIES("${Boost_INCLUDE_DIRS}" "/usr/include/python3.4")
-INCLUDE_DIRECTORIES( /usr/include/python2.7/)
-
-
-TARGET_LINK_LIBRARIES(pwAsteroids ${Boost_LIBRARIES})
-TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython3.4m.so.1 )
-
-
+INCLUDE_DIRECTORIES( "/usr/include/python3.4")
+TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython2.7.so )
 
 if(UNIX)
-    FIND_PACKAGE( Boost 1.48 COMPONENTS program_options REQUIRED )
+    FIND_PACKAGE( Boost 1.48 REQUIRED COMPONENTS python system thread )
     INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
     TARGET_LINK_LIBRARIES( pwAsteroids ${Boost_LIBRARIES} )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_system )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_thread )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_python )
-    #python..
 
 else()
     SET_TARGET_PROPERTIES(pwAsteroids PROPERTIES ENVIRONMENT_DEBUG "PATH=${allegropath}/bin;%PATH%")
@@ -93,6 +82,8 @@ endif()
 
 include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
+message( $ENV{PYTHONNAME} $ENV{PYTHONPATH} WARNING)
+
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
 if(BuildTests)
@@ -126,4 +117,8 @@ if(BuildTests)
     # Include root directory
     include_directories(BEFORE ".")
     include_directories(BEFORE "src/")
+
+    # python
+    TARGET_LINK_LIBRARIES("${TEST_EXECUTABLE_NAME}" /usr/lib/x86_64-linux-gnu/libpython2.7.so )
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_python)
 endif()

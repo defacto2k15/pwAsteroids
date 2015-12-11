@@ -18,7 +18,7 @@ public:
 	}
 
 	virtual std::string getOutput(){
-
+		return std::string("");
 	}
 
 	virtual void OnStart(){
