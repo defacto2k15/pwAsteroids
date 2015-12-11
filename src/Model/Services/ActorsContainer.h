@@ -15,17 +15,9 @@
 class ActorsContainer  : public ServiceContainer {
 	std::vector<std::shared_ptr<IActor>> actorsVec_;
 public:
-	void addActor(std::shared_ptr<IActor> newActor){
-		actorsVec_.push_back(newActor);
-	}
+	void addActor(std::shared_ptr<IActor> newActor);
 
-	void removeActor(std::shared_ptr<IActor> newActor){
-		auto foundIt = std::find(begin(actorsVec_), end(actorsVec_), newActor);
-		if(foundIt == actorsVec_.end()){
-			throw RemovingNotAddedActorException();
-		}
-		actorsVec_.erase(foundIt);
-	}
+	void removeActor(std::shared_ptr<IActor> newActor);
 protected:
 	virtual std::vector<std::shared_ptr<IService>> getServices();
 };

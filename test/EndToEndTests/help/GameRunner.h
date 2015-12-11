@@ -36,27 +36,11 @@ public:
 
 	void makeUncheckedUpdate();
 
-	void removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove ){
-		bool someExpectationWasRemoved = false;
-
-		for( std::vector<std::shared_ptr<IEndToEndExpectation>> oneVec : allExpectations_){
-			if( contains(oneVec, expectationToRemove ) ){
-				someExpectationWasRemoved = true;
-				removeItem(oneVec, expectationToRemove);
-			}
-		}
-
-		if( !someExpectationWasRemoved ){
-			assert(false && " No item was removed");
-		}
-
-	}
+	void removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove );
 
 	void AddInPythonCommand(std::string command);
 private:
-	std::vector<std::shared_ptr<IEndToEndExpectation>> &getExpectations(ExpectationType type){
-		return allExpectations_[type];
-	}
+	std::vector<std::shared_ptr<IEndToEndExpectation>> & getExpectations(ExpectationType type);
 };
 
 

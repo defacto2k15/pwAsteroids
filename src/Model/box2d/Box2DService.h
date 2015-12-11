@@ -16,31 +16,16 @@
 class Box2DService : public IService {
 	b2World world_;
 public:
-	std::vector< std::shared_ptr<Box2dObject> > objectsToCreate_;
 
 	Box2DService() : world_(b2Vec2(0.0f, 0.0f)) {
 	}
 
-	void addObject( std::shared_ptr<Box2dObject> object ){
-		auto body = world_.CreateBody( object->getDef() );
-		object->setBodyAndCreateFixtures(body);
-	}
+	void addObject( std::shared_ptr<Box2dObject> object );
 
-	void removeObject( std::shared_ptr<Box2dObject> object ){
-		// dont expect it to work, but who knows....
-		 world_.DestroyBody(object->getBody());
-	}
+	void removeObject( std::shared_ptr<Box2dObject> object );
 
 
-	virtual void OnUpdate(){
-		float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
-		int32 velocityIterations = 8;   //how strongly to correct velocity
-		int32 positionIterations = 3;   //how strongly to correct position
-
-
-		world_.Step( timeStep, velocityIterations, positionIterations);
-
-	}
+	virtual void OnUpdate();
 
 };
 

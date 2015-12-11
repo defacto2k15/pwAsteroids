@@ -35,16 +35,15 @@ public:
 
 	virtual bool checkExpectation()=0;
 
-	virtual std::string getExpectationDescription(){
+	virtual std::string getExpectationDescription() {
 		return "lambda expectation";
 	}
 
-	virtual std::string getFailureMessage(){
-		return "During loop "+std::to_string(lastLoopCount_)
-		       +" there was error:\n" + lastCheck_.badCheckDescription;
+	virtual std::string getFailureMessage() {
+		return "lambda expectation";
 	}
 
-	virtual void beforeFirstUpdate(std::shared_ptr<Game> g){
+	virtual void beforeFirstUpdate(std::shared_ptr<Game> g) {
 		game_ = g;
 	}
 

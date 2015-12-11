@@ -15,14 +15,9 @@
 class LambdaExpectation : public InputVariableLambdaExpectation<std::shared_ptr<Game>> {
 
 public:
-	LambdaExpectation( std::function<LastCheck (std::shared_ptr<Game> g)> function ) : InputVariableLambdaExpectation(function){
-	}
+	LambdaExpectation( std::function<LastCheck (std::shared_ptr<Game> g)> function );
 
-	virtual bool checkExpectation(){
-		lastCheck_ = checkingFunction_(game_);
-		lastLoopCount_++;
-		return lastCheck_.wasCheckOk;
-	}
+	virtual bool checkExpectation();
 
 };
 

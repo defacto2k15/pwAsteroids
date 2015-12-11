@@ -3,3 +3,7 @@
 //
 
 #include "ActorIdGenerator.h"
+
+ActorId ActorIdGenerator::getActorId() {
+	return ++lastActorId_;
+}

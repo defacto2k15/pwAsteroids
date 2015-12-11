@@ -4,6 +4,18 @@
 
 #include "ActorsContainer.h"
 
+void ActorsContainer::addActor(std::shared_ptr<IActor> newActor) {
+	actorsVec_.push_back(newActor);
+}
+
+void ActorsContainer::removeActor(std::shared_ptr<IActor> newActor) {
+	auto foundIt = std::find(begin(actorsVec_), end(actorsVec_), newActor);
+	if(foundIt == actorsVec_.end()){
+		throw RemovingNotAddedActorException();
+	}
+	actorsVec_.erase(foundIt);
+}
+
 std::vector<std::shared_ptr<IService>> ActorsContainer::getServices() {
 	std::vector<std::shared_ptr<IService>> outVec(actorsVec_.size());
 	std::copy(begin(actorsVec_), end(actorsVec_), begin(outVec));

@@ -17,28 +17,13 @@ class KeyboardStateManager : public IKeyboardStateProvider, public IInKeyboardSt
 
 
 public:
-	virtual bool wasClicked(Keys key){
-		return (pressedKeysMap_.find(key) != pressedKeysMap_.end()) &&( pressedKeysMap_[key] == true)
-			&& (previousPressedKeysMap_.find(key) != previousPressedKeysMap_.end())
-	            &&(previousPressedKeysMap_[key] == false );
-	}
+	virtual bool wasClicked(Keys key);
 
-	virtual bool isPressed(Keys key){
-		if( pressedKeysMap_.find(key) == pressedKeysMap_.end()){
-			return false;
-		} else {
-			return (*pressedKeysMap_.find(key)).second;
-		}
-	}
+	virtual bool isPressed(Keys key);
 
-	virtual void gameKeyIsPressed(Keys key){ // called from keyboard State provider
-		pressedKeysMap_[key] = true;
-	}
+	virtual void gameKeyIsPressed(Keys key);
 
-	virtual void OnUpdate() override{
-		previousPressedKeysMap_ = pressedKeysMap_;
-		pressedKeysMap_.clear();
-	}
+	virtual void OnUpdate();
 };
 
 

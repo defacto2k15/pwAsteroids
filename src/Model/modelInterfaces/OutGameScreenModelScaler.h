@@ -19,24 +19,11 @@ public:
 			originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 
-	virtual void AddImage(ImagePrimitive image) override{
-		originalOutGameScreenModel_->AddImage(image);
-	}
+	virtual void AddImage(ImagePrimitive image);
 
-	virtual std::vector<ImagePrimitive> getImagePrimitives() override{
-		auto oldPrimitives = originalOutGameScreenModel_->getImagePrimitives();
-		std::vector<ImagePrimitive> newPrimitives;
-		ScaleToScreen scale = configuration_->getBox2dToAllegroScale();
-		for( auto &onePrimitive : oldPrimitives ){
-			Point newPos( onePrimitive.getPosition().getX() * scale.getX(), onePrimitive.getPosition().getY() * scale.getY());
-			newPrimitives.push_back(ImagePrimitive(newPos, onePrimitive.getRotation(), onePrimitive.getScale(), onePrimitive.getActorId(), onePrimitive.getImageType()));
-		}
-		return newPrimitives;
-	}
+	virtual std::vector<ImagePrimitive> getImagePrimitives();
 
-	virtual void OnUpdate() override{
-		originalOutGameScreenModel_->OnUpdate();
-	}
+	virtual void OnUpdate();
 };
 
 

@@ -12,25 +12,15 @@ class NegativeExpectation : public IEndToEndExpectation {
 	std::shared_ptr<IEndToEndExpectation> negatedExpectation_;
 
 public:
-	NegativeExpectation( std::shared_ptr<IEndToEndExpectation> negatedExpectation )
-			: negatedExpectation_(negatedExpectation){
-	}
+	NegativeExpectation( std::shared_ptr<IEndToEndExpectation> negatedExpectation );
 
-	virtual std::string getExpectationDescription(){
-		return std::string("Negated expectation of : "+negatedExpectation_->getExpectationDescription());
-	}
+	virtual std::string getExpectationDescription();
 
-	virtual bool checkExpectation(){
-		return !negatedExpectation_->checkExpectation();
-	}
+	virtual bool checkExpectation();
 
-	virtual std::string getFailureMessage(){
-		return std::string("Negated expectation was true!");
-	}
+	virtual std::string getFailureMessage();
 
-	virtual void beforeFirstUpdate( std::shared_ptr<Game> g){
-		negatedExpectation_->beforeFirstUpdate(g);
-	}
+	virtual void beforeFirstUpdate( std::shared_ptr<Game> g);
 };
 
 

@@ -22,26 +22,13 @@ public:
 	Box2dObject(b2BodyDef def, std::vector<b2FixtureDef> fixtureDefVec) : bodyDef_(def), fixtureDefVec_(fixtureDefVec){
 	}
 
-	const b2BodyDef *getDef(){
-		return &bodyDef_;
-	}
+	const b2BodyDef * getDef();
 
-	void setBodyAndCreateFixtures( b2Body *body){
-		body_ = body;
-		for( auto& oneFixtureDef : fixtureDefVec_ ){
-			auto fixture = body_->CreateFixture(&oneFixtureDef);
-			createdFixtures_.push_back(fixture);
-		}
+	void setBodyAndCreateFixtures( b2Body *body);
 
-	}
+	b2Body * getBody();
 
-	b2Body *getBody(){
-		return body_;
-	}
-
-	std::vector<b2Fixture*> getFixtures(){
-		return createdFixtures_;
-	}
+	std::vector<b2Fixture*> getFixtures();
 
 };
 

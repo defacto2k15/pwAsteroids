@@ -73,3 +73,23 @@ void GameRunner::makeUncheckedUpdate() {
 void GameRunner::AddInPythonCommand(std::string commandText) {
 	g_->getInPythonModule()->addCommand(commandText);
 }
+
+void GameRunner::removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove ) {
+	bool someExpectationWasRemoved = false;
+
+	for( std::vector<std::shared_ptr<IEndToEndExpectation>> oneVec : allExpectations_){
+		if( contains(oneVec, expectationToRemove ) ){
+			someExpectationWasRemoved = true;
+			removeItem(oneVec, expectationToRemove);
+		}
+	}
+
+	if( !someExpectationWasRemoved ){
+		assert(false && " No item was removed");
+	}
+
+}
+
+std::vector<std::shared_ptr<IEndToEndExpectation>> &GameRunner::getExpectations(ExpectationType type) {
+	return allExpectations_[type];
+}

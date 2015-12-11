@@ -24,32 +24,11 @@ public:
 			: keyboardStateProvider_(keyboardStateProvider){
 	}
 
-	virtual void OnStart(IActor &actor) override{
-		box2dComponent_ = actor.getOnlyComponent<RocketBox2dComponent>();
-	}
+	virtual void OnStart(IActor &actor);
 
-	virtual void OnUpdate() override{
-		if( rocketTailDrawing_ == false){
-			assert(false && "The rocket tail actor was not set! Shared ptr is null!") ;
-		}
+	virtual void OnUpdate();
 
-		if(keyboardStateProvider_->isPressed(Keys::Player1AccelerateKey)){ /* UGLY AS HELL, my eyes bleed but works*/
-			box2dComponent_->accelerate();
-			rocketTailDrawing_->setVisibility(true);
-		}  else {
-			rocketTailDrawing_->setVisibility(false);
-		}
-		if (keyboardStateProvider_->isPressed(Keys::Player1LeftKey)){
-			box2dComponent_->turnLeft();
-		}
-		if (keyboardStateProvider_->isPressed(Keys::Player1RightKey)){
-			box2dComponent_->turnRight();
-		}
-	}
-
-	void setRocketTail( std::shared_ptr<IActor> tailActor){
-		rocketTailDrawing_ = tailActor->getOnlyComponent<DrawingComponent>();
-	}
+	void setRocketTail( std::shared_ptr<IActor> tailActor);
 
 	virtual void OnStop() override{};
 private:

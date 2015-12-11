@@ -38,61 +38,17 @@ private:
 
 	std::shared_ptr<ActorsConfiguration> actorsConfiguration_ = std::make_shared<ActorsConfiguration>();
 public:
-	Game()
-	{
-		outGameScreenModel_= std::make_shared<OutGameScreenModelScaler>( std::make_shared<OutGameScreenModelImageCentering>(std::make_shared<OutGameScreenModel>(), actorsConfiguration_), actorsConfiguration_);
-		drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
+	Game();
 
-		std::shared_ptr<ActorsContainer> actorsContainer (new ActorsContainer);
-		rootServiceContainer_.addService(actorsContainer);
-		std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
-		rootServiceContainer_.addService(gameTimeProvider);
+	std::shared_ptr<IOutGameScreenModel> getOutGameScreenModel();;
 
-		rootServiceContainer_.addService(pythonModule_);
+	std::shared_ptr<IInKeyboardStateGetter> getInKeyboardStateGetter();
 
-		rootServiceContainer_.addService(boxService_);
-		auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
+	std::shared_ptr<IInPythonModule> getInPythonModule();
 
-		rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
-		rocket->addComponent(std::make_shared<PositionComponent>());
-		rocket->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Rocket, ScaleToScreen(0.053, 0.1)));
-		auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_);
-		rocket->addComponent(rocketMovingComponent);
+	std::shared_ptr<IOutPythonModule> getOutPythonModule();
 
-		auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
-		rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
-		rocketTail->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::RocketTail, ScaleToScreen(0.053, 0.1)));
-		rocketTail->addComponent(std::make_shared<PositionComponent>());
-
-		actorsContainer->addActor(rocket);
-		actorsContainer->addActor(rocketTail);
-		rocketMovingComponent->setRocketTail(rocketTail);
-
-		rootServiceContainer_.addService(keyboardManager_); // MUST BE ONE OF LAST!
-		rootServiceContainer_.OnStart();
-		outGameScreenModel_->OnStart();
-	}
-	std::shared_ptr<IOutGameScreenModel> getOutGameScreenModel(){
-		return outGameScreenModel_;
-	};
-
-	std::shared_ptr<IInKeyboardStateGetter> getInKeyboardStateGetter(){
-		return keyboardManager_;
-	}
-
-	std::shared_ptr<IInPythonModule> getInPythonModule(){
-		return pythonModule_;
-	}
-
-	std::shared_ptr<IOutPythonModule> getOutPythonModule(){
-		return pythonModule_;
-	}
-
-	void update(){
-		outGameScreenModel_->OnUpdate();
-		rootServiceContainer_.OnUpdate(); // ugly but works!
-
-	};
+	void update();;
 };
 
 

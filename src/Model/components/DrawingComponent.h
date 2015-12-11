@@ -13,24 +13,13 @@
 class DrawingComponent : public Component{
 	ScaleToScreen scaleToScreen_;
 public:
-	DrawingComponent(std::shared_ptr<DrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen)
-			: drawingSystem_(drawingSystem), imageType_(imageType), scaleToScreen_(scaleToScreen){}
+	DrawingComponent(std::shared_ptr<DrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen);
 
-	virtual void OnStart(IActor &actor) override{
-		positionComponent_ = actor.getOnlyComponent<PositionComponent>();
-		actorId_ = actor.getActorId();
-	};
+	virtual void OnStart(IActor &actor);;
 
-	virtual void OnUpdate() override{
-		if( isVisible_ ) {
-			drawingSystem_->drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
-			                          scaleToScreen_, actorId_);
-		}
-	};
+	virtual void OnUpdate();;
 
-	void setVisibility(bool visibility ){
-		isVisible_ = visibility;
-	}
+	void setVisibility(bool visibility );
 
 private:
 	std::shared_ptr<DrawingSystem> drawingSystem_;

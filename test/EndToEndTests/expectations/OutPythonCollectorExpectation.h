@@ -16,7 +16,7 @@ public:
 	}
 
 	virtual bool checkExpectation(){
-		auto a1 = game_->getOutPythonModule();
+		auto a1 = game_->getOutPythonModule(); // TOOD clean
 		auto a2 = a1->getOutput();
 
 		lastCheck_ = checkingFunction_(a2);

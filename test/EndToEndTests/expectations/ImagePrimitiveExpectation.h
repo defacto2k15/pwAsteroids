@@ -15,37 +15,15 @@ class ImagePrimitiveExpectation  : public IEndToEndExpectation {
 
 public:
 	ImagePrimitiveExpectation(std::function<bool (ImagePrimitive &)> primitivesSelectingFunction,
-			std::function<void (ImagePrimitive &)> primitivesAssertionFunction )
-			: primitivesSelectingFunction_(primitivesSelectingFunction),
-			  primitivesAssertionFunction_(primitivesAssertionFunction){
-	}
+				std::function<void (ImagePrimitive &)> primitivesAssertionFunction );
 
-	virtual std::string getExpectationDescription(){
-		return " Expectation checking image primitives";
-	}
+	virtual std::string getExpectationDescription();
 
-	virtual bool checkExpectation(){
-		std::vector<ImagePrimitive> allPrimitives = g_->getOutGameScreenModel()->getImagePrimitives();
-		auto newEnd = std::remove_if(allPrimitives.begin(), allPrimitives.end(), [=](ImagePrimitive &primitive){ return !primitivesSelectingFunction_(primitive);} );
-		allPrimitives.erase(newEnd, allPrimitives.end());
+	virtual bool checkExpectation();
 
-		if( allPrimitives.size() == 0){
-			return false;
-		}
+	virtual std::string getFailureMessage();
 
-		for( auto &onePrimitive : allPrimitives){
-			primitivesAssertionFunction_(onePrimitive);
-		}
-		return true;
-	}
-
-	virtual std::string getFailureMessage(){
-		return "There was no primitive found that would match selecting expectation";
-	}
-
-	virtual void beforeFirstUpdate( std::shared_ptr<Game> g){
-		g_ = g;
-	};
+	virtual void beforeFirstUpdate( std::shared_ptr<Game> g);;
 };
 
 

@@ -3,3 +3,18 @@
 //
 
 #include "RocketTailPositionComponent.h"
+
+void  RocketTailPositionComponent::OnStart(IActor &actor) {
+	tailPositionComponent_ = actor.getOnlyComponent<PositionComponent>();
+	rocketPositionComponent_ = rocketActor_->getOnlyComponent<PositionComponent>();
+}
+
+void  RocketTailPositionComponent::OnUpdate() {
+	Point newPos(
+			rocketPositionComponent_->getPosition().getX()
+			- configurableValues_->getDistanceBetweenRocketAndTail()*myMath::sinDeg(rocketPositionComponent_->getRotation()),
+			rocketPositionComponent_->getPosition().getY()
+			+ configurableValues_->getDistanceBetweenRocketAndTail()*myMath::cosDeg(rocketPositionComponent_->getRotation()));
+	tailPositionComponent_->setPosition(newPos);
+	tailPositionComponent_->setRotation(rocketPositionComponent_->getRotation());
+}

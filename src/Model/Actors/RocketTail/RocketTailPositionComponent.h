@@ -23,20 +23,9 @@ public:
 			: rocketActor_( rocketActor ), configurableValues_(values){
 	}
 
-	virtual void OnStart(IActor &actor){
-		tailPositionComponent_ = actor.getOnlyComponent<PositionComponent>();
-		rocketPositionComponent_ = rocketActor_->getOnlyComponent<PositionComponent>();
-	}
+	virtual void OnStart(IActor &actor);
 
-	virtual void OnUpdate(){
-		Point newPos(
-				rocketPositionComponent_->getPosition().getX()
-						- configurableValues_->getDistanceBetweenRocketAndTail()*myMath::sinDeg(rocketPositionComponent_->getRotation()),
-				rocketPositionComponent_->getPosition().getY()
-						+ configurableValues_->getDistanceBetweenRocketAndTail()*myMath::cosDeg(rocketPositionComponent_->getRotation()));
-		tailPositionComponent_->setPosition(newPos);
-		tailPositionComponent_->setRotation(rocketPositionComponent_->getRotation());
-	}
+	virtual void OnUpdate();
 
 	virtual void OnStop(){
 

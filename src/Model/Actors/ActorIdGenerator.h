@@ -11,9 +11,7 @@
 class ActorIdGenerator {
 	ActorId lastActorId_=0;
 public:
-	ActorId getActorId(){
-		return ++lastActorId_;
-	}
+	ActorId getActorId();
 };
 
 
