@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(pwAsteroids)
 
-add_definitions(-std=c++14)
+add_definitions(-std=c++14 -Wfatal-errors)
 # Extra warnings
 # add_definitions(-Wall)
 
