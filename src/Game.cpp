@@ -2,18 +2,21 @@
 // Created by defacto on 16.10.15.
 //
 
+#include <Model/python/PythonRootMethodNames.h>
 #include "Game.h"
 
+class MockClass;
+
 Game::Game() {
+	rootServiceContainer_.addService(pythonModule_); // must be one of first
 	outGameScreenModel_= std::make_shared<OutGameScreenModelScaler>( std::make_shared<OutGameScreenModelImageCentering>(std::make_shared<OutGameScreenModel>(), actorsConfiguration_), actorsConfiguration_);
 	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
 
-	std::shared_ptr<ActorsContainer> actorsContainer (new ActorsContainer);
+	std::shared_ptr<ActorsContainer> actorsContainer = std::make_shared<ActorsContainer>();
 	rootServiceContainer_.addService(actorsContainer);
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
 
-	rootServiceContainer_.addService(pythonModule_);
 
 	rootServiceContainer_.addService(boxService_);
 	auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
@@ -36,6 +39,11 @@ Game::Game() {
 	rootServiceContainer_.addService(keyboardManager_); // MUST BE ONE OF LAST!
 	rootServiceContainer_.OnStart();
 	outGameScreenModel_->OnStart();
+
+
+	//std::function< void(MockClass*) > function = [](MockClass *ptr){ ; };
+	pythonModule_->addVectorOfClass<PythonActorHandle>("PythonActorHandleClass");
+	pythonModule_->addRootFunction( PythonRootMethodNames::getAllActorsName, [actorsContainer](){ return actorsContainer->getAllActors();});
 }
 
 std::shared_ptr<IOutGameScreenModel> Game::getOutGameScreenModel() {

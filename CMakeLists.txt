@@ -19,8 +19,10 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
 add_executable(pwAsteroids ${SRC_FILES}  )
 
 # Including python things...
-INCLUDE_DIRECTORIES( "/usr/include/python3.4")
+
+INCLUDE_DIRECTORIES( "/usr/include/python2.7")
 TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython2.7.so )
+#set(Python_ADDITIONAL_VERSIONS 3.4)
 
 if(UNIX)
     FIND_PACKAGE( Boost 1.48 REQUIRED COMPONENTS python system thread )

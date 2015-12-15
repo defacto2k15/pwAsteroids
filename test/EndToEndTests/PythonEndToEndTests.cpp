@@ -16,6 +16,23 @@ TEST(PythonEndToEndTests, SimpleMathTest ){
 			return LastCheck(true,"");
 		}
 	}));
-	runner.AddInPythonCommand("2**4");
+	runner.AddInPythonCommand("print(2**4)");
+	runner.RunForLoops(3);
+}
+
+TEST(PythonEndToEndTest, RocketPositionWritingTest ){
+	GameRunner runner;
+	ActorsConfiguration configuration;
+	runner.AddAfterRunExpectations(std::make_shared<OutPythonCollectorExpectation>( [configuration](std::string outPython){
+		if(( outPython.find(std::to_string(configuration.getInitialPosition().getX())) == std::string::npos ) ||
+			( outPython.find(std::to_string(configuration.getInitialPosition().getY())) == std::string::npos )	){
+			return LastCheck(false, std::string("there was no written position of rocket: ")
+									+configuration.getInitialPosition().toString()+"As expected");
+		} else {
+			return LastCheck(true,"");
+		}
+	}));
+	runner.AddInPythonCommand("rocket = ActorsContainer.getActorByName(\"Rocket\")");
+	runner.AddInPythonCommand("print(rocket.getPosition())");
 	runner.RunForLoops(3);
 }

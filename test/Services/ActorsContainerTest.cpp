@@ -19,7 +19,6 @@ public:
 		return outVec;
 	}
 
-
 };
 
 TEST_F(ActorsContainerTest, CanAddAndRemoveActorsAndNotingBadWillHappen){

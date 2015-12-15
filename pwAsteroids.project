@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="pwAsteroids" InternalType="">
+  <Plugins>
+    <Plugin Name="CMakePlugin">
+      <![CDATA[[{
+  "name": "Debug",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }]]]>
+    </Plugin>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
+  </Plugins>
+  <VirtualDirectory Name="test">
+    <VirtualDirectory Name="EndToEndTests">
+      <VirtualDirectory Name="expectations">
+        <File Name="test/EndToEndTests/expectations/ThereIsImage.cpp"/>
+        <File Name="test/EndToEndTests/expectations/LambdaExpectation.h"/>
+        <File Name="test/EndToEndTests/expectations/LambdaExpectation.cpp"/>
+        <File Name="test/EndToEndTests/expectations/OutPythonCollectorExpectation.cpp"/>
+        <File Name="test/EndToEndTests/expectations/ImagePrimitiveExpectation.h"/>
+        <File Name="test/EndToEndTests/expectations/IEndToEndExpectation.h"/>
+        <File Name="test/EndToEndTests/expectations/ThereIsImage.h"/>
+        <File Name="test/EndToEndTests/expectations/NegativeExpectation.h"/>
+        <File Name="test/EndToEndTests/expectations/ImagePrimitiveExpectation.cpp"/>
+        <File Name="test/EndToEndTests/expectations/NegativeExpectation.cpp"/>
+        <File Name="test/EndToEndTests/expectations/InputVariableLambdaExpectation.h"/>
+        <File Name="test/EndToEndTests/expectations/InputVariableLambdaExpectation.cpp"/>
+        <File Name="test/EndToEndTests/expectations/OutPythonCollectorExpectation.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="when">
+        <File Name="test/EndToEndTests/when/ForEveryLoop.cpp"/>
+        <File Name="test/EndToEndTests/when/WhenCheckExpectations.h"/>
+        <File Name="test/EndToEndTests/when/ForEveryLoop.h"/>
+        <File Name="test/EndToEndTests/when/WhenCheckExpectations.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="help">
+        <File Name="test/EndToEndTests/help/GameRunner.h"/>
+        <File Name="test/EndToEndTests/help/FakeKeyboardStateToGameProvider.cpp"/>
+        <File Name="test/EndToEndTests/help/GameRunner.cpp"/>
+        <File Name="test/EndToEndTests/help/FakeKeyboardStateToGameProvider.h"/>
+      </VirtualDirectory>
+      <File Name="test/EndToEndTests/PythonEndToEndTests.cpp"/>
+      <File Name="test/EndToEndTests/ModelEndToEndTests.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Services">
+      <File Name="test/Services/GameTimeProviderTest.cpp"/>
+      <File Name="test/Services/RootServiceContainerTest.cpp"/>
+      <File Name="test/Services/ActorsContainerTest.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="PrimitiveTypes">
+      <File Name="test/PrimitiveTypes/RotationType.cpp"/>
+      <File Name="test/PrimitiveTypes/ScaleToScreenTest.cpp"/>
+    </VirtualDirectory>
+    <File Name="test/ActorTest.cpp"/>
+    <File Name="test/main.cpp"/>
+    <File Name="test/ComponentTypeInformationTest.cpp"/>
+    <File Name="test/ComponentsContainerTest.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="src">
+    <VirtualDirectory Name="Model">
+      <VirtualDirectory Name="Actors">
+        <VirtualDirectory Name="Rocket">
+          <File Name="src/Model/Actors/Rocket/RocketMovingComponent.cpp"/>
+          <File Name="src/Model/Actors/Rocket/IRocketConfigurableValues.h"/>
+          <File Name="src/Model/Actors/Rocket/RocketDrawableComponent.cpp"/>
+          <File Name="src/Model/Actors/Rocket/RocketBox2dComponent.h"/>
+          <File Name="src/Model/Actors/Rocket/RocketBox2dComponent.cpp"/>
+          <File Name="src/Model/Actors/Rocket/RocketMovingComponent.h"/>
+          <File Name="src/Model/Actors/Rocket/InitialRocketSettings.cpp"/>
+          <File Name="src/Model/Actors/Rocket/RocketDrawableComponent.h"/>
+          <File Name="src/Model/Actors/Rocket/InitialRocketSettings.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="RocketTail">
+          <File Name="src/Model/Actors/RocketTail/RocketTailPositionComponent.h"/>
+          <File Name="src/Model/Actors/RocketTail/RocketTailPositionComponent.cpp"/>
+          <File Name="src/Model/Actors/RocketTail/IRocketTailConfigurableValues.h"/>
+        </VirtualDirectory>
+        <File Name="src/Model/Actors/IActor.h"/>
+        <File Name="src/Model/Actors/Actor.cpp"/>
+        <File Name="src/Model/Actors/ActorIdGenerator.h"/>
+        <File Name="src/Model/Actors/Actor.h"/>
+        <File Name="src/Model/Actors/ActorIdGenerator.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="exceptions">
+        <File Name="src/Model/exceptions/BadScaleArgumentException.h"/>
+        <File Name="src/Model/exceptions/ThereIsNotOneComponentOfGivenType.h"/>
+        <File Name="src/Model/exceptions/RemovingNotAddedActorException.h"/>
+        <File Name="src/Model/exceptions/RemovingNotAddedActorException.cpp"/>
+        <File Name="src/Model/exceptions/ThereIsNotOneComponentOfGivenType.cpp"/>
+        <File Name="src/Model/exceptions/BadScaleArgumentException.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="modelInterfaces">
+        <File Name="src/Model/modelInterfaces/KeyboardStateManager.h"/>
+        <File Name="src/Model/modelInterfaces/OutGameScreenModelScaler.cpp"/>
+        <File Name="src/Model/modelInterfaces/OutGameScreenModelImageCentering.h"/>
+        <File Name="src/Model/modelInterfaces/OutGameScreenModelScaler.h"/>
+        <File Name="src/Model/modelInterfaces/Keys.h"/>
+        <File Name="src/Model/modelInterfaces/OutGameScreenModel.h"/>
+        <File Name="src/Model/modelInterfaces/IOutGameScreenModel.h"/>
+        <File Name="src/Model/modelInterfaces/KeyboardStateManager.cpp"/>
+        <File Name="src/Model/modelInterfaces/IInKeyboardStateGetter.h"/>
+        <File Name="src/Model/modelInterfaces/OutGameScreenModelImageCentering.cpp"/>
+        <File Name="src/Model/modelInterfaces/IKeyboardStateProvider.h"/>
+        <File Name="src/Model/modelInterfaces/OutGameScreenModel.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Services">
+        <File Name="src/Model/Services/IPhysicsService.h"/>
+        <File Name="src/Model/Services/ServiceContainer.cpp"/>
+        <File Name="src/Model/Services/GameTimeProvider.h"/>
+        <File Name="src/Model/Services/RootServiceContainer.h"/>
+        <File Name="src/Model/Services/GameTimeProvider.cpp"/>
+        <File Name="src/Model/Services/RootServiceContainer.cpp"/>
+        <File Name="src/Model/Services/ActorsContainer.h"/>
+        <File Name="src/Model/Services/ServiceContainer.h"/>
+        <File Name="src/Model/Services/IService.h"/>
+        <File Name="src/Model/Services/ActorsContainer.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="ModelDrawing">
+        <File Name="src/Model/ModelDrawing/IDrawablePrimitive.h"/>
+        <File Name="src/Model/ModelDrawing/DrawingSystem.cpp"/>
+        <File Name="src/Model/ModelDrawing/ImagePrimitive.h"/>
+        <File Name="src/Model/ModelDrawing/ImagePrimitiveType.h"/>
+        <File Name="src/Model/ModelDrawing/IPrimitivesToDrawContainer.h"/>
+        <File Name="src/Model/ModelDrawing/DrawingSystem.h"/>
+        <File Name="src/Model/ModelDrawing/ImagePrimitive.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Observer">
+        <File Name="src/Model/Observer/Observable.h"/>
+        <File Name="src/Model/Observer/IObserver.h"/>
+        <File Name="src/Model/Observer/Observable.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="box2d">
+        <File Name="src/Model/box2d/Box2DService.cpp"/>
+        <File Name="src/Model/box2d/Box2dObject.cpp"/>
+        <File Name="src/Model/box2d/Box2dObject.h"/>
+        <File Name="src/Model/box2d/Box2DService.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="help">
+        <File Name="src/Model/help/DegreesCalculations.cpp"/>
+        <File Name="src/Model/help/StdContainers.h"/>
+        <File Name="src/Model/help/myMath.h"/>
+        <File Name="src/Model/help/myMath.cpp"/>
+        <File Name="src/Model/help/DegreesCalculations.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="PrimitiveTypes">
+        <File Name="src/Model/PrimitiveTypes/ScaleToScreen.h"/>
+        <File Name="src/Model/PrimitiveTypes/Rotation.cpp"/>
+        <File Name="src/Model/PrimitiveTypes/AliasedTypes.h"/>
+        <File Name="src/Model/PrimitiveTypes/Rotation.h"/>
+        <File Name="src/Model/PrimitiveTypes/Point.cpp"/>
+        <File Name="src/Model/PrimitiveTypes/ScaleToScreen.cpp"/>
+        <File Name="src/Model/PrimitiveTypes/Point.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="configuration">
+        <File Name="src/Model/configuration/IImageCenteringConfiguration.h"/>
+        <File Name="src/Model/configuration/ActorsConfiguration.h"/>
+        <File Name="src/Model/configuration/IScreenScallingConfiguration.h"/>
+        <File Name="src/Model/configuration/ActorsConfiguration.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="components">
+        <File Name="src/Model/components/DrawingComponent.cpp"/>
+        <File Name="src/Model/components/Component.h"/>
+        <File Name="src/Model/components/DrawingComponent.h"/>
+        <File Name="src/Model/components/Component.cpp"/>
+        <File Name="src/Model/components/ComponentsContainer.h"/>
+        <File Name="src/Model/components/PositionComponent.cpp"/>
+        <File Name="src/Model/components/ComponentsContainer.cpp"/>
+        <File Name="src/Model/components/PositionComponent.h"/>
+        <File Name="src/Model/components/ComponentTypeChecker.h"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="python">
+        <File Name="src/Model/python/PythonModule.cpp"/>
+        <File Name="src/Model/python/IInPythonModule.h"/>
+        <File Name="src/Model/python/PythonModule.h"/>
+        <File Name="src/Model/python/IOutPythonModule.h"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <VirtualDirectory Name="View">
+      <File Name="src/View/DrawableObject.cpp"/>
+      <File Name="src/View/DrawableObject.h"/>
+      <File Name="src/View/ViewManager.cpp"/>
+      <File Name="src/View/ViewManager.h"/>
+      <File Name="src/View/Display.cpp"/>
+      <File Name="src/View/Scene.h"/>
+      <File Name="src/View/Display.h"/>
+      <File Name="src/View/Scene.cpp"/>
+    </VirtualDirectory>
+    <File Name="src/main.cpp"/>
+    <File Name="src/Game.cpp"/>
+    <File Name="src/Game.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="lib">
+    <VirtualDirectory Name="Box2D">
+      <VirtualDirectory Name="Dynamics">
+        <VirtualDirectory Name="Contacts">
+          <File Name="lib/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2ContactSolver.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2Contact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2CircleContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2EdgeAndCircleContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2PolygonContact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2PolygonContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2ChainAndPolygonContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2ContactSolver.h"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2PolygonAndCircleContact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2Contact.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Contacts/b2CircleContact.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Joints">
+          <File Name="lib/Box2D/Dynamics/Joints/b2PulleyJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2PrismaticJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2PrismaticJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2WheelJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2WheelJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2GearJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2DistanceJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2RevoluteJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2MouseJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2RopeJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2FrictionJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2WeldJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2Joint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2RevoluteJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2WeldJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2MotorJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2GearJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2Joint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2DistanceJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2FrictionJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2MotorJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2PulleyJoint.cpp"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2RopeJoint.h"/>
+          <File Name="lib/Box2D/Dynamics/Joints/b2MouseJoint.h"/>
+        </VirtualDirectory>
+        <File Name="lib/Box2D/Dynamics/b2WorldCallbacks.h"/>
+        <File Name="lib/Box2D/Dynamics/b2ContactManager.h"/>
+        <File Name="lib/Box2D/Dynamics/b2Body.h"/>
+        <File Name="lib/Box2D/Dynamics/b2Island.cpp"/>
+        <File Name="lib/Box2D/Dynamics/b2World.h"/>
+        <File Name="lib/Box2D/Dynamics/b2Fixture.cpp"/>
+        <File Name="lib/Box2D/Dynamics/b2WorldCallbacks.cpp"/>
+        <File Name="lib/Box2D/Dynamics/b2Body.cpp"/>
+        <File Name="lib/Box2D/Dynamics/b2Island.h"/>
+        <File Name="lib/Box2D/Dynamics/b2Fixture.h"/>
+        <File Name="lib/Box2D/Dynamics/b2TimeStep.h"/>
+        <File Name="lib/Box2D/Dynamics/b2ContactManager.cpp"/>
+        <File Name="lib/Box2D/Dynamics/b2World.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Collision">
+        <VirtualDirectory Name="Shapes">
+          <File Name="lib/Box2D/Collision/Shapes/b2PolygonShape.h"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2EdgeShape.h"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2ChainShape.h"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2EdgeShape.cpp"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2PolygonShape.cpp"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2ChainShape.cpp"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2Shape.h"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2CircleShape.h"/>
+          <File Name="lib/Box2D/Collision/Shapes/b2CircleShape.cpp"/>
+        </VirtualDirectory>
+        <File Name="lib/Box2D/Collision/b2BroadPhase.cpp"/>
+        <File Name="lib/Box2D/Collision/b2TimeOfImpact.h"/>
+        <File Name="lib/Box2D/Collision/b2CollidePolygon.cpp"/>
+        <File Name="lib/Box2D/Collision/b2Collision.h"/>
+        <File Name="lib/Box2D/Collision/b2DynamicTree.h"/>
+        <File Name="lib/Box2D/Collision/b2TimeOfImpact.cpp"/>
+        <File Name="lib/Box2D/Collision/b2CollideEdge.cpp"/>
+        <File Name="lib/Box2D/Collision/b2Distance.cpp"/>
+        <File Name="lib/Box2D/Collision/b2CollideCircle.cpp"/>
+        <File Name="lib/Box2D/Collision/b2DynamicTree.cpp"/>
+        <File Name="lib/Box2D/Collision/b2BroadPhase.h"/>
+        <File Name="lib/Box2D/Collision/b2Distance.h"/>
+        <File Name="lib/Box2D/Collision/b2Collision.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Common">
+        <File Name="lib/Box2D/Common/b2StackAllocator.cpp"/>
+        <File Name="lib/Box2D/Common/b2Math.cpp"/>
+        <File Name="lib/Box2D/Common/b2StackAllocator.h"/>
+        <File Name="lib/Box2D/Common/b2Settings.h"/>
+        <File Name="lib/Box2D/Common/b2Math.h"/>
+        <File Name="lib/Box2D/Common/b2GrowableStack.h"/>
+        <File Name="lib/Box2D/Common/b2Timer.h"/>
+        <File Name="lib/Box2D/Common/b2Settings.cpp"/>
+        <File Name="lib/Box2D/Common/b2Draw.cpp"/>
+        <File Name="lib/Box2D/Common/b2Draw.h"/>
+        <File Name="lib/Box2D/Common/b2BlockAllocator.h"/>
+        <File Name="lib/Box2D/Common/b2BlockAllocator.cpp"/>
+        <File Name="lib/Box2D/Common/b2Timer.cpp"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="Rope">
+        <File Name="lib/Box2D/Rope/b2Rope.cpp"/>
+        <File Name="lib/Box2D/Rope/b2Rope.h"/>
+      </VirtualDirectory>
+      <File Name="lib/Box2D/Box2D.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="gmock-1.7.0">
+      <VirtualDirectory Name="fused-src">
+        <VirtualDirectory Name="gtest">
+          <File Name="lib/gmock-1.7.0/fused-src/gtest/gtest.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="gmock">
+          <File Name="lib/gmock-1.7.0/fused-src/gmock/gmock.h"/>
+        </VirtualDirectory>
+        <File Name="lib/gmock-1.7.0/fused-src/gmock_main.cc"/>
+        <File Name="lib/gmock-1.7.0/fused-src/gmock-gtest-all.cc"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="include">
+        <VirtualDirectory Name="gmock">
+          <VirtualDirectory Name="internal">
+            <File Name="lib/gmock-1.7.0/include/gmock/internal/gmock-generated-internal-utils.h"/>
+            <File Name="lib/gmock-1.7.0/include/gmock/internal/gmock-port.h"/>
+            <File Name="lib/gmock-1.7.0/include/gmock/internal/gmock-internal-utils.h"/>
+          </VirtualDirectory>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-generated-matchers.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-actions.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-more-actions.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-cardinalities.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-generated-actions.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-more-matchers.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-generated-nice-strict.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-generated-function-mockers.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-matchers.h"/>
+          <File Name="lib/gmock-1.7.0/include/gmock/gmock-spec-builders.h"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="gtest">
+        <VirtualDirectory Name="fused-src">
+          <VirtualDirectory Name="gtest">
+            <File Name="lib/gmock-1.7.0/gtest/fused-src/gtest/gtest_main.cc"/>
+            <File Name="lib/gmock-1.7.0/gtest/fused-src/gtest/gtest-all.cc"/>
+            <File Name="lib/gmock-1.7.0/gtest/fused-src/gtest/gtest.h"/>
+          </VirtualDirectory>
+        </VirtualDirectory>
+        <VirtualDirectory Name="xcode">
+          <VirtualDirectory Name="Samples">
+            <VirtualDirectory Name="FrameworkSample">
+              <File Name="lib/gmock-1.7.0/gtest/xcode/Samples/FrameworkSample/widget_test.cc"/>
+              <File Name="lib/gmock-1.7.0/gtest/xcode/Samples/FrameworkSample/widget.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/xcode/Samples/FrameworkSample/widget.cc"/>
+            </VirtualDirectory>
+          </VirtualDirectory>
+        </VirtualDirectory>
+        <VirtualDirectory Name="include">
+          <VirtualDirectory Name="gtest">
+            <VirtualDirectory Name="internal">
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-tuple.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-type-util.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-linked_ptr.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-param-util.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-internal.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-filepath.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-param-util-generated.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-string.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-death-test-internal.h"/>
+              <File Name="lib/gmock-1.7.0/gtest/include/gtest/internal/gtest-port.h"/>
+            </VirtualDirectory>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest_prod.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-test-part.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-param-test.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-death-test.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-message.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest_pred_impl.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-typed-test.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-printers.h"/>
+            <File Name="lib/gmock-1.7.0/gtest/include/gtest/gtest-spi.h"/>
+          </VirtualDirectory>
+        </VirtualDirectory>
+        <VirtualDirectory Name="codegear">
+          <File Name="lib/gmock-1.7.0/gtest/codegear/gtest_link.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/codegear/gtest_all.cc"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="src">
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest_main.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-port.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-internal-inl.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-all.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-death-test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-printers.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-filepath.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-test-part.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/src/gtest-typed-test.cc"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="test">
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-printers_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-message_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_help_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-unittest-api_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_xml_outfile1_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_environment_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_repeat_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-listener_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-param-test2_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-options_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-tuple_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_list_tests_unittest_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_prod_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/production.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_env_var_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-death-test_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_catch_exceptions_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_break_on_failure_unittest_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_throw_on_failure_ex_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_xml_output_unittest_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_output_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_no_test_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_pred_impl_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_throw_on_failure_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_xml_outfile2_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/production.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-typed-test_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_uninitialized_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-param-test_test.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_color_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-test-part_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_sole_header_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-typed-test_test.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-typed-test2_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_shuffle_test_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-param-test_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_main_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_all_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-death-test_ex_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-linked_ptr_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_premature_exit_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_filter_unittest_.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest_stress_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-filepath_test.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/test/gtest-port_test.cc"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="samples">
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample8_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample2.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample5_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample10_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample7_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample2.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample2_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample4_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample1_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample4.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample1.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample3-inl.h"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample1.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample9_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample6_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample4.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/sample3_unittest.cc"/>
+          <File Name="lib/gmock-1.7.0/gtest/samples/prime_tables.h"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+      <VirtualDirectory Name="src">
+        <File Name="lib/gmock-1.7.0/src/gmock-all.cc"/>
+        <File Name="lib/gmock-1.7.0/src/gmock_main.cc"/>
+        <File Name="lib/gmock-1.7.0/src/gmock-internal-utils.cc"/>
+        <File Name="lib/gmock-1.7.0/src/gmock.cc"/>
+        <File Name="lib/gmock-1.7.0/src/gmock-cardinalities.cc"/>
+        <File Name="lib/gmock-1.7.0/src/gmock-spec-builders.cc"/>
+        <File Name="lib/gmock-1.7.0/src/gmock-matchers.cc"/>
+      </VirtualDirectory>
+      <VirtualDirectory Name="test">
+        <File Name="lib/gmock-1.7.0/test/gmock-port_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-matchers_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_all_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_ex_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-spec-builders_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-actions_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_output_test_.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-generated-matchers_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-cardinalities_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-internal-utils_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_link_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-generated-function-mockers_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_link_test.h"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-generated-internal-utils_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_leak_test_.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_link2_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock_stress_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-generated-actions_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-more-actions_test.cc"/>
+        <File Name="lib/gmock-1.7.0/test/gmock-nice-strict_test.cc"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="build">
+    <VirtualDirectory Name="CMakeFiles">
+      <VirtualDirectory Name="3.0.2">
+        <VirtualDirectory Name="CompilerIdCXX">
+          <File Name="build/CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompilerId.cpp"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="CompilerIdC">
+          <File Name="build/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerId.c"/>
+        </VirtualDirectory>
+      </VirtualDirectory>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="mock">
+    <File Name="mock/MockService.h"/>
+    <File Name="mock/MockIActor.h"/>
+    <File Name="mock/MockComponent.h"/>
+  </VirtualDirectory>
+  <Settings Type="Dynamic Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="GCC ( 4.9 )" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="" IntermediateDirectory="./Debug" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="yes">
+        <Target Name="cmake">cd build &amp;&amp; cmake -D BuildTests=ON</Target>
+        <RebuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>cd build &amp;&amp; cmake -DBuildTests=ON .. &amp;&amp; make</BuildCommand>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory>$(WorkspacePath)</WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="GCC ( 4.9 )" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="yes">
+        <RebuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>make</BuildCommand>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory>$(WorkspacePath)</WorkingDirectory>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>
