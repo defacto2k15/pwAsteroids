@@ -4,6 +4,14 @@
 
 #include <Model/python/PythonRootMethodNames.h>
 #include "Game.h"
+#include <Model/Services/ActorsContainer.h>
+#include <Model/Services/GameTimeProvider.h>
+#include <Model/components/PositionComponent.h>
+#include <Model/Actors/Rocket/RocketMovingComponent.h>
+#include <Model/Actors/RocketTail/RocketTailPositionComponent.h>
+#include <Model/modelInterfaces/OutGameScreenModelScaler.h>
+#include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
+
 
 class MockClass;
 

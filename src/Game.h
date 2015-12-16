@@ -7,24 +7,17 @@
 
 
 #include <Model/modelInterfaces/OutGameScreenModel.h>
-#include <stdexcept>
-#include <Model/Services/ActorsContainer.h>
-#include <Model/Services/GameTimeProvider.h>
 #include <Model/Services/RootServiceContainer.h>
-#include <Model/components/PositionComponent.h>
-#include <Model/Actors/Rocket/RocketDrawableComponent.h>
-#include <Model/Actors/Rocket/RocketMovingComponent.h>
-#include <Model/Actors/Actor.h>
 #include <Model/ModelDrawing/DrawingSystem.h>
-#include <Model/modelInterfaces/IInKeyboardStateGetter.h>
 #include <Model/modelInterfaces/KeyboardStateManager.h>
-#include <Model/configuration/ActorsConfiguration.h>
-#include <Model/components/DrawingComponent.h>
-#include <Model/Actors/RocketTail/RocketTailPositionComponent.h>
-#include <Model/modelInterfaces/OutGameScreenModelScaler.h>
-#include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
-#include <Model/Actors/ActorIdGenerator.h>
+#include <Model/box2d/Box2DService.h>
 #include <Model/python/PythonModule.h>
+#include <Model/Actors/ActorIdGenerator.h>
+#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/modelInterfaces/IInKeyboardStateGetter.h>
+#include <Model/python/IInPythonModule.h>
+#include <Model/python/IOutPythonModule.h>
+
 
 class Game {
 private:
