@@ -4,7 +4,6 @@
 
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <mock/MockComponent.h>
-#include <memory>
 #include <Model/help/StdContainers.h>
 #include <Model/components/ComponentsContainer.h>
 #include "Model/exceptions/ThereIsNotOneComponentOfGivenType.h"

@@ -4,7 +4,6 @@
 
 #include <Model/exceptions/ThereIsNotOneComponentOfGivenType.h>
 #include "ComponentsContainer.h"
-#include "Component.h"
 
 void ComponentsContainer::addComponent(std::shared_ptr<Component> newComponent) {
 	componentsVector_.push_back(newComponent);

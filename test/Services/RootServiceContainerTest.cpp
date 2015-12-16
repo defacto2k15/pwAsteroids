@@ -11,7 +11,7 @@
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <mock/MockService.h>
 #include <Model/Services/RootServiceContainer.h>
-#include <iostream>
+
 class RootServiceContainerTest : public ::testing::Test {
 public:
 	std::vector<std::shared_ptr<MockIService>> mockServicesVec_;

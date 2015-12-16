@@ -5,7 +5,6 @@
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <mock/MockIActor.h>
 #include <Model/Services/ActorsContainer.h>
-#include <Model/exceptions/RemovingNotAddedActorException.h>
 
 class ActorsContainerTest : public ::testing::Test {
 	std::vector<std::shared_ptr<MockIActor>> mockActorsVec_{std::make_shared<MockIActor>(),

@@ -3,7 +3,6 @@
 //
 
 #include <ostream>
-#include <iostream>
 #include "GameTimeProvider.h"
 
 long GameTimeProvider::getMilisecondsSinceGameStart() {

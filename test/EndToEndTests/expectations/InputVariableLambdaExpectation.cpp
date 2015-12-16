@@ -2,8 +2,6 @@
 // Created by defacto on 10.12.15.
 //
 
-#include "InputVariableLambdaExpectation.h"
-
 /*std::string  InputVariableLambdaExpectation::getExpectationDescription() {
 	return "lambda expectation";
 }

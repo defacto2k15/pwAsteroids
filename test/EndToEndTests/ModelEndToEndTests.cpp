@@ -1,14 +1,12 @@
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <chrono>
 #include <test/EndToEndTests/help/GameRunner.h>
-#include <test/EndToEndTests/when/ForEveryLoop.h>
 #include <test/EndToEndTests/expectations/ThereIsImage.h>
 #include <test/EndToEndTests/expectations/LambdaExpectation.h>
 #include <test/EndToEndTests/expectations/NegativeExpectation.h>
 #include <test/EndToEndTests/expectations/ImagePrimitiveExpectation.h>
-#include "src/Model/ModelDrawing/ImagePrimitiveType.h"
 
- //Created by defacto on 16.10.15.
+//Created by defacto on 16.10.15.
 
 TEST(EndToEndTests, RocketAppearsOnScreen ){
 	GameRunner runner;

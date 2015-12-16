@@ -2,7 +2,6 @@
 // Created by defacto on 02.12.15.
 //
 
-#include <iostream>
 #include "myMath.h"
 
 double  myMath::sinDeg( Rotation rot ) {

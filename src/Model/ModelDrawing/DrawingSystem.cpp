@@ -3,7 +3,6 @@
 //
 
 #include "DrawingSystem.h"
-#include "ImagePrimitive.h"
 
 void DrawingSystem::drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale, ActorId actorId) {
 	primitivesContainer_->AddImage(ImagePrimitive(position, rotation, scale, actorId, type));

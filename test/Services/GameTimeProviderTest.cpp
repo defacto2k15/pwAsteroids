@@ -5,7 +5,7 @@
 #include <lib/gmock-1.7.0/gtest/include/gtest/gtest.h>
 #include <Model/Services/GameTimeProvider.h>
 #include <thread>
-#include <iostream>
+
 class GameTimeProviderTest : public ::testing::Test{
 public:
 	int tolerableDiffrenceInMiliseconds = 4;

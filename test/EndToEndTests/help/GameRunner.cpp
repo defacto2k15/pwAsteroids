@@ -5,7 +5,6 @@
 #include <memory>
 #include <test/EndToEndTests/expectations/IEndToEndExpectation.h>
 #include "GameRunner.h"
-#include "FakeKeyboardStateToGameProvider.h"
 
 
 std::string GameRunner::createErrorMessage(std::shared_ptr<IEndToEndExpectation> failedExpectation) {
