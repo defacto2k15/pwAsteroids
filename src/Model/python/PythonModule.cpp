@@ -32,6 +32,10 @@ void PythonModule::OnStart() {
 		import("sys").attr("stderr") = redirector;
 		import("sys").attr("stdout") = redirector;
 
+		std::string ss = "A";
+		rootClass = std::make_shared<class_<A>>(ss.c_str());
+		main_namespace["RootClass"] = *rootClass;
+		//main_namespace["GameRoot"] = ptr(root);
 
 	} catch( boost::python::error_already_set ){
 		PyErr_Print();

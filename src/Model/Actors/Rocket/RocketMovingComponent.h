@@ -13,15 +13,20 @@
 #include "RocketBox2dComponent.h"
 #include "Model/modelInterfaces/Keys.h"
 #include "IRocketConfigurableValues.h"
+#include <exception>
+#include <stdexcept>
+#include <Model/python/PythonClassVisibilityModule.h>
+
 
 class RocketMovingComponent : public Component {
 	std::shared_ptr<RocketBox2dComponent> box2dComponent_;
 	std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
+	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IKeyboardStateProvider>, std::shared_ptr<PythonModule> > visibilityModule_;
 
 public:
-	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider)
-			: keyboardStateProvider_(keyboardStateProvider){
+	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider, std::shared_ptr<PythonModule> pythonModule )
+			: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule){
 	}
 
 	virtual void OnStart(IActor &actor);
@@ -29,6 +34,11 @@ public:
 	virtual void OnUpdate();
 
 	void setRocketTail( std::shared_ptr<IActor> tailActor);
+
+	int someStupidFunction( float arg ){ // todo remove
+		std::cout << "Dano mi " << arg << std::endl;
+		return arg + 33;
+	}
 
 	virtual void OnStop() override{};
 private:

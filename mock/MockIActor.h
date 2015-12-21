@@ -14,6 +14,7 @@ public:
 	MOCK_CONST_METHOD0(getActorId, ActorId());
 protected:
 	MOCK_METHOD1(getOnlyComponent, std::shared_ptr<Component> (ComponentTypeChecker checker));
+	MOCK_METHOD1(  isComponentPresent, bool(ComponentTypeChecker checker));
 };
 
 #endif //PWASTEROIDS_MOCKIACTOR_H

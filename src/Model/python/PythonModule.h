@@ -13,7 +13,12 @@
 #include "IInPythonModule.h"
 #include "ClassVisibleInPythonDuringBuild.h"
 #include "PythonActorHandle.h"
+
 #include <iostream>
+#include <map>
+#include <Model/help/StdContainers.h>
+
+//class PythonActorComponent;
 
 class PythonStdIoRedirect {
 public:
@@ -39,6 +44,8 @@ class MockClass{
 class A{
 public:
 	int a;
+
+
 };
 
 
@@ -62,9 +69,18 @@ class PythonModule : public IOutPythonModule, public IInPythonModule, public ISe
 	PythonStdIoRedirect redirector;
 	boost::python::object main_namespace;
 	boost::python::object main_module;
+	std::shared_ptr<class_<A>> rootClass ;
+	A root;
+
+	/*std::shared_ptr< class_<... pisz tutaj konkretnie o klasie handler aktora*/
+	std::map<std::string, std::vector<std::string> > classesAndMethodsMap_;
 
 	bool onceUpdated_ = false;
 public:
+	PythonModule() {
+		// empty ctor to shut up compiler
+	}
+
 	virtual void addCommand(std::string commandText);
 
 	virtual std::string getOutput();
@@ -80,19 +96,50 @@ public:
 		class_< std::vector<T>> (name.c_str()).def(boost::python::vector_indexing_suite< std::vector<T>>());
 	}
 
-	template< typename T>
-	void addRootFunction( std::string functionName, T functionToCall ){
-		//class_< std::vector<PythonActorHandle>> ("SupaVec").def(boost::python::vector_indexing_suite< std::vector<PythonActorHandle>>());
-			auto cls = class_<A>("A");
-			cls.def(functionName.c_str(),boost::python::make_function(
-        [functionToCall](const A& a) { return functionToCall(); },
-        boost::python::default_call_policies(),
-        boost::mpl::vector<std::vector<PythonActorHandle>, const A&>()))
-    ;
-			//cls.add_property("a", +[](const A& a){return a.a;});
-			main_namespace["A"] = cls;
+	template< typename TRet, typename ... TArg>
+	void addRootFunction( std::string functionName, std::function<TRet(TArg ...)> functionToCall ){
+		auto boostFunction = boost::python::make_function(
+			functionToCall,
+			boost::python::default_call_policies(),
+			boost::mpl::vector<TRet, TArg ...>());
+		main_namespace[functionName.c_str()] = boostFunction;
 	}
+
+	template< typename T>
+	void registerClass(  ){
+		T *ptr = nullptr;
+		registerClassGeneric(ptr,typeid(T).name());
+	}
+
+
+
+	template< typename T>
+	void registerClass( boost::python::class_<T, boost::shared_ptr<T> > &cls){
+		main_namespace[typeid(T).name()] = cls;
+	}
+
+	template< typename T>
+	void registerMethod ( std::string methodName, boost::python::object method){
+		if( contains( classesAndMethodsMap_[typeid(T).name()], methodName) == false ){
+			//classesAndMethodsMap_[typeid(T).name()].push_back(methodName);
+			//class_<T, boost::shared_ptr<T> >(typeid(T).name() ).def(methodName.c_str(), method);
+			//ZAPISUJ STWORZONE OBIEKTY KLAS DO JAKIEJS KOLEKCJI BY NIE TWORZYC NOWYCH class_ tylko tamtych uzywac!!
+		}
+	}
+
+	template <typename T>
+	void registerActorMethod( std::string methodName, boost::python::object method ){
+
+	}
+
+	std::shared_ptr<class_<A>> getPythonClass (){
+		return rootClass;
+	}
+
+
 };
+
+//#include "PythonActorComponent.h"
 
 
 #endif //PWASTEROIDS_PYTHONMODULE_H

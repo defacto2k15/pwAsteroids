@@ -27,12 +27,18 @@ public:
 		return afterCast;
 	}
 
+	template<typename ComponentType>
+	bool isComponentPresent(){
+		return isComponentPresent(ComponentTypeChecker::create<ComponentType>());
+	}
+
 	virtual ActorId getActorId() const=0;
 
 	virtual ~IActor(){};
 
 protected:
 	virtual std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker)=0;
+	virtual bool isComponentPresent(ComponentTypeChecker checker)=0;
 
 };
 #endif //PWASTEROIDS_IACTOR_H

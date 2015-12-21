@@ -18,6 +18,10 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
 
 add_executable(pwAsteroids ${SRC_FILES}  )
 
+set(BOX2D_VERSION 2.3.0)
+add_subdirectory(lib/Box2D)
+include_directories(${Box2D_SOURCE_DIR})
+
 # Including python things...
 
 INCLUDE_DIRECTORIES( "/usr/include/python2.7")
@@ -31,6 +35,8 @@ if(UNIX)
     TARGET_LINK_LIBRARIES( pwAsteroids boost_system )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_thread )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_python )
+
+    TARGET_LINK_LIBRARIES( pwAsteroids /home/defacto/ProgrammingProjects/pwAsteroids/lib/libBox2D.a) # todo repair
 
 else()
     SET_TARGET_PROPERTIES(pwAsteroids PROPERTIES ENVIRONMENT_DEBUG "PATH=${allegropath}/bin;%PATH%")
@@ -52,11 +58,12 @@ else()
     #INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 endif()
 
-set(BOX2D_VERSION 2.3.0)
-add_subdirectory(lib/Box2D)
-include_directories(${Box2D_SOURCE_DIR})
+#set(BOX2D_VERSION 2.3.0)
+#add_subdirectory(lib/Box2D)
+#include_directories(${Box2D_SOURCE_DIR})
 if(UNIX)
-    TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
+    #TARGET_LINK_LIBRARIES( pwAsteroids Box2D)
+    target_link_libraries(pwAsteroids )
 endif()
 
 include_directories(src)
@@ -84,8 +91,6 @@ endif()
 
 include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
-message( $ENV{PYTHONNAME} $ENV{PYTHONPATH} WARNING)
-
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
 if(BuildTests)
@@ -111,7 +116,7 @@ if(BuildTests)
     add_executable("${TEST_EXECUTABLE_NAME}" ${TEST_FILES} ${SRC_FILES} )
     # Set link libraries (order matters)
     target_link_libraries("${TEST_EXECUTABLE_NAME}" gmock gtest pthread ${Boost_LIBRARIES} )
-    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" Box2D)
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" /home/defacto/ProgrammingProjects/pwAsteroids/lib/libBox2D.a) # todo repair
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" ${Boost_LIBRARIES} )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_system )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_thread)

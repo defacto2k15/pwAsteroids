@@ -36,6 +36,8 @@ public:
 	std::vector<std::shared_ptr<Component>> getAllComponents();
 
 	std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker);
+
+	bool isComponentPresent(ComponentTypeChecker checker);
 };
 
 

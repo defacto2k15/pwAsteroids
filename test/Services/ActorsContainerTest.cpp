@@ -18,10 +18,12 @@ public:
 		return outVec;
 	}
 
+	std::shared_ptr<PythonModule> mockPython = std::make_shared<PythonModule>();
+
 };
 
 TEST_F(ActorsContainerTest, CanAddAndRemoveActorsAndNotingBadWillHappen){
-	ActorsContainer container;
+	ActorsContainer container(mockPython);
 	for(auto &actor : getActorsVec()){
 		container.addActor(actor);
 	};
@@ -29,14 +31,14 @@ TEST_F(ActorsContainerTest, CanAddAndRemoveActorsAndNotingBadWillHappen){
 }
 
 TEST_F(ActorsContainerTest, IfRemovingNotExistingActorExceptionIsThrown){
-	ActorsContainer container;
+	ActorsContainer container(mockPython);
 	container.addActor(getActorsVec()[0]);
 	container.addActor(getActorsVec()[1]);
 	ASSERT_THROW(container.removeActor(getActorsVec()[2]), RemovingNotAddedActorException);
 }
 
 TEST_F(ActorsContainerTest, WeCantRemoveTheSameActorTwoTimes){
-	ActorsContainer container;
+	ActorsContainer container(mockPython);
 	container.addActor(getActorsVec()[0]);
 	container.addActor(getActorsVec()[1]);
 	container.addActor(getActorsVec()[2]);

@@ -18,6 +18,8 @@ public:
 
 	virtual std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker);
 
+	virtual bool isComponentPresent( ComponentTypeChecker checker );
+
 	Actor(ActorId id) : actorId_(id){}
 	virtual void OnStart();
 

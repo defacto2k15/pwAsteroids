@@ -11,6 +11,7 @@
 #include <Model/Actors/RocketTail/RocketTailPositionComponent.h>
 #include <Model/modelInterfaces/OutGameScreenModelScaler.h>
 #include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
+#include <Model/python/PythonActorComponent.h>
 
 
 class MockClass;
@@ -20,7 +21,7 @@ Game::Game() {
 	outGameScreenModel_= std::make_shared<OutGameScreenModelScaler>( std::make_shared<OutGameScreenModelImageCentering>(std::make_shared<OutGameScreenModel>(), actorsConfiguration_), actorsConfiguration_);
 	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
 
-	std::shared_ptr<ActorsContainer> actorsContainer = std::make_shared<ActorsContainer>();
+	std::shared_ptr<ActorsContainer> actorsContainer = std::make_shared<ActorsContainer>(pythonModule_);
 	rootServiceContainer_.addService(actorsContainer);
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
@@ -32,8 +33,9 @@ Game::Game() {
 	rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
 	rocket->addComponent(std::make_shared<PositionComponent>());
 	rocket->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Rocket, ScaleToScreen(0.053, 0.1)));
-	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_);
+	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_, pythonModule_);
 	rocket->addComponent(rocketMovingComponent);
+	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
@@ -50,8 +52,9 @@ Game::Game() {
 
 
 	//std::function< void(MockClass*) > function = [](MockClass *ptr){ ; };
-	pythonModule_->addVectorOfClass<PythonActorHandle>("PythonActorHandleClass");
-	pythonModule_->addRootFunction( PythonRootMethodNames::getAllActorsName, [actorsContainer](){ return actorsContainer->getAllActors();});
+	//pythonModule_->registerClass<PythonActorComponent, std::shared_ptr<PythonModule>>();
+	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorHandleClass");
+	//pythonModule_->addRootFunction( PythonRootMethodNames::getAllActorsName, [actorsContainer](){ return actorsContainer->getAllActors();});
 }
 
 std::shared_ptr<IOutGameScreenModel> Game::getOutGameScreenModel() {

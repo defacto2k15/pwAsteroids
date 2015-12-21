@@ -2,10 +2,15 @@
 // Created by defacto on 26.10.15.
 //
 
+#include <Model/python/PythonActorComponent.h>
 #include "RocketMovingComponent.h"
 
 void RocketMovingComponent::OnStart(IActor &actor) {
 	box2dComponent_ = actor.getOnlyComponent<RocketBox2dComponent>();
+	visibilityModule_.registerClass();
+	visibilityModule_.registerActorMethod("sf", &RocketMovingComponent::someStupidFunction );
+
+	//actor.getOnlyComponent<PythonActorComponent>()->makeMethodVisible("someSt", &RocketMovingComponent::someStupidFunction);
 }
 
 void RocketMovingComponent::OnUpdate() {

@@ -1,6 +1,4 @@
 //
-// Created by defacto on 14.10.15.
-//
 
 #include "Actor.h"
 
@@ -28,6 +26,12 @@ void Actor::OnStop() {
 
 std::shared_ptr<Component> Actor::getOnlyComponent(ComponentTypeChecker checker) {
 	return container_.getOnlyComponent(checker);
+}
+
+//
+// Created by defacto on 14.10.15.
+bool Actor::isComponentPresent(ComponentTypeChecker checker) {
+	return container_.isComponentPresent(checker);
 }
 
 ActorId  Actor::getActorId() const {

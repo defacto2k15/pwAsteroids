@@ -31,3 +31,7 @@ std::shared_ptr<Component> ComponentsContainer::getOnlyComponent(ComponentTypeCh
 	}
 	return retrivedComponents[0];
 }
+
+bool ComponentsContainer::isComponentPresent(ComponentTypeChecker checker) {
+	return getComponents(checker).size() != 0;
+}
