@@ -14,8 +14,9 @@
 #include "IRocketConfigurableValues.h"
 #include <cmath>
 #include <Model/help/DegreesCalculations.h>
+#include <Model/box2d/IBox2dComponent.h>
 
-class RocketBox2dComponent : public Component{
+class RocketBox2dComponent : public IBox2dComponent{
 	std::shared_ptr<Box2DService> box2dService_;
 	std::shared_ptr<Box2dObject> rocketBox2dObject_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
@@ -36,8 +37,12 @@ public:
 	void turnLeft();
 
 	void turnRight();
-private:
 
+	void setPosition( double x, double y) override;
+
+	void setRotation( double rotation) override;
+private:
+	void setTransformation( double x, double y, double rotation );
 };
 
 

@@ -4,6 +4,7 @@
 
 #include <Model/PrimitiveTypes/Point.h>
 #include <Model/PrimitiveTypes/AliasedTypes.h>
+#include <Model/python/PythonClassVisibilityModule.h>
 #include "Component.h"
 
 #ifndef PWASTEROIDS_POSITIONCOMPONENT_H
@@ -12,13 +13,15 @@
 class PositionComponent : public Component{
 	Point position_;
 	Rotation rotation_;
+	PythonClassVisibilityModule<PositionComponent> visibility_;
+
 
 public:
-	PositionComponent();
+	PositionComponent( std::shared_ptr<PythonModule> python);
 
-	Point getPosition() const;
+	Point getPosition() ;
 
-	Rotation getRotation() const;
+	Rotation getRotation() ;
 
 	void setPosition( Point newPos);
 
@@ -31,6 +34,12 @@ public:
 	void setRotation( Rotation newRotation );
 
 	void rotateBy( double toRotate );
+
+	void OnStart( IActor &actor) override{
+		visibility_.registerClass();
+		visibility_.registerActorMethod("getPosition", &PositionComponent::getPosition);
+		visibility_.registerActorMethod("getRotation", &PositionComponent::getRotation);
+	}
 
 };
 

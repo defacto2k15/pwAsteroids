@@ -23,9 +23,12 @@ add_subdirectory(lib/Box2D)
 include_directories(${Box2D_SOURCE_DIR})
 
 # Including python things...
-
-INCLUDE_DIRECTORIES( "/usr/include/python2.7")
-TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython2.7.so )
+if(UNIX)
+    INCLUDE_DIRECTORIES( "/usr/include/python2.7") # linki bezpośrednie, potem to naprawie todo
+    TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython2.7.so )
+else()
+    # TU DODAJ Własny python
+endif()
 #set(Python_ADDITIONAL_VERSIONS 3.4)
 
 if(UNIX)

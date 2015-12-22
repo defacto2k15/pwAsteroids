@@ -12,6 +12,10 @@
 #include <Model/modelInterfaces/OutGameScreenModelScaler.h>
 #include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
 #include <Model/python/PythonActorComponent.h>
+#include <Model/Services/ActorTypeEnumInPythonVisualisator.h>
+#include <Model/components/ActorTypeComponent.h>
+#include <Model/box2d/Box2dPositionSettingComponent.h>
+#include <Model/python/CommonTypesVisualizer.h>
 
 
 class MockClass;
@@ -31,30 +35,34 @@ Game::Game() {
 	auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
 
 	rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
-	rocket->addComponent(std::make_shared<PositionComponent>());
+	rocket->addComponent(std::make_shared<PositionComponent>(pythonModule_));
 	rocket->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Rocket, ScaleToScreen(0.053, 0.1)));
 	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_, pythonModule_);
 	rocket->addComponent(rocketMovingComponent);
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
+	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket, pythonModule_));
+	rocket->addComponent( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
 	rocketTail->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::RocketTail, ScaleToScreen(0.053, 0.1)));
-	rocketTail->addComponent(std::make_shared<PositionComponent>());
+	rocketTail->addComponent(std::make_shared<PositionComponent>(pythonModule_));
 
 	actorsContainer->addActor(rocket);
 	actorsContainer->addActor(rocketTail);
 	rocketMovingComponent->setRocketTail(rocketTail);
+
+	//auto actorTypeVisualisator = std::make_shared<ActorTypeEnumInPythonVisualisator>( pythonModule_ );
+	//rootServiceContainer_.addService(actorTypeVisualisator);
+	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
+	rootServiceContainer_.addService(commonTypesVisualizer);
 
 	rootServiceContainer_.addService(keyboardManager_); // MUST BE ONE OF LAST!
 	rootServiceContainer_.OnStart();
 	outGameScreenModel_->OnStart();
 
 
-	//std::function< void(MockClass*) > function = [](MockClass *ptr){ ; };
-	//pythonModule_->registerClass<PythonActorComponent, std::shared_ptr<PythonModule>>();
-	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorHandleClass");
-	//pythonModule_->addRootFunction( PythonRootMethodNames::getAllActorsName, [actorsContainer](){ return actorsContainer->getAllActors();});
+	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
 }
 
 std::shared_ptr<IOutGameScreenModel> Game::getOutGameScreenModel() {

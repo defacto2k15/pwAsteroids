@@ -12,7 +12,6 @@
 #include <Model/exceptions/RemovingNotAddedActorException.h>
 #include <Model/Actors/IActor.h>
 #include <Model/python/PythonModule.h>
-#include <Model/python/PythonActorHandle.h>
 #include <Model/python/PythonActorComponent.h>
 #include <Model/help/boostHelp.h>
 

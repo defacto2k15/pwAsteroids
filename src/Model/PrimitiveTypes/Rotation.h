@@ -13,6 +13,10 @@ public:
 
 	operator double();
 
+	double getAsDouble(){
+		return rotationInDegrees_;
+	}
+
 
 	Rotation operator+(const Rotation& b);
 

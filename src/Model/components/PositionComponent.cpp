@@ -2,17 +2,18 @@
 // Created by defacto on 24.10.15.
 //
 
+#include <Model/python/PythonModule.h>
 #include "PositionComponent.h"
 
-PositionComponent::PositionComponent() : position_(0.0, 0.0), rotation_(0.0) {
-
+PositionComponent::PositionComponent( std::shared_ptr<PythonModule> python)
+		: position_(0.0, 0.0), rotation_(0.0), visibility_(python) {
 }
 
-Point PositionComponent::getPosition() const {
+Point PositionComponent::getPosition()  {
 	return position_;
 }
 
-Rotation PositionComponent::getRotation() const {
+Rotation PositionComponent::getRotation()  {
 	return rotation_;
 }
 

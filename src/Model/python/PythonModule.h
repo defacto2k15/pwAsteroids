@@ -11,8 +11,6 @@
 #include <Model/Services/IService.h>
 #include "IOutPythonModule.h"
 #include "IInPythonModule.h"
-#include "ClassVisibleInPythonDuringBuild.h"
-#include "PythonActorHandle.h"
 
 #include <iostream>
 #include <map>
@@ -69,10 +67,7 @@ class PythonModule : public IOutPythonModule, public IInPythonModule, public ISe
 	PythonStdIoRedirect redirector;
 	boost::python::object main_namespace;
 	boost::python::object main_module;
-	std::shared_ptr<class_<A>> rootClass ;
-	A root;
 
-	/*std::shared_ptr< class_<... pisz tutaj konkretnie o klasie handler aktora*/
 	std::map<std::string, std::vector<std::string> > classesAndMethodsMap_;
 
 	bool onceUpdated_ = false;
@@ -106,40 +101,17 @@ public:
 	}
 
 	template< typename T>
-	void registerClass(  ){
-		T *ptr = nullptr;
-		registerClassGeneric(ptr,typeid(T).name());
+	void registerInMainNamespace(const char *name, T &elem){
+		main_namespace[name] = elem;
 	}
-
-
 
 	template< typename T>
 	void registerClass( boost::python::class_<T, boost::shared_ptr<T> > &cls){
 		main_namespace[typeid(T).name()] = cls;
 	}
 
-	template< typename T>
-	void registerMethod ( std::string methodName, boost::python::object method){
-		if( contains( classesAndMethodsMap_[typeid(T).name()], methodName) == false ){
-			//classesAndMethodsMap_[typeid(T).name()].push_back(methodName);
-			//class_<T, boost::shared_ptr<T> >(typeid(T).name() ).def(methodName.c_str(), method);
-			//ZAPISUJ STWORZONE OBIEKTY KLAS DO JAKIEJS KOLEKCJI BY NIE TWORZYC NOWYCH class_ tylko tamtych uzywac!!
-		}
-	}
-
-	template <typename T>
-	void registerActorMethod( std::string methodName, boost::python::object method ){
-
-	}
-
-	std::shared_ptr<class_<A>> getPythonClass (){
-		return rootClass;
-	}
-
 
 };
-
-//#include "PythonActorComponent.h"
 
 
 #endif //PWASTEROIDS_PYTHONMODULE_H

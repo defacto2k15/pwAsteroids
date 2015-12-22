@@ -60,3 +60,16 @@ void RocketBox2dComponent::turnLeft() {
 void RocketBox2dComponent::turnRight() {
 	rocketBox2dObject_->getBody()->ApplyTorque(configurableValues_->getRocketTurnRate(), true);
 }
+
+void RocketBox2dComponent::setPosition(double x, double y) {
+	setTransformation(x, y, rocketBox2dObject_->getBody()->GetAngle());
+}
+
+void RocketBox2dComponent::setRotation(double rotation) {
+	auto currentPosition = rocketBox2dObject_->getBody()->GetPosition();
+	setTransformation(currentPosition.x, currentPosition.y, DegreesCalculations::degreesToRadians(rotation));
+}
+
+void RocketBox2dComponent::setTransformation(double x, double y, double rotationInRadians) {
+	rocketBox2dObject_->getBody()->SetTransform( b2Vec2(x,y), rotationInRadians);
+}

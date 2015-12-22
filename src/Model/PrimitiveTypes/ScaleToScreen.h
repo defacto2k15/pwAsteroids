@@ -15,16 +15,16 @@ public:
 
 	ScaleToScreen();;
 
-	double getX() const;
+	double getX() ;
 
-	double getY() const;;
+	double getY() ;;
 
-	Point scalePoint(Point p) const;
+	Point scalePoint(Point p) ;
 private:
 	void assertArgumentsAreAcceptable(double x, double y);
 };
 
-std::ostream & operator<<(std::ostream& stream, const ScaleToScreen& scale);
+std::ostream & operator<<(std::ostream& stream,  ScaleToScreen& scale);
 
 
 #endif //PWASTEROIDS_SCALE_H

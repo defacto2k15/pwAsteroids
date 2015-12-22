@@ -17,19 +17,19 @@ public:
 
 	Point(double x, double y);
 
-	double getX() const;
+	double getX(void) ;
 
-	double getY() const;
+	double getY(void) ;
 
 	Point move(double x, double y);
 
 	std::string toString();
 };
 
-bool operator==(const Point& p1, const Point& p2);
+bool operator==( Point& p1,  Point& p2);
 
-bool operator!=(const Point& p1, const Point& p2);
+bool operator!=( Point& p1,  Point& p2);
 
-std::ostream & operator<<(std::ostream& stream, const Point& point);
+std::ostream & operator<<(std::ostream& stream,  Point& point);
 
 #endif //PWASTEROIDS_POINT_H

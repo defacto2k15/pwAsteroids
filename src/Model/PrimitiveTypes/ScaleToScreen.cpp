@@ -12,11 +12,11 @@ ScaleToScreen::ScaleToScreen(double x, double y) {
 
 ScaleToScreen::ScaleToScreen() : p_(1.0, 1.0) {}
 
-double ScaleToScreen::getX() const {
+double ScaleToScreen::getX()  {
 	return p_.getX();
 }
 
-double ScaleToScreen::getY() const {
+double ScaleToScreen::getY()  {
 	return p_.getY();
 }
 
@@ -27,12 +27,12 @@ void ScaleToScreen::assertArgumentsAreAcceptable(double x, double y) {
 	}
 }
 
-std::ostream &operator<<(std::ostream& stream, const ScaleToScreen& scale) {
+std::ostream &operator<<(std::ostream& stream,  ScaleToScreen& scale) {
 	stream << "<"<<scale.getX()<<","<<scale.getY()<<">";
 	return stream;
 }
 
-Point ScaleToScreen::scalePoint(Point p) const {
+Point ScaleToScreen::scalePoint(Point p)  {
 	Point newPoint( p.getX()*p_.getX(), p.getY()*p_.getY());
 	return newPoint;
 }
