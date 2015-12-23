@@ -16,6 +16,7 @@
 #include <Model/components/ActorTypeComponent.h>
 #include <Model/box2d/Box2dPositionSettingComponent.h>
 #include <Model/python/CommonTypesVisualizer.h>
+#include <Model/components/ScreenBoundariesTeleportationComponent.h>
 
 
 class MockClass;
@@ -42,6 +43,7 @@ Game::Game() {
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
 	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket, pythonModule_));
 	rocket->addComponent( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
+	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(actorsConfiguration_));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));

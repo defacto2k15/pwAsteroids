@@ -8,6 +8,7 @@
 #include "Component.h"
 
 class IPositionSettingComponent : public Component {
+public:
     virtual void setPosition( double x, double y)=0;
     virtual void setRotation( double rotation )=0;
 };
