@@ -24,6 +24,12 @@ public:
 	Point move(double x, double y);
 
 	std::string toString();
+
+	Point& operator*=(double scale){
+		x_ *=scale;
+		y_ *=scale;
+		return *this;
+	}
 };
 
 bool operator==( Point p1,  Point p2);

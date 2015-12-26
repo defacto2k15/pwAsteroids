@@ -36,3 +36,8 @@ Point ScaleToScreen::scalePoint(Point p)  {
 	Point newPoint( p.getX()*p_.getX(), p.getY()*p_.getY());
 	return newPoint;
 }
+
+ScaleToScreen operator*(ScaleToScreen scale1, double scale2) {
+	scale1 *= scale2;
+	return scale1;
+}

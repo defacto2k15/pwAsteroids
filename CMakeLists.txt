@@ -14,6 +14,7 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/Model/Actors/*.h" "src/Model/Actors/*.cpp" "src/Model/box2d/*.cpp" "src/Model/box2d/*.h"
         "src/View/*.cpp" "src/View/*.h" "src/Model/configuration/*.cpp" "src/Model/configuration/*.h"
         "src/Model/Actors/RocketTail/*.cpp" "src/Model/Actors/RocketTail/*.h" "src/Model/python/*.cpp" "src/Model/python/*.h"
+        "src/Model/Actors/Asteroid/*.cpp" "src/Model/Actors/Asteroid/*.h"
   )
 
 add_executable(pwAsteroids ${SRC_FILES}  )

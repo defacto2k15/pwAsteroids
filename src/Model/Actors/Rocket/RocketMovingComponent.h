@@ -16,17 +16,23 @@
 #include <exception>
 #include <stdexcept>
 #include <Model/python/PythonClassVisibilityModule.h>
+#include <Model/configuration/ActorsConfiguration.h>
 
 
 class RocketMovingComponent : public Component {
 	std::shared_ptr<RocketBox2dComponent> box2dComponent_;
 	std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
-	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IKeyboardStateProvider>, std::shared_ptr<PythonModule> > visibilityModule_;
+	std::shared_ptr<ActorsConfiguration> actorsConfiguration_;
+	std::shared_ptr<PositionComponent> rocketPositionComponent_;
+	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IKeyboardStateProvider>,
+			std::shared_ptr<PythonModule>, std::shared_ptr<ActorsConfiguration> > visibilityModule_;
 
 public:
-	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider, std::shared_ptr<PythonModule> pythonModule )
-			: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule){
+	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
+						   std::shared_ptr<PythonModule> pythonModule, std::shared_ptr<ActorsConfiguration> actorsConfiguration )
+			: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule),
+				actorsConfiguration_(actorsConfiguration){
 	}
 
 	virtual void OnStart(IActor &actor);
@@ -42,6 +48,7 @@ public:
 
 	virtual void OnStop() override{};
 private:
+	void accelerate();
 
 };
 #endif //PWASTEROIDS_ROCKETMOVINGCOMPONENT_H

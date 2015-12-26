@@ -24,7 +24,8 @@ class RocketBox2dComponent : public IBox2dComponent{
 	b2PolygonShape polygonShape_;
 
 public:
-	RocketBox2dComponent( std::shared_ptr<Box2DService> box2dService , std::shared_ptr<IRocketConfigurableValues> configurableValues);
+	RocketBox2dComponent( std::shared_ptr<Box2DService> box2dService , std::shared_ptr<IRocketConfigurableValues> configurableValues,
+							std::shared_ptr<Box2dObject> rocketBox2dObject);
 
 	virtual void OnStart(IActor &actor);
 
@@ -37,6 +38,10 @@ public:
 	void turnLeft();
 
 	void turnRight();
+
+	void applyForce(Point forceVector);
+
+	void applyTorque(double torque);
 
 	void setPosition( double x, double y) override;
 

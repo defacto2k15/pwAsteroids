@@ -17,6 +17,7 @@
 #include <Model/box2d/Box2dPositionSettingComponent.h>
 #include <Model/python/CommonTypesVisualizer.h>
 #include <Model/components/ScreenBoundariesTeleportationComponent.h>
+#include <Model/box2d/Box2dObjectsContainer.h>
 
 
 class MockClass;
@@ -36,13 +37,15 @@ Game::Game() {
 	rootServiceContainer_.addService(boxService_);
 	auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
 
-	rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
+	Box2dObjectsContainer container;
+
+	rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_, container.getRocketObject()));
 	rocket->addComponent(std::make_shared<PositionComponent>(pythonModule_));
 	rocket->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::Rocket, ScaleToScreen(0.053, 0.1)));
-	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_, pythonModule_);
+	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_, pythonModule_, actorsConfiguration_);
 	rocket->addComponent(rocketMovingComponent);
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
-	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket, pythonModule_));
+	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket,  pythonModule_));
 	rocket->addComponent( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
 	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(actorsConfiguration_));
 

@@ -5,22 +5,10 @@
 #include "RocketBox2dComponent.h"
 
 
-RocketBox2dComponent::RocketBox2dComponent( std::shared_ptr<Box2DService> box2dService , std::shared_ptr<IRocketConfigurableValues> configurableValues)
-		: box2dService_(box2dService), configurableValues_(configurableValues) {
-
-	polygonShape_.SetAsBox(2,2);
-
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set( configurableValues->getInitialPosition().getX(), configurableValues->getInitialPosition().getY() );
-	bodyDef.angle = DegreesCalculations::degreesToRadians( configurableValues->getInitialRotation() );
-
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &polygonShape_;
-	fixtureDef.density = 1;
-
-	std::vector<b2FixtureDef> fixturesVec{fixtureDef};
-	rocketBox2dObject_ = std::make_shared<Box2dObject>(bodyDef, fixturesVec);
+RocketBox2dComponent::RocketBox2dComponent( std::shared_ptr<Box2DService> box2dService ,
+											std::shared_ptr<IRocketConfigurableValues> configurableValues,
+											std::shared_ptr<Box2dObject> rocketBox2dObject)
+		: box2dService_(box2dService), configurableValues_(configurableValues), rocketBox2dObject_(rocketBox2dObject) {
 }
 
 void  RocketBox2dComponent::OnStart(IActor &actor) {
@@ -29,6 +17,9 @@ void  RocketBox2dComponent::OnStart(IActor &actor) {
 
 	rocketPositionComponent_->setPosition(configurableValues_->getInitialPosition());
 	rocketPositionComponent_->setRotation(configurableValues_->getInitialRotation());
+
+	b2Vec2 position( configurableValues_->getInitialPosition().getX(), configurableValues_->getInitialPosition().getY() );
+	rocketBox2dObject_->getBody()->SetTransform(position, DegreesCalculations::degreesToRadians( configurableValues_->getInitialRotation() ));
 
 }
 
@@ -72,4 +63,14 @@ void RocketBox2dComponent::setRotation(double rotation) {
 
 void RocketBox2dComponent::setTransformation(double x, double y, double rotationInRadians) {
 	rocketBox2dObject_->getBody()->SetTransform( b2Vec2(x,y), rotationInRadians);
+}
+
+void RocketBox2dComponent::applyForce(Point forceVector) {
+	b2Vec2 accVec =  b2Vec2(forceVector.getX(), forceVector.getY());
+	rocketBox2dObject_->getBody()->ApplyForce(accVec,
+											  rocketBox2dObject_->getBody()->GetWorldCenter(), true);
+}
+
+void RocketBox2dComponent::applyTorque(double torque) {
+	rocketBox2dObject_->getBody()->ApplyTorque(torque, true);
 }

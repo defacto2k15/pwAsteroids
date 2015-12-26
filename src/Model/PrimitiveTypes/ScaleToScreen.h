@@ -20,11 +20,18 @@ public:
 	double getY() ;;
 
 	Point scalePoint(Point p) ;
+
+	ScaleToScreen& operator*=(double scale ){
+		p_ *= scale;
+		return *this;
+	}
 private:
 	void assertArgumentsAreAcceptable(double x, double y);
 };
 
 std::ostream & operator<<(std::ostream& stream,  ScaleToScreen& scale);
+
+ScaleToScreen operator*(ScaleToScreen scale1, double scale2);
 
 
 #endif //PWASTEROIDS_SCALE_H

@@ -12,7 +12,8 @@
 enum ActorType{
     ActorType_Invalid = 0,
     ActorType_Rocket = 1,
-    ActorType_RocketTail = 2
+    ActorType_RocketTail = 2,
+    ActorType_Asteroid = 3
 };
 
 std::string getActorTypeString(ActorType type);
