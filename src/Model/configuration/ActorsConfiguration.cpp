@@ -35,3 +35,11 @@ ScaleToScreen ActorsConfiguration::getBox2dToAllegroScale() const {
 Point ActorsConfiguration::getBox2dScreenDimensions() const {
 	return Point( 10.24f, 6.00f);
 }
+
+Point ActorsConfiguration::GetDuplicationBoundariesSize() const {
+	return Point(1.0f, 1.0f);
+}
+
+ActorId ActorsConfiguration::getBoundariesDuplicateActorIdOffset() const {
+	return 10000;
+}

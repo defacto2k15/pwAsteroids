@@ -17,6 +17,7 @@
 #include <Model/modelInterfaces/IInKeyboardStateGetter.h>
 #include <Model/python/IInPythonModule.h>
 #include <Model/python/IOutPythonModule.h>
+#include <Model/ModelDrawing/BoundariesDuplicationsDrawingSystem.h>
 
 
 class Game {
@@ -24,6 +25,7 @@ private:
 	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
 	RootServiceContainer rootServiceContainer_;
 	std::shared_ptr<DrawingSystem> drawingSystem_;
+	std::shared_ptr<BoundariesDuplicationsDrawingSystem> boundariesDuplicationsDrawingSystem_;
 	std::shared_ptr<KeyboardStateManager> keyboardManager_ = std::make_shared<KeyboardStateManager>();
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>();
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();

@@ -4,7 +4,7 @@
 
 //
 // Created by defacto on 28.11.15.
-DrawingComponent::DrawingComponent(std::shared_ptr<DrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen)
+DrawingComponent::DrawingComponent(std::shared_ptr<IDrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen)
 		: drawingSystem_(drawingSystem), imageType_(imageType), scaleToScreen_(scaleToScreen) {}
 
 void  DrawingComponent::OnStart(IActor &actor) {

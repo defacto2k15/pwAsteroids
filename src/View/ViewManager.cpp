@@ -1,5 +1,6 @@
 #include <Game.h>
 #include "ViewManager.h"
+#include <map>
 
 enum MYKEYS {
 	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
@@ -20,6 +21,7 @@ void ViewManager::drawAllScenesOnDisplay()
 
 void ViewManager::start()
 {
+	std::map<ActorId, DrawableObject*> drawableObjects;
 	//timerThread = new boost::thread(boost::bind(&ViewManager::startTimerEvent, this));
 	Scene *scene = createNewScene();
 	DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
@@ -55,11 +57,18 @@ void ViewManager::start()
 
 			auto primitivesVec = g.getOutGameScreenModel()->getImagePrimitives();
 			for( auto &primitive : primitivesVec){
+				if( drawableObjects.count(primitive.getActorId()) == 0){
+					drawableObjects[primitive.getActorId()] = scene->addDrawableObject("../res/aa.bmp", 512, 300);
+				}
+				drawableObjects[primitive.getActorId()]->setPozX( primitive.getPosition().getX());
+				drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
+				drawableObjects[primitive.getActorId()]->setAngle( double(primitive.getRotation())*0.0174532925f);
+
 				//std::cout << "pos: " << primitive.getPosition().toString() << " rot " << primitive.getRotation() << std::endl;
 			}
 			std::cout << std::endl;
 
-			if( primitivesVec.size() == 2){
+			/*if( primitivesVec.size() == 2){
 				tail->setPozX(primitivesVec[1].getPosition().getX());
 				tail->setPozY( primitivesVec[1].getPosition().getY() );
 				tail->setAngle(( double(primitivesVec[1].getRotation()))*0.0174532925f);
@@ -69,7 +78,7 @@ void ViewManager::start()
 				rocket->setPozX(primitivesVec[0].getPosition().getX());
 				rocket->setPozY(primitivesVec[0].getPosition().getY());
 				rocket->setAngle((double(primitivesVec[0].getRotation())) * 0.0174532925f);
-			}
+			}*/
 
 
 			drawAllScenesOnDisplay();	// refresh the screen

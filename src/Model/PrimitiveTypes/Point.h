@@ -26,9 +26,11 @@ public:
 	std::string toString();
 };
 
-bool operator==( Point& p1,  Point& p2);
+bool operator==( Point p1,  Point p2);
 
-bool operator!=( Point& p1,  Point& p2);
+bool operator!=( Point p1,  Point p2);
+
+Point operator+(Point p1, Point p2);
 
 std::ostream & operator<<(std::ostream& stream,  Point& point);
 

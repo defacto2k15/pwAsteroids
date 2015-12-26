@@ -13,7 +13,7 @@
 class DrawingComponent : public Component{
 	ScaleToScreen scaleToScreen_;
 public:
-	DrawingComponent(std::shared_ptr<DrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen);
+	DrawingComponent(std::shared_ptr<IDrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen);
 
 	virtual void OnStart(IActor &actor);;
 
@@ -22,7 +22,7 @@ public:
 	void setVisibility(bool visibility );
 
 private:
-	std::shared_ptr<DrawingSystem> drawingSystem_;
+	std::shared_ptr<IDrawingSystem> drawingSystem_;
 	std::shared_ptr<PositionComponent> positionComponent_;
 	ImagePrimitiveType imageType_;
 	bool isVisible_ = true;

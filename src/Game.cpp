@@ -25,6 +25,7 @@ Game::Game() {
 	rootServiceContainer_.addService(pythonModule_); // must be one of first
 	outGameScreenModel_= std::make_shared<OutGameScreenModelScaler>( std::make_shared<OutGameScreenModelImageCentering>(std::make_shared<OutGameScreenModel>(), actorsConfiguration_), actorsConfiguration_);
 	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
+	boundariesDuplicationsDrawingSystem_ = std::make_shared<BoundariesDuplicationsDrawingSystem>(drawingSystem_, actorsConfiguration_);
 
 	std::shared_ptr<ActorsContainer> actorsContainer = std::make_shared<ActorsContainer>(pythonModule_);
 	rootServiceContainer_.addService(actorsContainer);
@@ -37,7 +38,7 @@ Game::Game() {
 
 	rocket->addComponent(std::make_shared<RocketBox2dComponent>(boxService_, actorsConfiguration_));
 	rocket->addComponent(std::make_shared<PositionComponent>(pythonModule_));
-	rocket->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Rocket, ScaleToScreen(0.053, 0.1)));
+	rocket->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::Rocket, ScaleToScreen(0.053, 0.1)));
 	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(keyboardManager_, pythonModule_);
 	rocket->addComponent(rocketMovingComponent);
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
@@ -47,7 +48,7 @@ Game::Game() {
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
-	rocketTail->addComponent(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::RocketTail, ScaleToScreen(0.053, 0.1)));
+	rocketTail->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::RocketTail, ScaleToScreen(0.053, 0.1)));
 	rocketTail->addComponent(std::make_shared<PositionComponent>(pythonModule_));
 
 	actorsContainer->addActor(rocket);

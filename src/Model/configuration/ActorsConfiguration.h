@@ -33,6 +33,10 @@ public:
 	virtual ScaleToScreen getBox2dToAllegroScale()const override;
 
 	virtual Point getBox2dScreenDimensions() const;
+
+	virtual Point GetDuplicationBoundariesSize() const;
+
+	virtual ActorId getBoundariesDuplicateActorIdOffset() const;
 };
 
 

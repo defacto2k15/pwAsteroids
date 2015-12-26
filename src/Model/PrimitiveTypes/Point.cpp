@@ -31,10 +31,14 @@ std::string Point::toString() {
 	return ss.str();
 }
 
-bool operator==( Point& p1,  Point& p2) {
+bool operator==( Point p1,  Point p2) {
 	return p1.getY() == p2.getY() && p1.getX() == p2.getX();
 }
 
-bool operator!=( Point& p1,  Point& p2) {
+bool operator!=( Point p1,  Point p2) {
 	return !(p1==p2);
+}
+
+Point operator+(Point p1, Point p2) {
+	return Point(p1.getX()+p2.getX(), p1.getY()+p2.getY());
 }
