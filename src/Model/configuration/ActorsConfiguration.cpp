@@ -9,15 +9,15 @@ Point ActorsConfiguration::getInitialPosition() const {
 }
 
 Rotation ActorsConfiguration::getInitialRotation() const {
-	return 0;
+	return 90;
 }
 
-int ActorsConfiguration::getRocketAccelerationRate() const {
+double ActorsConfiguration::getRocketAccelerationRate() const {
 	return -3;
 }
 
-int ActorsConfiguration::getRocketTurnRate() const {
-	return 3;
+double ActorsConfiguration::getRocketTurnRate() const {
+	return 0.2;
 }
 
 ScaleToScreen ActorsConfiguration::getRocketScaleToScreen() const {

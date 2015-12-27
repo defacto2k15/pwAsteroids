@@ -13,8 +13,8 @@ class IRocketConfigurableValues {
 public:
 	virtual Point getInitialPosition() const = 0;
 	virtual Rotation getInitialRotation() const = 0;
-	virtual int getRocketAccelerationRate() const = 0;
-	virtual int getRocketTurnRate() const = 0;
+	virtual double getRocketAccelerationRate() const = 0;
+	virtual double getRocketTurnRate() const = 0;
 	virtual ScaleToScreen getRocketScaleToScreen() const = 0;
 };
 #endif //PWASTEROIDS_IROCKETCONFIGURABLEVALUES_H

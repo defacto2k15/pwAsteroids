@@ -10,7 +10,7 @@
 #include <Model/Services/IPhysicsService.h>
 #include <Model/box2d/Box2DService.h>
 #include <Model/components/DrawingComponent.h>
-#include "RocketBox2dComponent.h"
+#include "Box2dComponent.h"
 #include "Model/modelInterfaces/Keys.h"
 #include "IRocketConfigurableValues.h"
 #include <exception>
@@ -20,7 +20,7 @@
 
 
 class RocketMovingComponent : public Component {
-	std::shared_ptr<RocketBox2dComponent> box2dComponent_;
+	std::shared_ptr<Box2dComponent> box2dComponent_;
 	std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
 	std::shared_ptr<ActorsConfiguration> actorsConfiguration_;

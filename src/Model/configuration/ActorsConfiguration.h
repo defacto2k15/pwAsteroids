@@ -8,6 +8,7 @@
 
 #include <Model/Actors/Rocket/IRocketConfigurableValues.h>
 #include <Model/Actors/RocketTail/IRocketTailConfigurableValues.h>
+#include <Model/PrimitiveTypes/Rectangle.h>
 #include "IScreenScallingConfiguration.h"
 #include "IImageCenteringConfiguration.h"
 
@@ -21,9 +22,9 @@ public:
 
 	virtual Rotation getInitialRotation() const;
 
-	virtual int getRocketAccelerationRate() const;
+	virtual double getRocketAccelerationRate() const;
 
-	virtual int getRocketTurnRate() const;
+	virtual double getRocketTurnRate() const;
 
 	virtual ScaleToScreen getRocketScaleToScreen() const;
 
@@ -37,6 +38,49 @@ public:
 	virtual Point GetDuplicationBoundariesSize() const;
 
 	virtual ActorId getBoundariesDuplicateActorIdOffset() const;
+
+	/* Asteroids generation */
+	unsigned int getAsteroidCreationPropabilityRatio() const{
+		return 2;
+	}
+
+	unsigned int GetMinTimeBetweenAsteroidsCreation() const{
+		return 4000;
+	}
+
+	unsigned int GetMaxAsteroidsCount() const{
+		return 12;
+	}
+
+	Point GetAsteroidsGenerationBoundariesSize() const {
+		return Point(0.001, 0.001);
+	}
+
+	double GetAsteroidMaxInitialImpulse(){
+		return 0.15;
+	}
+
+	double GetAsteroidMinInitialImpulse(){
+		return 0.05;
+	}
+
+	double GetAsteroidMinSize(){
+		return 0.1;
+	}
+
+	double GetAsteroidMaxSize(){
+		return 0.4;
+	}
+
+	double GetAsteroidMaxRotationSpeed(){
+		return 0.08;
+	}
+
+	Rectangle getActorsDestroyRectangle(){
+		Point destroyBoundaries(2,2);
+		return Rectangle( -destroyBoundaries, getBox2dScreenDimensions() + (destroyBoundaries*2));
+	}
+
 };
 
 

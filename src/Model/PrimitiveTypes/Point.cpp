@@ -3,6 +3,7 @@
 //
 
 #include "Point.h"
+#include <cmath>
 
 Point::Point(double x, double y) : x_(x), y_(y) {}
 
@@ -18,6 +19,12 @@ double Point::getY(void)  {
 
 Point Point::move(double x, double y) {
 	return Point( x_ + x, y_ + y);
+}
+
+void Point::normalize() {
+	double alphaInRadians = atan2( y_ , x_);
+	x_ = 1 * cos( alphaInRadians);
+	y_ = 1 * sin( alphaInRadians);
 }
 
 std::ostream &operator<<(std::ostream& stream,  Point& point) {
@@ -41,4 +48,24 @@ bool operator!=( Point p1,  Point p2) {
 
 Point operator+(Point p1, Point p2) {
 	return Point(p1.getX()+p2.getX(), p1.getY()+p2.getY());
+}
+
+Point operator-(Point p1) {
+	return Point( -p1.getX(), -p1.getY());
+}
+
+Point operator-(Point p1, Point p2 ) {
+	return p1 + (-p2);
+}
+
+//double Point::getX(void) const {
+//	return x_;
+//}
+//
+//double Point::getY(void) const {
+//	return y_;
+//}
+
+Point operator*(Point p1, double scale) {
+	return Point(p1.getX()*scale, p1.getY()*scale);
 }

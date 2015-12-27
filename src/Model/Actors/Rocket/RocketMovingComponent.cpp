@@ -7,7 +7,7 @@
 
 void RocketMovingComponent::OnStart(IActor &actor) {
 	rocketPositionComponent_ = actor.getOnlyComponent<PositionComponent>();
-	box2dComponent_ = actor.getOnlyComponent<RocketBox2dComponent>();
+	box2dComponent_ = actor.getOnlyComponent<Box2dComponent>();
 	visibilityModule_.registerClass();
 	visibilityModule_.registerActorMethod("sf", &RocketMovingComponent::someStupidFunction );
 

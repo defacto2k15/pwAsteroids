@@ -8,11 +8,17 @@ void ActorsContainer::addActor(std::shared_ptr<IActor> newActor) {
 	actorsVec_.push_back(newActor);
 }
 
+void ActorsContainer::addActorDuringRuntime(std::shared_ptr<IActor> newActor) {
+	newActor->OnStart();
+	addActor(newActor);
+}
+
 void ActorsContainer::removeActor(std::shared_ptr<IActor> newActor) {
 	auto foundIt = std::find(begin(actorsVec_), end(actorsVec_), newActor);
 	if(foundIt == actorsVec_.end()){
 		throw RemovingNotAddedActorException();
 	}
+	(*foundIt)->OnStop();
 	actorsVec_.erase(foundIt);
 }
 

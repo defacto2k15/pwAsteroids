@@ -24,8 +24,8 @@ void ViewManager::start()
 	std::map<ActorId, DrawableObject*> drawableObjects;
 	//timerThread = new boost::thread(boost::bind(&ViewManager::startTimerEvent, this));
 	Scene *scene = createNewScene();
-	DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
-	DrawableObject* tail = scene->addDrawableObject("../res/aa.bmp", 100, 300);	// example bitmap to be moved
+	//DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
+	//DrawableObject* tail = scene->addDrawableObject("../res/aa.bmp", 100, 300);	// example bitmap to be moved
 	bool key[4] = { false, false, false, false };
 	//int speed = 20;
 	Game g;
@@ -58,7 +58,13 @@ void ViewManager::start()
 			auto primitivesVec = g.getOutGameScreenModel()->getImagePrimitives();
 			for( auto &primitive : primitivesVec){
 				if( drawableObjects.count(primitive.getActorId()) == 0){
-					drawableObjects[primitive.getActorId()] = scene->addDrawableObject("../res/aa.bmp", 512, 300);
+					const char *pathToImage;
+					if( primitive.getImageType() == ImagePrimitiveType::Asteroid){
+						pathToImage = "../res/asteroid.bmp";
+					} else {
+						pathToImage = "../res/aa.bmp";
+					}
+					drawableObjects[primitive.getActorId()] = scene->addDrawableObject(pathToImage, 512, 300);
 				}
 				drawableObjects[primitive.getActorId()]->setPozX( primitive.getPosition().getX());
 				drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
@@ -66,19 +72,6 @@ void ViewManager::start()
 
 				//std::cout << "pos: " << primitive.getPosition().toString() << " rot " << primitive.getRotation() << std::endl;
 			}
-			std::cout << std::endl;
-
-			/*if( primitivesVec.size() == 2){
-				tail->setPozX(primitivesVec[1].getPosition().getX());
-				tail->setPozY( primitivesVec[1].getPosition().getY() );
-				tail->setAngle(( double(primitivesVec[1].getRotation()))*0.0174532925f);
-			}
-
-			if( primitivesVec.size() > 0) {
-				rocket->setPozX(primitivesVec[0].getPosition().getX());
-				rocket->setPozY(primitivesVec[0].getPosition().getY());
-				rocket->setAngle((double(primitivesVec[0].getRotation())) * 0.0174532925f);
-			}*/
 
 
 			drawAllScenesOnDisplay();	// refresh the screen

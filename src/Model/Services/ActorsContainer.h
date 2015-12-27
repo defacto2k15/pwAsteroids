@@ -42,7 +42,19 @@ public:
 
 	void addActor(std::shared_ptr<IActor> newActor);
 
+	void addActorDuringRuntime(std::shared_ptr<IActor> newActor);
+
 	void removeActor(std::shared_ptr<IActor> newActor);
+
+	void removeActorById(ActorId id ){
+		auto iterator = std::find_if( begin(actorsVec_), end(actorsVec_), [id](std::shared_ptr<IActor> actor){
+			return actor->getActorId() == id;
+		});
+		if( iterator == actorsVec_.end() ){
+			throw RemovingNotAddedActorException();
+		}
+		removeActor( *iterator );
+	}
 protected:
 	virtual std::vector<std::shared_ptr<IService>> getServices();
 };

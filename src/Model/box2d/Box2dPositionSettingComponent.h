@@ -14,13 +14,13 @@
 
 class Box2dPositionSettingComponent : public IPositionSettingComponent{
     PythonClassVisibilityModule<Box2dPositionSettingComponent, std::shared_ptr<PythonModule>> visibilityModule_;
-    std::shared_ptr<IBox2dComponent> box2dComponent_;
+    std::shared_ptr<Box2dComponent> box2dComponent_;
 public:
     Box2dPositionSettingComponent( std::shared_ptr<PythonModule> python ) : visibilityModule_(python){
     }
 
     virtual void OnStart(IActor &actor){
-        box2dComponent_ = actor.getOnlyComponent<IBox2dComponent>();
+        box2dComponent_ = actor.getOnlyComponent<Box2dComponent>();
         visibilityModule_.registerActorMethod("setPosition", &Box2dPositionSettingComponent::setPosition);
         visibilityModule_.registerActorMethod("setRotation", &Box2dPositionSettingComponent::setRotation);
     }

@@ -18,6 +18,9 @@
 #include <Model/python/IInPythonModule.h>
 #include <Model/python/IOutPythonModule.h>
 #include <Model/ModelDrawing/BoundariesDuplicationsDrawingSystem.h>
+#include <Model/Actors/Asteroid/AsteroidsGenerator.h>
+#include <Model/help/RandomNumbersProvider.h>
+#include <Model/ModelDrawing/ImageScalesContainer.h>
 
 
 class Game {
@@ -30,6 +33,11 @@ private:
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>();
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
 	ActorIdGenerator idGenerator;
+	std::shared_ptr<AsteroidsGenerator> asteroidGenerator_;
+	std::shared_ptr<AsteroidsCounter> asteroidsCounter_ = std::make_shared<AsteroidsCounter>();
+	RandomNumbersProvider randomNumbersProvider_;
+	ImageScalesContainer imageScalesContainer_;
+	Box2dObjectsContainer box2dObjectsContainer_;
 
 	std::shared_ptr<ActorsConfiguration> actorsConfiguration_ = std::make_shared<ActorsConfiguration>();
 public:
