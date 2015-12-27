@@ -26,10 +26,10 @@ void RocketMovingComponent::OnUpdate() {
 		rocketTailDrawing_->setVisibility(false);
 	}
 	if (keyboardStateProvider_->isPressed(Keys::Player1LeftKey)){
-		box2dComponent_->applyTorque(-actorsConfiguration_->getRocketTurnRate());
+		box2dComponent_->applyTorque(-actorsConfiguration_.getRocketTurnRate());
 	}
 	if (keyboardStateProvider_->isPressed(Keys::Player1RightKey)){
-		box2dComponent_->applyTorque(actorsConfiguration_->getRocketTurnRate());
+		box2dComponent_->applyTorque(actorsConfiguration_.getRocketTurnRate());
 	}
 }
 
@@ -38,8 +38,8 @@ void RocketMovingComponent::setRocketTail( std::shared_ptr<IActor> tailActor) {
 }
 
 void RocketMovingComponent::accelerate() {
-	Point accVec = Point((-1)*(actorsConfiguration_->getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
-							actorsConfiguration_->getRocketAccelerationRate() * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
+	Point accVec = Point((-1)*(actorsConfiguration_.getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
+							actorsConfiguration_.getRocketAccelerationRate() * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
 	box2dComponent_->applyForce(accVec);
 
 }

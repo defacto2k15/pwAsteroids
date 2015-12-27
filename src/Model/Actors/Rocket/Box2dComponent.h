@@ -22,11 +22,11 @@ class Box2dComponent : public Component{
 	std::shared_ptr<Box2DService> box2dService_;
 	std::shared_ptr<Box2dObject> box2dObject_;
 	std::shared_ptr<PositionComponent> positionComponent_;
-	std::shared_ptr<ActorsConfiguration> configurableValues_;
+	ActorsConfiguration &configurableValues_;
 
 public:
 	Box2dComponent(std::shared_ptr<Box2DService> box2dService,
-				   std::shared_ptr<ActorsConfiguration> configurableValues,
+				   ActorsConfiguration &configurableValues,
 				   std::shared_ptr<Box2dObject> rocketBox2dObject);
 
 	virtual void OnStart(IActor &actor);

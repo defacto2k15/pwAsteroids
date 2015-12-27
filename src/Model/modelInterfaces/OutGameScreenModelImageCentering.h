@@ -14,11 +14,11 @@
 
 class OutGameScreenModelImageCentering : public IOutGameScreenModel {
 	std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel_;
-	std::shared_ptr<IImageCenteringConfiguration> configuration_;
+	IImageCenteringConfiguration &configuration_;
 
 public:
 	OutGameScreenModelImageCentering(std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel,
-										std::shared_ptr<IImageCenteringConfiguration> configuration) :
+										IImageCenteringConfiguration &configuration) :
 										originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 

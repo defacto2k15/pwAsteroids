@@ -12,13 +12,13 @@
 #include "PositionComponent.h"
 
 class ActorOnOutOfScreenDestroyerComponent : public Component {
-    std::shared_ptr<ActorsConfiguration> configuration_;
+    ActorsConfiguration &configuration_;
     std::shared_ptr<ActorsContainer> actorsContainer_;
     ActorId actorId_;
     std::shared_ptr<PositionComponent> positionComponent_;
 public:
 
-    ActorOnOutOfScreenDestroyerComponent(std::shared_ptr<ActorsConfiguration> &configuration_,
+    ActorOnOutOfScreenDestroyerComponent(ActorsConfiguration &configuration_,
                                          std::shared_ptr<ActorsContainer> &actorsContainer_) : configuration_(
             configuration_), actorsContainer_(actorsContainer_) {
     }
@@ -30,7 +30,7 @@ public:
 
     void OnUpdate() override {
         Point position = positionComponent_->getPosition();
-        if( configuration_->getActorsDestroyRectangle().isPointInRectangle(position) == false){
+        if( configuration_.getActorsDestroyRectangle().isPointInRectangle(position) == false){
             actorsContainer_->removeActorById(actorId_);
         }
     }

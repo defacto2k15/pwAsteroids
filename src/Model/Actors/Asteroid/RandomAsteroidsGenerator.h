@@ -14,14 +14,14 @@
 class RandomAsteroidsGenerator : public IService{
     std::shared_ptr<AsteroidsGenerator> asteroidsGenerator_;
     std::shared_ptr<AsteroidsCounter> asteroidsCounter_;
-    std::shared_ptr<ActorsConfiguration> configuration_;
+    ActorsConfiguration &configuration_;
     std::shared_ptr<GameTimeProvider> timeProvider_;
     RandomNumbersProvider &provider_;
     unsigned int timeOfLastAsteroidCreation_ = 0;
 public:
     RandomAsteroidsGenerator(std::shared_ptr<AsteroidsGenerator> &asteroidsGenerator_,
                              std::shared_ptr<AsteroidsCounter> &asteroidsCounter_,
-                             std::shared_ptr<ActorsConfiguration> &configuration_,
+                             ActorsConfiguration &configuration_,
                              std::shared_ptr<GameTimeProvider> &timeProvider_,
                              RandomNumbersProvider &provider_)
             : asteroidsGenerator_(asteroidsGenerator_), asteroidsCounter_(asteroidsCounter_),
@@ -31,9 +31,9 @@ public:
 
     void OnUpdate(){
         if( timeProvider_->getMilisecondsSinceGameStart() - timeOfLastAsteroidCreation_
-                > configuration_->GetMinTimeBetweenAsteroidsCreation()) {
-            if (provider_.getRandomBool(configuration_->getAsteroidCreationPropabilityRatio())) {
-                if( asteroidsCounter_->getValue() < configuration_->GetMaxAsteroidsCount() ) {
+                > configuration_.GetMinTimeBetweenAsteroidsCreation()) {
+            if (provider_.getRandomBool(configuration_.getAsteroidCreationPropabilityRatio())) {
+                if( asteroidsCounter_->getValue() < configuration_.GetMaxAsteroidsCount() ) {
                     timeOfLastAsteroidCreation_ = timeProvider_->getMilisecondsSinceGameStart();
                     createAsteroid();
                 }
@@ -46,13 +46,13 @@ private:
         Point position = generateRandomPositionOnRectangularEdgeWithBoundaries(); // have to odjac size boudaries!!asdas
         Point accelerationNormalVector = generateAccelerationNormalVector( position );
         auto accelerationVector  = accelerationNormalVector *= provider_.getRandomDouble(
-                configuration_->GetAsteroidMinInitialImpulse(), configuration_->GetAsteroidMaxInitialImpulse());
+                configuration_.GetAsteroidMinInitialImpulse(), configuration_.GetAsteroidMaxInitialImpulse());
         Rotation newRotation = DegreesCalculations::degreesToRadians(provider_.getRandom(360) );
 
-        position = position - Point( configuration_->GetAsteroidsGenerationBoundariesSize().getX(),
-                                     configuration_->GetAsteroidsGenerationBoundariesSize().getY());
-        double size = provider_.getRandomDouble(configuration_->GetAsteroidMinSize(), configuration_->GetAsteroidMaxSize());
-        double rotationSpeed = provider_.getRandomDouble(0, configuration_->GetAsteroidMaxRotationSpeed());
+        position = position - Point( configuration_.GetAsteroidsGenerationBoundariesSize().getX(),
+                                     configuration_.GetAsteroidsGenerationBoundariesSize().getY());
+        double size = provider_.getRandomDouble(configuration_.GetAsteroidMinSize(), configuration_.GetAsteroidMaxSize());
+        double rotationSpeed = provider_.getRandomDouble(0, configuration_.GetAsteroidMaxRotationSpeed());
         asteroidsGenerator_->generateAsteroid(position, newRotation, size, accelerationVector, rotationSpeed  );
        // std::cout << "Created in pos "<<position.toString() <<" accelvec  " << accelerationVector.toString() << std::endl;
     }
@@ -61,8 +61,8 @@ private:
         bool generateOnLongerSide = provider_.getRandomBool();
         Point creationPoint;
         Point asteroidsGenerationScreenSize(
-                configuration_->getBox2dScreenDimensions().getX() + (configuration_->GetAsteroidsGenerationBoundariesSize().getX()*2),
-                configuration_->getBox2dScreenDimensions().getY() + (configuration_->GetAsteroidsGenerationBoundariesSize().getY()*2));
+                configuration_.getBox2dScreenDimensions().getX() + (configuration_.GetAsteroidsGenerationBoundariesSize().getX()*2),
+                configuration_.getBox2dScreenDimensions().getY() + (configuration_.GetAsteroidsGenerationBoundariesSize().getY()*2));
 
         double x = provider_.getRandomDouble(0,1) * ( 2* asteroidsGenerationScreenSize.getX() + 2*asteroidsGenerationScreenSize.getY());
         if( x < asteroidsGenerationScreenSize.getX( )){
@@ -82,8 +82,8 @@ private:
 
     Point generateRandomPointInRectangularWithBoundaries(){
         Point asteroidsGenerationScreenSize(
-                configuration_->getBox2dScreenDimensions().getX() + (configuration_->GetAsteroidsGenerationBoundariesSize().getX()*2),
-                configuration_->getBox2dScreenDimensions().getY() + (configuration_->GetAsteroidsGenerationBoundariesSize().getY()*2));
+                configuration_.getBox2dScreenDimensions().getX() + (configuration_.GetAsteroidsGenerationBoundariesSize().getX()*2),
+                configuration_.getBox2dScreenDimensions().getY() + (configuration_.GetAsteroidsGenerationBoundariesSize().getY()*2));
         return Point(provider_.getRandomDouble(0, asteroidsGenerationScreenSize.getX()),
                      provider_.getRandomDouble(0, asteroidsGenerationScreenSize.getY()));
     }

@@ -15,11 +15,11 @@
 
 class RocketTailPositionComponent : public Component {
 	std::shared_ptr<IActor> rocketActor_;
-	std::shared_ptr<IRocketTailConfigurableValues> configurableValues_;
+	IRocketTailConfigurableValues &configurableValues_;
 	std::shared_ptr<PositionComponent> tailPositionComponent_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
 public:
-	RocketTailPositionComponent( std::shared_ptr<IActor> rocketActor, std::shared_ptr<IRocketTailConfigurableValues> values )
+	RocketTailPositionComponent( std::shared_ptr<IActor> rocketActor, IRocketTailConfigurableValues &values )
 			: rocketActor_( rocketActor ), configurableValues_(values){
 	}
 

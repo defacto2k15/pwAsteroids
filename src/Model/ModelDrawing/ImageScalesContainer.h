@@ -11,7 +11,7 @@
 class ImageScalesContainer {
 public:
     Point getScreenSize(){
-        return Point(1024, 612);
+        return Point(1024, 600);
     }
 
     ScaleToScreen getRocketImageScale(){

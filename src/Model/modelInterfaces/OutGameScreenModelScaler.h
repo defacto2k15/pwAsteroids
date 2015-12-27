@@ -12,10 +12,10 @@
 
 class OutGameScreenModelScaler : public IOutGameScreenModel {
 	std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel_;
-	std::shared_ptr<IScreenScalingConfiguration> configuration_;
+	IScreenScalingConfiguration &configuration_;
 public:
 	OutGameScreenModelScaler(std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel,
-	                         std::shared_ptr<IScreenScalingConfiguration> configuration) :
+	                         IScreenScalingConfiguration &configuration) :
 			originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 

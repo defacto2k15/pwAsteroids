@@ -23,14 +23,14 @@ class RocketMovingComponent : public Component {
 	std::shared_ptr<Box2dComponent> box2dComponent_;
 	std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
-	std::shared_ptr<ActorsConfiguration> actorsConfiguration_;
+	ActorsConfiguration &actorsConfiguration_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
 	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IKeyboardStateProvider>,
-			std::shared_ptr<PythonModule>, std::shared_ptr<ActorsConfiguration> > visibilityModule_;
+			std::shared_ptr<PythonModule>, ActorsConfiguration &> visibilityModule_;
 
 public:
 	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
-						   std::shared_ptr<PythonModule> pythonModule, std::shared_ptr<ActorsConfiguration> actorsConfiguration )
+						   std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration )
 			: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule),
 				actorsConfiguration_(actorsConfiguration){
 	}

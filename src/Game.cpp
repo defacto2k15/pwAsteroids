@@ -74,7 +74,7 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	rootServiceContainer_.OnStart();
 	outGameScreenModel_->OnStart();
 
-	asteroidGenerator_->generateAsteroid(Point(actorsConfiguration_->getInitialPosition().getX(),0), 0.0f, 1, Point(0.0,0.1), 0.00);
+	//asteroidGenerator_->generateAsteroid(Point(actorsConfiguration_.getInitialPosition().getX(),0), 270.0f, 1, Point(0.0,0.1), 0.00);
 
 	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
 }

@@ -14,9 +14,9 @@
 class ScreenBoundariesTeleportationComponent : public Component {
     std::shared_ptr<PositionComponent> positionComponent_;
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
-    std::shared_ptr<ActorsConfiguration> configuration_;
+    ActorsConfiguration &configuration_;
 public:
-    ScreenBoundariesTeleportationComponent( std::shared_ptr<ActorsConfiguration>  configuration ) : configuration_(configuration ){
+    ScreenBoundariesTeleportationComponent( ActorsConfiguration & configuration ) : configuration_(configuration ){
     }
 
     void OnStart( IActor &actor) override {
@@ -27,10 +27,10 @@ public:
     void OnUpdate() override{
         Point position  = positionComponent_->getPosition();
         if( position.getX() < 0  || position.getY( ) < 0 ||
-                position.getX() >   configuration_->getBox2dScreenDimensions().getX() ||
-                position.getY() >   configuration_->getBox2dScreenDimensions().getY( )){
-            position = Point( fmod(position.getX() + configuration_->getBox2dScreenDimensions().getX(),  configuration_->getBox2dScreenDimensions().getX()),
-                              fmod(position.getY() + configuration_->getBox2dScreenDimensions().getY(),  configuration_->getBox2dScreenDimensions().getY()));
+                position.getX() >   configuration_.getBox2dScreenDimensions().getX() ||
+                position.getY() >   configuration_.getBox2dScreenDimensions().getY( )){
+            position = Point( fmod(position.getX() + configuration_.getBox2dScreenDimensions().getX(),  configuration_.getBox2dScreenDimensions().getX()),
+                              fmod(position.getY() + configuration_.getBox2dScreenDimensions().getY(),  configuration_.getBox2dScreenDimensions().getY()));
             positionSettingComponent_->setPosition( position.getX(), position.getY());
         }
     }

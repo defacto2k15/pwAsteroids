@@ -39,7 +39,7 @@ private:
 	ImageScalesContainer imageScalesContainer_;
 	Box2dObjectsContainer box2dObjectsContainer_;
 
-	std::shared_ptr<ActorsConfiguration> actorsConfiguration_ = std::make_shared<ActorsConfiguration>();
+	ActorsConfiguration actorsConfiguration_;
 public:
 	Game();
 

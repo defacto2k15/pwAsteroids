@@ -27,7 +27,7 @@ class AsteroidsGenerator {
     ActorIdGenerator &idGenerator_;
     std::shared_ptr<PythonModule> pythonModule_;
     std::shared_ptr<DrawingSystem> drawingSystem_;
-    std::shared_ptr<ActorsConfiguration> actorsConfiguration_;
+    ActorsConfiguration &actorsConfiguration_;
     std::shared_ptr<Box2DService> boxService_;
     std::shared_ptr<AsteroidsCounter> asteroidsCounter_;
     Box2dObjectsContainer &container_;
@@ -38,7 +38,7 @@ public:
                        ActorIdGenerator &idGenerator_,
                        std::shared_ptr<PythonModule> &pythonModule_,
                        std::shared_ptr<DrawingSystem> &drawingSystem_,
-                       std::shared_ptr<ActorsConfiguration> &actorsConfiguration_,
+                       ActorsConfiguration &actorsConfiguration_,
                        std::shared_ptr<Box2DService> &boxService_,
                        std::shared_ptr<AsteroidsCounter> &asteroidsCounter_,
                        Box2dObjectsContainer &container_,

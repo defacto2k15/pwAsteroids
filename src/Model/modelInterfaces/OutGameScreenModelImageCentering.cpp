@@ -12,7 +12,7 @@ std::vector<ImagePrimitive>  OutGameScreenModelImageCentering::getImagePrimitive
 	auto originalPrimitives = originalOutGameScreenModel_->getImagePrimitives();
 	std::vector<ImagePrimitive> outPrimitives;
 	for( auto &oldPrimitive : originalPrimitives){
-		Point imageSize =oldPrimitive.getScale().scalePoint( configuration_->getBox2dScreenDimensions());
+		Point imageSize =oldPrimitive.getScale().scalePoint( configuration_.getBox2dScreenDimensions());
 		Point newPos(
 				oldPrimitive.getPosition().getX() + (0.5f)*imageSize.getX() * myMath::sinDeg( oldPrimitive.getRotation() ),
 				oldPrimitive.getPosition().getY() - (0.5)*imageSize.getX() * myMath::cosDeg(oldPrimitive.getRotation())

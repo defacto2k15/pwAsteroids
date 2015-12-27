@@ -7,7 +7,7 @@
 
 
 Box2dComponent::Box2dComponent(std::shared_ptr<Box2DService> box2dService,
-							   std::shared_ptr<ActorsConfiguration> configurableValues,
+							   ActorsConfiguration &configurableValues,
 							   std::shared_ptr<Box2dObject> rocketBox2dObject)
 		: box2dService_(box2dService), configurableValues_(configurableValues), box2dObject_(rocketBox2dObject) {
 }
@@ -16,11 +16,11 @@ void  Box2dComponent::OnStart(IActor &actor) {
 	positionComponent_ = actor.getOnlyComponent<PositionComponent>();
 	box2dService_->addObject(box2dObject_);
 
-	positionComponent_->setPosition(configurableValues_->getInitialPosition());
-	positionComponent_->setRotation(configurableValues_->getInitialRotation());
+	positionComponent_->setPosition(configurableValues_.getInitialPosition());
+	positionComponent_->setRotation(configurableValues_.getInitialRotation());
 
-	b2Vec2 position( configurableValues_->getInitialPosition().getX(), configurableValues_->getInitialPosition().getY() );
-	box2dObject_->getBody()->SetTransform(position, DegreesCalculations::degreesToRadians(configurableValues_->getInitialRotation() ));
+	b2Vec2 position( configurableValues_.getInitialPosition().getX(), configurableValues_.getInitialPosition().getY() );
+	box2dObject_->getBody()->SetTransform(position, DegreesCalculations::degreesToRadians(configurableValues_.getInitialRotation() ));
 
 }
 
