@@ -8,11 +8,11 @@
 
 #include "Point.h"
 
-class Rectangle {
+class Rect {
     Point leftTopPoint_;
     Point dimensions_;
 public:
-    Rectangle(Point leftTopPoint, Point dimensions );
+    Rect(Point leftTopPoint, Point dimensions );
 
     bool isPointInRectangle(Point point );
 };

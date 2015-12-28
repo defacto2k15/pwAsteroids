@@ -2,12 +2,12 @@
 // Created by defacto on 2015.12.27..
 //
 
-#include "Rectangle.h"
+#include "Rect.h"
 
-Rectangle::Rectangle(Point leftTopPoint, Point dimensions ) : leftTopPoint_(leftTopPoint), dimensions_(dimensions) {
+Rect::Rect(Point leftTopPoint, Point dimensions ) : leftTopPoint_(leftTopPoint), dimensions_(dimensions) {
 }
 
-bool Rectangle::isPointInRectangle(Point point ) {
+bool Rect::isPointInRectangle(Point point ) {
     return (point.getX() >= leftTopPoint_.getX() ) && (point.getY() >= leftTopPoint_.getY() ) &&
            ( point.getX() <= leftTopPoint_.getX() + dimensions_.getX()) &&
            ( point.getY() <= leftTopPoint_.getY() + dimensions_.getY() );

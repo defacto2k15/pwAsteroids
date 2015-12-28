@@ -80,9 +80,9 @@ double ActorsConfiguration::GetAsteroidMaxRotationSpeed() {
 	return 0.08;
 }
 
-Rectangle ActorsConfiguration::getActorsDestroyRectangle() {
+Rect ActorsConfiguration::getActorsDestroyRectangle() {
 	Point destroyBoundaries(2,2);
-	return Rectangle( -destroyBoundaries, getBox2dScreenDimensions() + (destroyBoundaries*2));
+	return Rect(-destroyBoundaries, getBox2dScreenDimensions() + (destroyBoundaries * 2));
 }
 
 unsigned long ActorsConfiguration::getMinTimeBetweenShots() {

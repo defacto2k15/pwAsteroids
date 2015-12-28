@@ -8,7 +8,7 @@
 
 #include <Model/Actors/Rocket/IRocketConfigurableValues.h>
 #include <Model/Actors/RocketTail/IRocketTailConfigurableValues.h>
-#include <Model/PrimitiveTypes/Rectangle.h>
+#include <Model/PrimitiveTypes/Rect.h>
 #include "IScreenScallingConfiguration.h"
 #include "IImageCenteringConfiguration.h"
 
@@ -57,7 +57,7 @@ public:
 
 	double GetAsteroidMaxRotationSpeed();
 
-	Rectangle getActorsDestroyRectangle();
+	Rect getActorsDestroyRectangle();
 
 	unsigned long getMinTimeBetweenShots();
 
