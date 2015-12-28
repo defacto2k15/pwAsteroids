@@ -39,47 +39,31 @@ public:
 
 	virtual ActorId getBoundariesDuplicateActorIdOffset() const;
 
-	/* Asteroids generation */
-	unsigned int getAsteroidCreationPropabilityRatio() const{
-		return 2;
-	}
+	unsigned int getAsteroidCreationPropabilityRatio() const;
 
-	unsigned int GetMinTimeBetweenAsteroidsCreation() const{
-		return 4000;
-	}
+	unsigned int GetMinTimeBetweenAsteroidsCreation() const;
 
-	unsigned int GetMaxAsteroidsCount() const{
-		return 12;
-	}
+	unsigned int GetMaxAsteroidsCount() const;
 
-	Point GetAsteroidsGenerationBoundariesSize() const {
-		return Point(0.001, 0.001);
-	}
+	Point GetAsteroidsGenerationBoundariesSize() const;
 
-	double GetAsteroidMaxInitialImpulse(){
-		return 0.15;
-	}
+	double GetAsteroidMaxInitialImpulse();
 
-	double GetAsteroidMinInitialImpulse(){
-		return 0.05;
-	}
+	double GetAsteroidMinInitialImpulse();
 
-	double GetAsteroidMinSize(){
-		return 0.1;
-	}
+	double GetAsteroidMinSize();
 
-	double GetAsteroidMaxSize(){
-		return 0.4;
-	}
+	double GetAsteroidMaxSize();
 
-	double GetAsteroidMaxRotationSpeed(){
-		return 0.08;
-	}
+	double GetAsteroidMaxRotationSpeed();
 
-	Rectangle getActorsDestroyRectangle(){
-		Point destroyBoundaries(2,2);
-		return Rectangle( -destroyBoundaries, getBox2dScreenDimensions() + (destroyBoundaries*2));
-	}
+	Rectangle getActorsDestroyRectangle();
+
+	unsigned long getMinTimeBetweenShots();
+
+	double getDistanceBetweenRocketAndProjectile();
+
+	double getProjectileSpeed();
 
 };
 

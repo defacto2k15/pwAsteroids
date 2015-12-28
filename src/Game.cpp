@@ -19,6 +19,8 @@
 #include <Model/components/ScreenBoundariesTeleportationComponent.h>
 #include <Model/box2d/Box2dObjectsContainer.h>
 #include <Model/Actors/Asteroid/RandomAsteroidsGenerator.h>
+#include <Model/Actors/Projectile/ProjectilesGenerator.h>
+#include <Model/Actors/Rocket/RocketShootingComponent.h>
 
 
 class MockClass;
@@ -36,10 +38,14 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	rootServiceContainer_.addService(gameTimeProvider);
 	asteroidGenerator_ = std::make_shared<AsteroidsGenerator>(actorsContainer, idGenerator,
 		pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
-		asteroidsCounter_, box2dObjectsContainer_, imageScalesContainer_);
-//	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-//			asteroidGenerator_,  asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
-//	));
+		 box2dObjectsContainer_, imageScalesContainer_, asteroidsCounter_);
+	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
+			asteroidGenerator_, asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
+	));
+
+	projectilesGenerator_ = std::make_shared< ProjectilesGenerator>(actorsContainer, idGenerator,
+			pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
+			box2dObjectsContainer_, imageScalesContainer_);
 
 
 	rootServiceContainer_.addService(boxService_);
@@ -55,6 +61,7 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket,  pythonModule_));
 	rocket->addComponent( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
 	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(actorsConfiguration_));
+	rocket->addComponent( std::make_shared<RocketShootingComponent>(actorsConfiguration_, projectilesGenerator_, keyboardManager_, gameTimeProvider));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
@@ -75,6 +82,8 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	outGameScreenModel_->OnStart();
 
 	//asteroidGenerator_->generateAsteroid(Point(actorsConfiguration_.getInitialPosition().getX(),0), 270.0f, 1, Point(0.0,0.1), 0.00);
+	asteroidGenerator_->generateAsteroid(Point(1, 1), 0.0f, 1, Point(0.2,0.0), 2.00);
+	asteroidGenerator_->generateAsteroid(Point(6, 1), 45.0f, 1, Point(-0.2,0.0), 0.00);
 
 	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
 }

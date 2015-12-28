@@ -35,6 +35,12 @@ public:
 		return *this;
 	}
 
+	Point &operator+=( Point other){
+		x_ += other.x_;
+		y_ += other.y_;
+		return  *this;
+	}
+
 	void normalize();
 };
 

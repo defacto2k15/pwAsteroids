@@ -51,6 +51,10 @@ void ViewManager::start()
 			if (key[KEY_RIGHT]) {
 				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1RightKey);
 			}
+
+			if( key[KEY_DOWN]) {
+				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AttackKey);
+			}
 			//if(speed < 360) speed += 1;
 			//if (!key[KEY_UP] && !key[KEY_DOWN] && !key[KEY_LEFT] && !key[KEY_RIGHT]) speed = 20;
 			g.update();
@@ -61,6 +65,8 @@ void ViewManager::start()
 					const char *pathToImage;
 					if( primitive.getImageType() == ImagePrimitiveType::Asteroid){
 						pathToImage = "../res/asteroid.bmp";
+					} else if( primitive.getImageType() == ImagePrimitiveType::Projectile) {
+						pathToImage = "../res/proj.bmp";
 					} else {
 						pathToImage = "../res/aa.bmp";
 					}

@@ -11,7 +11,7 @@
 #include <Model/configuration/ActorsConfiguration.h>
 #include "Box2dObject.h"
 
-class Box2dObjectsContainer {
+class Box2dObjectsContainer { // TODO clean this class!
     std::vector<std::shared_ptr<b2PolygonShape>> polygonShapesVector_;
     ImageScalesContainer &imageScalesContainer_;
     ActorsConfiguration &actorsConfiguration_;
@@ -67,7 +67,29 @@ public:
 
         std::vector<b2FixtureDef> fixturesVec{fixtureDef};
         return std::make_shared<Box2dObject>(bodyDef, fixturesVec);
-}
+    }
+
+    std::shared_ptr<Box2dObject> getProjectileObject(){
+        ScaleToScreen asteroidImageScale = imageScalesContainer_.getProjectileImageScale();
+
+        auto asteroidShape = std::make_shared<b2PolygonShape>();
+        Point imageSizeInGameUnits = asteroidImageScale.scalePoint( actorsConfiguration_.getBox2dScreenDimensions()  );
+        asteroidShape->SetAsBox(imageSizeInGameUnits.getX()/2,imageSizeInGameUnits.getY()/2);
+
+        polygonShapesVector_.push_back(asteroidShape);
+
+        b2BodyDef bodyDef;
+        bodyDef.type = b2_dynamicBody;
+        bodyDef.position.Set(0,0 );
+        bodyDef.angle = 0;
+
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape =asteroidShape.get();
+        fixtureDef.density = 12;
+
+        std::vector<b2FixtureDef> fixturesVec{fixtureDef};
+        return std::make_shared<Box2dObject>(bodyDef, fixturesVec);
+    }
 };
 
 

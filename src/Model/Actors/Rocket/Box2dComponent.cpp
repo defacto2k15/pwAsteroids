@@ -76,3 +76,9 @@ void Box2dComponent::SetLineralVelocity(Point speedVector ) {
 void Box2dComponent::SetAngularVelocity(double velocity) {
 	box2dObject_->getBody()->SetAngularVelocity(velocity);
 }
+
+Point Box2dComponent::getLineralVelocity() {
+	Point returnValue( box2dObject_->getBody()->GetLinearVelocity().x,
+					   box2dObject_->getBody()->GetLinearVelocity().y);
+	return returnValue;
+}

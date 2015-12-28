@@ -53,8 +53,8 @@ private:
                                      configuration_.GetAsteroidsGenerationBoundariesSize().getY());
         double size = provider_.getRandomDouble(configuration_.GetAsteroidMinSize(), configuration_.GetAsteroidMaxSize());
         double rotationSpeed = provider_.getRandomDouble(0, configuration_.GetAsteroidMaxRotationSpeed());
-        asteroidsGenerator_->generateAsteroid(position, newRotation, size, accelerationVector, rotationSpeed  );
-       // std::cout << "Created in pos "<<position.toString() <<" accelvec  " << accelerationVector.toString() << std::endl;
+        // todo - size is not used for now!
+        asteroidsGenerator_->generateAsteroid(position, newRotation, 1, accelerationVector, rotationSpeed  );
     }
 
     Point  generateRandomPositionOnRectangularEdgeWithBoundaries(){

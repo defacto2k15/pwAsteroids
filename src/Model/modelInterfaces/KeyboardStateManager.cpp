@@ -6,9 +6,13 @@
 
 
 bool  KeyboardStateManager::wasClicked(Keys key) {
-	return (pressedKeysMap_.find(key) != pressedKeysMap_.end()) &&( pressedKeysMap_[key] == true)
-	       && (previousPressedKeysMap_.find(key) != previousPressedKeysMap_.end())
-	       &&(previousPressedKeysMap_[key] == false );
+	bool returnedValue =  (pressedKeysMap_.find(key) != pressedKeysMap_.end()) &&( pressedKeysMap_[key] == true)
+	       && ( !(previousPressedKeysMap_.find(key) != previousPressedKeysMap_.end()) ||
+	      		 (previousPressedKeysMap_[key] == false ));
+	if( key == Keys::Player1AttackKey ){
+		int x = 22;
+	}
+	return returnedValue;
 }
 
 bool  KeyboardStateManager::isPressed(Keys key) {

@@ -50,6 +50,8 @@ public:
 	void SetLineralVelocity(Point speedVector );
 
 	void SetAngularVelocity(double velocity);
+
+	Point getLineralVelocity();
 private:
 	void setTransformation( double x, double y, double rotation );
 };

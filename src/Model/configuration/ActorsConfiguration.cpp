@@ -43,3 +43,56 @@ Point ActorsConfiguration::GetDuplicationBoundariesSize() const {
 ActorId ActorsConfiguration::getBoundariesDuplicateActorIdOffset() const {
 	return 10000;
 }
+
+unsigned int ActorsConfiguration::getAsteroidCreationPropabilityRatio() const {
+	return 2;
+}
+
+unsigned int ActorsConfiguration::GetMinTimeBetweenAsteroidsCreation() const {
+	return 4000;
+}
+
+unsigned int ActorsConfiguration::GetMaxAsteroidsCount() const {
+	return 12;
+}
+
+Point ActorsConfiguration::GetAsteroidsGenerationBoundariesSize() const {
+	return Point(0.001, 0.001);
+}
+
+double ActorsConfiguration::GetAsteroidMaxInitialImpulse() {
+	return 0.15;
+}
+
+double ActorsConfiguration::GetAsteroidMinInitialImpulse() {
+	return 0.05;
+}
+
+double ActorsConfiguration::GetAsteroidMinSize() {
+	return 0.1;
+}
+
+double ActorsConfiguration::GetAsteroidMaxSize() {
+	return 0.4;
+}
+
+double ActorsConfiguration::GetAsteroidMaxRotationSpeed() {
+	return 0.08;
+}
+
+Rectangle ActorsConfiguration::getActorsDestroyRectangle() {
+	Point destroyBoundaries(2,2);
+	return Rectangle( -destroyBoundaries, getBox2dScreenDimensions() + (destroyBoundaries*2));
+}
+
+unsigned long ActorsConfiguration::getMinTimeBetweenShots() {
+	return 200;
+}
+
+double ActorsConfiguration::getDistanceBetweenRocketAndProjectile() {
+	return 0.2f;
+}
+
+double ActorsConfiguration::getProjectileSpeed() {
+	return 1.8f;
+}

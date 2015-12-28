@@ -21,6 +21,7 @@
 #include <Model/Actors/Asteroid/AsteroidsGenerator.h>
 #include <Model/help/RandomNumbersProvider.h>
 #include <Model/ModelDrawing/ImageScalesContainer.h>
+#include <Model/Actors/Projectile/ProjectilesGenerator.h>
 
 
 class Game {
@@ -34,6 +35,7 @@ private:
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
 	ActorIdGenerator idGenerator;
 	std::shared_ptr<AsteroidsGenerator> asteroidGenerator_;
+	std::shared_ptr<ProjectilesGenerator> projectilesGenerator_;
 	std::shared_ptr<AsteroidsCounter> asteroidsCounter_ = std::make_shared<AsteroidsCounter>();
 	RandomNumbersProvider randomNumbersProvider_;
 	ImageScalesContainer imageScalesContainer_;
