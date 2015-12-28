@@ -40,12 +40,14 @@ public:
     }
 
     void registerClass(){
-        std::string name = typeid(T).name();
-        if( pythonClass_ == false){
-            pythonClass_ = IsTypeEmpty<T, TConstructorArgs ...>::createClass(name);
-           /* pythonClass_ = std::make_shared<class_<T, boost::shared_ptr<T>> >
-                    (name.c_str(), boost::python::init<TConstructorArgs ... >() );*/
-            pythonModule_->registerClass(*pythonClass_);
+        if (pythonModule_->isPythonEnabled_) {
+            std::string name = typeid(T).name();
+            if( pythonClass_ == false){
+                pythonClass_ = IsTypeEmpty<T, TConstructorArgs ...>::createClass(name);
+                /* pythonClass_ = std::make_shared<class_<T, boost::shared_ptr<T>> >
+                         (name.c_str(), boost::python::init<TConstructorArgs ... >() );*/
+                pythonModule_->registerClass(*pythonClass_);
+            }
         }
     }
 
@@ -89,36 +91,40 @@ void PythonClassVisibilityModule<T,TConstructorArgs ...>::registerMethodInternal
 template< typename T, typename ... TConstructorArgs >
 template< typename TReturn, typename ... TArgs >
 void PythonClassVisibilityModule<T,TConstructorArgs ...>::registerMethod(std::string methodName,  TReturn( T::* function)( TArgs...) ){
-    if( contains(registeredMethods_, methodName) == false ) {
-      //  registeredMethods_.push_back(methodName); will be added in PythonActorComponent
-        std::function<TReturn(T & , TArgs ...)> functionToPython
-                = [function](T &object, TArgs ... args) {
-                    return ((&object)->*function)(args ...);
-                };
-        registerMethodInternal(methodName, functionToPython);
+    if (pythonModule_->isPythonEnabled_) {
+        if( contains(registeredMethods_, methodName) == false ) {
+            //  registeredMethods_.push_back(methodName); will be added in PythonActorComponent
+            std::function<TReturn(T & , TArgs ...)> functionToPython
+                    = [function](T &object, TArgs ... args) {
+                        return ((&object)->*function)(args ...);
+                    };
+            registerMethodInternal(methodName, functionToPython);
+        }
     }
 };
 
 template< typename T, typename ... TConstructorArgs >
 template<typename TComponent, typename TReturn, typename ... TArgs >
 void PythonClassVisibilityModule<T,TConstructorArgs ...>::registerActorMethod( std::string methodName, TReturn( TComponent::* function)( TArgs...) ){
-    if( contains(registeredMethods_, methodName) == false ) {
-        registeredMethods_.push_back(methodName);
-        std::function<TReturn( PythonActorComponent &, TArgs ...)> functionToPython
-                = [function]( PythonActorComponent &comp, TArgs ... args) {
-                    auto component = comp.getActor()->getOnlyComponent<TComponent>();
-                    return ((component.get())->*function)(args ...);
-                };
+    if (pythonModule_->isPythonEnabled_) {
+        if( contains(registeredMethods_, methodName) == false ) {
+            registeredMethods_.push_back(methodName);
+            std::function<TReturn( PythonActorComponent &, TArgs ...)> functionToPython
+                    = [function]( PythonActorComponent &comp, TArgs ... args) {
+                        auto component = comp.getActor()->getOnlyComponent<TComponent>();
+                        return ((component.get())->*function)(args ...);
+                    };
 
-        auto boostFunction = boost::python::make_function(
-                functionToPython,
-                boost::python::default_call_policies(),
-                boost::mpl::vector<TReturn, PythonActorComponent &, TArgs ...>());
+            auto boostFunction = boost::python::make_function(
+                    functionToPython,
+                    boost::python::default_call_policies(),
+                    boost::mpl::vector<TReturn, PythonActorComponent &, TArgs ...>());
 
-        //pythonModule_->registerActorMethod(methodName, boostFunction);
-        PythonClassVisibilityModule< PythonActorComponent, std::shared_ptr<PythonModule> > actorVisibilityModule(pythonModule_);
-        actorVisibilityModule.registerClass();
-        actorVisibilityModule.registerMethodInternal(methodName, functionToPython);
+            //pythonModule_->registerActorMethod(methodName, boostFunction);
+            PythonClassVisibilityModule< PythonActorComponent, std::shared_ptr<PythonModule> > actorVisibilityModule(pythonModule_);
+            actorVisibilityModule.registerClass();
+            actorVisibilityModule.registerMethodInternal(methodName, functionToPython);
+        }
     }
 };
 

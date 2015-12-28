@@ -71,7 +71,10 @@ class PythonModule : public IOutPythonModule, public IInPythonModule, public ISe
 	std::map<std::string, std::vector<std::string> > classesAndMethodsMap_;
 
 	bool onceUpdated_ = false;
+
 public:
+	bool isPythonEnabled_ = false;
+
 	PythonModule() {
 		// empty ctor to shut up compiler
 	}
@@ -88,26 +91,34 @@ public:
 
 	template< typename T>
 	void addVectorOfClass(std::string name){
-		class_< std::vector<T>> (name.c_str()).def(boost::python::vector_indexing_suite< std::vector<T>>());
+		if (isPythonEnabled_) {
+			class_< std::vector<T>> (name.c_str()).def(boost::python::vector_indexing_suite< std::vector<T>>());
+		}
 	}
 
 	template< typename TRet, typename ... TArg>
 	void addRootFunction( std::string functionName, std::function<TRet(TArg ...)> functionToCall ){
-		auto boostFunction = boost::python::make_function(
-			functionToCall,
-			boost::python::default_call_policies(),
-			boost::mpl::vector<TRet, TArg ...>());
-		main_namespace[functionName.c_str()] = boostFunction;
+		if (isPythonEnabled_) {
+			auto boostFunction = boost::python::make_function(
+					functionToCall,
+					boost::python::default_call_policies(),
+					boost::mpl::vector<TRet, TArg ...>());
+			main_namespace[functionName.c_str()] = boostFunction;
+		}
 	}
 
 	template< typename T>
 	void registerInMainNamespace(const char *name, T &elem){
-		main_namespace[name] = elem;
+		if (isPythonEnabled_) {
+			main_namespace[name] = elem;
+		}
 	}
 
 	template< typename T>
 	void registerClass( boost::python::class_<T, boost::shared_ptr<T> > &cls){
-		main_namespace[typeid(T).name()] = cls;
+		if (isPythonEnabled_) {
+			main_namespace[typeid(T).name()] = cls;
+		}
 	}
 
 

@@ -24,22 +24,26 @@ std::string PythonModule::getOutput() {
 }
 
 void PythonModule::OnStart() {
-	try{
-		Py_Initialize();
-		main_module = import("__main__");
-		main_namespace = main_module.attr("__dict__");
-		main_namespace["PythonStdIoRedirect"] = class_<PythonStdIoRedirect>("PythonStdIoRedirect", init<>())
-				.def("write", &PythonStdIoRedirect::Write);
-		import("sys").attr("stderr") = redirector;
-		import("sys").attr("stdout") = redirector;
+	if (isPythonEnabled_) {
+		try{
+			Py_Initialize();
+			main_module = import("__main__");
+			main_namespace = main_module.attr("__dict__");
+			main_namespace["PythonStdIoRedirect"] = class_<PythonStdIoRedirect>("PythonStdIoRedirect", init<>())
+					.def("write", &PythonStdIoRedirect::Write);
+			import("sys").attr("stderr") = redirector;
+			import("sys").attr("stdout") = redirector;
 
-	} catch( boost::python::error_already_set ){
-		PyErr_Print();
+		} catch( boost::python::error_already_set ){
+			PyErr_Print();
+		}
 	}
 }
 
 void PythonModule::OnStop() {
-	Py_Finalize();
+	if (isPythonEnabled_) {
+		Py_Finalize();
+	}
 }
 
 void PythonModule::OnUpdate() {
