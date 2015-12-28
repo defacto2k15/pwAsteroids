@@ -12,14 +12,9 @@ class Rectangle {
     Point leftTopPoint_;
     Point dimensions_;
 public:
-    Rectangle( Point leftTopPoint, Point dimensions ) : leftTopPoint_(leftTopPoint), dimensions_(dimensions){
-    }
+    Rectangle(Point leftTopPoint, Point dimensions );
 
-    bool isPointInRectangle( Point point ){
-        return (point.getX() >= leftTopPoint_.getX() ) && (point.getY() >= leftTopPoint_.getY() ) &&
-                ( point.getX() <= leftTopPoint_.getX() + dimensions_.getX()) &&
-                ( point.getY() <= leftTopPoint_.getY() + dimensions_.getY() );
-    }
+    bool isPointInRectangle(Point point );
 };
 
 

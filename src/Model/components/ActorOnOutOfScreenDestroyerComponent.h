@@ -19,21 +19,11 @@ class ActorOnOutOfScreenDestroyerComponent : public Component {
 public:
 
     ActorOnOutOfScreenDestroyerComponent(ActorsConfiguration &configuration_,
-                                         std::shared_ptr<ActorsContainer> &actorsContainer_) : configuration_(
-            configuration_), actorsContainer_(actorsContainer_) {
-    }
+                                         std::shared_ptr<ActorsContainer> &actorsContainer_);
 
-    void OnStart( IActor &actor )override {
-        actorId_ = actor.getActorId();
-        positionComponent_ = actor.getOnlyComponent<PositionComponent>();
-    }
+    void OnStart(IActor &actor );
 
-    void OnUpdate() override {
-        Point position = positionComponent_->getPosition();
-        if( configuration_.getActorsDestroyRectangle().isPointInRectangle(position) == false){
-            actorsContainer_->removeActorById(actorId_);
-        }
-    }
+    void OnUpdate();
 };
 
 

@@ -16,24 +16,11 @@ class ScreenBoundariesTeleportationComponent : public Component {
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
     ActorsConfiguration &configuration_;
 public:
-    ScreenBoundariesTeleportationComponent( ActorsConfiguration & configuration ) : configuration_(configuration ){
-    }
+    ScreenBoundariesTeleportationComponent(ActorsConfiguration & configuration );
 
-    void OnStart( IActor &actor) override {
-        positionComponent_ = actor.getOnlyComponent<PositionComponent>();
-        positionSettingComponent_ = actor.getOnlyComponent<IPositionSettingComponent>();
-    }
+    void OnStart(IActor &actor);
 
-    void OnUpdate() override{
-        Point position  = positionComponent_->getPosition();
-        if( position.getX() < 0  || position.getY( ) < 0 ||
-                position.getX() >   configuration_.getBox2dScreenDimensions().getX() ||
-                position.getY() >   configuration_.getBox2dScreenDimensions().getY( )){
-            position = Point( fmod(position.getX() + configuration_.getBox2dScreenDimensions().getX(),  configuration_.getBox2dScreenDimensions().getX()),
-                              fmod(position.getY() + configuration_.getBox2dScreenDimensions().getY(),  configuration_.getBox2dScreenDimensions().getY()));
-            positionSettingComponent_->setPosition( position.getX(), position.getY());
-        }
-    }
+    void OnUpdate();
 };
 
 

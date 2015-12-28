@@ -8,6 +8,7 @@
 
 #include <Model/python/PythonModule.h>
 #include <Model/python/PythonClassVisibilityModule.h>
+#include <Model/Actors/Rocket/Box2dComponent.h>
 #include "Model/components/IPositionSettingComponent.h"
 #include "IBox2dComponent.h"
 
@@ -16,22 +17,13 @@ class Box2dPositionSettingComponent : public IPositionSettingComponent{
     PythonClassVisibilityModule<Box2dPositionSettingComponent, std::shared_ptr<PythonModule>> visibilityModule_;
     std::shared_ptr<Box2dComponent> box2dComponent_;
 public:
-    Box2dPositionSettingComponent( std::shared_ptr<PythonModule> python ) : visibilityModule_(python){
-    }
+    Box2dPositionSettingComponent(std::shared_ptr<PythonModule> python );
 
-    virtual void OnStart(IActor &actor){
-        box2dComponent_ = actor.getOnlyComponent<Box2dComponent>();
-        visibilityModule_.registerActorMethod("setPosition", &Box2dPositionSettingComponent::setPosition);
-        visibilityModule_.registerActorMethod("setRotation", &Box2dPositionSettingComponent::setRotation);
-    }
+    virtual void OnStart(IActor &actor);
 
-    virtual void setPosition(double x, double y) override{
-        box2dComponent_->setPosition(x,y);
-    }
+    virtual void setPosition(double x, double y);
 
-    virtual void setRotation(double rotation) override{
-        box2dComponent_->setRotation(rotation);
-    }
+    virtual void setRotation(double rotation);
 };
 
 

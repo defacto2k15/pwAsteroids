@@ -10,26 +10,15 @@
 class RandomNumbersProvider {
 
 public:
-    unsigned int getRandom(unsigned int min, unsigned int max){
-        return min + ( rand() % (max-min));
-    }
+    unsigned int getRandom(unsigned int min, unsigned int max);
 
-    unsigned int getRandom( unsigned int max){
-        return getRandom(0, max);
-    }
+    unsigned int getRandom(unsigned int max);
 
-    double getRandomDouble( double min, double max ){
-        double f = (double)rand() / RAND_MAX;
-        return min + f*( max - min);
-    }
+    double getRandomDouble(double min, double max );
 
-    bool getRandomBool( unsigned int propabilityRatio ){
-        return getRandom(0, propabilityRatio) == 0;
-    }
+    bool getRandomBool(unsigned int propabilityRatio );
 
-    bool getRandomBool(){
-        return getRandomBool(1);
-    }
+    bool getRandomBool();
 };
 
 
