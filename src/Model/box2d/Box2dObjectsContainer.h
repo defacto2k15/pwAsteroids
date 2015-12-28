@@ -15,10 +15,6 @@ class Box2dObjectsContainer { // TODO clean this class!
     std::vector<std::shared_ptr<b2PolygonShape>> polygonShapesVector_;
     ImageScalesContainer &imageScalesContainer_;
     ActorsConfiguration &actorsConfiguration_;
-    std::vector< std::shared_ptr<std::array<b2Vec2, 4>>> collisionBoxArrays_;
-
-    double x = 0.25;
-    double y = 0.3;
 
 public:
     Box2dObjectsContainer( ImageScalesContainer &imageScalesContainer, ActorsConfiguration &actorsConfiguration ) :
@@ -26,57 +22,26 @@ public:
     }
 
     std::shared_ptr<Box2dObject> getRocketObject(){
-        ScaleToScreen rocketImageScale = imageScalesContainer_.getRocketImageScale();
-
-        auto rocketShape = std::make_shared<b2PolygonShape>();
-        Point imageSizeInGameUnits = rocketImageScale.scalePoint( actorsConfiguration_.getBox2dScreenDimensions()  );
-        rocketShape->SetAsBox(imageSizeInGameUnits.getX()/2,imageSizeInGameUnits.getY()/2);
-        polygonShapesVector_.push_back(rocketShape);
-
-      	b2BodyDef bodyDef;
-        bodyDef.type = b2_dynamicBody;
-        bodyDef.position.Set(0,0 );
-        bodyDef.angle = 0;
-
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape = rocketShape.get();
-        fixtureDef.density = 14;
-
-        std::vector<b2FixtureDef> fixturesVec{fixtureDef};
-        return std::make_shared<Box2dObject>(bodyDef, fixturesVec);
+        return createObjectWithBoxShape(imageScalesContainer_.getRocketImageScale(), 120);
     }
 
 
     std::shared_ptr<Box2dObject> getAsteriodObject(double size){
-        ScaleToScreen asteroidImageScale = imageScalesContainer_.getBasicAsteroidImageScale();
-
-        auto asteroidShape = std::make_shared<b2PolygonShape>();
-        Point imageSizeInGameUnits = asteroidImageScale.scalePoint( actorsConfiguration_.getBox2dScreenDimensions()  );
-        asteroidShape->SetAsBox(imageSizeInGameUnits.getX()/2,imageSizeInGameUnits.getY()/2);
-
-        polygonShapesVector_.push_back(asteroidShape);
-
-        b2BodyDef bodyDef;
-        bodyDef.type = b2_dynamicBody;
-        bodyDef.position.Set(0,0 );
-        bodyDef.angle = 0;
-
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape =asteroidShape.get();
-        fixtureDef.density = 1;
-
-        std::vector<b2FixtureDef> fixturesVec{fixtureDef};
-        return std::make_shared<Box2dObject>(bodyDef, fixturesVec);
+        return createObjectWithBoxShape(imageScalesContainer_.getBasicAsteroidImageScale(), 120);
     }
 
     std::shared_ptr<Box2dObject> getProjectileObject(){
-        ScaleToScreen asteroidImageScale = imageScalesContainer_.getProjectileImageScale();
+        return createObjectWithBoxShape(imageScalesContainer_.getProjectileImageScale(), 120);
+    }
 
-        auto asteroidShape = std::make_shared<b2PolygonShape>();
-        Point imageSizeInGameUnits = asteroidImageScale.scalePoint( actorsConfiguration_.getBox2dScreenDimensions()  );
-        asteroidShape->SetAsBox(imageSizeInGameUnits.getX()/2,imageSizeInGameUnits.getY()/2);
 
-        polygonShapesVector_.push_back(asteroidShape);
+private:
+    std::shared_ptr<Box2dObject> createObjectWithBoxShape(ScaleToScreen imageScale, double densityPerSquareUnit ){
+        auto shape = std::make_shared<b2PolygonShape>();
+        Point imageSizeInGameUnits = imageScale.scalePoint( actorsConfiguration_.getBox2dScreenDimensions()  );
+        shape->SetAsBox(imageSizeInGameUnits.getX()/2,imageSizeInGameUnits.getY()/2);
+
+        polygonShapesVector_.push_back(shape);
 
         b2BodyDef bodyDef;
         bodyDef.type = b2_dynamicBody;
@@ -84,8 +49,8 @@ public:
         bodyDef.angle = 0;
 
         b2FixtureDef fixtureDef;
-        fixtureDef.shape =asteroidShape.get();
-        fixtureDef.density = 12;
+        fixtureDef.shape =shape.get();
+        fixtureDef.density = imageSizeInGameUnits.getX()*imageSizeInGameUnits.getY()*densityPerSquareUnit;
 
         std::vector<b2FixtureDef> fixturesVec{fixtureDef};
         return std::make_shared<Box2dObject>(bodyDef, fixturesVec);
