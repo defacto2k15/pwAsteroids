@@ -13,19 +13,22 @@ int ViewManager::numberOfScenes()
 
 void ViewManager::drawAllScenesOnDisplay()
 {
+	display->clearDisplay(40, 120, 120);
 	for (auto scene : scenes)
 	{
 		if(scene->isActive()) display->drawSceneOnDisplay(scene);
 	}
+	display->flipDisplay();
 }
 
 void ViewManager::start()
 {
 	std::map<ActorId, DrawableObject*> drawableObjects;
-	//timerThread = new boost::thread(boost::bind(&ViewManager::startTimerEvent, this));
-	Scene *scene = createNewScene();
+	Scene* scene = createNewScene();
+	Scene* texts = createNewScene();
 	//DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
-	//DrawableObject* tail = scene->addDrawableObject("../res/aa.bmp", 100, 300);	// example bitmap to be moved
+	int spaceClicks = 0;
+	DrawableObject* spaceClickText = texts->addDrawableObject(true, "Space clicks: 0 (few more..)", 50, 50);	// true means 'it's a text'
 	bool key[4] = { false, false, false, false };
 	//int speed = 20;
 	Game g;
@@ -70,7 +73,8 @@ void ViewManager::start()
 					} else {
 						pathToImage = "../res/aa.bmp";
 					}
-					drawableObjects[primitive.getActorId()] = scene->addDrawableObject(pathToImage, 512, 300);
+					drawableObjects[primitive.getActorId()] = scene->addDrawableObject(false, pathToImage, 512, 300);
+					drawableObjects[primitive.getActorId()]->setZoom((float)((1 + rand() % 200) / 50.0f));	// sets scale only for Bitmaps, not models!
 				}
 				drawableObjects[primitive.getActorId()]->setPozX( primitive.getPosition().getX());
 				drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
@@ -102,6 +106,14 @@ void ViewManager::start()
 			case ALLEGRO_KEY_RIGHT:
 				key[KEY_RIGHT] = true;
 				break;
+			case ALLEGRO_KEY_SPACE:
+				++spaceClicks;
+				std::string str = "Space clicks: ";
+				spaceClickText->setText(str + boost::lexical_cast<std::string>(spaceClicks));
+				if(spaceClicks >= 5) DrawableObject* yaayText = texts->addDrawableObject(true, "Yaay!!!",
+					  rand()%al_get_display_width(display->getDisplay()), rand() % al_get_display_height(display->getDisplay()));
+				else spaceClickText->setText(spaceClickText->getText() + " (few more..)");
+				break;
 			}
 		}
 		else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
@@ -126,7 +138,7 @@ void ViewManager::start()
 	}
 }
 
-Scene * ViewManager::createNewScene()
+Scene* ViewManager::createNewScene()
 {
 	Scene* newScene = new Scene();
 	scenes.push_back(newScene);

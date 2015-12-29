@@ -6,6 +6,7 @@
 #include "Scene.h"
 #include "Display.h"
 #include <boost/thread/thread.hpp>
+#include <string>
 
 const float FPS = 60;
 

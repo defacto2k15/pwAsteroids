@@ -7,7 +7,7 @@
 
 class Scene {
 public:
-	DrawableObject* addDrawableObject(const char*, int = 10, int = 10, float = 0);
+	DrawableObject* addDrawableObject(bool, const char*, int = 10, int = 10, float = 0);
 	std::vector<DrawableObject*> getSceneObjects();
 	void changeActiveState();
 	bool isActive() { return active; }
