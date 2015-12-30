@@ -6,6 +6,10 @@ enum MYKEYS {
 	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
 };
 
+enum MYMOUSEKEYS {
+	LMB = 1, RMB, MMB
+};
+
 int ViewManager::numberOfScenes()
 {
 	return scenes.size();
@@ -23,12 +27,16 @@ void ViewManager::drawAllScenesOnDisplay()
 
 void ViewManager::start()
 {
+	ALLEGRO_MOUSE_STATE msestate;
 	std::map<ActorId, DrawableObject*> drawableObjects;
 	Scene* scene = createNewScene();
 	Scene* texts = createNewScene();
 	//DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
 	int spaceClicks = 0;
-	DrawableObject* spaceClickText = texts->addDrawableObject(true, "Space clicks: 0 (few more..)", 50, 50);	// true means 'it's a text'
+	DrawableObject* spaceClickText = texts->addDrawableObject(true, "Space clicks: 0 (few more..)", 30, 20);	// true means 'it's a text'
+	DrawableObject* mouseInfo = texts->addDrawableObject(true, "[Mouse info - let's click!]", 30, 80);	// true means 'it's a text'
+	DrawableObject* numberOfObjects = texts->addDrawableObject(true,
+												("Number of objects: " + boost::lexical_cast<std::string>(scene->getNumberOfObjects())).c_str(), 30, 50);
 	bool key[4] = { false, false, false, false };
 	//int speed = 20;
 	Game g;
@@ -58,8 +66,9 @@ void ViewManager::start()
 			if( key[KEY_DOWN]) {
 				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AttackKey);
 			}
-			//if(speed < 360) speed += 1;
-			//if (!key[KEY_UP] && !key[KEY_DOWN] && !key[KEY_LEFT] && !key[KEY_RIGHT]) speed = 20;
+			
+			numberOfObjects->setText("Number of objects: " + boost::lexical_cast<std::string>(scene->getNumberOfObjects()));
+
 			g.update();
 
 			auto primitivesVec = g.getOutGameScreenModel()->getImagePrimitives();
@@ -82,7 +91,6 @@ void ViewManager::start()
 
 				//std::cout << "pos: " << primitive.getPosition().toString() << " rot " << primitive.getRotation() << std::endl;
 			}
-
 
 			drawAllScenesOnDisplay();	// refresh the screen
 		}
@@ -108,11 +116,10 @@ void ViewManager::start()
 				break;
 			case ALLEGRO_KEY_SPACE:
 				++spaceClicks;
-				std::string str = "Space clicks: ";
-				spaceClickText->setText(str + boost::lexical_cast<std::string>(spaceClicks));
+				spaceClickText->setText("Space clicks: " + boost::lexical_cast<std::string>(spaceClicks));
 				if(spaceClicks >= 5) DrawableObject* yaayText = texts->addDrawableObject(true, "Yaay!!!",
 					  rand()%al_get_display_width(display->getDisplay()), rand() % al_get_display_height(display->getDisplay()));
-				else spaceClickText->setText(spaceClickText->getText() + " (few more..)");
+				else spaceClickText->setText(spaceClickText->getText() + " (few more...)");
 				break;
 			}
 		}
@@ -135,6 +142,22 @@ void ViewManager::start()
 				break;
 			}
 		}
+		else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+			switch (ev.mouse.button) {
+			case LMB:
+				mouseInfo->setText("[LMB clicked");
+				break;
+			case RMB:
+				mouseInfo->setText("[RMB clicked");
+				break;
+			case MMB:
+				mouseInfo->setText("[MMB clicked");
+				break;
+			}
+			al_get_mouse_state(&msestate);
+			mouseInfo->setText(mouseInfo->getText() + ", x=" + boost::lexical_cast<std::string>(al_get_mouse_state_axis(&msestate, 0)) +
+								  ", y=" + boost::lexical_cast<std::string>(al_get_mouse_state_axis(&msestate, 1)) + "]");
+		}
 	}
 }
 
@@ -153,6 +176,7 @@ ViewManager::ViewManager(int screenWidth, int screenHeight)
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));	// Timer events (refresh)
 	al_register_event_source(event_queue, al_get_display_event_source(display->getDisplay()));	// Display events (like "close" with 'X')
 	al_register_event_source(event_queue, al_get_keyboard_event_source());	// Keyboard events
+	al_register_event_source(event_queue, al_get_mouse_event_source());		// Mouse events
 	al_start_timer(timer);
 }
 

@@ -39,12 +39,16 @@ Display::Display(int width, int height)
 		throw std::runtime_error("Failed to install keyboard!");
 	}
 
+	if (!al_install_mouse()) {
+		throw std::runtime_error("Failed to install mouse!");
+	}
+
 	al_init_font_addon();
 	al_init_ttf_addon();
 	if (!(font = al_load_ttf_font("../res/arial.ttf", 20, 0))) {
 		throw std::runtime_error("Failed to load font!");
 	}
-
+	
 	al_init_image_addon();
 
 	al_clear_to_color(al_map_rgb(255, 120, 0));
