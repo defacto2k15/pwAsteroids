@@ -5,12 +5,13 @@
 #include "ActorsContainer.h"
 
 void ActorsContainer::addActor(std::shared_ptr<IActor> newActor) {
+	assert(!weHaveStarted);
 	actorsVec_.push_back(newActor);
 }
 
 void ActorsContainer::addActorDuringRuntime(std::shared_ptr<IActor> newActor) {
 	newActor->OnStart();
-	addActor(newActor);
+	actorsVec_.push_back(newActor);
 }
 
 void ActorsContainer::removeActor(std::shared_ptr<IActor> newActor) {

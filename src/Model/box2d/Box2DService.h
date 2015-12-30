@@ -11,13 +11,15 @@
 #include <Model/Actors/Actor.h>
 #include <Model/PrimitiveTypes/Point.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
+#include <Model/collisions/MyContactListener.h>
 #include "Box2dObject.h"
 
 class Box2DService : public IService {
 	b2World world_;
 public:
 
-	Box2DService() : world_(b2Vec2(0.0f, 0.0f)) {
+	Box2DService( MyContactListener *contactListener) : world_(b2Vec2(0.0f, 0.0f)) {
+		world_.SetContactListener( contactListener );
 	}
 
 	void addObject( std::shared_ptr<Box2dObject> object );

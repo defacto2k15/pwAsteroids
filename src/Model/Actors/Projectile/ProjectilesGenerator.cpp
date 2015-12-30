@@ -3,6 +3,7 @@
 //
 
 #include "ProjectilesGenerator.h"
+#include "ProjectileCollisionComponent.h"
 
 ProjectilesGenerator::ProjectilesGenerator(std::shared_ptr<ActorsContainer> actorsContainer,
                                            ActorIdGenerator &idGenerator,
@@ -11,8 +12,10 @@ ProjectilesGenerator::ProjectilesGenerator(std::shared_ptr<ActorsContainer> acto
                                            ActorsConfiguration &actorsConfiguration,
                                            std::shared_ptr<Box2DService> boxService,
                                            Box2dObjectsContainer &container,
-                                           ImageScalesContainer &imageScalesContainer) : ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
-                                                                                                         actorsConfiguration, boxService, container, imageScalesContainer) {
+                                           ImageScalesContainer &imageScalesContainer,
+                                           ContactComponentsContainer &contactComponentsContainer) :
+        ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
+                        actorsConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer) {
 }
 
 void ProjectilesGenerator::generateProjectile(Point position, Rotation rotation, Point speedVector, double rotationSpeed) {
@@ -24,6 +27,7 @@ void ProjectilesGenerator::generateProjectile(Point position, Rotation rotation,
         componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Asteroid, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<ActorOnOutOfScreenDestroyerComponent>(actorsConfiguration_, actorsContainer_));
+        componentsForAsteroid.push_back( std::make_shared<ProjectileCollisionComponent>(contactComponentsContainer_, actorsContainer_));
 
         generateActor(componentsForAsteroid, position, rotation, speedVector, rotationSpeed);
 }

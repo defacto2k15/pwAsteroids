@@ -82,3 +82,16 @@ Point Box2dComponent::getLineralVelocity() {
 					   box2dObject_->getBody()->GetLinearVelocity().y);
 	return returnValue;
 }
+
+b2Body *Box2dComponent::getBody() {
+	assert( box2dObject_ );
+	return box2dObject_->getBody();
+}
+
+double Box2dComponent::getMass() {
+	return box2dObject_->getMass();
+}
+
+Point Box2dComponent::getBoxSize() {
+	return box2dObject_->getBoxSize();
+}

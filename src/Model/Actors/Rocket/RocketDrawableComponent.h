@@ -14,7 +14,7 @@
 /*class RocketDrawableComponent : public Component{
 
 public:
-	RocketDrawableComponent(DrawingSystem &drawingSystem ) : drawingSystem_(drawingSystem){}
+	RocketDrawableComponent(DrawingSystem &drawingSystem_ ) : drawingSystem_(drawingSystem_){}
 
 	virtual void OnStart(IActor &actor) override{
 		positionComponent_ = actor.getOnlyComponent<PositionComponent>();

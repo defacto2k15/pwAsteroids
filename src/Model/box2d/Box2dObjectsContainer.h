@@ -9,6 +9,7 @@
 #include <Model/help/DegreesCalculations.h>
 #include <Model/ModelDrawing/ImageScalesContainer.h>
 #include <Model/configuration/ActorsConfiguration.h>
+#include <Model/collisions/CollisionGroupsData.h>
 #include "Box2dObject.h"
 
 class Box2dObjectsContainer {
@@ -28,7 +29,9 @@ public:
 
 
 private:
-    std::shared_ptr<Box2dObject> createObjectWithBoxShape(ScaleToScreen imageScale, double densityPerSquareUnit );
+    std::shared_ptr<Box2dObject> createObjectWithBoxShape(ScaleToScreen imageScale,
+                                                              double densityPerSquareUnit,
+                                                              CollisionGroupsData collisionGroupData);
 };
 
 

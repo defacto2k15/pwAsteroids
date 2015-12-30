@@ -18,6 +18,7 @@
 class ActorsContainer  : public ServiceContainer {
 	std::vector<std::shared_ptr<IActor>> actorsVec_;
 	std::shared_ptr< PythonModule >python_;
+	bool weHaveStarted = false;
 public:
 	ActorsContainer(std::shared_ptr< PythonModule > python) : python_(python){
 
@@ -27,6 +28,7 @@ public:
 		std::function<std::vector<PythonActorComponent>(void) > func =  [this](){ return getAllActors();};
 		python_->addRootFunction("getAllActors", func);
 		ServiceContainer::OnStart();
+		weHaveStarted = true;
 	}
 
 	std::vector<PythonActorComponent> getAllActors(){

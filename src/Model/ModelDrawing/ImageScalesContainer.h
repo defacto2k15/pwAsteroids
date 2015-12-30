@@ -29,6 +29,14 @@ public:
     ScaleToScreen getProjectileImageScale(){
         return ScaleToScreen(15.0f / getScreenSize().getX(), 15.0f / getScreenSize().getY());
     }
+
+    ScaleToScreen getBorderIndicatorImageScale(){
+        return getProjectileImageScale();
+    }
+
+    ScaleToScreen getHeartImageScale(){
+        return getProjectileImageScale();
+    }
 };
 
 

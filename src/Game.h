@@ -22,6 +22,9 @@
 #include <Model/help/RandomNumbersProvider.h>
 #include <Model/ModelDrawing/ImageScalesContainer.h>
 #include <Model/Actors/Projectile/ProjectilesGenerator.h>
+#include <Model/collisions/ContactComponentsContainer.h>
+#include <Model/Actors/Rocket/RocketLife.h>
+#include <Model/Actors/lifeIndicator/LifeIndicatorService.h>
 
 
 class Game {
@@ -31,7 +34,10 @@ private:
 	std::shared_ptr<DrawingSystem> drawingSystem_;
 	std::shared_ptr<BoundariesDuplicationsDrawingSystem> boundariesDuplicationsDrawingSystem_;
 	std::shared_ptr<KeyboardStateManager> keyboardManager_ = std::make_shared<KeyboardStateManager>();
-	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>();
+
+	ContactComponentsContainer contactComponentsContainer_;
+	MyContactListener contactListener_;
+	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
 	ActorIdGenerator idGenerator;
 	std::shared_ptr<AsteroidsGenerator> asteroidGenerator_;
@@ -39,9 +45,12 @@ private:
 	std::shared_ptr<AsteroidsCounter> asteroidsCounter_ = std::make_shared<AsteroidsCounter>();
 	RandomNumbersProvider randomNumbersProvider_;
 	ImageScalesContainer imageScalesContainer_;
-	Box2dObjectsContainer box2dObjectsContainer_;
 
+	Box2dObjectsContainer box2dObjectsContainer_;
 	ActorsConfiguration actorsConfiguration_;
+
+	RocketLife rocketLife_;
+	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 public:
 	Game();
 

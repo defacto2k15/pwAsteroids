@@ -31,6 +31,7 @@ protected:
     std::shared_ptr<Box2DService> boxService_;
     Box2dObjectsContainer &container_;
     ImageScalesContainer &imageScalesContainer_;
+    ContactComponentsContainer &contactComponentsContainer_;
 
     ActorsGenerator(std::shared_ptr<ActorsContainer> actorsContainer_,
         ActorIdGenerator &idGenerator_,
@@ -39,10 +40,12 @@ protected:
         ActorsConfiguration &actorsConfiguration_,
         std::shared_ptr<Box2DService> boxService_,
         Box2dObjectsContainer &container_,
-        ImageScalesContainer &imageScalesContainer)
+        ImageScalesContainer &imageScalesContainer,
+        ContactComponentsContainer &contactComponentsContainer)
     : actorsContainer_(actorsContainer_), idGenerator_(idGenerator_), pythonModule_(pythonModule_),
         drawingSystem_(drawingSystem_), actorsConfiguration_(actorsConfiguration_), boxService_(boxService_),
-        container_(container_), imageScalesContainer_(imageScalesContainer) {
+        container_(container_), imageScalesContainer_(imageScalesContainer),
+      contactComponentsContainer_(contactComponentsContainer) {
     }
 
     void generateActor( std::vector<std::shared_ptr<Component>> componentsVector,

@@ -52,6 +52,12 @@ public:
 	void SetAngularVelocity(double velocity);
 
 	Point getLineralVelocity();
+
+	b2Body * getBody();
+
+	double getMass();
+
+	Point getBoxSize();
 private:
 	void setTransformation( double x, double y, double rotation );
 };

@@ -17,7 +17,8 @@ public:
                          ActorsConfiguration &actorsConfiguration,
                          std::shared_ptr<Box2DService> boxService,
                          Box2dObjectsContainer &container,
-                         ImageScalesContainer &imageScalesContainer);
+                         ImageScalesContainer &imageScalesContainer,
+                        ContactComponentsContainer &contactComponentsContainer);
 
     void generateProjectile(Point position, Rotation rotation, Point speedVector, double rotationSpeed);
 };

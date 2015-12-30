@@ -12,14 +12,18 @@
 #include <iostream>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Dynamics/b2World.h>
+#include <Model/PrimitiveTypes/Point.h>
 
 class Box2dObject {
 	b2Body *body_;
 	b2BodyDef bodyDef_;
 	std::vector<b2FixtureDef> fixtureDefVec_;
 	std::vector<b2Fixture*> createdFixtures_;
+	double mass_;
+	Point boxSize_;
 public:
-	Box2dObject(b2BodyDef def, std::vector<b2FixtureDef> fixtureDefVec) : bodyDef_(def), fixtureDefVec_(fixtureDefVec){
+	Box2dObject(b2BodyDef def, std::vector<b2FixtureDef> fixtureDefVec, double mass, Point boxSize) :
+			bodyDef_(def), fixtureDefVec_(fixtureDefVec), mass_(mass), boxSize_(boxSize){
 	}
 
 	const b2BodyDef * getDef();
@@ -29,6 +33,10 @@ public:
 	b2Body * getBody();
 
 	std::vector<b2Fixture*> getFixtures();
+
+	double getMass();
+
+	Point getBoxSize();
 
 };
 

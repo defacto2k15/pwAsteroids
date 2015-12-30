@@ -8,6 +8,8 @@ enum class Keys{
 	Player1AccelerateKey,
 	Player1LeftKey,
 	Player1RightKey,
-	Player1AttackKey
+	Player1AttackKey,
+	Player2LeftKey,
+	Player2RightKey
 };
 #endif //PWASTEROIDS_KEYS_H

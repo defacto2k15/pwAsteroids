@@ -21,11 +21,15 @@
 #include <Model/Actors/Asteroid/RandomAsteroidsGenerator.h>
 #include <Model/Actors/Projectile/ProjectilesGenerator.h>
 #include <Model/Actors/Rocket/RocketShootingComponent.h>
+#include <Model/Actors/secondPlayer/BorderIndicatorComponent.h>
+#include <Model/components/StaticPositionSettingComponent.h>
+#include <Model/Actors/Rocket/RocketCollisionComponent.h>
 
 
 class MockClass;
 
-Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguration_) {
+Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguration_),
+				contactListener_(contactComponentsContainer_), rocketLife_(actorsConfiguration_) {
 	rootServiceContainer_.addService(pythonModule_); // must be one of first
 	outGameScreenModel_= std::make_shared<OutGameScreenModelScaler>( std::make_shared<OutGameScreenModelImageCentering>(std::make_shared<OutGameScreenModel>(), actorsConfiguration_), actorsConfiguration_);
 	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
@@ -38,17 +42,22 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	rootServiceContainer_.addService(gameTimeProvider);
 	asteroidGenerator_ = std::make_shared<AsteroidsGenerator>(actorsContainer, idGenerator,
 		pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
-		 box2dObjectsContainer_, imageScalesContainer_, asteroidsCounter_);
-	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-			asteroidGenerator_, asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
-	));
+		 box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_);
+//	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
+//			asteroidGenerator_, asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
+//	));
 
 	projectilesGenerator_ = std::make_shared< ProjectilesGenerator>(actorsContainer, idGenerator,
 			pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
-			box2dObjectsContainer_, imageScalesContainer_);
+			box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_);
 
 
 	rootServiceContainer_.addService(boxService_);
+
+	lifeIndicatorService_ = std::make_shared<LifeIndicatorService>(
+			actorsContainer, pythonModule_, drawingSystem_, imageScalesContainer_, idGenerator, actorsConfiguration_, rocketLife_);
+	rootServiceContainer_.addService(lifeIndicatorService_);
+
 	auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
 
 
@@ -62,11 +71,19 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	rocket->addComponent( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
 	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(actorsConfiguration_));
 	rocket->addComponent( std::make_shared<RocketShootingComponent>(actorsConfiguration_, projectilesGenerator_, keyboardManager_, gameTimeProvider));
+	rocket->addComponent( std::make_shared<RocketCollisionComponent>( contactComponentsContainer_, rocketLife_, actorsConfiguration_, gameTimeProvider));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, actorsConfiguration_));
 	rocketTail->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::RocketTail, imageScalesContainer_.getRocketTailImageScale()));
 	rocketTail->addComponent(std::make_shared<PositionComponent>(pythonModule_));
+
+	auto borderIndicator = std::make_shared<Actor>(idGenerator.getActorId());
+	borderIndicator->addComponent( std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::BorderIndicator, imageScalesContainer_.getBorderIndicatorImageScale() ));
+	borderIndicator->addComponent( std::make_shared<PositionComponent>(pythonModule_));
+	borderIndicator->addComponent( std::make_shared<BorderIndicatorComponent>(actorsConfiguration_, keyboardManager_));
+	borderIndicator->addComponent( std::make_shared<StaticPositionSettingComponent>());
+	actorsContainer->addActor(borderIndicator);
 
 	actorsContainer->addActor(rocket);
 	actorsContainer->addActor(rocketTail);
@@ -82,8 +99,9 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	outGameScreenModel_->OnStart();
 
 	//asteroidGenerator_->generateAsteroid(Point(actorsConfiguration_.getInitialPosition().getX(),0), 270.0f, 1, Point(0.0,0.1), 0.00);
-	asteroidGenerator_->generateAsteroid(Point(1, 1), 0.0f, 1, Point(0.2,0.0), 2.00);
-	asteroidGenerator_->generateAsteroid(Point(6, 1), 45.0f, 1, Point(-0.2,0.0), 0.00);
+	asteroidGenerator_->generateAsteroid(Point(8, actorsConfiguration_.getInitialPosition().getY()/2), 0.0f, 1, Point(0.0,0.0), 0.00);
+	//projectilesGenerator_->generateProjectile( Point(6, 1), 0.0f, Point(-0.2, 0.0), 0.0);
+	//asteroidGenerator_->generateAsteroid(Point(6, 1.6), 0.0f, 1, Point(-0.2,0.0), 0.00);
 
 	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
 }

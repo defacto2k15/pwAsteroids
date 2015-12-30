@@ -65,6 +65,26 @@ public:
 
 	double getProjectileSpeed();
 
+	unsigned int getInitialRocketLife(){
+		return 3;
+	}
+
+	unsigned int getTimesRocketImageIsFlickering(){
+		return 4;
+	}
+
+	unsigned long getTimeofOneFlicker(){
+		return 400;
+	}
+
+	Point getInitialHeartPosition(){
+		return Point(1,1);
+	}
+
+	unsigned int getMaxRocketLifes(){
+		return 5;
+	}
+
 };
 
 

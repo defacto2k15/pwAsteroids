@@ -24,3 +24,11 @@ b2Body *Box2dObject::getBody() {
 std::vector<b2Fixture*> Box2dObject::getFixtures() {
 	return createdFixtures_;
 }
+
+double Box2dObject::getMass() {
+	return mass_;
+}
+
+Point Box2dObject::getBoxSize() {
+	return boxSize_;
+}
