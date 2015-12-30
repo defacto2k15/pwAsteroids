@@ -43,3 +43,9 @@ void RocketMovingComponent::accelerate() {
 	box2dComponent_->applyForce(accVec);
 
 }
+
+RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
+											 std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration )
+		: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule),
+		  actorsConfiguration_(actorsConfiguration) {
+}

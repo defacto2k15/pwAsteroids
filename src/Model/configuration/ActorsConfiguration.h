@@ -65,25 +65,15 @@ public:
 
 	double getProjectileSpeed();
 
-	unsigned int getInitialRocketLife(){
-		return 3;
-	}
+	unsigned int getInitialRocketLife();
 
-	unsigned int getTimesRocketImageIsFlickering(){
-		return 4;
-	}
+	unsigned int getTimesRocketImageIsFlickering();
 
-	unsigned long getTimeofOneFlicker(){
-		return 400;
-	}
+	unsigned long getTimeofOneFlicker();
 
-	Point getInitialHeartPosition(){
-		return Point(1,1);
-	}
+	Point getInitialHeartPosition();
 
-	unsigned int getMaxRocketLifes(){
-		return 5;
-	}
+	unsigned int getMaxRocketLifes();
 
 };
 

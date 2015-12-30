@@ -96,3 +96,23 @@ double ActorsConfiguration::getDistanceBetweenRocketAndProjectile() {
 double ActorsConfiguration::getProjectileSpeed() {
 	return 1.8f;
 }
+
+unsigned int ActorsConfiguration::getInitialRocketLife() {
+	return 3;
+}
+
+unsigned int ActorsConfiguration::getTimesRocketImageIsFlickering() {
+	return 4;
+}
+
+unsigned long ActorsConfiguration::getTimeofOneFlicker() {
+	return 400;
+}
+
+Point ActorsConfiguration::getInitialHeartPosition() {
+	return Point(1,1);
+}
+
+unsigned int ActorsConfiguration::getMaxRocketLifes() {
+	return 5;
+}

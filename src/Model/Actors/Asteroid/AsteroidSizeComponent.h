@@ -10,12 +10,9 @@
 class AsteroidSizeComponent : public Component {
     double size_;
 public:
-    AsteroidSizeComponent( double size ) : size_(size){
-    }
+    AsteroidSizeComponent(double size );
 
-    double getSize(){
-        return size_;
-    }
+    double getSize();
 };
 
 

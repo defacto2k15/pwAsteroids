@@ -23,43 +23,14 @@ class RocketShootingComponent : public Component {
     unsigned long timeOfLastShot_ = 0;
 public:
     RocketShootingComponent(ActorsConfiguration &configuration, std::shared_ptr<ProjectilesGenerator> projectilesGenerator,
-            std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider, std::shared_ptr<GameTimeProvider> timeProvider ) :
-            configuration_(configuration), projectilesGenerator_(projectilesGenerator),
-            keyboardStateProvider_(keyboardStateProvider), timeProvider_(timeProvider) {
-        int todoDelete = 44;
-    }
+                            std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider, std::shared_ptr<GameTimeProvider> timeProvider );
 
-    void OnStart(IActor &actor) override{
-        positionComponent_ = actor.getOnlyComponent<PositionComponent>();
-        box2dComponent_ = actor.getOnlyComponent<Box2dComponent>();
-    }
+    void OnStart(IActor &actor);
 
-    void OnUpdate() override {
-        if( keyboardStateProvider_->wasClicked(Keys::Player1AttackKey) ){
-            if( timeProvider_->getMilisecondsSinceGameStart() - timeOfLastShot_ > configuration_.getMinTimeBetweenShots()){
-                timeOfLastShot_ = timeProvider_->getMilisecondsSinceGameStart();
-                shootProjectile();
-            }
-        }
-    }
+    void OnUpdate();
 
 private:
-    void shootProjectile(){
-        auto rocketPosition = positionComponent_->getPosition();
-        auto rocketRotation = positionComponent_->getRotation();
-
-        auto distanceBetweenRocketAndProjectile = configuration_.getDistanceBetweenRocketAndProjectile();
-        Point projectileAndRocketDelta = Point(
-                distanceBetweenRocketAndProjectile * sin(DegreesCalculations::degreesToRadians(rocketRotation)),
-               - distanceBetweenRocketAndProjectile * cos(DegreesCalculations::degreesToRadians(rocketRotation)));
-        Point speedVector = projectileAndRocketDelta;
-        speedVector.normalize();
-        speedVector *= configuration_.getProjectileSpeed();
-        //speedVector += box2dComponent_->getLineralVelocity();
-
-        projectilesGenerator_->generateProjectile(rocketPosition + projectileAndRocketDelta,
-                                                  rocketRotation, speedVector, 0);
-    }
+    void shootProjectile();
 };
 
 

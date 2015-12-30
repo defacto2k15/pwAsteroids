@@ -29,11 +29,8 @@ class RocketMovingComponent : public Component {
 			std::shared_ptr<PythonModule>, ActorsConfiguration &> visibilityModule_;
 
 public:
-	RocketMovingComponent( std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
-						   std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration )
-			: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule),
-				actorsConfiguration_(actorsConfiguration){
-	}
+	RocketMovingComponent(std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
+						  std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration );
 
 	virtual void OnStart(IActor &actor);
 

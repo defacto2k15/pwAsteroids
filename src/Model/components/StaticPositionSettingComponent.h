@@ -12,16 +12,11 @@
 class StaticPositionSettingComponent : public IPositionSettingComponent {
     std::shared_ptr<PositionComponent> positionComponent_;
 public:
-    void OnStart(IActor &actor){
-        positionComponent_ = actor.getOnlyComponent<PositionComponent>();
-    }
+    void OnStart(IActor &actor);
 
-    virtual void setPosition( double x, double y) override {
-        positionComponent_->setPosition(Point(x,y));
-    }
-    virtual void setRotation( double rotation ) override{
-        positionComponent_->setRotation( rotation );
-    }
+    virtual void setPosition(double x, double y);
+
+    virtual void setRotation(double rotation );
 
 };
 

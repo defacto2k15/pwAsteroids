@@ -14,28 +14,15 @@ class RocketLife {
     unsigned int life_;
     ActorsConfiguration &actorsConfiguration_;
 public:
-    RocketLife( ActorsConfiguration &actorsConfiguration)
-            : life_( actorsConfiguration.getInitialRocketLife()), actorsConfiguration_(actorsConfiguration){
-    }
+    RocketLife(ActorsConfiguration &actorsConfiguration);
 
-    void decreaseLife(){
-        if( life_ == 0){
-            throw std::runtime_error("There is arleady 0 life_ left");
-        }
-        --life_;
-    }
+    void decreaseLife();
 
-    void increaseLife(){
-        life_;
-    }
+    void increaseLife();
 
-    void resetLife(){
-        life_ = actorsConfiguration_.getInitialRocketLife();
-    }
+    void resetLife();
 
-    unsigned int getLife(){
-        return life_;
-    }
+    unsigned int getLife();
 };
 
 

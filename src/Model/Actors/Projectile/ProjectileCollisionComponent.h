@@ -15,19 +15,11 @@ class ProjectileCollisionComponent : public Box2dCollisionsComponent{
 public:
 
     ProjectileCollisionComponent(ContactComponentsContainer &contactContainer,
-                                 const std::shared_ptr<ActorsContainer> actorsContainer) : Box2dCollisionsComponent(
-            contactContainer), actorsContainer_(actorsContainer) {
-    }
+                                 const std::shared_ptr<ActorsContainer> actorsContainer);
 
-    void OnStart( IActor &actor ) override{
-        Box2dCollisionsComponent::OnStart(actor);
-        id_ = actor.getActorId();
-    }
+    void OnStart(IActor &actor );
 
-    bool manageCollision(double impulseValue ) override{
-        actorsContainer_->removeActorById(id_);
-        return true;
-    }
+    bool manageCollision(double impulseValue );
 };
 
 

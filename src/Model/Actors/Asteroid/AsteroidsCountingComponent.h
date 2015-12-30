@@ -12,16 +12,11 @@
 class AsteroidsCountingComponent : public Component {
     std::shared_ptr<AsteroidsCounter> counter_;
 public:
-    AsteroidsCountingComponent( std::shared_ptr<AsteroidsCounter> counter ) : counter_(counter){
-    }
+    AsteroidsCountingComponent(std::shared_ptr<AsteroidsCounter> counter );
 
-    void OnStart( IActor &actor) override {
-        counter_->Increment();
-    }
+    void OnStart(IActor &actor);
 
-    void OnStop() override {
-        counter_->Decrement();
-    }
+    void OnStop();
 
 };
 

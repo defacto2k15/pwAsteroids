@@ -3,3 +3,10 @@
 //
 
 #include "AsteroidSizeComponent.h"
+
+AsteroidSizeComponent::AsteroidSizeComponent(double size ) : size_(size) {
+}
+
+double AsteroidSizeComponent::getSize() {
+    return size_;
+}
