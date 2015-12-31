@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "Scene.h"
+#include "Screen.h"
 #include "Display.h"
 #include <boost/thread/thread.hpp>
 #include <string>
@@ -12,21 +13,22 @@ const float FPS = 60;
 
 class ViewManager {
 public:
-	int numberOfScenes();
-	void drawSceneOnDisplay(Scene* scene) { display->drawSceneOnDisplay(scene); }
-	void drawAllScenesOnDisplay();
+	void changeActiveScreen(std::string);
+	void initializeScreens();
 	void start();
-	Scene* createNewScene();
+	void exit() { isExit = true; }
+	Display* getDisplay() { return display; }
 	ViewManager(int, int);
 	~ViewManager();
 
 private:
-	std::vector<Scene*> scenes;
+	std::vector<Screen*> screens;
+	std::vector<Screen*>::iterator activeScreen, it;
 	Display* display;
 	ALLEGRO_TIMER *timer;
 	ALLEGRO_EVENT_QUEUE *event_queue;
 	boost::thread* timerThread;
-	void startTimerEvent();
+	bool isExit = false;
 };
 
 #endif

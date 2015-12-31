@@ -51,9 +51,9 @@ Display::Display(int width, int height)
 	
 	al_init_image_addon();
 
-	al_clear_to_color(al_map_rgb(255, 120, 0));
+	al_clear_to_color(al_map_rgb(40, 120, 120));
 
-	al_flip_display();
+	//al_flip_display();
 
 	std::cout << "Allegro created, current working directory: " << al_get_current_directory() << "\n";
 }
