@@ -24,6 +24,7 @@
 #include <Model/Actors/secondPlayer/BorderIndicatorComponent.h>
 #include <Model/components/StaticPositionSettingComponent.h>
 #include <Model/Actors/Rocket/RocketCollisionComponent.h>
+#include <Model/Actors/ScoreDisplay/ScoreDisplayer.h>
 
 
 class MockClass;
@@ -43,13 +44,13 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 	asteroidGenerator_ = std::make_shared<AsteroidsGenerator>(actorsContainer, idGenerator,
 		pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
 		 box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_);
-//	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-//			asteroidGenerator_, asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
-//	));
+	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
+			asteroidGenerator_, asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
+	));
 
 	projectilesGenerator_ = std::make_shared< ProjectilesGenerator>(actorsContainer, idGenerator,
 			pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
-			box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_);
+			box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_);
 
 
 	rootServiceContainer_.addService(boxService_);
@@ -60,6 +61,9 @@ Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguratio
 
 	auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
 
+	auto scoreActor = std::make_shared<Actor>(idGenerator.getActorId());
+	scoreActor->addComponent( std::make_shared<ScoreDisplayer>(scoreCount_, drawingSystem_, actorsConfiguration_));
+	actorsContainer->addActor(scoreActor);
 
 	rocket->addComponent(std::make_shared<Box2dComponent>(boxService_, actorsConfiguration_, box2dObjectsContainer_.getRocketObject()));
 	rocket->addComponent(std::make_shared<PositionComponent>(pythonModule_));

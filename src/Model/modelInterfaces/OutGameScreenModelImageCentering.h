@@ -24,10 +24,16 @@ public:
 
 	virtual void AddImage(ImagePrimitive image);
 
-	virtual std::vector<ImagePrimitive> getImagePrimitives();
+	virtual std::vector<ImagePrimitive> getImagePrimitives() override;
+
+	virtual std::vector<TextPrimitive> getTextPrimitives() override{
+		return originalOutGameScreenModel_->getTextPrimitives();
+	}
 
 	virtual void OnUpdate();
 
+
+	virtual void AddText(TextPrimitive primitive) override;
 };
 
 

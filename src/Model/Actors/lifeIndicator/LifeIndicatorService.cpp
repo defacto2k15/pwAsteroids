@@ -34,7 +34,6 @@ void LifeIndicatorService::OnUpdate() {
     unsigned int activeHearts = life_.getLife();
     for( int i = 0; i < configuration_.getMaxRocketLifes(); i++){
         bool visibility = false;
-        std::cout << " There are " << activeHearts << " life" << std::endl;
         if( i < activeHearts ){
             visibility = true;
         }

@@ -9,10 +9,12 @@
 #include <Model/ModelDrawing/ImagePrimitive.h>
 #include <Model/ModelDrawing/IPrimitivesToDrawContainer.h>
 #include <Model/Services/IService.h>
+#include <Model/ModelDrawing/TextPrimitive.h>
 
 class IOutGameScreenModel : public IPrimitivesToDrawContainer, public IService {
 public:
 
 	virtual std::vector<ImagePrimitive> getImagePrimitives()=0;
+	virtual std::vector<TextPrimitive> getTextPrimitives()=0;
 };
 #endif //PWASTEROIDS_IOUTGAMESCREENMODEL_H

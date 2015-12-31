@@ -29,7 +29,8 @@ private:
 	DrawableObject* numberOfObjects;
 
 	ALLEGRO_MOUSE_STATE msestate;
-	bool key[4] = { false, false, false, false };
+	bool key[8] = { false, false, false, false, false, false ,false };
+
 	int spaceClicks = 0;
 };
 

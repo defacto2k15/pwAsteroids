@@ -20,8 +20,8 @@ void AsteroidCollisionComponent::OnStart(IActor &actor ) {
 }
 
 bool AsteroidCollisionComponent::manageCollision(double impulseValue ) {
-    double minCollisionImpulseValueToManage = 0.4;
-    double destructionMassFactor = 0.50f;
+    double minCollisionImpulseValueToManage = 0.8;
+    double destructionMassFactor = 0.20f;
     double asteroidMass = box2dComponent_->getMass();
 
 

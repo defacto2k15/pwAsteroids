@@ -7,8 +7,10 @@
 
 
 #include <Model/Actors/ActorsGenerator.h>
+#include <Model/Actors/ScoreDisplay/ScoreCount.h>
 
 class ProjectilesGenerator : public ActorsGenerator{
+    ScoreCount &scoreCount_;
 public:
     ProjectilesGenerator(std::shared_ptr<ActorsContainer> actorsContainer,
                          ActorIdGenerator &idGenerator,
@@ -18,7 +20,8 @@ public:
                          std::shared_ptr<Box2DService> boxService,
                          Box2dObjectsContainer &container,
                          ImageScalesContainer &imageScalesContainer,
-                        ContactComponentsContainer &contactComponentsContainer);
+                        ContactComponentsContainer &contactComponentsContainer,
+                        ScoreCount &scoreCount);
 
     void generateProjectile(Point position, Rotation rotation, Point speedVector, double rotationSpeed);
 };

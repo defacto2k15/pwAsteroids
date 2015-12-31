@@ -15,5 +15,6 @@ class IDrawingSystem{
 public:
     virtual void drawImage(ImagePrimitiveType type, Point position,
                            Rotation rotation, ScaleToScreen scale, ActorId actorId) = 0;
+    virtual void drawText( std::string textValue, Point position, ActorId actorId) = 0;
 };
 #endif //PWASTEROIDS_IDRAWINGSYSTEM_H

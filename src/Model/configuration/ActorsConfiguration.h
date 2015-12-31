@@ -75,6 +75,14 @@ public:
 
 	unsigned int getMaxRocketLifes();
 
+	Point 	getScoreTextPosition(){
+		return Point(8, 5);
+	}
+
+	unsigned int getScoreByDestroyingAsteroid(){
+		return 10;
+	}
+
 };
 
 

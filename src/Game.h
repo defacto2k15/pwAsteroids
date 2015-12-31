@@ -25,6 +25,7 @@
 #include <Model/collisions/ContactComponentsContainer.h>
 #include <Model/Actors/Rocket/RocketLife.h>
 #include <Model/Actors/lifeIndicator/LifeIndicatorService.h>
+#include <Model/Actors/ScoreDisplay/ScoreCount.h>
 
 
 class Game {
@@ -50,6 +51,7 @@ private:
 	ActorsConfiguration actorsConfiguration_;
 
 	RocketLife rocketLife_;
+	ScoreCount scoreCount_;
 	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 public:
 	Game();

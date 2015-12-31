@@ -8,6 +8,8 @@ void  OutGameScreenModelImageCentering::AddImage(ImagePrimitive image) {
 	originalOutGameScreenModel_->AddImage(image);
 }
 
+
+
 std::vector<ImagePrimitive>  OutGameScreenModelImageCentering::getImagePrimitives() {
 	auto originalPrimitives = originalOutGameScreenModel_->getImagePrimitives();
 	std::vector<ImagePrimitive> outPrimitives;
@@ -30,4 +32,8 @@ std::vector<ImagePrimitive>  OutGameScreenModelImageCentering::getImagePrimitive
 
 void  OutGameScreenModelImageCentering::OnUpdate() {
 	originalOutGameScreenModel_->OnUpdate();
+}
+
+void OutGameScreenModelImageCentering::AddText(TextPrimitive primitive) {
+	originalOutGameScreenModel_->AddText(primitive);
 }

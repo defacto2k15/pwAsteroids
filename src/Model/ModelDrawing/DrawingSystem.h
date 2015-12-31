@@ -21,6 +21,7 @@ public:
 
 	void drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale, ActorId actorId) override;
 
+	void drawText(std::string textValue, Point position, ActorId actorId) override;
 };
 
 

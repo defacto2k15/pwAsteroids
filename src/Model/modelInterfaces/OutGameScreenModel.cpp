@@ -15,4 +15,13 @@ void OutGameScreenModel::AddImage(ImagePrimitive primitive) {
 
 void OutGameScreenModel::OnUpdate() {
 	imagePrimitives_.clear();
+	textPrimitives_.clear();
+}
+
+std::vector<TextPrimitive> OutGameScreenModel::getTextPrimitives() {
+	return textPrimitives_;
+}
+
+void OutGameScreenModel::AddText(TextPrimitive text) {
+	textPrimitives_.push_back(text);
 }

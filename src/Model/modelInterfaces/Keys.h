@@ -10,6 +10,7 @@ enum class Keys{
 	Player1RightKey,
 	Player1AttackKey,
 	Player2LeftKey,
-	Player2RightKey
+	Player2RightKey,
+	Player2AttackKey
 };
 #endif //PWASTEROIDS_KEYS_H

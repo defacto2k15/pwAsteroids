@@ -19,7 +19,7 @@ std::shared_ptr<Box2dObject> Box2dObjectsContainer::getAsteriodObject(double siz
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getProjectileObject() {
-    return createObjectWithBoxShape(imageScalesContainer_.getProjectileImageScale(), 120, CollisionGroupsData::getProjectileData());
+    return createObjectWithBoxShape(imageScalesContainer_.getProjectileImageScale(), 250, CollisionGroupsData::getProjectileData());
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::createObjectWithBoxShape(ScaleToScreen imageScale,

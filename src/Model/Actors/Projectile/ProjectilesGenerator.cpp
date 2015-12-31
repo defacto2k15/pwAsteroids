@@ -13,9 +13,11 @@ ProjectilesGenerator::ProjectilesGenerator(std::shared_ptr<ActorsContainer> acto
                                            std::shared_ptr<Box2DService> boxService,
                                            Box2dObjectsContainer &container,
                                            ImageScalesContainer &imageScalesContainer,
-                                           ContactComponentsContainer &contactComponentsContainer) :
+                                           ContactComponentsContainer &contactComponentsContainer,
+                                                ScoreCount &scoreCount) :
         ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
-                        actorsConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer) {
+                        actorsConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer),
+                scoreCount_(scoreCount){
 }
 
 void ProjectilesGenerator::generateProjectile(Point position, Rotation rotation, Point speedVector, double rotationSpeed) {
@@ -27,7 +29,7 @@ void ProjectilesGenerator::generateProjectile(Point position, Rotation rotation,
         componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Asteroid, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<ActorOnOutOfScreenDestroyerComponent>(actorsConfiguration_, actorsContainer_));
-        componentsForAsteroid.push_back( std::make_shared<ProjectileCollisionComponent>(contactComponentsContainer_, actorsContainer_));
+        componentsForAsteroid.push_back( std::make_shared<ProjectileCollisionComponent>(contactComponentsContainer_, actorsContainer_, scoreCount_, actorsConfiguration_));
 
         generateActor(componentsForAsteroid, position, rotation, speedVector, rotationSpeed);
 }

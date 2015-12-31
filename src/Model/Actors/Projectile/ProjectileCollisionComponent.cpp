@@ -5,9 +5,11 @@
 #include "ProjectileCollisionComponent.h"
 
 ProjectileCollisionComponent::ProjectileCollisionComponent(ContactComponentsContainer &contactContainer,
-                                                           const std::shared_ptr<ActorsContainer> actorsContainer)
+                                                           const std::shared_ptr<ActorsContainer> actorsContainer,
+                                                            ScoreCount &scoreCount,
+                                                            ActorsConfiguration &configuration)
         : Box2dCollisionsComponent(
-        contactContainer), actorsContainer_(actorsContainer) {
+        contactContainer), actorsContainer_(actorsContainer), scoreCount_(scoreCount), actorsConfiguration_(configuration) {
 }
 
 void ProjectileCollisionComponent::OnStart(IActor &actor ) {
@@ -17,5 +19,6 @@ void ProjectileCollisionComponent::OnStart(IActor &actor ) {
 
 bool ProjectileCollisionComponent::manageCollision(double impulseValue ) {
     actorsContainer_->removeActorById(id_);
+    scoreCount_.addScore( actorsConfiguration_.getScoreByDestroyingAsteroid());
     return true;
 }

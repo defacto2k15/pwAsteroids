@@ -10,3 +10,7 @@ void DrawingSystem::drawImage(ImagePrimitiveType type, Point position, Rotation 
 
 DrawingSystem::DrawingSystem( std::shared_ptr<IPrimitivesToDrawContainer> primitivesContainer)
 		: primitivesContainer_(primitivesContainer) {}
+
+void DrawingSystem::drawText(std::string textValue, Point position, ActorId actorId) {
+	primitivesContainer_->AddText(TextPrimitive(textValue, position, actorId));
+}
