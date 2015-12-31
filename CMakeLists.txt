@@ -15,8 +15,6 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/View/*.cpp" "src/View/*.h" "src/Model/configuration/*.cpp" "src/Model/configuration/*.h"
         "src/Model/Actors/RocketTail/*.cpp" "src/Model/Actors/RocketTail/*.h" "src/Model/python/*.cpp" "src/Model/python/*.h"
         "src/Model/Actors/Asteroid/*.cpp" "src/Model/Actors/Asteroid/*.h" "src/Model/Actors/Projectile/*.cpp" "src/Model/Actors/Projectile/*.h"
-        "src/Model/collisions/*.cpp" "src/Model/collisions/*.h" "src/Model/Actors/secondPlayer/*.cpp" "src/Model/Actors/secondPlayer/*.h"
-        "src/Model/Actors/lifeIndicator/*.cpp" "src/Model/Actors/lifeIndicator/*.h"
   )
 
 add_executable(pwAsteroids ${SRC_FILES}  )
@@ -77,7 +75,7 @@ include_directories(src)
 # allegro - works on linux and only if allegro is installed- need to be changed
 if(UNIX)
     include_directories(/usr/include/x86_64-linux-gnu)
-    TARGET_LINK_LIBRARIES( pwAsteroids allegro_image allegro)
+    TARGET_LINK_LIBRARIES( pwAsteroids allegro_ttf allegro_font allegro_image allegro )
 else()
     # TARGET_LINK_LIBRARIES(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/Box2D.lib )
 endif()
