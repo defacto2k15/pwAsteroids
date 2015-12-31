@@ -1,62 +1,60 @@
 #include <Game.h>
 #include "ViewManager.h"
-#include "GameScreen.h"
-#include "MenuScreen.h"
-#include "EmptyScreen.h"
 #include <map>
 
-void ViewManager::changeActiveScreen(std::string screenTitle)
+enum MYKEYS {
+	KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
+};
+
+enum MYMOUSEKEYS {
+	LMB = 1, RMB, MMB
+};
+
+int ViewManager::numberOfScenes()
 {
-	for (it = screens.begin(); it != screens.end(); ++it)
-	{
-		if (screenTitle == (*it)->getTitle())
-		{
-			activeScreen = it;
-			std::cout << "- Changed screen to " << (*activeScreen)->getTitle() << "\n";
-			break;
-		}
-	}
+	return scenes.size();
 }
 
-void ViewManager::initializeScreens()
+void ViewManager::drawAllScenesOnDisplay()
 {
-	for (it = screens.begin(); it != screens.end(); ++it)
+	display->clearDisplay(40, 120, 120);
+	for (auto scene : scenes)
 	{
-		(*it)->initializeScreenElements();
+		if(scene->isActive()) display->drawSceneOnDisplay(scene);
 	}
-	std::cout << "Initialized " << screens.size() << " screens\n";
-	activeScreen = screens.begin();
+	display->flipDisplay();
 }
 
 void ViewManager::start()
 {
+	ALLEGRO_MOUSE_STATE msestate;
+	std::map<ActorId, DrawableObject*> drawableObjects;
+	Scene* scene = createNewScene();
+	Scene* texts = createNewScene();
+	//DrawableObject* rocket = scene->addDrawableObject("../res/aa.bmp", 512, 300);	// example bitmap to be moved
+	int spaceClicks = 0;
+	DrawableObject* spaceClickText = texts->addDrawableObject(true, "Space clicks: 0 (few more..)", 30, 20);	// true means 'it's a text'
+	DrawableObject* mouseInfo = texts->addDrawableObject(true, "[Mouse info - let's click!]", 30, 80);	// true means 'it's a text'
+	DrawableObject* numberOfObjects = texts->addDrawableObject(true,
+												("Number of objects: " + boost::lexical_cast<std::string>(scene->getNumberOfObjects())).c_str(), 30, 50);
+	bool key[4] = { false, false, false, false };
+	//int speed = 20;
 	Game g;
 	g.update();
-
-	std::string str = "MenuScreen";
-	MenuScreen* menuScreen = new MenuScreen(str);
-	screens.push_back(menuScreen);
-
-	str = "GameScreen";
-	GameScreen* gameScreen = new GameScreen(str);
-	screens.push_back(gameScreen);
-
-	/* str = "EmptyScreen";
-	EmptyScreen* emptyScreen = new EmptyScreen(str);
-	screens.push_back(emptyScreen); */
-
-	initializeScreens();	// must be called before drawing screens!
-	std::cout << "While(1) loop\n";
 	while (1)
 	{
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-		(*activeScreen)->eventAction(ev, this, &g);
-		if (isExit) break;
 
+		if (ev.type == ALLEGRO_EVENT_TIMER) {
 			if (key[KEY_UP]) {
 				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AccelerateKey);
 			}
+
+			if (key[KEY_DOWN]) {
+				//object->setPozY(object->getPozY() + speed/20);
+			}
+
 			if (key[KEY_LEFT]) {
 				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1LeftKey);
 			}
@@ -68,15 +66,10 @@ void ViewManager::start()
 			if( key[KEY_DOWN]) {
 				g.getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AttackKey);
 			}
+			
+			numberOfObjects->setText("Number of objects: " + boost::lexical_cast<std::string>(scene->getNumberOfObjects()));
 
-			//if(speed < 360) speed += 1;
-			//if (!key[KEY_UP] && !key[KEY_DOWN] && !key[KEY_LEFT] && !key[KEY_RIGHT]) speed = 20;
 			g.update();
-
-			for( auto &kv : drawableObjects ){
-				kv.second->setPozX(-100);
-				kv.second->setPozY(-100);
-			}
 
 			auto primitivesVec = g.getOutGameScreenModel()->getImagePrimitives();
 			for( auto &primitive : primitivesVec){
@@ -86,14 +79,11 @@ void ViewManager::start()
 						pathToImage = "../res/asteroid.bmp";
 					} else if( primitive.getImageType() == ImagePrimitiveType::Projectile) {
 						pathToImage = "../res/proj.bmp";
-					} else if( primitive.getImageType() == ImagePrimitiveType::BorderIndicator){
-						pathToImage = "../res/arrow.bmp";
-					} else if(primitive.getImageType() == ImagePrimitiveType::Heart){
-						pathToImage = "../res/arrow.bmp";
 					} else {
 						pathToImage = "../res/aa.bmp";
 					}
-					drawableObjects[primitive.getActorId()] = scene->addDrawableObject(pathToImage, 512, 300);
+					drawableObjects[primitive.getActorId()] = scene->addDrawableObject(false, pathToImage, 512, 300);
+					drawableObjects[primitive.getActorId()]->setZoom((float)((1 + rand() % 200) / 50.0f));	// sets scale only for Bitmaps, not models!
 				}
 				drawableObjects[primitive.getActorId()]->setPozX( primitive.getPosition().getX());
 				drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
@@ -101,7 +91,6 @@ void ViewManager::start()
 
 				//std::cout << "pos: " << primitive.getPosition().toString() << " rot " << primitive.getRotation() << std::endl;
 			}
-
 
 			drawAllScenesOnDisplay();	// refresh the screen
 		}
@@ -125,6 +114,13 @@ void ViewManager::start()
 			case ALLEGRO_KEY_RIGHT:
 				key[KEY_RIGHT] = true;
 				break;
+			case ALLEGRO_KEY_SPACE:
+				++spaceClicks;
+				spaceClickText->setText("Space clicks: " + boost::lexical_cast<std::string>(spaceClicks));
+				if(spaceClicks >= 5) DrawableObject* yaayText = texts->addDrawableObject(true, "Yaay!!!",
+					  rand()%al_get_display_width(display->getDisplay()), rand() % al_get_display_height(display->getDisplay()));
+				else spaceClickText->setText(spaceClickText->getText() + " (few more...)");
+				break;
 			}
 		}
 		else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
@@ -146,8 +142,30 @@ void ViewManager::start()
 				break;
 			}
 		}
-
+		else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
+			switch (ev.mouse.button) {
+			case LMB:
+				mouseInfo->setText("[LMB clicked");
+				break;
+			case RMB:
+				mouseInfo->setText("[RMB clicked");
+				break;
+			case MMB:
+				mouseInfo->setText("[MMB clicked");
+				break;
+			}
+			al_get_mouse_state(&msestate);
+			mouseInfo->setText(mouseInfo->getText() + ", x=" + boost::lexical_cast<std::string>(al_get_mouse_state_axis(&msestate, 0)) +
+								  ", y=" + boost::lexical_cast<std::string>(al_get_mouse_state_axis(&msestate, 1)) + "]");
+		}
 	}
+}
+
+Scene* ViewManager::createNewScene()
+{
+	Scene* newScene = new Scene();
+	scenes.push_back(newScene);
+	return newScene;
 }
 
 ViewManager::ViewManager(int screenWidth, int screenHeight)
@@ -169,4 +187,21 @@ ViewManager::~ViewManager()
 	std::cout << "Timer stopped\n";
 	delete display;
 	// TO DO: also delete each scene in scenes
+}
+
+void ViewManager::startTimerEvent()
+{
+	boost::mutex mtx;
+	while (1)
+	{
+		ALLEGRO_EVENT ev;
+		al_wait_for_event(event_queue, &ev);
+		if (ev.type == ALLEGRO_EVENT_TIMER)
+		{
+			std::cout << "Timer event (FPS: " << FPS << ")\n";
+			mtx.lock();
+			//drawAllScenesOnDisplay();			// THAT'S NOT THREAD SAFE FOR ALLEGRO!!!
+			mtx.unlock();
+		}
+	}
 }
