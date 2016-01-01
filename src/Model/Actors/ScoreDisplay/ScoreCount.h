@@ -9,17 +9,11 @@
 class ScoreCount {
     unsigned int score_ = 0;
 public:
-    unsigned int getScore(){
-        return score_;
-    }
+    unsigned int getScore();
 
-    void addScore(unsigned int delta){
-        score_ += delta;
-    }
+    void addScore(unsigned int delta);
 
-    void resetScore(){
-        score_ = 0;
-    }
+    void resetScore();
 };
 
 

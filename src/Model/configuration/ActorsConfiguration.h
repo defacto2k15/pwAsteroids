@@ -77,33 +77,19 @@ public:
 
 	unsigned int getMaxRocketLifes();
 
-	Point 	getScoreTextPosition(){
-		return Point(8, 5);
-	}
+	Point getScoreTextPosition();
 
-	unsigned int getScoreByDestroyingAsteroid(){
-		return 10;
-	}
+	unsigned int getScoreByDestroyingAsteroid();
 
-	unsigned long getMinTimeBetweenSecondPlayerShoots(){
-		return 300;
-	}
+	unsigned long getMinTimeBetweenSecondPlayerShoots();
 
-	double getSecondPlayerAsteroidVelocityMultiplayer(){
-		return 0.4f;
-	}
+	double getSecondPlayerAsteroidVelocityMultiplayer();
 
-	double getSecondPlayerAsteroidSizeDivider(){
-		return 3.0f;
-	}
+	double getSecondPlayerAsteroidSizeDivider();
 
-	double getMinSecondPlayerAsteroidSize(){
-		return 0.15f;
-	}
+	double getMinSecondPlayerAsteroidSize();
 
-	double getMaxSecondPlayerAsteroidSize(){
-		return 3.5f;
-	}
+	double getMaxSecondPlayerAsteroidSize();
 
 };
 

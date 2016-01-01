@@ -19,19 +19,11 @@ class ScoreDisplayer : public Component {
 public:
 
     ScoreDisplayer(ScoreCount &count_, const std::shared_ptr<IDrawingSystem> &drawingSystem_,
-                   ActorsConfiguration &actorsConfiguration_) : count_(count_), drawingSystem_(drawingSystem_),
-                                                                actorsConfiguration_(actorsConfiguration_) {
-    }
+                   ActorsConfiguration &actorsConfiguration_);
 
-    virtual void OnStart( IActor &actor) override{
-        id_ = actor.getActorId();
-    }
+    virtual void OnStart(IActor &actor);
 
-    virtual void OnUpdate() override{
-        int k = count_.getScore();
-        std::string textToDraw = "Score: "+std::to_string(count_.getScore());
-        drawingSystem_->drawText(textToDraw, actorsConfiguration_.getScoreTextPosition(), id_);
-    }
+    virtual void OnUpdate();
 };
 
 

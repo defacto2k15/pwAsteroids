@@ -120,3 +120,31 @@ Point ActorsConfiguration::getInitialHeartPosition() {
 unsigned int ActorsConfiguration::getMaxRocketLifes() {
 	return 5;
 }
+
+unsigned int ActorsConfiguration::getScoreByDestroyingAsteroid() {
+	return 10;
+}
+
+unsigned long ActorsConfiguration::getMinTimeBetweenSecondPlayerShoots() {
+	return 300;
+}
+
+double ActorsConfiguration::getSecondPlayerAsteroidVelocityMultiplayer() {
+	return 0.4f;
+}
+
+double ActorsConfiguration::getSecondPlayerAsteroidSizeDivider() {
+	return 3.0f;
+}
+
+double ActorsConfiguration::getMinSecondPlayerAsteroidSize() {
+	return 0.15f;
+}
+
+double ActorsConfiguration::getMaxSecondPlayerAsteroidSize() {
+	return 3.5f;
+}
+
+Point ActorsConfiguration::getScoreTextPosition() {
+	return Point(8, 5);
+}

@@ -32,56 +32,18 @@ public:
                                 std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                 std::shared_ptr<IInputStateProvider> inputStateProvider_,
                                 std::shared_ptr<AsteroidsGenerator> asteroidGenerator_,
-                                ActorsConfiguration &configuration_) :
-            indicatorPositionProvider_( indicatorPositionProvider_), gameTimeProvider_(gameTimeProvider_),
-            inputStateProvider_(inputStateProvider_), asteroidGenerator_(asteroidGenerator_),
-                                                                       configuration_(configuration_) {
-    }
+                                ActorsConfiguration &configuration_);
 
-    virtual void OnStart(IActor &actor) override{
-        positionSettingComponent_ = actor.getOnlyComponent<IPositionSettingComponent>();
-    }
+    virtual void OnStart(IActor &actor);
 
-    virtual void OnUpdate() override{
-        Point mousePosition = inputStateProvider_->getMousePosition();
-        std::cout << "Mouse position: " << mousePosition.toString() << std::endl;
-        positionSettingComponent_->setPosition(mousePosition.getX(), mousePosition.getY());
-
-        if( inputStateProvider_->isPressed( Keys::Player2AttackKey)) {
-            if (gameTimeProvider_->getMilisecondsSinceGameStart()
-                    > timeOfLastShoot_ + configuration_.getMinTimeBetweenSecondPlayerShoots()) {
-                timeOfLastShoot_ = gameTimeProvider_->getMilisecondsSinceGameStart();
-                Point newAsteroidVelocityVector = calculateVelocityVector();
-                double asteroidSize = calculateAsteroidSize( newAsteroidVelocityVector);
-                asteroidGenerator_->generateAsteroid( indicatorPositionProvider_->getBorderIndicatorPosition(),
-                                                      0, asteroidSize, newAsteroidVelocityVector, 0);
-            }
-        }
-    }
+    virtual void OnUpdate();
 
 private:
-    Point calculateVelocityVector(){
-        Point firstPoint = indicatorPositionProvider_->getBorderIndicatorPosition();
-        Point secondPoint = inputStateProvider_->getMousePosition();
-        Point velocityVector = secondPoint - firstPoint;
-        velocityVector.normalize();
-        double distanceBetweenPoints = calculateDistanceBetweenPoints(firstPoint, secondPoint);
-        velocityVector *= configuration_.getSecondPlayerAsteroidVelocityMultiplayer()*distanceBetweenPoints;
-        return velocityVector;
-    }
+    Point calculateVelocityVector();
 
-    double calculateAsteroidSize( Point velocityVector ){
-        double distance = sqrt( pow(velocityVector.getX(),2) + pow(velocityVector.getY(),2));
-        double size = configuration_.getSecondPlayerAsteroidSizeDivider()/distance;
-        size = std::max(size , configuration_.getMinSecondPlayerAsteroidSize());
-        size = std::min(size , configuration_.getMaxSecondPlayerAsteroidSize());
-        return size;
-    }
+    double calculateAsteroidSize(Point velocityVector );
 
-    double calculateDistanceBetweenPoints( Point p1, Point p2){
-        double distanceBetweenPoints = sqrt( pow(p1.getX()-p2.getX(),2) + (p1.getY()-p2.getY(),2) );
-        return distanceBetweenPoints;
-    }
+    double calculateDistanceBetweenPoints(Point p1, Point p2);
 
 };
 

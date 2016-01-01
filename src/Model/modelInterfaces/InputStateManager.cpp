@@ -32,7 +32,6 @@ void  InputStateManager::OnUpdate() {
 }
 
 void InputStateManager::setMousePosition(double x, double y) {
-	std::cout << " Set mouse position to " << x << " and " << y << std::endl;
 	mousePosition_ = Point(x,y);
 }
 
