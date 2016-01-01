@@ -18,11 +18,11 @@ class RocketShootingComponent : public Component {
     std::shared_ptr<GameTimeProvider> timeProvider_;
     std::shared_ptr<Box2dComponent> box2dComponent_;
     ActorsConfiguration &configuration_;
-    std::shared_ptr<ProjectilesGenerator> projectilesGenerator_;
+    ProjectilesGenerator &projectilesGenerator_;
 
     unsigned long timeOfLastShot_ = 0;
 public:
-    RocketShootingComponent(ActorsConfiguration &configuration, std::shared_ptr<ProjectilesGenerator> projectilesGenerator,
+    RocketShootingComponent(ActorsConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
                             std::shared_ptr<IInputStateProvider> inputStateProvider, std::shared_ptr<GameTimeProvider> timeProvider );
 
     void OnStart(IActor &actor);

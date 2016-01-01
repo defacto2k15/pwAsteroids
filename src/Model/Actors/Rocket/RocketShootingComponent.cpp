@@ -4,7 +4,7 @@
 
 #include "RocketShootingComponent.h"
 
-RocketShootingComponent::RocketShootingComponent(ActorsConfiguration &configuration, std::shared_ptr<ProjectilesGenerator> projectilesGenerator,
+RocketShootingComponent::RocketShootingComponent(ActorsConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
                                                  std::shared_ptr<IInputStateProvider> inputStateProvider, std::shared_ptr<GameTimeProvider> timeProvider )
         : configuration_(configuration), projectilesGenerator_(projectilesGenerator),
           inputStateProvider_(inputStateProvider), timeProvider_(timeProvider) {
@@ -38,6 +38,6 @@ void RocketShootingComponent::shootProjectile() {
     speedVector *= configuration_.getProjectileSpeed();
     //speedVector += box2dComponent_->getLineralVelocity();
 
-    projectilesGenerator_->generateProjectile(rocketPosition + projectileAndRocketDelta,
+    projectilesGenerator_.generateProjectile(rocketPosition + projectileAndRocketDelta,
                                               rocketRotation, speedVector, 0);
 }

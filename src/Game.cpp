@@ -43,7 +43,8 @@ Game::Game() :
 		drawingSystem_(outGameScreenModel_),
 		 boundariesDuplicationsDrawingSystem_(drawingSystem_, actorsConfiguration_),
 		actorsContainer_( new ActorsContainer(pythonModule_)),
-		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, actorsConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_){
+		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, actorsConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_),
+		projectilesGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, actorsConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_){
 
 	rootServiceContainer_.addService(pythonModule_); // must be one of first
 
@@ -58,9 +59,9 @@ Game::Game() :
 			asteroidGenerator_, asteroidsCounter_, actorsConfiguration_, gameTimeProvider, randomNumbersProvider_
 	));
 
-	projectilesGenerator_ = std::make_shared< ProjectilesGenerator>(actorsContainer_, idGenerator,
-			pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
-			box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_);
+//	projectilesGenerator_ = std::make_shared< ProjectilesGenerator>(actorsContainer_, idGenerator,
+//			pythonModule_, drawingSystem_, actorsConfiguration_, boxService_,
+//			box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_);
 
 
 	rootServiceContainer_.addService(boxService_);
@@ -125,7 +126,7 @@ Game::Game() :
 
 	//asteroidGenerator_.generateAsteroid(Point(actorsConfiguration_.getInitialPosition().getX(),0), 270.0f, 1, Point(0.0,0.1), 0.00);
 	asteroidGenerator_.generateAsteroid(Point(8, actorsConfiguration_.getInitialPosition().getY()/2), 0.0f, 1, Point(0.0,0.0), 0.00);
-	//projectilesGenerator_->generateProjectile( Point(6, 1), 0.0f, Point(-0.2, 0.0), 0.0);
+	//projectilesGenerator_.generateProjectile( Point(6, 1), 0.0f, Point(-0.2, 0.0), 0.0);
 	//asteroidGenerator_.generateAsteroid(Point(6, 1.6), 0.0f, 1, Point(-0.2,0.0), 0.00);
 
 	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");

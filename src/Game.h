@@ -43,7 +43,7 @@ private:
 	MyContactListener contactListener_;
 	ActorIdGenerator idGenerator;
 	AsteroidsGenerator asteroidGenerator_;
-	std::shared_ptr<ProjectilesGenerator> projectilesGenerator_;
+	ProjectilesGenerator projectilesGenerator_;
 	AsteroidsCounter asteroidsCounter_;
 	RandomNumbersProvider randomNumbersProvider_;
 	ImageScalesContainer imageScalesContainer_;
