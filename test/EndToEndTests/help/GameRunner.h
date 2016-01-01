@@ -17,7 +17,7 @@ enum ExpectationType{ FirstLoop = 0, EachLoop = 1, AfterTest = 2 };
 class GameRunner {
 	std::shared_ptr<Game> g_;
 	std::vector<std::vector<std::shared_ptr<IEndToEndExpectation>>> allExpectations_;
-	FakeKeyboardStateToGameProvider keyboard_;
+	FakeKeyboardStateToGameProvider input_;
 
 public:
 	GameRunner();

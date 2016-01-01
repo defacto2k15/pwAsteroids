@@ -10,25 +10,33 @@
 #include <Model/configuration/ActorsConfiguration.h>
 #include <Model/modelInterfaces/IOutGameScreenModel.h>
 #include <Model/ModelDrawing/ImageScalesContainer.h>
-#include <Model/modelInterfaces/IInKeyboardStateGetter.h>
-#include <Model/modelInterfaces/IKeyboardStateProvider.h>
+#include <Model/modelInterfaces/IInputStateGetter.h>
+#include <Model/modelInterfaces/IInputStateProvider.h>
 #include <Model/components/PositionComponent.h>
 #include <Model/components/IPositionSettingComponent.h>
+#include "IBorderIndicatorPositionProvider.h"
 
-class BorderIndicatorComponent : public Component{
+class BorderIndicatorComponent : public Component, public IBorderIndicatorPositionProvider{
     ActorsConfiguration &configuration_;
-    std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
+    std::shared_ptr<IInputStateProvider> inputStateProvider_;
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
     Rect indicatorMovingCircuitRect_;
 
     double lastIndicatorPosition_ = 0;
 public:
+    virtual Point getBorderIndicatorPosition() override;
+
     BorderIndicatorComponent(ActorsConfiguration &configuration,
-                             std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider);
+                             std::shared_ptr<IInputStateProvider> inputStateProvider);
 
     void OnStart(IActor &actor);
 
     void OnUpdate();
+
+private:
+    Point calculatePositionOfIndicator( );
+
+
 };
 
 

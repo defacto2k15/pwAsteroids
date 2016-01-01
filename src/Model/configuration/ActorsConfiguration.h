@@ -33,6 +33,8 @@ public:
 
 	virtual ScaleToScreen getBox2dToAllegroScale()const override;
 
+	virtual ScaleToScreen getAllegroToBox2dScale() const;
+
 	virtual Point getBox2dScreenDimensions() const;
 
 	virtual Point GetDuplicationBoundariesSize() const;
@@ -81,6 +83,26 @@ public:
 
 	unsigned int getScoreByDestroyingAsteroid(){
 		return 10;
+	}
+
+	unsigned long getMinTimeBetweenSecondPlayerShoots(){
+		return 300;
+	}
+
+	double getSecondPlayerAsteroidVelocityMultiplayer(){
+		return 0.4f;
+	}
+
+	double getSecondPlayerAsteroidSizeDivider(){
+		return 3.0f;
+	}
+
+	double getMinSecondPlayerAsteroidSize(){
+		return 0.15f;
+	}
+
+	double getMaxSecondPlayerAsteroidSize(){
+		return 3.5f;
 	}
 
 };

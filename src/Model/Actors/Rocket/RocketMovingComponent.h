@@ -6,7 +6,8 @@
 #define PWASTEROIDS_ROCKETMOVINGCOMPONENT_H
 
 #include <Model/components/PositionComponent.h>
-#include <Model/modelInterfaces/IKeyboardStateProvider.h>
+#include <Model/modelInterfaces/IInputStateProvider.h>
+
 #include <Model/Services/IPhysicsService.h>
 #include <Model/box2d/Box2DService.h>
 #include <Model/components/DrawingComponent.h>
@@ -21,15 +22,15 @@
 
 class RocketMovingComponent : public Component {
 	std::shared_ptr<Box2dComponent> box2dComponent_;
-	std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider_;
+	std::shared_ptr<IInputStateProvider> inputStateProvider_;
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
 	ActorsConfiguration &actorsConfiguration_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
-	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IKeyboardStateProvider>,
+	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IInputStateProvider>,
 			std::shared_ptr<PythonModule>, ActorsConfiguration &> visibilityModule_;
 
 public:
-	RocketMovingComponent(std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
+	RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
 						  std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration );
 
 	virtual void OnStart(IActor &actor);

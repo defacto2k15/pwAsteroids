@@ -2,17 +2,19 @@
 // Created by defacto on 09.11.15.
 //
 
-#include "KeyboardStateManager.h"
+#include "InputStateManager.h"
+#include <iostream>
+#include <Model/PrimitiveTypes/Point.h>
 #include <iostream>
 
-bool  KeyboardStateManager::wasClicked(Keys key) {
+bool  InputStateManager::wasClicked(Keys key) {
 	bool returnedValue =  (pressedKeysMap_.find(key) != pressedKeysMap_.end()) &&( pressedKeysMap_[key] == true)
 	       && ( !(previousPressedKeysMap_.find(key) != previousPressedKeysMap_.end()) ||
 	      		 (previousPressedKeysMap_[key] == false ));
 	return returnedValue;
 }
 
-bool  KeyboardStateManager::isPressed(Keys key) {
+bool  InputStateManager::isPressed(Keys key) {
 	if( pressedKeysMap_.find(key) == pressedKeysMap_.end()){
 		return false;
 	} else {
@@ -20,11 +22,20 @@ bool  KeyboardStateManager::isPressed(Keys key) {
 	}
 }
 
-void  KeyboardStateManager::gameKeyIsPressed(Keys key) { // called from keyboard State provider
+void  InputStateManager::gameKeyIsPressed(Keys key) { // called from input State provider
 	pressedKeysMap_[key] = true;
 }
 
-void  KeyboardStateManager::OnUpdate() {
+void  InputStateManager::OnUpdate() {
 	previousPressedKeysMap_ = pressedKeysMap_;
 	pressedKeysMap_.clear();
+}
+
+void InputStateManager::setMousePosition(double x, double y) {
+	std::cout << " Set mouse position to " << x << " and " << y << std::endl;
+	mousePosition_ = Point(x,y);
+}
+
+Point InputStateManager::getMousePosition() {
+	return mousePosition_;
 }

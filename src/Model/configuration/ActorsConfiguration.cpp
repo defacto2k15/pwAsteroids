@@ -32,6 +32,10 @@ ScaleToScreen ActorsConfiguration::getBox2dToAllegroScale() const {
 	return ScaleToScreen( 100.0f, 100.0f);
 }
 
+ScaleToScreen ActorsConfiguration::getAllegroToBox2dScale() const {
+	return ScaleToScreen(0.01f,0.01f);
+}
+
 Point ActorsConfiguration::getBox2dScreenDimensions() const {
 	return Point( 10.24f, 6.00f);
 }

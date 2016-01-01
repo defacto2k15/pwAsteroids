@@ -19,16 +19,16 @@ void RocketMovingComponent::OnUpdate() {
 		assert(false && "The rocket tail actor was not set! Shared ptr is null!") ;
 	}
 
-	if(keyboardStateProvider_->isPressed(Keys::Player1AccelerateKey)){ /* UGLY AS HELL, my eyes bleed but works*/
+	if(inputStateProvider_->isPressed(Keys::Player1AccelerateKey)){ /* UGLY AS HELL, my eyes bleed but works*/
 		accelerate();
 		rocketTailDrawing_->setVisibility(true);
 	}  else {
 		rocketTailDrawing_->setVisibility(false);
 	}
-	if (keyboardStateProvider_->isPressed(Keys::Player1LeftKey)){
+	if (inputStateProvider_->isPressed(Keys::Player1LeftKey)){
 		box2dComponent_->applyTorque(-actorsConfiguration_.getRocketTurnRate());
 	}
-	if (keyboardStateProvider_->isPressed(Keys::Player1RightKey)){
+	if (inputStateProvider_->isPressed(Keys::Player1RightKey)){
 		box2dComponent_->applyTorque(actorsConfiguration_.getRocketTurnRate());
 	}
 }
@@ -44,8 +44,8 @@ void RocketMovingComponent::accelerate() {
 
 }
 
-RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider,
+RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
 											 std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration )
-		: keyboardStateProvider_(keyboardStateProvider), visibilityModule_(pythonModule),
+		: inputStateProvider_(inputStateProvider), visibilityModule_(pythonModule),
 		  actorsConfiguration_(actorsConfiguration) {
 }

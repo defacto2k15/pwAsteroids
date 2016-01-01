@@ -15,27 +15,27 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 {
 	if (ev.type == ALLEGRO_EVENT_TIMER) {
 		if (key[KEY_UP]) {
-			g->getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AccelerateKey);
+			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player1AccelerateKey);
 		}
 
 		if (key[KEY_LEFT]) {
-			g->getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1LeftKey);
+			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player1LeftKey);
 		}
 
 		if (key[KEY_RIGHT]) {
-			g->getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1RightKey);
+			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player1RightKey);
 		}
 
 		if (key[KEY_SPACE]) {
-			g->getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player1AttackKey);
+			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player1AttackKey);
 		}
 
 		if( key[KEY_LMB]){
-			g->getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player2AttackKey);
+			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player2AttackKey);
 		}
 
 		if( key[KEY_RMB]){
-			g->getInKeyboardStateGetter()->gameKeyIsPressed(Keys::Player2LeftKey);
+			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player2LeftKey);
 		}
 
 		numberOfObjects->setText("Number of objects: " + boost::lexical_cast<std::string>(background->getNumberOfObjects()));
@@ -54,6 +54,9 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 				assert(imageDataMap_.count(primitive.getImageType()) == 1);
 				const char *pathToImage = imageDataMap_[primitive.getImageType()].path;
 				drawableObjects[primitive.getActorId()] = background->addDrawableObject(false, pathToImage, 512, 300);
+				if( primitive.getImageType() == ImagePrimitiveType::SecondPlayerTarget){
+					int k = 22;
+				}
 				int xImageSize = 1024;
 				float zoom = (xImageSize * primitive.getScale().getX())/ (imageDataMap_[primitive.getImageType()].xSize);
 
@@ -76,6 +79,9 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 			drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
 			drawableObjects[primitive.getActorId()]->setAngle(0);
 		}
+
+		al_get_mouse_state(&msestate);
+		g->getInputStateGetter()->setMousePosition(al_get_mouse_state_axis(&msestate, 0),al_get_mouse_state_axis(&msestate, 1));
 
 		drawAllScenesOnDisplay(vm->getDisplay());	// refresh the screen
 	}
@@ -178,6 +184,7 @@ GameScreen::GameScreen(std::string& t)
 	imageDataMap_[ImagePrimitiveType::Rocket] = ImageData{55, 61, "../res/aa.bmp"};
 	imageDataMap_[ImagePrimitiveType::RocketTail] = ImageData{55, 61, "../res/aa.bmp"};
 	imageDataMap_[ImagePrimitiveType::Heart] = ImageData{ 55, 61, "../res/aa.bmp"};
+	imageDataMap_[ImagePrimitiveType::SecondPlayerTarget] = ImageData{ 55, 61, "../res/aa.bmp"};
 }
 
 GameScreen::~GameScreen()

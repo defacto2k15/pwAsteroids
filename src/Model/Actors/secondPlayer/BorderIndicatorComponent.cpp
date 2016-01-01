@@ -6,8 +6,8 @@
 #include <iostream>
 
 BorderIndicatorComponent::BorderIndicatorComponent(ActorsConfiguration &configuration,
-                                                   std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider)
-        : configuration_(configuration), keyboardStateProvider_(keyboardStateProvider),
+                                                   std::shared_ptr<IInputStateProvider> inputStateProvider)
+        : configuration_(configuration), inputStateProvider_(inputStateProvider),
           indicatorMovingCircuitRect_(Point(0,0), configuration.getBox2dScreenDimensions()) {
 }
 
@@ -17,14 +17,23 @@ void BorderIndicatorComponent::OnStart(IActor &actor) {
 
 void BorderIndicatorComponent::OnUpdate() {
     double indicatorMoveDelta = 0.05;
-    if( keyboardStateProvider_->isPressed(Keys::Player2LeftKey)){
+    if( inputStateProvider_->isPressed(Keys::Player2LeftKey)){
         lastIndicatorPosition_ -= indicatorMoveDelta;
     }
-    if( keyboardStateProvider_->isPressed(Keys::Player2RightKey)){
+    if( inputStateProvider_->isPressed(Keys::Player2RightKey)){
         lastIndicatorPosition_ += indicatorMoveDelta;
     }
     lastIndicatorPosition_ += indicatorMovingCircuitRect_.getLength();
     lastIndicatorPosition_ = fmod(lastIndicatorPosition_, indicatorMovingCircuitRect_.getLength());
-    auto positionOfIndicator = indicatorMovingCircuitRect_.getPointByLength(lastIndicatorPosition_);
+    auto positionOfIndicator = calculatePositionOfIndicator();
     positionSettingComponent_->setPosition(positionOfIndicator.getX(), positionOfIndicator.getY());
+}
+
+Point BorderIndicatorComponent::getBorderIndicatorPosition() {
+    return calculatePositionOfIndicator();
+}
+
+Point BorderIndicatorComponent::calculatePositionOfIndicator( ) {
+    auto positionOfIndicator = indicatorMovingCircuitRect_.getPointByLength(lastIndicatorPosition_);
+    return positionOfIndicator;
 }

@@ -11,7 +11,7 @@ std::string GameRunner::createErrorMessage(std::shared_ptr<IEndToEndExpectation>
 	return "FAILED:\n"+failedExpectation->getExpectationDescription()+"\n BECOUSE OF: \n " + failedExpectation->getFailureMessage();
 }
 
-GameRunner::GameRunner() : g_(std::make_shared<Game>()), keyboard_(g_) ,  allExpectations_(3){}
+GameRunner::GameRunner() : g_(std::make_shared<Game>()), input_(g_) ,  allExpectations_(3){}
 
 void GameRunner::AddEachLoopExpectations(std::shared_ptr<IEndToEndExpectation> newExpectation) {
 	getExpectations(ExpectationType::EachLoop).push_back(newExpectation);
@@ -34,7 +34,7 @@ void GameRunner::RunForLoops(int loopsToRun) {
 	}
 
 	for( int i = 0; i < loopsToRun; i++ ){
-		keyboard_.sendKeysPressedToGame();
+		input_.sendKeysPressedToGame();
 		g_->update();
 		if( i == 0){
 			for( auto& expectation : getExpectations(ExpectationType::FirstLoop)){
@@ -62,7 +62,7 @@ void GameRunner::RunForLoops(int loopsToRun) {
 }
 
 void GameRunner::AddKeyPressed(Keys keyPressed) {
-	keyboard_.addKeyToPress(keyPressed);
+	input_.addKeyToPress(keyPressed);
 }
 
 void GameRunner::makeUncheckedUpdate() {

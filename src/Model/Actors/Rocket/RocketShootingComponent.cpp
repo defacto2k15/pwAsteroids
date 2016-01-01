@@ -5,9 +5,9 @@
 #include "RocketShootingComponent.h"
 
 RocketShootingComponent::RocketShootingComponent(ActorsConfiguration &configuration, std::shared_ptr<ProjectilesGenerator> projectilesGenerator,
-                                                 std::shared_ptr<IKeyboardStateProvider> keyboardStateProvider, std::shared_ptr<GameTimeProvider> timeProvider )
+                                                 std::shared_ptr<IInputStateProvider> inputStateProvider, std::shared_ptr<GameTimeProvider> timeProvider )
         : configuration_(configuration), projectilesGenerator_(projectilesGenerator),
-          keyboardStateProvider_(keyboardStateProvider), timeProvider_(timeProvider) {
+          inputStateProvider_(inputStateProvider), timeProvider_(timeProvider) {
     int todoDelete = 44;
 }
 
@@ -17,7 +17,7 @@ void RocketShootingComponent::OnStart(IActor &actor) {
 }
 
 void RocketShootingComponent::OnUpdate() {
-    if( keyboardStateProvider_->wasClicked(Keys::Player1AttackKey) ){
+    if( inputStateProvider_->wasClicked(Keys::Player1AttackKey) ){
         if( timeProvider_->getMilisecondsSinceGameStart() - timeOfLastShot_ > configuration_.getMinTimeBetweenShots()){
             timeOfLastShot_ = timeProvider_->getMilisecondsSinceGameStart();
             shootProjectile();

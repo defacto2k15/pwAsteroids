@@ -63,7 +63,7 @@ ViewManager::ViewManager(int screenWidth, int screenHeight)
 	event_queue = al_create_event_queue();
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));	// Timer events (refresh)
 	al_register_event_source(event_queue, al_get_display_event_source(display->getDisplay()));	// Display events (like "close" with 'X')
-	al_register_event_source(event_queue, al_get_keyboard_event_source());	// Keyboard events
+	al_register_event_source(event_queue, al_get_keyboard_event_source());	// Input events
 	al_register_event_source(event_queue, al_get_mouse_event_source());		// Mouse events
 	al_start_timer(timer);
 }

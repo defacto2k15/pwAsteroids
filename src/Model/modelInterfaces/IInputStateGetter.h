@@ -9,9 +9,10 @@
 #include "Model/Observer/Observable.h"
 #include "Keys.h"
 
-class IInKeyboardStateGetter :  public IService {
+class IInputStateGetter : public IService {
 public:
 	virtual void gameKeyIsPressed(Keys key)=0;
+	virtual void setMousePosition(double x, double y)=0;
 };
 
 

@@ -6,15 +6,16 @@
 #define PWASTEROIDS_KEYBOARDSTATEMANAGER_H
 
 
-#include "IKeyboardStateProvider.h"
-#include "IInKeyboardStateGetter.h"
+#include <Model/modelInterfaces/IInputStateProvider.h>
+#include <Model/modelInterfaces/IInputStateGetter.h>
 #include <map>
 #include <iostream>
+#include <Model/PrimitiveTypes/Point.h>
 
-class KeyboardStateManager : public IKeyboardStateProvider, public IInKeyboardStateGetter {
+class InputStateManager : public IInputStateProvider, public IInputStateGetter {
 	std::map<Keys, bool> previousPressedKeysMap_;
 	std::map<Keys, bool> pressedKeysMap_;
-
+	Point mousePosition_ = Point(0,0);
 
 public:
 	virtual bool wasClicked(Keys key);
@@ -24,6 +25,11 @@ public:
 	virtual void gameKeyIsPressed(Keys key);
 
 	virtual void OnUpdate();
+
+
+	virtual void setMousePosition(double x, double y) override;
+
+	virtual Point getMousePosition() override;
 };
 
 

@@ -26,6 +26,10 @@ public:
         return ScaleToScreen(0.053, 0.1);
     }
 
+    ScaleToScreen getSecondPlayerTargetImageScale(){
+        return ScaleToScreen(0.053, 0.1);
+    }
+
     ScaleToScreen getProjectileImageScale(){
         return ScaleToScreen(15.0f / getScreenSize().getX(), 15.0f / getScreenSize().getY());
     }
