@@ -13,12 +13,12 @@
 
 class ScoreDisplayer : public Component {
     ScoreCount &count_;
-    std::shared_ptr<IDrawingSystem>  drawingSystem_;
+    IDrawingSystem & drawingSystem_;
     ActorsConfiguration &actorsConfiguration_;
     ActorId  id_;
 public:
 
-    ScoreDisplayer(ScoreCount &count_, const std::shared_ptr<IDrawingSystem> &drawingSystem_,
+    ScoreDisplayer(ScoreCount &count_, IDrawingSystem &drawingSystem_,
                    ActorsConfiguration &actorsConfiguration_);
 
     virtual void OnStart(IActor &actor);

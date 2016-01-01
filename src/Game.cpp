@@ -38,11 +38,13 @@ Game::Game() :
 										actorsConfiguration_)),
 								actorsConfiguration_)),
 		box2dObjectsContainer_(imageScalesContainer_, actorsConfiguration_),
-		contactListener_(contactComponentsContainer_), rocketLife_(actorsConfiguration_) {
+		contactListener_(contactComponentsContainer_), rocketLife_(actorsConfiguration_),
+		drawingSystem_(outGameScreenModel_),
+		 boundariesDuplicationsDrawingSystem_(drawingSystem_, actorsConfiguration_) {
 
 	rootServiceContainer_.addService(pythonModule_); // must be one of first
-	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
-	boundariesDuplicationsDrawingSystem_ = std::make_shared<BoundariesDuplicationsDrawingSystem>(drawingSystem_, actorsConfiguration_);
+//	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
+//	boundariesDuplicationsDrawingSystem_ = std::make_shared<BoundariesDuplicationsDrawingSystem>(drawingSystem_, actorsConfiguration_);
 
 
 	std::shared_ptr<ActorsContainer> actorsContainer = std::make_shared<ActorsContainer>(pythonModule_);

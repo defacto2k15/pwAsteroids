@@ -6,7 +6,7 @@
 
 LifeIndicatorService::LifeIndicatorService(std::shared_ptr<ActorsContainer> actorsContainer,
                                            std::shared_ptr<PythonModule> pythonModule_,
-                                           std::shared_ptr<IDrawingSystem> drawingSystem,
+                                           IDrawingSystem &drawingSystem,
                                            ImageScalesContainer &imageScalesContainer, ActorIdGenerator &idGenerator,
                                            ActorsConfiguration &configuration, RocketLife &life)
         : actorsContainer_(actorsContainer), pythonModule_(pythonModule_), drawingSystem_(drawingSystem),

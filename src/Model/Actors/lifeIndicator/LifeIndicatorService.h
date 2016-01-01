@@ -23,7 +23,7 @@ class LifeIndicatorService : public IService{
     ActorIdGenerator &idGenerator_;
     ImageScalesContainer &imageScalesContainer_;
     std::shared_ptr<ActorsContainer> actorsContainer_;
-    std::shared_ptr<IDrawingSystem> drawingSystem_;
+    IDrawingSystem &drawingSystem_;
     std::shared_ptr<PythonModule>  pythonModule_;
 
     std::vector<std::shared_ptr<IActor>> heartsActors;
@@ -31,7 +31,7 @@ class LifeIndicatorService : public IService{
 public:
     LifeIndicatorService(std::shared_ptr<ActorsContainer> actorsContainer,
                          std::shared_ptr<PythonModule> pythonModule_,
-                         std::shared_ptr<IDrawingSystem> drawingSystem,
+                         IDrawingSystem &drawingSystem,
                          ImageScalesContainer &imageScalesContainer, ActorIdGenerator &idGenerator,
                          ActorsConfiguration &configuration, RocketLife &life);
 

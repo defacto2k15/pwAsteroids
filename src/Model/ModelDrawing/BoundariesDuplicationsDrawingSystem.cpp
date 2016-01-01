@@ -4,7 +4,7 @@
 
 #include "BoundariesDuplicationsDrawingSystem.h"
 
-BoundariesDuplicationsDrawingSystem::BoundariesDuplicationsDrawingSystem(std::shared_ptr<IDrawingSystem> normalDrawingSystem,
+BoundariesDuplicationsDrawingSystem::BoundariesDuplicationsDrawingSystem(IDrawingSystem &normalDrawingSystem,
                                                                          ActorsConfiguration &configuration)
         : normalDrawingSystem_(normalDrawingSystem), configuration_(configuration) {
 }
@@ -12,7 +12,7 @@ BoundariesDuplicationsDrawingSystem::BoundariesDuplicationsDrawingSystem(std::sh
 void BoundariesDuplicationsDrawingSystem::drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale,
                                                             ActorId actorId) {
     auto screenSize = configuration_.getBox2dScreenDimensions();
-    normalDrawingSystem_->drawImage(type, position, rotation, scale, actorId);
+    normalDrawingSystem_.drawImage(type, position, rotation, scale, actorId);
     Point delta;
     if( position.getX() < configuration_.GetDuplicationBoundariesSize().getX()){
         delta = delta + Point(screenSize.getX()+ position.getX(), 0);
@@ -28,7 +28,7 @@ void BoundariesDuplicationsDrawingSystem::drawImage(ImagePrimitiveType type, Poi
     }
 
     if( delta != Point() ){
-        normalDrawingSystem_->drawImage(type, position+delta, rotation, scale,
+        normalDrawingSystem_.drawImage(type, position+delta, rotation, scale,
                                         actorId+configuration_.getBoundariesDuplicateActorIdOffset());
     }
 

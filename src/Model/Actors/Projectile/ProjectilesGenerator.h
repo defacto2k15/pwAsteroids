@@ -15,7 +15,7 @@ public:
     ProjectilesGenerator(std::shared_ptr<ActorsContainer> actorsContainer,
                          ActorIdGenerator &idGenerator,
                          std::shared_ptr<PythonModule> pythonModule,
-                         std::shared_ptr<DrawingSystem> drawingSystem,
+                         DrawingSystem &drawingSystem,
                          ActorsConfiguration &actorsConfiguration,
                          std::shared_ptr<Box2DService> boxService,
                          Box2dObjectsContainer &container,

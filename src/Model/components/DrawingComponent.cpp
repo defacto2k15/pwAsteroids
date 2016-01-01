@@ -4,7 +4,7 @@
 
 //
 // Created by defacto on 28.11.15.
-DrawingComponent::DrawingComponent(std::shared_ptr<IDrawingSystem> drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen)
+DrawingComponent::DrawingComponent(IDrawingSystem &drawingSystem, ImagePrimitiveType imageType, ScaleToScreen scaleToScreen)
 		: drawingSystem_(drawingSystem), imageType_(imageType), scaleToScreen_(scaleToScreen) {}
 
 void  DrawingComponent::OnStart(IActor &actor) {
@@ -14,7 +14,7 @@ void  DrawingComponent::OnStart(IActor &actor) {
 
 void  DrawingComponent::OnUpdate() {
 	if( isVisible_ ) {
-		drawingSystem_->drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
+		drawingSystem_.drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
 		                          scaleToScreen_, actorId_);
 	}
 }

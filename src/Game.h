@@ -32,8 +32,8 @@ class Game {
 private:
 	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
 	RootServiceContainer rootServiceContainer_;
-	std::shared_ptr<DrawingSystem> drawingSystem_;
-	std::shared_ptr<BoundariesDuplicationsDrawingSystem> boundariesDuplicationsDrawingSystem_;
+	DrawingSystem drawingSystem_;
+	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
 	std::shared_ptr<InputStateManager> inputManager_ = std::make_shared<InputStateManager>();
 	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, actorsConfiguration_);
 	ContactComponentsContainer contactComponentsContainer_;
