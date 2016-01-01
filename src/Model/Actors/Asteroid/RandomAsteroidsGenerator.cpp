@@ -4,8 +4,8 @@
 
 #include "RandomAsteroidsGenerator.h"
 
-RandomAsteroidsGenerator::RandomAsteroidsGenerator(std::shared_ptr<AsteroidsGenerator> &asteroidsGenerator_,
-                                                   std::shared_ptr<AsteroidsCounter> &asteroidsCounter_,
+RandomAsteroidsGenerator::RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_,
+                                                   AsteroidsCounter &asteroidsCounter_,
                                                    ActorsConfiguration &configuration_,
                                                    std::shared_ptr<GameTimeProvider> &timeProvider_,
                                                    RandomNumbersProvider &provider_)
@@ -18,7 +18,7 @@ void RandomAsteroidsGenerator::OnUpdate() {
     if( timeProvider_->getMilisecondsSinceGameStart() - timeOfLastAsteroidCreation_
         > configuration_.GetMinTimeBetweenAsteroidsCreation()) {
         if (provider_.getRandomBool(configuration_.getAsteroidCreationPropabilityRatio())) {
-            if( asteroidsCounter_->getValue() < configuration_.GetMaxAsteroidsCount() ) {
+            if( asteroidsCounter_.getValue() < configuration_.GetMaxAsteroidsCount() ) {
                 timeOfLastAsteroidCreation_ = timeProvider_->getMilisecondsSinceGameStart();
                 createAsteroid();
             }
@@ -38,7 +38,7 @@ void RandomAsteroidsGenerator::createAsteroid() {
     double size = provider_.getRandomDouble(configuration_.GetAsteroidMinSize(), configuration_.GetAsteroidMaxSize());
     double rotationSpeed = provider_.getRandomDouble(0, configuration_.GetAsteroidMaxRotationSpeed());
     // todo - size is not used for now!
-    asteroidsGenerator_->generateAsteroid(position, newRotation, 1, accelerationVector, rotationSpeed  );
+    asteroidsGenerator_.generateAsteroid(position, newRotation, 1, accelerationVector, rotationSpeed  );
 }
 
 Point RandomAsteroidsGenerator::generateRandomPositionOnRectangularEdgeWithBoundaries() {

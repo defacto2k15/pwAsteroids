@@ -7,7 +7,7 @@
 SecondPlayerTargetComponent::SecondPlayerTargetComponent(std::shared_ptr<IBorderIndicatorPositionProvider> indicatorPositionProvider_,
                                                          std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                                          std::shared_ptr<IInputStateProvider> inputStateProvider_,
-                                                         std::shared_ptr<AsteroidsGenerator> asteroidGenerator_,
+                                                         AsteroidsGenerator &asteroidGenerator_,
                                                          ActorsConfiguration &configuration_)
         : indicatorPositionProvider_(indicatorPositionProvider_), gameTimeProvider_(gameTimeProvider_),
           inputStateProvider_(inputStateProvider_), asteroidGenerator_(asteroidGenerator_),
@@ -28,7 +28,7 @@ void SecondPlayerTargetComponent::OnUpdate() {
             timeOfLastShoot_ = gameTimeProvider_->getMilisecondsSinceGameStart();
             Point newAsteroidVelocityVector = calculateVelocityVector();
             double asteroidSize = calculateAsteroidSize( newAsteroidVelocityVector);
-            asteroidGenerator_->generateAsteroid( indicatorPositionProvider_->getBorderIndicatorPosition(),
+            asteroidGenerator_.generateAsteroid( indicatorPositionProvider_->getBorderIndicatorPosition(),
                                                   0, asteroidSize, newAsteroidVelocityVector, 0);
         }
     }

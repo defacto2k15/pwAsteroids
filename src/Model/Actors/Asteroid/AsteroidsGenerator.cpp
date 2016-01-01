@@ -13,7 +13,7 @@ AsteroidsGenerator::AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsCo
                                        Box2dObjectsContainer &container,
                                        ImageScalesContainer &imageScalesContainer,
                                        ContactComponentsContainer &contactComponentsContainer,
-                                       std::shared_ptr<AsteroidsCounter> asteroidsCounter)
+                                       AsteroidsCounter &asteroidsCounter)
         : ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
                           actorsConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer),
           asteroidsCounter_( asteroidsCounter) {

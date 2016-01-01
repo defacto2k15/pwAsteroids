@@ -26,7 +26,7 @@
 #include "AsteroidCollisionComponent.h"
 
 class AsteroidsGenerator : public ActorsGenerator{
-    std::shared_ptr<AsteroidsCounter> asteroidsCounter_;
+    AsteroidsCounter &asteroidsCounter_;
 
 public:
 
@@ -39,7 +39,7 @@ public:
                        Box2dObjectsContainer &container,
                        ImageScalesContainer &imageScalesContainer,
                        ContactComponentsContainer &contactComponentsContainer,
-                       std::shared_ptr<AsteroidsCounter> asteroidsCounter);
+                       AsteroidsCounter &asteroidsCounter);
 
     void generateAsteroid(Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed);
 };

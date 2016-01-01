@@ -20,7 +20,7 @@ class SecondPlayerTargetComponent : public Component {
     std::shared_ptr<IBorderIndicatorPositionProvider> indicatorPositionProvider_;
     std::shared_ptr<GameTimeProvider> gameTimeProvider_;
     std::shared_ptr<IInputStateProvider> inputStateProvider_;
-    std::shared_ptr<AsteroidsGenerator> asteroidGenerator_;
+    AsteroidsGenerator &asteroidGenerator_;
 
     ActorsConfiguration &configuration_;
 
@@ -31,7 +31,7 @@ public:
     SecondPlayerTargetComponent(std::shared_ptr<IBorderIndicatorPositionProvider> indicatorPositionProvider_,
                                 std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                 std::shared_ptr<IInputStateProvider> inputStateProvider_,
-                                std::shared_ptr<AsteroidsGenerator> asteroidGenerator_,
+                                AsteroidsGenerator &asteroidGenerator_,
                                 ActorsConfiguration &configuration_);
 
     virtual void OnStart(IActor &actor);

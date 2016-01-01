@@ -12,15 +12,15 @@
 #include <iostream>
 
 class RandomAsteroidsGenerator : public IService{
-    std::shared_ptr<AsteroidsGenerator> asteroidsGenerator_;
-    std::shared_ptr<AsteroidsCounter> asteroidsCounter_;
+    AsteroidsGenerator &asteroidsGenerator_;
+    AsteroidsCounter &asteroidsCounter_;
     ActorsConfiguration &configuration_;
     std::shared_ptr<GameTimeProvider> timeProvider_;
     RandomNumbersProvider &provider_;
     unsigned int timeOfLastAsteroidCreation_ = 0;
 public:
-    RandomAsteroidsGenerator(std::shared_ptr<AsteroidsGenerator> &asteroidsGenerator_,
-                             std::shared_ptr<AsteroidsCounter> &asteroidsCounter_,
+    RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_,
+                             AsteroidsCounter &asteroidsCounter_,
                              ActorsConfiguration &configuration_,
                              std::shared_ptr<GameTimeProvider> &timeProvider_,
                              RandomNumbersProvider &provider_);

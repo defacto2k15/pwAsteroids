@@ -10,9 +10,9 @@
 #include "AsteroidsCounter.h"
 
 class AsteroidsCountingComponent : public Component {
-    std::shared_ptr<AsteroidsCounter> counter_;
+    AsteroidsCounter &counter_;
 public:
-    AsteroidsCountingComponent(std::shared_ptr<AsteroidsCounter> counter );
+    AsteroidsCountingComponent(AsteroidsCounter &counter );
 
     void OnStart(IActor &actor);
 

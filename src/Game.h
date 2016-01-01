@@ -30,20 +30,21 @@
 
 class Game {
 private:
-	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
 	RootServiceContainer rootServiceContainer_;
-	DrawingSystem drawingSystem_;
-	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
+	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
 	std::shared_ptr<InputStateManager> inputManager_ = std::make_shared<InputStateManager>();
 	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, actorsConfiguration_);
-	ContactComponentsContainer contactComponentsContainer_;
-	MyContactListener contactListener_;
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
+	std::shared_ptr<ActorsContainer> actorsContainer_;
+	DrawingSystem drawingSystem_;
+	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
+	ContactComponentsContainer contactComponentsContainer_;
+	MyContactListener contactListener_;
 	ActorIdGenerator idGenerator;
-	std::shared_ptr<AsteroidsGenerator> asteroidGenerator_;
+	AsteroidsGenerator asteroidGenerator_;
 	std::shared_ptr<ProjectilesGenerator> projectilesGenerator_;
-	std::shared_ptr<AsteroidsCounter> asteroidsCounter_ = std::make_shared<AsteroidsCounter>();
+	AsteroidsCounter asteroidsCounter_;
 	RandomNumbersProvider randomNumbersProvider_;
 	ImageScalesContainer imageScalesContainer_;
 
