@@ -31,10 +31,16 @@
 
 class MockClass;
 
-Game::Game() :  box2dObjectsContainer_(imageScalesContainer_, actorsConfiguration_),
-				contactListener_(contactComponentsContainer_), rocketLife_(actorsConfiguration_) {
+Game::Game() :
+		outGameScreenModel_( new OutGameScreenModelScaler(
+								std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModelImageCentering(
+										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
+										actorsConfiguration_)),
+								actorsConfiguration_)),
+		box2dObjectsContainer_(imageScalesContainer_, actorsConfiguration_),
+		contactListener_(contactComponentsContainer_), rocketLife_(actorsConfiguration_) {
+
 	rootServiceContainer_.addService(pythonModule_); // must be one of first
-	outGameScreenModel_= std::make_shared<OutGameScreenModelScaler>( std::make_shared<OutGameScreenModelImageCentering>(std::make_shared<OutGameScreenModel>(), actorsConfiguration_), actorsConfiguration_);
 	drawingSystem_ = std::make_shared<DrawingSystem>(outGameScreenModel_);
 	boundariesDuplicationsDrawingSystem_ = std::make_shared<BoundariesDuplicationsDrawingSystem>(drawingSystem_, actorsConfiguration_);
 
