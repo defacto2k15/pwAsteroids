@@ -16,5 +16,6 @@ public:
 
 	virtual std::vector<ImagePrimitive> getImagePrimitives()=0;
 	virtual std::vector<TextPrimitive> getTextPrimitives()=0;
+	virtual std::vector<ActorId> getRemovedActorsIds()=0;
 };
 #endif //PWASTEROIDS_IOUTGAMESCREENMODEL_H

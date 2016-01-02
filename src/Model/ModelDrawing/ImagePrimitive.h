@@ -7,25 +7,21 @@
 
 #include "IDrawablePrimitive.h"
 #include "ImagePrimitiveType.h"
+#include "BaseDrawablePrimitive.h"
+#include "DrawablePrimitiveVisitor.h"
 
-class ImagePrimitive : public IDrawablePrimitive {
-	Point position_;
-	Rotation rotation_;
-	ScaleToScreen scale_;
+class ImagePrimitive : public BaseDrawablePrimitive {
 	ImagePrimitiveType imageType_;
-	ActorId actorId_;
 public:
-	ImagePrimitive(const Point &position, Rotation rotation, const ScaleToScreen &scale, const ActorId &actorId, const ImagePrimitiveType &imageType);
 
-	virtual Point getPosition() const;
-
-	virtual Rotation getRotation() const;
-
-	virtual ScaleToScreen getScale() const;
+	ImagePrimitive(const Point &position_, const Rotation &rotation_, const ScaleToScreen &scale_, const ActorId &id,
+				   const ImagePrimitiveType &imageType_)
+			: BaseDrawablePrimitive(position_, rotation_, scale_, id), imageType_(imageType_) { }
 
 	ImagePrimitiveType getImageType() const;
 
-	virtual ActorId getActorId() const;
+
+	virtual void accept(DrawablePrimitiveVisitor &visitor) override;
 };
 
 

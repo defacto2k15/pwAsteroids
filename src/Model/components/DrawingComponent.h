@@ -19,6 +19,10 @@ public:
 
 	virtual void OnUpdate();;
 
+	virtual void OnStop() override{
+		drawingSystem_.addRemovedActorId(actorId_);
+	}
+
 	void setVisibility(bool visibility );
 
 private:

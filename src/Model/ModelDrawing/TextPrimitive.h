@@ -8,28 +8,21 @@
 #include <Model/PrimitiveTypes/Point.h>
 #include <Model/PrimitiveTypes/AliasedTypes.h>
 #include <iostream>
+#include "BaseDrawablePrimitive.h"
+#include "DrawablePrimitiveVisitor.h"
 
-class TextPrimitive {
+class TextPrimitive : public BaseDrawablePrimitive {
     std::string textToWrite;
-    Point position;
-    ActorId actorId;
 
 public:
-    TextPrimitive(const std::string &textToWrite, const Point &position, ActorId actorId) : textToWrite(textToWrite),
-                                                                                            position(position){
-    }
 
-    std::string getTextToWrite() const {
-        return textToWrite;
-    }
+    TextPrimitive(const Point &position_, const Rotation &rotation_, const ScaleToScreen &scale_, const ActorId &id,
+                  const std::string &textToWrite);
 
-    Point getPosition() const {
-        return position;
-    }
+    std::string getTextToWrite() const;
 
-    ActorId getActorId() const {
-        return actorId;
-    }
+
+    virtual void accept(DrawablePrimitiveVisitor &visitor) override;
 };
 
 

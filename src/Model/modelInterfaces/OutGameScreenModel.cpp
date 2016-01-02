@@ -2,6 +2,7 @@
 // Created by defacto on 18.10.15.
 //
 #include <stdexcept>
+#include <memory>
 #include "OutGameScreenModel.h"
 
 std::vector<ImagePrimitive> OutGameScreenModel::getImagePrimitives() {
@@ -9,19 +10,34 @@ std::vector<ImagePrimitive> OutGameScreenModel::getImagePrimitives() {
 	return vecToReturn;
 }
 
-void OutGameScreenModel::AddImage(ImagePrimitive primitive) {
-	imagePrimitives_.push_back(primitive);
-}
 
 void OutGameScreenModel::OnUpdate() {
 	imagePrimitives_.clear();
 	textPrimitives_.clear();
+	actorIdsToRemove_.clear();
 }
 
 std::vector<TextPrimitive> OutGameScreenModel::getTextPrimitives() {
 	return textPrimitives_;
 }
 
-void OutGameScreenModel::AddText(TextPrimitive text) {
+
+void OutGameScreenModel::AddPrimitive(std::shared_ptr<IDrawablePrimitive> primitive) {
+	primitive->accept(*this);
+}
+
+void OutGameScreenModel::visit(ImagePrimitive &image) {
+	imagePrimitives_.push_back(image);
+}
+
+void OutGameScreenModel::visit(TextPrimitive &text) {
 	textPrimitives_.push_back(text);
+}
+
+std::vector<ActorId> OutGameScreenModel::getRemovedActorsIds() {
+	return actorIdsToRemove_;
+}
+
+void OutGameScreenModel::AddRemovedPrimitiveId(ActorId id) {
+	actorIdsToRemove_.push_back(id);
 }

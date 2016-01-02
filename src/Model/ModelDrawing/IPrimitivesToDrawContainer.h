@@ -7,11 +7,12 @@
 
 #include "ImagePrimitive.h"
 #include "TextPrimitive.h"
+#include <memory>
 
 class IPrimitivesToDrawContainer {
 public:
-	virtual void AddImage(ImagePrimitive image)=0;
-	virtual void AddText(TextPrimitive primitive)=0;
+	virtual void AddPrimitive( std::shared_ptr<IDrawablePrimitive> primitive)=0;
+	virtual void AddRemovedPrimitiveId( ActorId id)=0;
 	virtual ~IPrimitivesToDrawContainer(){};
 };
 

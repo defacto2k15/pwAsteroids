@@ -33,3 +33,7 @@ void BoundariesDuplicationsDrawingSystem::drawImage(ImagePrimitiveType type, Poi
     }
 
 }
+
+void BoundariesDuplicationsDrawingSystem::addRemovedActorId(ActorId id) {
+    normalDrawingSystem_.addRemovedActorId(id);
+}

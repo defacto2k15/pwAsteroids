@@ -19,32 +19,22 @@ public:
 			originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 
-	virtual void AddImage(ImagePrimitive image);
-
-	virtual void AddText( TextPrimitive text ){
-		originalOutGameScreenModel_->AddText(text);
-	}
-
 	virtual std::vector<ImagePrimitive> getImagePrimitives();
 
-	virtual std::vector<TextPrimitive> getTextPrimitives() override{
-		auto oldPrimitives = originalOutGameScreenModel_->getTextPrimitives();
-		std::vector<TextPrimitive> outVec;
-		for( auto onePrimitive : oldPrimitives){
-			outVec.push_back( TextPrimitive(onePrimitive.getTextToWrite(), calculateNewPosition(onePrimitive.getPosition()),
-											onePrimitive.getActorId()));
-		}
-		return outVec;
-	}
+
+	virtual std::vector<TextPrimitive> getTextPrimitives() override;
 
 	virtual void OnUpdate();
 
+
+	virtual void AddPrimitive(std::shared_ptr<IDrawablePrimitive> primitive) override;
+
+	virtual std::vector<ActorId> getRemovedActorsIds() override;
+
+	virtual void AddRemovedPrimitiveId(ActorId id) override;
+
 private:
-	Point calculateNewPosition( Point oldPosition){
-		ScaleToScreen scale = configuration_.getBox2dToAllegroScale();
-		Point newPos( oldPosition.getX() * scale.getX(), oldPosition.getY() * scale.getY());
-		return newPos;
-	}
+	Point calculateNewPosition(Point oldPosition);
 };
 
 

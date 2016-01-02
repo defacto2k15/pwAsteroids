@@ -32,8 +32,8 @@
 class MockClass;
 
 Game::Game() :
-		outGameScreenModel_( new OutGameScreenModelScaler(
-								std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModelImageCentering(
+		outGameScreenModel_( new  OutGameScreenModelImageCentering(
+								std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModelScaler(
 										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
 										actorsConfiguration_)),
 								actorsConfiguration_)),

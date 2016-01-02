@@ -22,18 +22,17 @@ public:
 										originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 
-	virtual void AddImage(ImagePrimitive image);
-
 	virtual std::vector<ImagePrimitive> getImagePrimitives() override;
 
-	virtual std::vector<TextPrimitive> getTextPrimitives() override{
-		return originalOutGameScreenModel_->getTextPrimitives();
-	}
+	virtual std::vector<TextPrimitive> getTextPrimitives();
 
 	virtual void OnUpdate();
 
+	virtual void AddPrimitive(std::shared_ptr<IDrawablePrimitive> primitive) override;
 
-	virtual void AddText(TextPrimitive primitive) override;
+	virtual std::vector<ActorId> getRemovedActorsIds() override;
+
+	virtual void AddRemovedPrimitiveId(ActorId id) override;
 };
 
 

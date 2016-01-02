@@ -23,6 +23,8 @@ public:
     virtual void drawText( std::string textValue, Point position, ActorId actorId){
         normalDrawingSystem_.drawText(textValue, position, actorId);
     }
+
+    virtual void addRemovedActorId(ActorId id) override;
 };
 
 

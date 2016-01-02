@@ -4,36 +4,37 @@
 
 #include "OutGameScreenModelImageCentering.h"
 
-void  OutGameScreenModelImageCentering::AddImage(ImagePrimitive image) {
-	originalOutGameScreenModel_->AddImage(image);
-}
-
-
-
 std::vector<ImagePrimitive>  OutGameScreenModelImageCentering::getImagePrimitives() {
-	auto originalPrimitives = originalOutGameScreenModel_->getImagePrimitives();
-	std::vector<ImagePrimitive> outPrimitives;
-	for( auto &oldPrimitive : originalPrimitives){
-		Point imageSize =oldPrimitive.getScale().scalePoint( configuration_.getBox2dScreenDimensions());
-		Point newPos(
-				oldPrimitive.getPosition().getX() + (0.5f)*imageSize.getX() * myMath::sinDeg( oldPrimitive.getRotation() ),
-				oldPrimitive.getPosition().getY() - (0.5)*imageSize.getX() * myMath::cosDeg(oldPrimitive.getRotation())
-		);
-		Point newPos2(
-				newPos.getX() - (0.5f)*imageSize.getY() * myMath::cosDeg( oldPrimitive.getRotation() ),
-				newPos.getY() - (0.5f)*imageSize.getY() * myMath::sinDeg( oldPrimitive.getRotation() )
-		);
-
-		outPrimitives.push_back( ImagePrimitive(newPos2, oldPrimitive.getRotation(), oldPrimitive.getScale(), oldPrimitive.getActorId(), oldPrimitive.getImageType()));
-	}
-	//std::cout << std::endl;
-	return outPrimitives;
+	return originalOutGameScreenModel_->getImagePrimitives();
 }
 
 void  OutGameScreenModelImageCentering::OnUpdate() {
 	originalOutGameScreenModel_->OnUpdate();
 }
 
-void OutGameScreenModelImageCentering::AddText(TextPrimitive primitive) {
-	originalOutGameScreenModel_->AddText(primitive);
+
+void OutGameScreenModelImageCentering::AddPrimitive(std::shared_ptr<IDrawablePrimitive> primitive) {
+	Point imageSize =primitive->getScale().scalePoint( configuration_.getBox2dScreenDimensions());
+	Point newPos(
+			primitive->getPosition().getX() + (0.5f)*imageSize.getX() * myMath::sinDeg( primitive->getRotation() ),
+			primitive->getPosition().getY() - (0.5)*imageSize.getX() * myMath::cosDeg(primitive->getRotation())
+	);
+	Point newPos2(
+			newPos.getX() - (0.5f)*imageSize.getY() * myMath::cosDeg( primitive->getRotation() ),
+			newPos.getY() - (0.5f)*imageSize.getY() * myMath::sinDeg( primitive->getRotation() )
+	);
+	primitive->setPosition(newPos2);
+	originalOutGameScreenModel_->AddPrimitive(primitive);
+}
+
+std::vector<TextPrimitive> OutGameScreenModelImageCentering::getTextPrimitives() {
+	return originalOutGameScreenModel_->getTextPrimitives();
+}
+
+std::vector<ActorId> OutGameScreenModelImageCentering::getRemovedActorsIds() {
+	return originalOutGameScreenModel_->getRemovedActorsIds();
+}
+
+void OutGameScreenModelImageCentering::AddRemovedPrimitiveId(ActorId id) {
+	originalOutGameScreenModel_->AddRemovedPrimitiveId(id);
 }

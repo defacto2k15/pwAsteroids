@@ -21,6 +21,8 @@ public:
 
 	void drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale, ActorId actorId) override;
 
+	virtual void addRemovedActorId(ActorId id) override;
+
 	void drawText(std::string textValue, Point position, ActorId actorId) override;
 };
 

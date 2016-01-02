@@ -37,6 +37,7 @@ private:
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
 	std::shared_ptr<ActorsContainer> actorsContainer_;
+	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 	DrawingSystem drawingSystem_;
 	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
 	ContactComponentsContainer contactComponentsContainer_;
@@ -46,14 +47,13 @@ private:
 	ProjectilesGenerator projectilesGenerator_;
 	AsteroidsCounter asteroidsCounter_;
 	RandomNumbersProvider randomNumbersProvider_;
+
 	ImageScalesContainer imageScalesContainer_;
-
 	Box2dObjectsContainer box2dObjectsContainer_;
-	ActorsConfiguration actorsConfiguration_;
 
+	ActorsConfiguration actorsConfiguration_;
 	RocketLife rocketLife_;
 	ScoreCount scoreCount_;
-	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 public:
 	Game();
 

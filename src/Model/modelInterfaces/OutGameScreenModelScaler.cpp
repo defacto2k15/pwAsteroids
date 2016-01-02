@@ -4,20 +4,35 @@
 
 #include "OutGameScreenModelScaler.h"
 
-void  OutGameScreenModelScaler::AddImage(ImagePrimitive image) {
-	originalOutGameScreenModel_->AddImage(image);
-}
 
 std::vector<ImagePrimitive>  OutGameScreenModelScaler::getImagePrimitives() {
-	auto oldPrimitives = originalOutGameScreenModel_->getImagePrimitives();
-	std::vector<ImagePrimitive> newPrimitives;
-	for( auto &onePrimitive : oldPrimitives ){
-		newPrimitives.push_back(ImagePrimitive( calculateNewPosition(onePrimitive.getPosition()),
-												onePrimitive.getRotation(), onePrimitive.getScale(), onePrimitive.getActorId(), onePrimitive.getImageType()));
-	}
-	return newPrimitives;
+	return originalOutGameScreenModel_->getImagePrimitives();
+}
+
+std::vector<TextPrimitive> OutGameScreenModelScaler::getTextPrimitives() {
+	return originalOutGameScreenModel_->getTextPrimitives();
 }
 
 void  OutGameScreenModelScaler::OnUpdate() {
 	originalOutGameScreenModel_->OnUpdate();
+}
+
+void OutGameScreenModelScaler::AddPrimitive(std::shared_ptr<IDrawablePrimitive> primitive) {
+	Point newPosition = calculateNewPosition(primitive->getPosition());
+	primitive->setPosition(newPosition);
+	originalOutGameScreenModel_->AddPrimitive(primitive);
+}
+
+Point OutGameScreenModelScaler::calculateNewPosition(Point oldPosition) {
+	ScaleToScreen scale = configuration_.getBox2dToAllegroScale();
+	Point newPos( oldPosition.getX() * scale.getX(), oldPosition.getY() * scale.getY());
+	return newPos;
+}
+
+std::vector<ActorId> OutGameScreenModelScaler::getRemovedActorsIds() {
+	return originalOutGameScreenModel_->getRemovedActorsIds();
+}
+
+void OutGameScreenModelScaler::AddRemovedPrimitiveId(ActorId id) {
+	originalOutGameScreenModel_->AddRemovedPrimitiveId(id);
 }
