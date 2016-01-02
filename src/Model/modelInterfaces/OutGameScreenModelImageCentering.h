@@ -7,18 +7,18 @@
 
 #include <memory>
 #include <Model/configuration/IScreenScallingConfiguration.h>
-#include <Model/configuration/IImageCenteringConfiguration.h>
+#include <Model/configuration/ActorsConfiguration.h>
 #include "IOutGameScreenModel.h"
 #include <cmath>
 #include <Model/help/myMath.h>
 
 class OutGameScreenModelImageCentering : public IOutGameScreenModel {
 	std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel_;
-	IImageCenteringConfiguration &configuration_;
+	ActorsConfiguration &configuration_;
 
 public:
 	OutGameScreenModelImageCentering(std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel,
-										IImageCenteringConfiguration &configuration) :
+										ActorsConfiguration &configuration) :
 										originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 

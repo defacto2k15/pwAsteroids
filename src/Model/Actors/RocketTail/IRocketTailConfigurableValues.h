@@ -4,8 +4,8 @@
 
 #ifndef PWASTEROIDS_IROCKETTAILCONFIGURABLEVALUES_H
 #define PWASTEROIDS_IROCKETTAILCONFIGURABLEVALUES_H
-class IRocketTailConfigurableValues{
-public:
-	virtual float getDistanceBetweenRocketAndTail( )=0;
-};
+//class ActorsConfiguration{ todo delete
+//public:
+//	virtual float getDistanceBetweenRocketAndTail( )=0;
+//};
 #endif //PWASTEROIDS_IROCKETTAILCONFIGURABLEVALUES_H

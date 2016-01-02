@@ -6,16 +6,12 @@
 #define PWASTEROIDS_ACTORSCONFIGURATION_H
 
 
-#include <Model/Actors/Rocket/IRocketConfigurableValues.h>
-#include <Model/Actors/RocketTail/IRocketTailConfigurableValues.h>
 #include <Model/PrimitiveTypes/Rect.h>
-#include "IScreenScallingConfiguration.h"
-#include "IImageCenteringConfiguration.h"
+#include <Model/PrimitiveTypes/Rotation.h>
+#include <Model/PrimitiveTypes/ScaleToScreen.h>
+#include <Model/PrimitiveTypes/AliasedTypes.h>
 
-class ActorsConfiguration : public IRocketConfigurableValues,
-                            public IRocketTailConfigurableValues,
-                            public IScreenScalingConfiguration,
-							public IImageCenteringConfiguration {
+class ActorsConfiguration {
 
 public:
 	virtual Point getInitialPosition() const;
@@ -28,10 +24,9 @@ public:
 
 	virtual ScaleToScreen getRocketScaleToScreen() const;
 
-
 	virtual float getDistanceBetweenRocketAndTail();
 
-	virtual ScaleToScreen getBox2dToAllegroScale()const override;
+	virtual ScaleToScreen getBox2dToAllegroScale()const;
 
 	virtual ScaleToScreen getAllegroToBox2dScale() const;
 

@@ -11,7 +11,6 @@
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Model/components/PositionComponent.h>
-#include "IRocketConfigurableValues.h"
 #include <cmath>
 #include <Model/help/DegreesCalculations.h>
 #include <Model/box2d/IBox2dComponent.h>

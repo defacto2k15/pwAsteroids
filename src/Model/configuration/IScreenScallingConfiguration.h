@@ -5,11 +5,11 @@
 #ifndef PWASTEROIDS_ISCREENSCALLINGCONFIGURATION_H
 #define PWASTEROIDS_ISCREENSCALLINGCONFIGURATION_H
 
-#include <Model/PrimitiveTypes/ScaleToScreen.h>
+//#include <Model/PrimitiveTypes/ScaleToScreen.h>
 
-class IScreenScalingConfiguration{
-public:
-	virtual ScaleToScreen getBox2dToAllegroScale() const = 0;
-};
+//class ActorsConfiguration{ todo delete
+//public:
+//	virtual ScaleToScreen getBox2dToAllegroScale() const = 0;
+//};
 
 #endif //PWASTEROIDS_ISCREENSCALLINGCONFIGURATION_H

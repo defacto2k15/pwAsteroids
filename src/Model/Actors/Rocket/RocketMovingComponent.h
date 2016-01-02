@@ -13,7 +13,6 @@
 #include <Model/components/DrawingComponent.h>
 #include "Box2dComponent.h"
 #include "Model/modelInterfaces/Keys.h"
-#include "IRocketConfigurableValues.h"
 #include <exception>
 #include <stdexcept>
 #include <Model/python/PythonClassVisibilityModule.h>
