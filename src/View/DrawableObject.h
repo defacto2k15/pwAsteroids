@@ -20,13 +20,19 @@ public:
 	void setAngle(float newAngle) { angle = newAngle; }
 	float getZoom() { return zoom; }
 	void setZoom(float newZoom) { zoom = newZoom; }
-	DrawableObject(bool, const char*, int, int, float = 0.0f, float = 1.0f);
+	int getTextX() { return textX; }
+	void setTextX(int newTextX) { textX = newTextX; }
+	int getTextY() { return textY; }
+	void setTextY(int newTextY) { textX = newTextY; }
+	DrawableObject(int x, int y, const char* path = NULL, const char* t = NULL, float a = 0.0f, float z = 1.0f, int tx = 0, int ty = 0);
 private:
-	ALLEGRO_BITMAP* bitmap;
+	ALLEGRO_BITMAP* bitmap = NULL;
 	std::string text;
 	bool typeIsText;
 	int pozX;
 	int pozY;
+	int textX;
+	int textY;
 	float angle;
 	float zoom;
 };

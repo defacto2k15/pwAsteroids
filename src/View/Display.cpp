@@ -5,13 +5,12 @@ void Display::drawSceneOnDisplay(Scene *scene)
 	std::vector<DrawableObject*> objectsToDisplay = scene->getSceneObjects();
 	if (objectsToDisplay.size() != 0) {
 		for (auto object : objectsToDisplay) {
-			if (object->isText()) {
-				al_draw_text(font, al_map_rgb(255, 255, 255), object->getPozX(), object->getPozY(), 0, (object->getText()).c_str());
-			}
-			else {
+			if(object->getBitmap() != NULL) {
 				al_draw_scaled_rotated_bitmap(object->getBitmap(), 0, 0, object->getPozX(), object->getPozY(),
 					object->getZoom(), object->getZoom(), object->getAngle(), 0);
 			}
+			al_draw_text(font, al_map_rgb(255, 255, 255), object->getPozX()+object->getTextX(), object->getPozY()+object->getTextY(),
+							0, (object->getText()).c_str());
 		}
 	}
 }
@@ -52,8 +51,6 @@ Display::Display(int width, int height)
 	al_init_image_addon();
 
 	al_clear_to_color(al_map_rgb(40, 120, 120));
-
-	//al_flip_display();
 
 	std::cout << "Allegro created, current working directory: " << al_get_current_directory() << "\n";
 }

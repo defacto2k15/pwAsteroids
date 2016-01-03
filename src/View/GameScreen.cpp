@@ -39,7 +39,7 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 		}
 
 		numberOfObjects->setText("Number of objects: " + boost::lexical_cast<std::string>(background->getNumberOfObjects()));
-
+		
 		g->update();
 
 		auto primitivesVec = g->getOutGameScreenModel()->getImagePrimitives();
@@ -47,13 +47,14 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 			pair.second->setPozX(-100);
 			pair.second->setPozY(-100);
 		}
-
+		
 		for (auto &primitive : primitivesVec) {
 			if (drawableObjects.count(primitive.getActorId()) == 0) {
 
 				assert(imageDataMap_.count(primitive.getImageType()) == 1);
 				const char *pathToImage = imageDataMap_[primitive.getImageType()].path;
-				drawableObjects[primitive.getActorId()] = background->addDrawableObject(false, pathToImage, 512, 300);
+				if(primitive.getImageType() == ImagePrimitiveType::Rocket) drawableObjects[primitive.getActorId()] = background->addDrawableObject(512, 300, pathToImage, "Jeste rakieta!");
+				else drawableObjects[primitive.getActorId()] = background->addDrawableObject(512, 300, pathToImage);
 				if( primitive.getImageType() == ImagePrimitiveType::SecondPlayerTarget){
 					int k = 22;
 				}
@@ -66,13 +67,13 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 			drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
 			drawableObjects[primitive.getActorId()]->setAngle(double(primitive.getRotation()) * 0.0174532925f);
 		}
-
+		
 		auto textPrimitivesVec = g->getOutGameScreenModel()->getTextPrimitives();
 
 		for (auto &primitive : textPrimitivesVec) {
 			if (drawableObjects.count(primitive.getActorId()) == 0) {
 				std::cout << "Writing one primitive with text "<< primitive.getTextToWrite() << std::endl;
-				drawableObjects[primitive.getActorId()] = background->addDrawableObject(true, primitive.getTextToWrite().c_str(), 512, 300);
+				drawableObjects[primitive.getActorId()] = background->addDrawableObject(512, 300, NULL, primitive.getTextToWrite().c_str());
 			}
 			drawableObjects[primitive.getActorId()]->setText(primitive.getTextToWrite());
 			drawableObjects[primitive.getActorId()]->setPozX(primitive.getPosition().getX());
@@ -105,8 +106,15 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 		case ALLEGRO_KEY_RIGHT:
 			key[KEY_RIGHT] = true;
 			break;
+
 		case ALLEGRO_KEY_SPACE:
 			key[KEY_SPACE] = true;
+			break;
+
+		case ALLEGRO_KEY_ESCAPE:
+			std::string str = "MenuScreen";
+			vm->changeActiveScreen(str);
+			break;
 		}
 	}
 	else if (ev.type == ALLEGRO_EVENT_KEY_UP) {
@@ -168,10 +176,9 @@ void GameScreen::initializeScreenElements()
 	background = createNewScene();
 	texts = createNewScene();
 	// drawable objects
-	spaceClickText = texts->addDrawableObject(true, "Space clicks: 0 (few more..)", 30, 20);	// true means 'it's a text'
-	mouseInfo = texts->addDrawableObject(true, "[Mouse info - let's click!]", 30, 80);	// true means 'it's a text'
-	numberOfObjects = texts->addDrawableObject(true, ("Number of objects: " + boost::lexical_cast<std::string>(background->getNumberOfObjects())).c_str(), 30, 50);
-
+	spaceClickText = texts->addDrawableObject(30, 20, NULL, "Space clicks: 0 (few more..)");
+	mouseInfo = texts->addDrawableObject(30, 80, NULL, "[Mouse info - let's click!]");
+	numberOfObjects = texts->addDrawableObject(30, 50, NULL, ("Number of objects: "+boost::lexical_cast<std::string>(background->getNumberOfObjects())).c_str());
 	std::cout << title << " initialized\n";
 }
 
@@ -181,7 +188,7 @@ GameScreen::GameScreen(std::string& t)
 	imageDataMap_[ImagePrimitiveType::Asteroid] = ImageData{ 55, 61,  "../res/asteroid.bmp" };
 	imageDataMap_[ImagePrimitiveType::BorderIndicator] = ImageData{15, 15, "../res/arrow.bmp"};
 	imageDataMap_[ImagePrimitiveType::Projectile] = ImageData{15, 15, "../res/proj.bmp"};
-	imageDataMap_[ImagePrimitiveType::Rocket] = ImageData{55, 61, "../res/aa.bmp"};
+	imageDataMap_[ImagePrimitiveType::Rocket] = ImageData{60, 60, "../res/rocket.bmp"};
 	imageDataMap_[ImagePrimitiveType::RocketTail] = ImageData{55, 61, "../res/aa.bmp"};
 	imageDataMap_[ImagePrimitiveType::Heart] = ImageData{ 55, 61, "../res/aa.bmp"};
 	imageDataMap_[ImagePrimitiveType::SecondPlayerTarget] = ImageData{ 55, 61, "../res/aa.bmp"};

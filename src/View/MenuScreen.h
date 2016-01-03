@@ -22,9 +22,8 @@ private:
 	// add additional elements in that place - scenes, objects, variables etc.
 	Scene* background;
 	DrawableObject* text;
-	DrawableObject* text2;
-
-	bool key[4] = { false, false, false, false };
+	DrawableObject* button1, *button2, *button3, *button4;
+	DrawableObject* selectedButton;
 };
 
 #endif#pragma once

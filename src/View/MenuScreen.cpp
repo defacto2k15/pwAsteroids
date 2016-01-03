@@ -2,6 +2,9 @@
 #include "ViewManager.h"
 #include "DrawableObject.h"
 
+enum OPTION { START, OPTIONS, ABOUT, EXIT };
+int option = START;
+
 void MenuScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 {
 	if (ev.type == ALLEGRO_EVENT_TIMER) {
@@ -13,23 +16,32 @@ void MenuScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 	else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
 		switch (ev.keyboard.keycode) {
 		case ALLEGRO_KEY_UP:
-			key[KEY_UP] = true;
+			if (option > 0) {
+				--option;
+				selectedButton->setPozY(selectedButton->getPozY() - 80);
+			}
 			break;
 
 		case ALLEGRO_KEY_DOWN:
-			key[KEY_DOWN] = true;
+			if (option < 3) {
+				++option;
+				selectedButton->setPozY(selectedButton->getPozY() + 80);
+			}
 			break;
 
 		case ALLEGRO_KEY_LEFT:
-			key[KEY_LEFT] = true;
 			break;
 
 		case ALLEGRO_KEY_RIGHT:
-			key[KEY_RIGHT] = true;
 			break;
 		case ALLEGRO_KEY_SPACE:
-			std::string str = "GameScreen";
-			vm->changeActiveScreen(str);
+			if (option == START) {
+				std::string str = "GameScreen";
+				vm->changeActiveScreen(str);
+			}
+			else if (option == EXIT) {
+				vm->exit();
+			}
 			break;
 		}
 	}
@@ -40,9 +52,12 @@ void MenuScreen::initializeScreenElements()
 	// scenes
 	background = createNewScene();
 	// drawable objects
-	text = background->addDrawableObject(true, "pwAsteroids", 450, 200);
-	text2 = background->addDrawableObject(true, "Press space to play :-)", 410, 300);
-
+	text = background->addDrawableObject(410, 80, NULL, "pwAsteroids (cool logo)");
+	button1 = background->addDrawableObject(340, 160, "../res/button.bmp", "Start the game", 0.0f, 1.0f, 110, 15);
+	button2 = background->addDrawableObject(340, 240, "../res/button.bmp", "Options", 0.0f, 1.0f, 140, 15);
+	button3 = background->addDrawableObject(340, 320, "../res/button.bmp", "About", 0.0f, 1.0f, 150, 15);
+	button4 = background->addDrawableObject(340, 400, "../res/button.bmp", "Exit", 0.0f, 1.0f, 155, 15);
+	selectedButton = background->addDrawableObject(320, 170, "../res/aa.bmp", NULL, 1.570796f, 0.75f);
 	std::cout << title << " initialized\n";
 }
 

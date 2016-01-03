@@ -1,8 +1,8 @@
 #include "Scene.h"
 
-DrawableObject* Scene::addDrawableObject(bool isText, const char* parameter, int x, int y, float angle)
+DrawableObject* Scene::addDrawableObject(int x, int y, const char* path, const char* text, float a, float z, int tx, int ty)
 {
-	DrawableObject* newObject = new DrawableObject(isText, parameter, x, y, angle);
+	DrawableObject* newObject = new DrawableObject(x, y, path, text, a, z, tx, ty);
 	objects.push_back(newObject);
 	return newObject;
 }

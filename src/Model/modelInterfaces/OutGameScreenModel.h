@@ -10,7 +10,7 @@
 #include <Model/Observer/Observable.h>
 #include <Model/Services/IService.h>
 #include <Model/ModelDrawing/IPrimitivesToDrawContainer.h>
-#include <bits/shared_ptr.h>
+//#include <bits/shared_ptr.h>
 #include "IOutGameScreenModel.h"
 
 

@@ -21,7 +21,7 @@ void EmptyScreen::initializeScreenElements()
 	// scenes
 	background = createNewScene();
 	// drawable objects
-	text = background->addDrawableObject(true, "Empty Screen", 30, 20); // true means it's a text object
+	text = background->addDrawableObject(30, 20, NULL, "Empty Screen"); // true means it's a text object
 
 	std::cout << title << " initialized\n";
 }
