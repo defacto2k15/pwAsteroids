@@ -7,7 +7,7 @@
 
 //#include <Model/PrimitiveTypes/ScaleToScreen.h>
 
-//class ActorsConfiguration{ todo delete
+//class GameConfiguration{ todo delete
 //public:
 //	virtual ScaleToScreen getBox2dToAllegroScale() const = 0;
 //};

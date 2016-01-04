@@ -5,10 +5,10 @@
 #include "RocketCollisionComponent.h"
 
 RocketCollisionComponent::RocketCollisionComponent(ContactComponentsContainer &contactContainer, RocketLife &rocketLife_,
-                                                   ActorsConfiguration &actorsConfiguration_,
+                                                   GameConfiguration &gameConfiguration_,
                                                    std::shared_ptr<GameTimeProvider> timeProvider_)
         : Box2dCollisionsComponent(contactContainer), rocketLife_(rocketLife_),
-          actorsConfiguration_(actorsConfiguration_), timeProvider_(timeProvider_) {
+          gameConfiguration_(gameConfiguration_), timeProvider_(timeProvider_) {
 }
 
 void RocketCollisionComponent::OnStart(IActor &actor) {
@@ -20,8 +20,8 @@ void RocketCollisionComponent::OnStart(IActor &actor) {
 void RocketCollisionComponent::OnUpdate() {
     Box2dCollisionsComponent::OnUpdate();
     if( isRocketReseting_ ){
-        int timesImageIsFlickering = actorsConfiguration_.getTimesRocketImageIsFlickering();
-        unsigned int timeOfOneFlicker = actorsConfiguration_.getTimeofOneFlicker();
+        int timesImageIsFlickering = gameConfiguration_.getTimesRocketImageIsFlickering();
+        unsigned int timeOfOneFlicker = gameConfiguration_.getTimeofOneFlicker();
         unsigned int currentTime = timeProvider_->getMilisecondsSinceGameStart() - lastTimeOfReset_;
         if( currentTime > timesImageIsFlickering * 2 * timeOfOneFlicker){
             isRocketReseting_ = false;
@@ -46,7 +46,7 @@ bool RocketCollisionComponent::manageCollision(double impulseValue ) {
     isRocketReseting_ = true;
     rocketLife_.decreaseLife();
     positionSettingComponent_->setPosition(
-            actorsConfiguration_.getInitialPosition().getX(), actorsConfiguration_.getInitialPosition().getY());
+            gameConfiguration_.getInitialPosition().getX(), gameConfiguration_.getInitialPosition().getY());
     lastTimeOfReset_ = timeProvider_->getMilisecondsSinceGameStart();
     return false;
 }

@@ -19,6 +19,7 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 		}
 
 		if (key[KEY_LEFT]) {
+			//g->getInputStateGetter()->gameKeyIsPressed( Keys::PauseKey);
 			g->getInputStateGetter()->gameKeyIsPressed(Keys::Player1LeftKey);
 		}
 

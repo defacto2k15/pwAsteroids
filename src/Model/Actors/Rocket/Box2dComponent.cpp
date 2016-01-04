@@ -2,12 +2,12 @@
 // Created by defacto on 09.11.15.
 //
 
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include "Box2dComponent.h"
 
 
 Box2dComponent::Box2dComponent(std::shared_ptr<Box2DService> box2dService,
-							   ActorsConfiguration &configurableValues,
+							   GameConfiguration &configurableValues,
 							   std::shared_ptr<Box2dObject> rocketBox2dObject)
 		: box2dService_(box2dService), configurableValues_(configurableValues), box2dObject_(rocketBox2dObject) {
 }

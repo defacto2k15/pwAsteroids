@@ -12,6 +12,7 @@ class GameTimeProvider : public IService{
 	std::chrono::time_point<std::chrono::high_resolution_clock > gameStartTime;
 	std::chrono::time_point<std::chrono::high_resolution_clock> lastFrameTime;
 	std::chrono::time_point<std::chrono::high_resolution_clock> currentFrameTime;
+	bool isOn_ = true;
 public:
 	virtual void OnStart();;
 
@@ -19,6 +20,14 @@ public:
 
 	long getMilisecondsSinceGameStart();
 	long getMilisecondsBetweenFrames();
+
+	void turnOff(){
+		isOn_ = false;
+	}
+
+	void turnOn(){
+		isOn_ = true;
+	}
 };
 
 #endif //PWASTEROIDS_GAMETIMEPROVIDER_H

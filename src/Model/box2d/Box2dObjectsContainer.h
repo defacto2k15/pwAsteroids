@@ -8,17 +8,17 @@
 #include <vector>
 #include <Model/help/DegreesCalculations.h>
 #include <Model/ModelDrawing/ImageScalesContainer.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/collisions/CollisionGroupsData.h>
 #include "Box2dObject.h"
 
 class Box2dObjectsContainer {
     std::vector<std::shared_ptr<b2PolygonShape>> polygonShapesVector_;
     ImageScalesContainer &imageScalesContainer_;
-    ActorsConfiguration &actorsConfiguration_;
+    GameConfiguration &gameConfiguration_;
 
 public:
-    Box2dObjectsContainer(ImageScalesContainer &imageScalesContainer, ActorsConfiguration &actorsConfiguration );
+    Box2dObjectsContainer(ImageScalesContainer &imageScalesContainer, GameConfiguration &gameConfiguration );
 
     std::shared_ptr<Box2dObject> getRocketObject();
 

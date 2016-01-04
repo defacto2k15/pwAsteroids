@@ -5,7 +5,7 @@
 #include "BoundariesDuplicationsDrawingSystem.h"
 
 BoundariesDuplicationsDrawingSystem::BoundariesDuplicationsDrawingSystem(IDrawingSystem &normalDrawingSystem,
-                                                                         ActorsConfiguration &configuration)
+                                                                         GameConfiguration &configuration)
         : normalDrawingSystem_(normalDrawingSystem), configuration_(configuration) {
 }
 

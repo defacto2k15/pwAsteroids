@@ -22,6 +22,8 @@ void GameTimeProvider::OnStart() {
 }
 
 void GameTimeProvider::OnUpdate() {
-	lastFrameTime = currentFrameTime;
-	currentFrameTime = std::chrono::high_resolution_clock::now();
+	if( isOn_ ) {
+		lastFrameTime = currentFrameTime;
+		currentFrameTime = std::chrono::high_resolution_clock::now();
+	}
 }

@@ -23,7 +23,9 @@ bool  InputStateManager::isPressed(Keys key) {
 }
 
 void  InputStateManager::gameKeyIsPressed(Keys key) { // called from input State provider
-	pressedKeysMap_[key] = true;
+	if( isInterpretingGameInput_ || key == Keys::PauseKey ) {
+		pressedKeysMap_[key] = true;
+	}
 }
 
 void  InputStateManager::OnUpdate() {
@@ -32,7 +34,9 @@ void  InputStateManager::OnUpdate() {
 }
 
 void InputStateManager::setMousePosition(double x, double y) {
-	mousePosition_ = Point(x,y);
+	if( isInterpretingGameInput_) {
+		mousePosition_ = Point(x, y);
+	}
 }
 
 Point InputStateManager::getMousePosition() {

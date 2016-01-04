@@ -8,15 +8,15 @@
 
 #include <memory>
 #include <Model/configuration/IScreenScallingConfiguration.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include "IOutGameScreenModel.h"
 
 class OutGameScreenModelScaler : public IOutGameScreenModel {
 	std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel_;
-	ActorsConfiguration &configuration_;
+	GameConfiguration &configuration_;
 public:
 	OutGameScreenModelScaler(std::shared_ptr<IOutGameScreenModel> originalOutGameScreenModel,
-	                         ActorsConfiguration &configuration) :
+	                         GameConfiguration &configuration) :
 			originalOutGameScreenModel_(originalOutGameScreenModel), configuration_(configuration){
 	}
 

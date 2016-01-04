@@ -14,13 +14,13 @@ class ProjectileCollisionComponent : public Box2dCollisionsComponent{
     std::shared_ptr<ActorsContainer> actorsContainer_;
     ActorId id_;
     ScoreCount &scoreCount_;
-    ActorsConfiguration &actorsConfiguration_;
+    GameConfiguration &gameConfiguration_;
 public:
 
     ProjectileCollisionComponent(ContactComponentsContainer &contactContainer,
                                  const std::shared_ptr<ActorsContainer> actorsContainer,
                                 ScoreCount &scoreCount,
-                                ActorsConfiguration &actorsConfiguration);
+                                GameConfiguration &gameConfiguration);
 
     void OnStart(IActor &actor );
 

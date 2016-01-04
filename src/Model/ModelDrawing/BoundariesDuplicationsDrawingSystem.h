@@ -8,14 +8,14 @@
 
 #include "IDrawingSystem.h"
 #include <memory>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 
 class BoundariesDuplicationsDrawingSystem : public IDrawingSystem{
      IDrawingSystem &normalDrawingSystem_;
-     ActorsConfiguration &configuration_;
+     GameConfiguration &configuration_;
 public:
     BoundariesDuplicationsDrawingSystem(IDrawingSystem &normalDrawingSystem,
-                                        ActorsConfiguration &configuration);
+                                        GameConfiguration &configuration);
 
     virtual void drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale,
                            ActorId actorId);

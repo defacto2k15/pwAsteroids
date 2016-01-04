@@ -14,14 +14,14 @@
 class RandomAsteroidsGenerator : public IService{
     AsteroidsGenerator &asteroidsGenerator_;
     AsteroidsCounter &asteroidsCounter_;
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
     std::shared_ptr<GameTimeProvider> timeProvider_;
     RandomNumbersProvider &provider_;
     unsigned int timeOfLastAsteroidCreation_ = 0;
 public:
     RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_,
                              AsteroidsCounter &asteroidsCounter_,
-                             ActorsConfiguration &configuration_,
+                             GameConfiguration &configuration_,
                              std::shared_ptr<GameTimeProvider> &timeProvider_,
                              RandomNumbersProvider &provider_);
 

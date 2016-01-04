@@ -9,7 +9,7 @@
 //#include <Model/PrimitiveTypes/Point.h>
 //#include <Model/PrimitiveTypes/ScaleToScreen.h>
 
-//class ActorsConfiguration { todo delete
+//class GameConfiguration { todo delete
 //public:
 //	virtual Point getInitialPosition() const = 0;
 //	virtual Rotation getInitialRotation() const = 0;

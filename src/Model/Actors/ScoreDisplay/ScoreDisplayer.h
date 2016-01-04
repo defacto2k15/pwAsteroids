@@ -8,18 +8,18 @@
 
 #include <Model/components/Component.h>
 #include <Model/ModelDrawing/IDrawingSystem.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include "ScoreCount.h"
 
 class ScoreDisplayer : public Component {
     ScoreCount &count_;
     IDrawingSystem & drawingSystem_;
-    ActorsConfiguration &actorsConfiguration_;
+    GameConfiguration &gameConfiguration_;
     ActorId  id_;
 public:
 
     ScoreDisplayer(ScoreCount &count_, IDrawingSystem &drawingSystem_,
-                   ActorsConfiguration &actorsConfiguration_);
+                   GameConfiguration &gameConfiguration_);
 
     virtual void OnStart(IActor &actor);
 

@@ -19,7 +19,7 @@
 
 class LifeIndicatorService : public IService{
     RocketLife &life_;
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
     ActorIdGenerator &idGenerator_;
     ImageScalesContainer &imageScalesContainer_;
     std::shared_ptr<ActorsContainer> actorsContainer_;
@@ -33,7 +33,7 @@ public:
                          std::shared_ptr<PythonModule> pythonModule_,
                          IDrawingSystem &drawingSystem,
                          ImageScalesContainer &imageScalesContainer, ActorIdGenerator &idGenerator,
-                         ActorsConfiguration &configuration, RocketLife &life);
+                         GameConfiguration &configuration, RocketLife &life);
 
     void OnStart();
 

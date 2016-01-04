@@ -7,7 +7,7 @@
 
 
 #include <Model/components/Component.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/modelInterfaces/IOutGameScreenModel.h>
 #include <Model/ModelDrawing/ImageScalesContainer.h>
 #include <Model/modelInterfaces/IInputStateGetter.h>
@@ -17,7 +17,7 @@
 #include "IBorderIndicatorPositionProvider.h"
 
 class BorderIndicatorComponent : public Component, public IBorderIndicatorPositionProvider{
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
     std::shared_ptr<IInputStateProvider> inputStateProvider_;
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
     Rect indicatorMovingCircuitRect_;
@@ -26,7 +26,7 @@ class BorderIndicatorComponent : public Component, public IBorderIndicatorPositi
 public:
     virtual Point getBorderIndicatorPosition() override;
 
-    BorderIndicatorComponent(ActorsConfiguration &configuration,
+    BorderIndicatorComponent(GameConfiguration &configuration,
                              std::shared_ptr<IInputStateProvider> inputStateProvider);
 
     void OnStart(IActor &actor);

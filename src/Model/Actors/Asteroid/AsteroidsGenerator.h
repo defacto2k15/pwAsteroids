@@ -16,7 +16,7 @@
 #include <Model/Actors/Rocket/RocketMovingComponent.h>
 #include <Model/components/ActorTypeComponent.h>
 #include <Model/box2d/Box2dPositionSettingComponent.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/box2d/Box2dObjectsContainer.h>
 #include <Model/components/OnStartLambdaComponent.h>
 #include <Model/components/ActorOnOutOfScreenDestroyerComponent.h>
@@ -27,6 +27,7 @@
 
 class AsteroidsGenerator : public ActorsGenerator{
     AsteroidsCounter &asteroidsCounter_;
+    std::shared_ptr<PythonModule> python_;
 
 public:
 
@@ -34,7 +35,7 @@ public:
                        ActorIdGenerator &idGenerator,
                        std::shared_ptr<PythonModule> pythonModule,
                        DrawingSystem &drawingSystem,
-                       ActorsConfiguration &actorsConfiguration,
+                       GameConfiguration &gameConfiguration,
                        std::shared_ptr<Box2DService> boxService,
                        Box2dObjectsContainer &container,
                        ImageScalesContainer &imageScalesContainer,

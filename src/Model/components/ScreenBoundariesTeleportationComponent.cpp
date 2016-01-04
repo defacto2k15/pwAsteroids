@@ -4,7 +4,7 @@
 
 #include "ScreenBoundariesTeleportationComponent.h"
 
-ScreenBoundariesTeleportationComponent::ScreenBoundariesTeleportationComponent(ActorsConfiguration & configuration )
+ScreenBoundariesTeleportationComponent::ScreenBoundariesTeleportationComponent(GameConfiguration & configuration )
         : configuration_(configuration ) {
 }
 

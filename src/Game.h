@@ -12,7 +12,6 @@
 #include <Model/box2d/Box2DService.h>
 #include <Model/python/PythonModule.h>
 #include <Model/Actors/ActorIdGenerator.h>
-#include <Model/configuration/ActorsConfiguration.h>
 #include <Model/python/IInPythonModule.h>
 #include <Model/python/IOutPythonModule.h>
 #include <Model/ModelDrawing/BoundariesDuplicationsDrawingSystem.h>
@@ -26,6 +25,8 @@
 #include <Model/Actors/ScoreDisplay/ScoreCount.h>
 #include <Model/modelInterfaces/InputStateManager.h>
 #include <Model/modelInterfaces/ScallingMousePositionGetter.h>
+#include <Model/configuration/GameConfiguration.h>
+#include <Model/Services/GameStopService.h>
 
 
 class Game {
@@ -33,11 +34,12 @@ private:
 	RootServiceContainer rootServiceContainer_;
 	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
 	std::shared_ptr<InputStateManager> inputManager_ = std::make_shared<InputStateManager>();
-	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, actorsConfiguration_);
+	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, gameConfiguration_);
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
 	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
 	std::shared_ptr<ActorsContainer> actorsContainer_;
 	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
+	std::shared_ptr<GameStopService> gameStopService_;
 	DrawingSystem drawingSystem_;
 	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
 	ContactComponentsContainer contactComponentsContainer_;
@@ -51,7 +53,7 @@ private:
 	ImageScalesContainer imageScalesContainer_;
 	Box2dObjectsContainer box2dObjectsContainer_;
 
-	ActorsConfiguration actorsConfiguration_;
+	GameConfiguration gameConfiguration_;
 	RocketLife rocketLife_;
 	ScoreCount scoreCount_;
 public:

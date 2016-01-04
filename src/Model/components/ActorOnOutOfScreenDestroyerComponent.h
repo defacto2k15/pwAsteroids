@@ -6,19 +6,19 @@
 #define PWASTEROIDS_ACTORONOUTOFSCREENDESTROYERCOMPONENT_H
 
 
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/Services/ActorsContainer.h>
 #include "Component.h"
 #include "PositionComponent.h"
 
 class ActorOnOutOfScreenDestroyerComponent : public Component {
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
     std::shared_ptr<ActorsContainer> actorsContainer_;
     ActorId actorId_;
     std::shared_ptr<PositionComponent> positionComponent_;
 public:
 
-    ActorOnOutOfScreenDestroyerComponent(ActorsConfiguration &configuration_,
+    ActorOnOutOfScreenDestroyerComponent(GameConfiguration &configuration_,
                                          std::shared_ptr<ActorsContainer> &actorsContainer_);
 
     void OnStart(IActor &actor );

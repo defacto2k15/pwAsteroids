@@ -6,7 +6,7 @@
 
 RandomAsteroidsGenerator::RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_,
                                                    AsteroidsCounter &asteroidsCounter_,
-                                                   ActorsConfiguration &configuration_,
+                                                   GameConfiguration &configuration_,
                                                    std::shared_ptr<GameTimeProvider> &timeProvider_,
                                                    RandomNumbersProvider &provider_)
         : asteroidsGenerator_(asteroidsGenerator_), asteroidsCounter_(asteroidsCounter_),

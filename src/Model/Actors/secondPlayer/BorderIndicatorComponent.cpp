@@ -5,7 +5,7 @@
 #include "BorderIndicatorComponent.h"
 #include <iostream>
 
-BorderIndicatorComponent::BorderIndicatorComponent(ActorsConfiguration &configuration,
+BorderIndicatorComponent::BorderIndicatorComponent(GameConfiguration &configuration,
                                                    std::shared_ptr<IInputStateProvider> inputStateProvider)
         : configuration_(configuration), inputStateProvider_(inputStateProvider),
           indicatorMovingCircuitRect_(Point(0,0), configuration.getBox2dScreenDimensions()) {

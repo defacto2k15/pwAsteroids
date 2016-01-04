@@ -14,7 +14,7 @@
 
 class RocketCollisionComponent : public Box2dCollisionsComponent {
     std::shared_ptr<GameTimeProvider> timeProvider_;
-    ActorsConfiguration &actorsConfiguration_;
+    GameConfiguration &gameConfiguration_;
     RocketLife &rocketLife_;
     unsigned long lastTimeOfReset_ = 0;
     bool isRocketReseting_ = false;
@@ -24,7 +24,7 @@ class RocketCollisionComponent : public Box2dCollisionsComponent {
 public:
 
     RocketCollisionComponent(ContactComponentsContainer &contactContainer, RocketLife &rocketLife_,
-                             ActorsConfiguration &actorsConfiguration_,
+                             GameConfiguration &gameConfiguration_,
                              std::shared_ptr<GameTimeProvider> timeProvider_);
 
     void OnStart(IActor &actor);

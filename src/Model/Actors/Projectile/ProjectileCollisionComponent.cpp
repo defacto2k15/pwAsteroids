@@ -7,9 +7,9 @@
 ProjectileCollisionComponent::ProjectileCollisionComponent(ContactComponentsContainer &contactContainer,
                                                            const std::shared_ptr<ActorsContainer> actorsContainer,
                                                             ScoreCount &scoreCount,
-                                                            ActorsConfiguration &configuration)
+                                                            GameConfiguration &configuration)
         : Box2dCollisionsComponent(
-        contactContainer), actorsContainer_(actorsContainer), scoreCount_(scoreCount), actorsConfiguration_(configuration) {
+        contactContainer), actorsContainer_(actorsContainer), scoreCount_(scoreCount), gameConfiguration_(configuration) {
 }
 
 void ProjectileCollisionComponent::OnStart(IActor &actor ) {
@@ -19,6 +19,6 @@ void ProjectileCollisionComponent::OnStart(IActor &actor ) {
 
 bool ProjectileCollisionComponent::manageCollision(double impulseValue ) {
     actorsContainer_->removeActorById(id_);
-    scoreCount_.addScore( actorsConfiguration_.getScoreByDestroyingAsteroid());
+    scoreCount_.addScore( gameConfiguration_.getScoreByDestroyingAsteroid());
     return true;
 }

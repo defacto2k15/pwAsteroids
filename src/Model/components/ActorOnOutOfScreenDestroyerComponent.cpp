@@ -4,7 +4,7 @@
 
 #include "ActorOnOutOfScreenDestroyerComponent.h"
 
-ActorOnOutOfScreenDestroyerComponent::ActorOnOutOfScreenDestroyerComponent(ActorsConfiguration &configuration_,
+ActorOnOutOfScreenDestroyerComponent::ActorOnOutOfScreenDestroyerComponent(GameConfiguration &configuration_,
                                                                            std::shared_ptr<ActorsContainer> &actorsContainer_)
         : configuration_(
         configuration_), actorsContainer_(actorsContainer_) {

@@ -16,7 +16,7 @@
 #include <Model/Actors/Rocket/RocketMovingComponent.h>
 #include <Model/components/ActorTypeComponent.h>
 #include <Model/box2d/Box2dPositionSettingComponent.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/box2d/Box2dObjectsContainer.h>
 #include <Model/components/OnStartLambdaComponent.h>
 #include <Model/components/ActorOnOutOfScreenDestroyerComponent.h>
@@ -27,7 +27,7 @@ protected:
     ActorIdGenerator &idGenerator_;
     std::shared_ptr<PythonModule> pythonModule_;
     DrawingSystem &drawingSystem_;
-    ActorsConfiguration &actorsConfiguration_;
+    GameConfiguration &gameConfiguration_;
     std::shared_ptr<Box2DService> boxService_;
     Box2dObjectsContainer &container_;
     ImageScalesContainer &imageScalesContainer_;
@@ -37,13 +37,13 @@ protected:
         ActorIdGenerator &idGenerator_,
         std::shared_ptr<PythonModule> pythonModule_,
         DrawingSystem &drawingSystem_,
-        ActorsConfiguration &actorsConfiguration_,
+        GameConfiguration &gameConfiguration_,
         std::shared_ptr<Box2DService> boxService_,
         Box2dObjectsContainer &container_,
         ImageScalesContainer &imageScalesContainer,
         ContactComponentsContainer &contactComponentsContainer)
     : actorsContainer_(actorsContainer_), idGenerator_(idGenerator_), pythonModule_(pythonModule_),
-        drawingSystem_(drawingSystem_), actorsConfiguration_(actorsConfiguration_), boxService_(boxService_),
+        drawingSystem_(drawingSystem_), gameConfiguration_(gameConfiguration_), boxService_(boxService_),
         container_(container_), imageScalesContainer_(imageScalesContainer),
       contactComponentsContainer_(contactComponentsContainer) {
     }

@@ -11,7 +11,7 @@
 #include <Model/PrimitiveTypes/ScaleToScreen.h>
 #include <Model/PrimitiveTypes/AliasedTypes.h>
 
-class ActorsConfiguration {
+class GameConfiguration {
 
 public:
 	virtual Point getInitialPosition() const;

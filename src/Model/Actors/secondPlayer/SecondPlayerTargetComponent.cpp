@@ -8,7 +8,7 @@ SecondPlayerTargetComponent::SecondPlayerTargetComponent(std::shared_ptr<IBorder
                                                          std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                                          std::shared_ptr<IInputStateProvider> inputStateProvider_,
                                                          AsteroidsGenerator &asteroidGenerator_,
-                                                         ActorsConfiguration &configuration_)
+                                                         GameConfiguration &configuration_)
         : indicatorPositionProvider_(indicatorPositionProvider_), gameTimeProvider_(gameTimeProvider_),
           inputStateProvider_(inputStateProvider_), asteroidGenerator_(asteroidGenerator_),
           configuration_(configuration_) {

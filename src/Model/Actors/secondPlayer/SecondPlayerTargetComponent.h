@@ -9,7 +9,7 @@
 #include <Model/components/PositionComponent.h>
 #include "IBorderIndicatorPositionProvider.h"
 #include <memory>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/components/IPositionSettingComponent.h>
 #include <Model/modelInterfaces/IInputStateProvider.h>
 #include <Model/Services/GameTimeProvider.h>
@@ -22,7 +22,7 @@ class SecondPlayerTargetComponent : public Component {
     std::shared_ptr<IInputStateProvider> inputStateProvider_;
     AsteroidsGenerator &asteroidGenerator_;
 
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
 
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
     unsigned long timeOfLastShoot_ = 0;
@@ -32,7 +32,7 @@ public:
                                 std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                 std::shared_ptr<IInputStateProvider> inputStateProvider_,
                                 AsteroidsGenerator &asteroidGenerator_,
-                                ActorsConfiguration &configuration_);
+                                GameConfiguration &configuration_);
 
     virtual void OnStart(IActor &actor);
 

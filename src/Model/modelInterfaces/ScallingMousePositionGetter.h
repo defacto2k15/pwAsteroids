@@ -6,15 +6,15 @@
 #define PWASTEROIDS_SCALLINGDMOUSEPOSITIONGETTER_H
 
 #include <memory>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include "IInputStateGetter.h"
 
 class ScallingMousePositionGetter : public IInputStateGetter {
     std::shared_ptr<IInputStateGetter> rootStateGetter_;
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
 public:
     ScallingMousePositionGetter(const std::shared_ptr<IInputStateGetter> &rootStateGetter_,
-                                ActorsConfiguration &configuration_);
+                                GameConfiguration &configuration_);
 
     virtual void gameKeyIsPressed(Keys key);
 

@@ -11,15 +11,15 @@
 #include <cmath>
 #include <Model/help/DegreesCalculations.h>
 #include <Model/help/myMath.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 
 class RocketTailPositionComponent : public Component {
 	std::shared_ptr<IActor> rocketActor_;
-	ActorsConfiguration &configurableValues_;
+	GameConfiguration &configurableValues_;
 	std::shared_ptr<PositionComponent> tailPositionComponent_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
 public:
-	RocketTailPositionComponent( std::shared_ptr<IActor> rocketActor, ActorsConfiguration &values )
+	RocketTailPositionComponent( std::shared_ptr<IActor> rocketActor, GameConfiguration &values )
 			: rocketActor_( rocketActor ), configurableValues_(values){
 	}
 

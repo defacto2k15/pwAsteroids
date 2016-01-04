@@ -1,6 +1,7 @@
 #include "ConsoleScreen.h"
 #include "ViewManager.h"
 #include "DrawableObject.h"
+#include <boost/algorithm/string.hpp>
 
 bool gotScreenshot = false;
 
@@ -11,6 +12,19 @@ void ConsoleScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 		gameScreen->setTint(160, 160, 160);
 		gotScreenshot = true;
 	}
+
+	/*Bartkowy kod - cos zwrocil python */
+	std::string pythonOutput = g->getOutPythonModule()->getOutput();
+	if( pythonOutput.size() != 0 ){
+		std::vector<std::string> strs;
+		boost::split(strs, pythonOutput, boost::is_any_of("\n"));
+		int i = 0;
+		for( auto &oneOutLine : strs ){
+			for (int j = NUMBER_OF_LINES - 1; j > 0; --j) commandLine[j]->setText(commandLine[j - 1]->getText()); // uneffective but works
+			commandLine[0]->setText(oneOutLine);
+		}
+	}
+	/* koniec */
 
 	if (ev.type == ALLEGRO_EVENT_TIMER) {
 		drawAllScenesOnDisplay(vm->getDisplay()); // remember to refresh the screen in a proper place
@@ -38,6 +52,11 @@ void ConsoleScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 			commandLine[0]->setText("> " + boost::lexical_cast<std::string>(al_cstr(input)));
 			break;
 		case ALLEGRO_KEY_ENTER:
+			/* BARTKOWY KOD */
+			g->getInPythonModule()->addCommand(boost::lexical_cast<std::string>(al_cstr(input)));
+			g->update(); // ugly but necessary!
+			/* KONIEC */
+
 			for (int j = NUMBER_OF_LINES - 1; j > 0; --j) commandLine[j]->setText(commandLine[j - 1]->getText());
 			// call the command with parameter ' commandLine[1]->getText() '
 			commandLine[0]->setText("> ");	// or print response from the python module

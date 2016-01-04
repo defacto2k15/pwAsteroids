@@ -19,7 +19,7 @@ void PythonModule::addCommand(std::string commandText) {
 }
 
 std::string PythonModule::getOutput() {
-	std::string joinedString = boost::algorithm::join( redirector.GetOutput(), "\n");
+	std::string joinedString = boost::algorithm::join( redirector.GetOutput(), " ");
 	return joinedString;
 }
 
@@ -53,4 +53,8 @@ void PythonModule::OnUpdate() {
 		//	cls.add_property("a", +[](const A& a){return a.a;});
 		//	main_namespace["A"] = cls;
 	}
+}
+
+PythonModule::PythonModule() {
+	isPythonEnabled_ = true;
 }

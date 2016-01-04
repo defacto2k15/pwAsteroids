@@ -7,7 +7,7 @@
 
 //#include <Model/PrimitiveTypes/Point.h>
 
-//class ActorsConfiguration { todo delete
+//class GameConfiguration { todo delete
 //public:
 //	virtual Point getBox2dScreenDimensions() const = 0;
 //};

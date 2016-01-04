@@ -6,15 +6,15 @@
 #define PWASTEROIDS_ROCKETLIFECOMPONENT_H
 
 #include <memory>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include <Model/modelInterfaces/IOutGameScreenModel.h>
 #include <stdexcept>
 
 class RocketLife {
     unsigned int life_;
-    ActorsConfiguration &actorsConfiguration_;
+    GameConfiguration &gameConfiguration_;
 public:
-    RocketLife(ActorsConfiguration &actorsConfiguration);
+    RocketLife(GameConfiguration &gameConfiguration);
 
     void decreaseLife();
 

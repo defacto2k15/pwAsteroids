@@ -6,7 +6,7 @@
 #define PWASTEROIDS_SCREENBOUNDARIESTELEPORTATIONCOMPONENT_H
 
 
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 #include "Component.h"
 #include "PositionComponent.h"
 #include "IPositionSettingComponent.h"
@@ -14,9 +14,9 @@
 class ScreenBoundariesTeleportationComponent : public Component {
     std::shared_ptr<PositionComponent> positionComponent_;
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
-    ActorsConfiguration &configuration_;
+    GameConfiguration &configuration_;
 public:
-    ScreenBoundariesTeleportationComponent(ActorsConfiguration & configuration );
+    ScreenBoundariesTeleportationComponent(GameConfiguration & configuration );
 
     void OnStart(IActor &actor);
 

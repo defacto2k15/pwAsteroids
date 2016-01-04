@@ -8,7 +8,7 @@ LifeIndicatorService::LifeIndicatorService(std::shared_ptr<ActorsContainer> acto
                                            std::shared_ptr<PythonModule> pythonModule_,
                                            IDrawingSystem &drawingSystem,
                                            ImageScalesContainer &imageScalesContainer, ActorIdGenerator &idGenerator,
-                                           ActorsConfiguration &configuration, RocketLife &life)
+                                           GameConfiguration &configuration, RocketLife &life)
         : actorsContainer_(actorsContainer), pythonModule_(pythonModule_), drawingSystem_(drawingSystem),
           imageScalesContainer_(imageScalesContainer), idGenerator_(idGenerator), configuration_(configuration),
           life_(life) {

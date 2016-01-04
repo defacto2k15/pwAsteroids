@@ -5,8 +5,8 @@
 #include <Model/collisions/CollisionGroupsData.h>
 #include "Box2dObjectsContainer.h"
 
-Box2dObjectsContainer::Box2dObjectsContainer(ImageScalesContainer &imageScalesContainer, ActorsConfiguration &actorsConfiguration )
-        : imageScalesContainer_(imageScalesContainer), actorsConfiguration_(actorsConfiguration) {
+Box2dObjectsContainer::Box2dObjectsContainer(ImageScalesContainer &imageScalesContainer, GameConfiguration &gameConfiguration )
+        : imageScalesContainer_(imageScalesContainer), gameConfiguration_(gameConfiguration) {
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getRocketObject() {
@@ -26,7 +26,7 @@ std::shared_ptr<Box2dObject> Box2dObjectsContainer::createObjectWithBoxShape(Sca
                                                                              double density,
                                                                              CollisionGroupsData collisionGroupData) {
     auto shape = std::make_shared<b2PolygonShape>();
-    Point imageSizeInGameUnits = imageScale.scalePoint( actorsConfiguration_.getBox2dScreenDimensions()  );
+    Point imageSizeInGameUnits = imageScale.scalePoint( gameConfiguration_.getBox2dScreenDimensions()  );
     shape->SetAsBox(imageSizeInGameUnits.getX()/2,imageSizeInGameUnits.getY()/2);
 
     polygonShapesVector_.push_back(shape);

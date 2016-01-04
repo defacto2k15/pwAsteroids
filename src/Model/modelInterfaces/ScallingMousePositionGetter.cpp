@@ -6,7 +6,7 @@
 
 
 ScallingMousePositionGetter::ScallingMousePositionGetter(const std::shared_ptr<IInputStateGetter> &rootStateGetter_,
-                                                         ActorsConfiguration &configuration_)
+                                                         GameConfiguration &configuration_)
         : rootStateGetter_(rootStateGetter_),
           configuration_(configuration_) { }
 

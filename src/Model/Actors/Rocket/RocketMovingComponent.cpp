@@ -26,10 +26,10 @@ void RocketMovingComponent::OnUpdate() {
 		rocketTailDrawing_->setVisibility(false);
 	}
 	if (inputStateProvider_->isPressed(Keys::Player1LeftKey)){
-		box2dComponent_->applyTorque(-actorsConfiguration_.getRocketTurnRate());
+		box2dComponent_->applyTorque(-gameConfiguration_.getRocketTurnRate());
 	}
 	if (inputStateProvider_->isPressed(Keys::Player1RightKey)){
-		box2dComponent_->applyTorque(actorsConfiguration_.getRocketTurnRate());
+		box2dComponent_->applyTorque(gameConfiguration_.getRocketTurnRate());
 	}
 }
 
@@ -38,14 +38,14 @@ void RocketMovingComponent::setRocketTail( std::shared_ptr<IActor> tailActor) {
 }
 
 void RocketMovingComponent::accelerate() {
-	Point accVec = Point((-1)*(actorsConfiguration_.getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
-							actorsConfiguration_.getRocketAccelerationRate() * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
+	Point accVec = Point((-1)*(gameConfiguration_.getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
+							gameConfiguration_.getRocketAccelerationRate() * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
 	box2dComponent_->applyForce(accVec);
 
 }
 
 RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
-											 std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration )
+											 std::shared_ptr<PythonModule> pythonModule, GameConfiguration &gameConfiguration )
 		: inputStateProvider_(inputStateProvider), visibilityModule_(pythonModule),
-		  actorsConfiguration_(actorsConfiguration) {
+		  gameConfiguration_(gameConfiguration) {
 }

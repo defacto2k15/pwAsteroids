@@ -16,21 +16,21 @@
 #include <exception>
 #include <stdexcept>
 #include <Model/python/PythonClassVisibilityModule.h>
-#include <Model/configuration/ActorsConfiguration.h>
+#include <Model/configuration/GameConfiguration.h>
 
 
 class RocketMovingComponent : public Component {
 	std::shared_ptr<Box2dComponent> box2dComponent_;
 	std::shared_ptr<IInputStateProvider> inputStateProvider_;
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
-	ActorsConfiguration &actorsConfiguration_;
+	GameConfiguration &gameConfiguration_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
 	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IInputStateProvider>,
-			std::shared_ptr<PythonModule>, ActorsConfiguration &> visibilityModule_;
+			std::shared_ptr<PythonModule>, GameConfiguration &> visibilityModule_;
 
 public:
 	RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
-						  std::shared_ptr<PythonModule> pythonModule, ActorsConfiguration &actorsConfiguration );
+						  std::shared_ptr<PythonModule> pythonModule, GameConfiguration &gameConfiguration );
 
 	virtual void OnStart(IActor &actor);
 

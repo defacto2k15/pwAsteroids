@@ -4,8 +4,8 @@
 
 #include "RocketLife.h"
 
-RocketLife::RocketLife(ActorsConfiguration &actorsConfiguration)
-        : life_(actorsConfiguration.getInitialRocketLife()), actorsConfiguration_(actorsConfiguration) {
+RocketLife::RocketLife(GameConfiguration &gameConfiguration)
+        : life_(gameConfiguration.getInitialRocketLife()), gameConfiguration_(gameConfiguration) {
 }
 
 void RocketLife::decreaseLife() {
@@ -20,7 +20,7 @@ void RocketLife::increaseLife() {
 }
 
 void RocketLife::resetLife() {
-    life_ = actorsConfiguration_.getInitialRocketLife();
+    life_ = gameConfiguration_.getInitialRocketLife();
 }
 
 unsigned int RocketLife::getLife() {

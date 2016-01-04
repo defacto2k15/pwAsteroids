@@ -16,7 +16,7 @@ public:
                          ActorIdGenerator &idGenerator,
                          std::shared_ptr<PythonModule> pythonModule,
                          DrawingSystem &drawingSystem,
-                         ActorsConfiguration &actorsConfiguration,
+                         GameConfiguration &gameConfiguration,
                          std::shared_ptr<Box2DService> boxService,
                          Box2dObjectsContainer &container,
                          ImageScalesContainer &imageScalesContainer,

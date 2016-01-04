@@ -16,6 +16,7 @@ class InputStateManager : public IInputStateProvider, public IInputStateGetter {
 	std::map<Keys, bool> previousPressedKeysMap_;
 	std::map<Keys, bool> pressedKeysMap_;
 	Point mousePosition_ = Point(0,0);
+	bool isInterpretingGameInput_ = true;
 
 public:
 	virtual bool wasClicked(Keys key);
@@ -30,6 +31,14 @@ public:
 	virtual void setMousePosition(double x, double y) override;
 
 	virtual Point getMousePosition() override;
+
+	void turnOffGameKeysInterpretation(){
+		isInterpretingGameInput_ = false;
+	}
+
+	void turnOnGameKeysInterpretation(){
+		isInterpretingGameInput_ = true;
+	}
 };
 
 

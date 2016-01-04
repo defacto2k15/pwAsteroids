@@ -73,11 +73,9 @@ class PythonModule : public IOutPythonModule, public IInPythonModule, public ISe
 	bool onceUpdated_ = false;
 
 public:
-	bool isPythonEnabled_ = false;
+	bool isPythonEnabled_;
 
-	PythonModule() {
-		// empty ctor to shut up compiler
-	}
+	PythonModule();
 
 	virtual void addCommand(std::string commandText);
 

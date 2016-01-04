@@ -4,7 +4,7 @@
 
 #include "RocketShootingComponent.h"
 
-RocketShootingComponent::RocketShootingComponent(ActorsConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
+RocketShootingComponent::RocketShootingComponent(GameConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
                                                  std::shared_ptr<IInputStateProvider> inputStateProvider, std::shared_ptr<GameTimeProvider> timeProvider )
         : configuration_(configuration), projectilesGenerator_(projectilesGenerator),
           inputStateProvider_(inputStateProvider), timeProvider_(timeProvider) {

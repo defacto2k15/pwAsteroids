@@ -19,7 +19,8 @@ void Box2DService::OnUpdate() {
 	int32 velocityIterations = 8;   //how strongly to correct velocity
 	int32 positionIterations = 3;   //how strongly to correct position
 
-
-	world_.Step( timeStep, velocityIterations, positionIterations);
+	if( isOn_ ) {
+		world_.Step(timeStep, velocityIterations, positionIterations);
+	}
 
 }

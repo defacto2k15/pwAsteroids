@@ -16,6 +16,7 @@
 
 class Box2DService : public IService {
 	b2World world_;
+	bool isOn_ = true;
 public:
 
 	Box2DService( MyContactListener *contactListener) : world_(b2Vec2(0.0f, 0.0f)) {
@@ -28,6 +29,14 @@ public:
 
 
 	virtual void OnUpdate();
+
+	void turnOffSimulation(){
+		isOn_ = false;
+	}
+
+	void turnOnSimulation(){
+		isOn_ = true;
+	}
 
 };
 

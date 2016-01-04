@@ -22,7 +22,7 @@ TEST(PythonEndToEndTests, SimpleMathTest ){
 
 TEST(PythonEndToEndTest, RocketPositionWritingTest ){
 	GameRunner runner;
-	ActorsConfiguration configuration;
+	GameConfiguration configuration;
 	runner.AddAfterRunExpectations(std::make_shared<OutPythonCollectorExpectation>( [configuration](std::string outPython){
 		if(( outPython.find(std::to_string(configuration.getInitialPosition().getX())) == std::string::npos ) ||
 			( outPython.find(std::to_string(configuration.getInitialPosition().getY())) == std::string::npos )	){
