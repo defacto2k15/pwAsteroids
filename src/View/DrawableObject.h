@@ -8,7 +8,8 @@
 
 class DrawableObject {
 public:
-	ALLEGRO_BITMAP* getBitmap();
+	ALLEGRO_BITMAP* getBitmap() { return bitmap; }
+	void setBitmap(ALLEGRO_BITMAP* newBitmap) { bitmap = newBitmap; }
 	std::string getText() { return text; }
 	void setText(std::string newText) { text = newText; }
 	bool isText() { return typeIsText; }
@@ -24,6 +25,13 @@ public:
 	void setTextX(int newTextX) { textX = newTextX; }
 	int getTextY() { return textY; }
 	void setTextY(int newTextY) { textX = newTextY; }
+	int getTintR() { return tintR; }
+	void setTintR(int newTintR) { tintR = newTintR; }
+	int getTintG() { return tintG; }
+	void setTintG(int newTintG) { tintG = newTintG; }
+	int getTintB() { return tintB; }
+	void setTintB(int newTintB) { tintB = newTintB; }
+	void setTint(int newTintR, int newTintG, int newTintB) { tintR = newTintR; tintG = newTintG; tintB = newTintB; }
 	DrawableObject(int x, int y, const char* path = NULL, const char* t = NULL, float a = 0.0f, float z = 1.0f, int tx = 0, int ty = 0);
 private:
 	ALLEGRO_BITMAP* bitmap = NULL;
@@ -35,6 +43,7 @@ private:
 	int textY;
 	float angle;
 	float zoom;
+	int tintR = 255, tintG = 255, tintB = 255;
 };
 
 #endif

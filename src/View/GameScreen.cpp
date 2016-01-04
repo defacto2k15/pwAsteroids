@@ -90,6 +90,7 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 		vm->exit();
 	}
 	else if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+		std::string str;
 		switch (ev.keyboard.keycode) {
 		case ALLEGRO_KEY_UP:
 			key[KEY_UP] = true;
@@ -112,7 +113,12 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 			break;
 
 		case ALLEGRO_KEY_ESCAPE:
-			std::string str = "MenuScreen";
+			str = "MenuScreen";
+			vm->changeActiveScreen(str);
+			break;
+
+		case ALLEGRO_KEY_TILDE:
+			str = "ConsoleScreen";
 			vm->changeActiveScreen(str);
 			break;
 		}

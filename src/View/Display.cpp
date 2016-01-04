@@ -6,8 +6,8 @@ void Display::drawSceneOnDisplay(Scene *scene)
 	if (objectsToDisplay.size() != 0) {
 		for (auto object : objectsToDisplay) {
 			if(object->getBitmap() != NULL) {
-				al_draw_scaled_rotated_bitmap(object->getBitmap(), 0, 0, object->getPozX(), object->getPozY(),
-					object->getZoom(), object->getZoom(), object->getAngle(), 0);
+				al_draw_tinted_scaled_rotated_bitmap(object->getBitmap(), al_map_rgb(object->getTintR(), object->getTintG(), object->getTintB()), 0, 0,
+					object->getPozX(), object->getPozY(), object->getZoom(), object->getZoom(), object->getAngle(), 0);
 			}
 			al_draw_text(font, al_map_rgb(255, 255, 255), object->getPozX()+object->getTextX(), object->getPozY()+object->getTextY(),
 							0, (object->getText()).c_str());

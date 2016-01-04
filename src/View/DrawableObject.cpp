@@ -1,11 +1,6 @@
 #include "DrawableObject.h"
 #include <iostream>
 
-ALLEGRO_BITMAP* DrawableObject::getBitmap()
-{
-	return bitmap;
-}
-
 DrawableObject::DrawableObject(int x, int y, const char* path, const char* t, float a, float z, int tx, int ty)
 {
 	typeIsText = true;

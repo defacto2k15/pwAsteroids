@@ -3,6 +3,7 @@
 #include "GameScreen.h"
 #include "MenuScreen.h"
 #include "EmptyScreen.h"
+#include "ConsoleScreen.h"
 #include <map>
 
 void ViewManager::changeActiveScreen(std::string screenTitle)
@@ -40,6 +41,10 @@ void ViewManager::start()
 	str = "GameScreen";
 	GameScreen* gameScreen = new GameScreen(str);
 	screens.push_back(gameScreen);
+
+	str = "ConsoleScreen";
+	ConsoleScreen* consoleScreen = new ConsoleScreen(str);
+	screens.push_back(consoleScreen);
 
 	/* str = "EmptyScreen";
 	EmptyScreen* emptyScreen = new EmptyScreen(str);
