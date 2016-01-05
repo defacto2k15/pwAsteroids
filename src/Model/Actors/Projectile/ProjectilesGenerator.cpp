@@ -30,7 +30,7 @@ void ProjectilesGenerator::generateProjectile(Point position, Rotation rotation,
         componentsForAsteroid.push_back(std::make_shared<PositionComponent>(pythonModule_));
         componentsForAsteroid.push_back(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Projectile, imageScalesContainer_.getProjectileImageScale()));
         componentsForAsteroid.push_back( std::make_shared<PythonActorComponent>(pythonModule_));
-        componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Asteroid, pythonModule_));
+        componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Projectile, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<PositionSettingComponent >(true, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<ActorOnOutOfScreenDestroyerComponent>(gameConfiguration_, actorsContainer_));
         componentsForAsteroid.push_back( std::make_shared<ProjectileCollisionComponent>(contactComponentsContainer_, actorsContainer_, scoreCount_, gameConfiguration_));

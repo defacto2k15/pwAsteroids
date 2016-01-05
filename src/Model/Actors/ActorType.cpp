@@ -14,6 +14,12 @@ std::string getActorTypeString(ActorType type){
                         return "RocketTail";
                 case ActorType_Invalid:
                         return "Invalid";
+                case ActorType_Asteroid:
+                        return "Asteroid";
+                case ActorType_Projectile:
+                        return "Projectile";
+                case ActorType_Other:
+                        return "Other";
                 default:
                         std::cerr<<" Given actorType that i cant convert to string! ";
                         return "Error";

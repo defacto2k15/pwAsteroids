@@ -93,6 +93,7 @@ Game::Game() :
 	auto borderIndicatorComponent =  std::make_shared<BorderIndicatorComponent>(gameConfiguration_, inputManager_);
 	borderIndicator->addComponent(borderIndicatorComponent);
 	borderIndicator->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
+	borderIndicator->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
 	actorsContainer_->addActor(borderIndicator);
 
 	actorsContainer_->addActor(rocket);
@@ -106,6 +107,8 @@ Game::Game() :
 	secondPlayerTargetingActor->addComponent(
 			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider, inputManager_, asteroidGenerator_, gameConfiguration_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
+	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
+
 	actorsContainer_->addActor( secondPlayerTargetingActor );
 	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
 	rootServiceContainer_.addService(commonTypesVisualizer);
@@ -114,7 +117,6 @@ Game::Game() :
 	rootServiceContainer_.OnStart();
 	outGameScreenModel_->OnStart();
 
-	pythonModule_.addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
 }
 
 std::shared_ptr<IOutGameScreenModel> Game::getOutGameScreenModel() {
