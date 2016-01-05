@@ -22,7 +22,7 @@ class PythonStdIoRedirect {
 public:
 	void Write( std::string const& str ) {
 		m_outputs.push_back(str);
-		std::cout << "PyOut: "<<str<<std::endl;
+		std::cout << "PyOut: "<<str;
 	}
 
 	static std::vector<std::string> GetOutput()

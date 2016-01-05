@@ -28,6 +28,7 @@
 #include <Model/modelInterfaces/IInputStateGetter.h>
 #include <Model/Actors/secondPlayer/SecondPlayerTargetComponent.h>
 #include <Model/components/PositionSettingComponent.h>
+#include <Model/python/PythonScriptsExecutingSerivce.h>
 
 
 class MockClass;
@@ -113,6 +114,9 @@ Game::Game() :
 	actorsContainer_->addActor( secondPlayerTargetingActor );
 	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
 	rootServiceContainer_.addService(commonTypesVisualizer);
+
+	auto pythonScriptsExecutor = std::make_shared<PythonScriptsExecutingSerrive>( pythonModule_, gameConfiguration_);
+	rootServiceContainer_.addService(pythonScriptsExecutor);
 
 	rootServiceContainer_.addService(inputManager_); // MUST BE ONE OF LAST!
 	rootServiceContainer_.OnStart();

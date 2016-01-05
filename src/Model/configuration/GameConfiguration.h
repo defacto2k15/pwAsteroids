@@ -55,6 +55,8 @@ class GameConfiguration {
 	double  SecondPlayerAsteroidSizeDivider = 3.0f;
 	double  MinSecondPlayerAsteroidSize = 0.15f;
 	double  MaxSecondPlayerAsteroidSize = 3.5f;
+	std::string OnStartPythonScriptPath = "../res/OnStart.py";
+	std::string OnUpdatePythonScriptPath = "../res/OnUpdate.py";
 
 	PythonClassVisibilityModule<GameConfiguration> visibility_;
 	PythonModule &python_;
@@ -105,6 +107,8 @@ public:
 		visibility_.registerProperty("SecondPlayerAsteroidSizeDivider", &GameConfiguration::getSecondPlayerAsteroidSizeDivider, &GameConfiguration::setSecondPlayerAsteroidSizeDivider   );
 		visibility_.registerProperty("MinSecondPlayerAsteroidSize", &GameConfiguration::getMinSecondPlayerAsteroidSize, &GameConfiguration::setMinSecondPlayerAsteroidSize   );
 		visibility_.registerProperty("MaxSecondPlayerAsteroidSize", &GameConfiguration::getMaxSecondPlayerAsteroidSize, &GameConfiguration::setMaxSecondPlayerAsteroidSize   );
+		visibility_.registerProperty("OnStartPythonScriptPath", &GameConfiguration::getOnStartPythonScriptPath, &GameConfiguration::setOnStartPythonScriptPath);
+		visibility_.registerProperty("OnUpdatePythonScriptPath", &GameConfiguration::getOnUpdatePythonScriptPath, &GameConfiguration::setOnUpdatePythonScriptPath);
 
 		using gameRef = GameConfiguration&;
 		std::function< GameConfiguration&() > func = configurationGettingFunction;
@@ -399,6 +403,22 @@ public:
 
 	void setMaxSecondPlayerAsteroidSize(double MaxSecondPlayerAsteroidSize) {
 		GameConfiguration::MaxSecondPlayerAsteroidSize = MaxSecondPlayerAsteroidSize;
+	}
+
+	std::string getOnUpdatePythonScriptPath() const {
+		return OnUpdatePythonScriptPath;
+	}
+
+	void setOnUpdatePythonScriptPath(std::string OnUpdatePythonScriptPath) {
+		GameConfiguration::OnUpdatePythonScriptPath = OnUpdatePythonScriptPath;
+	}
+
+	std::string getOnStartPythonScriptPath() const {
+		return OnStartPythonScriptPath;
+	}
+
+	void setOnStartPythonScriptPath(std::string OnStartPythonScriptPath) {
+		GameConfiguration::OnStartPythonScriptPath = OnStartPythonScriptPath;
 	}
 };
 
