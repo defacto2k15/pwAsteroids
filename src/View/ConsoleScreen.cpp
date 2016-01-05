@@ -14,7 +14,7 @@ void ConsoleScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 	}
 
 	/*Bartkowy kod - cos zwrocil python */
-	std::string pythonOutput = g->getOutPythonModule()->getOutput();
+	std::string pythonOutput = g->getOutPythonModule().getOutput();
 	if( pythonOutput.size() != 0 ){
 		std::vector<std::string> strs;
 		boost::split(strs, pythonOutput, boost::is_any_of("\n"));
@@ -53,7 +53,7 @@ void ConsoleScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 			break;
 		case ALLEGRO_KEY_ENTER:
 			/* BARTKOWY KOD */
-			g->getInPythonModule()->addCommand(boost::lexical_cast<std::string>(al_cstr(input)));
+			g->getInPythonModule().addCommand(boost::lexical_cast<std::string>(al_cstr(input)));
 			g->update(); // ugly but necessary!
 			/* KONIEC */
 

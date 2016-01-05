@@ -36,7 +36,7 @@ private:
 	std::shared_ptr<InputStateManager> inputManager_ = std::make_shared<InputStateManager>();
 	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, gameConfiguration_);
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
-	std::shared_ptr<PythonModule> pythonModule_ = std::make_shared<PythonModule>();
+	PythonModule pythonModule_;
 	std::shared_ptr<ActorsContainer> actorsContainer_;
 	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 	std::shared_ptr<GameStopService> gameStopService_;
@@ -63,9 +63,9 @@ public:
 
 	std::shared_ptr<IInputStateGetter> getInputStateGetter();
 
-	std::shared_ptr<IInPythonModule> getInPythonModule();
+	IInPythonModule &getInPythonModule();
 
-	std::shared_ptr<IOutPythonModule> getOutPythonModule();
+	IOutPythonModule &getOutPythonModule();
 
 	void update();;
 };

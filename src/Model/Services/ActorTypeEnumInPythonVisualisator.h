@@ -13,7 +13,7 @@ class ActorTypeEnumInPythonVisualisator : public IService{
     PythonEnumVisibilityModule<ActorType> visibilityModule_;
 
 public:
-    ActorTypeEnumInPythonVisualisator( std::shared_ptr<PythonModule> module ):visibilityModule_(module){
+    ActorTypeEnumInPythonVisualisator( PythonModule &module ):visibilityModule_(module){
     }
 
     virtual void OnStart() override {

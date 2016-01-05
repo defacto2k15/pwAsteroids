@@ -5,9 +5,10 @@
 #include "GameStopService.h"
 #include <iostream>
 
-GameStopService::GameStopService(const std::shared_ptr<PythonModule> python_,
+GameStopService::GameStopService(PythonModule &python_,
                                  const std::shared_ptr<GameTimeProvider> gameTimeProvider_,
-                                 const std::shared_ptr<Box2DService> box2dService_, std::shared_ptr<InputStateManager> inputManager)
+                                 const std::shared_ptr<Box2DService> box2dService_,
+                                 std::shared_ptr<InputStateManager> inputManager)
         : python_(
         python_), gameTimeProvider_(gameTimeProvider_), box2dService_(box2dService_), inputManager(inputManager) { }
 

@@ -30,12 +30,6 @@ public:
 private:
     void createAsteroid();
 
-    Point generateRandomPositionOnRectangularEdgeWithBoundaries();
-
-    Point generateRandomPointInRectangularWithBoundaries();
-
-    Point generateAccelerationNormalVector(Point startPoint);
-
 };
 
 

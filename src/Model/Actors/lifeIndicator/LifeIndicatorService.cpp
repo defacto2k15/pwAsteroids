@@ -5,7 +5,7 @@
 #include "LifeIndicatorService.h"
 
 LifeIndicatorService::LifeIndicatorService(std::shared_ptr<ActorsContainer> actorsContainer,
-                                           std::shared_ptr<PythonModule> pythonModule_,
+                                           PythonModule &pythonModule_,
                                            IDrawingSystem &drawingSystem,
                                            ImageScalesContainer &imageScalesContainer, ActorIdGenerator &idGenerator,
                                            GameConfiguration &configuration, RocketLife &life)

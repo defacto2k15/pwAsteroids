@@ -13,16 +13,16 @@ class CommonTypesVisualizer : public IService {
     PythonClassVisibilityModule<Point, double, double> pointVisibilityModule_;
     PythonClassVisibilityModule<Rotation, double > rotationVisibilityModule_;
 public:
-    CommonTypesVisualizer( std::shared_ptr<PythonModule> python )
+    CommonTypesVisualizer( PythonModule &python )
             :  pointVisibilityModule_(python), rotationVisibilityModule_(python){
     }
 
     void OnStart() override{
-        pointVisibilityModule_.registerClass();
+        pointVisibilityModule_.registerClass("Point");
         pointVisibilityModule_.registerMethod("getX", &Point::getX);
         pointVisibilityModule_.registerMethod("getY", &Point::getY);
 
-        rotationVisibilityModule_.registerClass();
+        rotationVisibilityModule_.registerClass("Rotation");
         rotationVisibilityModule_.registerMethod("getAsDouble", &Rotation::getAsDouble);
     }
 };

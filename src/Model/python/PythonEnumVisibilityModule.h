@@ -13,9 +13,9 @@
 
 template< typename T >
 class PythonEnumVisibilityModule {
-    std::shared_ptr<PythonModule> pythonModule_;
+    PythonModule &pythonModule_;
 public:
-    PythonEnumVisibilityModule(std::shared_ptr<PythonModule> pythonModule)
+    PythonEnumVisibilityModule(PythonModule &pythonModule)
             : pythonModule_(pythonModule){
     }
 
@@ -23,7 +23,7 @@ public:
         if( pythonEnum_ == false){
            // auto kk = enum_<T>("TRE1");
             pythonEnum_ = std::make_shared<enum_<T>>(typeid(T).name());
-            pythonModule_->registerInMainNamespace(typeid(T).name(), *pythonEnum_);
+            pythonModule_.registerInMainNamespace(typeid(T).name(), *pythonEnum_);
         }
     }
 

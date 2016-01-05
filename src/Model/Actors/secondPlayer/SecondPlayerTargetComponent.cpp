@@ -49,6 +49,7 @@ double SecondPlayerTargetComponent::calculateAsteroidSize(Point velocityVector )
     double size = configuration_.getSecondPlayerAsteroidSizeDivider()/distance;
     size = std::max(size , configuration_.getMinSecondPlayerAsteroidSize());
     size = std::min(size , configuration_.getMaxSecondPlayerAsteroidSize());
+    size = sqrt(size);
     return size;
 }
 

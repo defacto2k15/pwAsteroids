@@ -18,7 +18,7 @@ public:
 		return outVec;
 	}
 
-	std::shared_ptr<PythonModule> mockPython = std::make_shared<PythonModule>();
+	PythonModule &mockPython = std::make_shared<PythonModule>();
 
 };
 

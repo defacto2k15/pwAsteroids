@@ -15,9 +15,8 @@ class PositionComponent : public Component{
 	Rotation rotation_;
 	PythonClassVisibilityModule<PositionComponent> visibility_;
 
-
 public:
-	PositionComponent( std::shared_ptr<PythonModule> python);
+	PositionComponent( PythonModule &python);
 
 	Point getPosition() ;
 

@@ -5,7 +5,7 @@
 #include <Model/python/PythonModule.h>
 #include "PositionComponent.h"
 
-PositionComponent::PositionComponent( std::shared_ptr<PythonModule> python)
+PositionComponent::PositionComponent( PythonModule &python)
 		: position_(0.0, 0.0), rotation_(0.0), visibility_(python) {
 }
 
@@ -40,3 +40,4 @@ void PositionComponent::setRotation( Rotation newRotation ) {
 void PositionComponent::rotateBy( double toRotate ) {
 	rotation_+=toRotate;
 }
+

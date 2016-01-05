@@ -26,11 +26,11 @@ class RocketMovingComponent : public Component {
 	GameConfiguration &gameConfiguration_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
 	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IInputStateProvider>,
-			std::shared_ptr<PythonModule>, GameConfiguration &> visibilityModule_;
+			PythonModule &, GameConfiguration &> visibilityModule_;
 
 public:
 	RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
-						  std::shared_ptr<PythonModule> pythonModule, GameConfiguration &gameConfiguration );
+						  PythonModule &pythonModule, GameConfiguration &gameConfiguration );
 
 	virtual void OnStart(IActor &actor);
 

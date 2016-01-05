@@ -30,6 +30,8 @@ void  Box2dComponent::OnUpdate() {
 
 	positionComponent_->setPosition(Point(rocketPositionInVec2d.x, rocketPositionInVec2d.y));
 	positionComponent_->setRotation(DegreesCalculations::radiansToDegrees(rocketRotationInRadians));
+
+	box2dObject_->getBody()->SetAngularVelocity( box2dObject_->getBody()->GetAngularVelocity() * 0.975f);
 }
 
 void  Box2dComponent::OnStop() {

@@ -25,7 +25,7 @@ class ActorsGenerator {
 protected:
     std::shared_ptr<ActorsContainer> actorsContainer_;
     ActorIdGenerator &idGenerator_;
-    std::shared_ptr<PythonModule> pythonModule_;
+    PythonModule &pythonModule_;
     DrawingSystem &drawingSystem_;
     GameConfiguration &gameConfiguration_;
     std::shared_ptr<Box2DService> boxService_;
@@ -35,7 +35,7 @@ protected:
 
     ActorsGenerator(std::shared_ptr<ActorsContainer> actorsContainer_,
         ActorIdGenerator &idGenerator_,
-        std::shared_ptr<PythonModule> pythonModule_,
+        PythonModule &pythonModule_,
         DrawingSystem &drawingSystem_,
         GameConfiguration &gameConfiguration_,
         std::shared_ptr<Box2DService> boxService_,

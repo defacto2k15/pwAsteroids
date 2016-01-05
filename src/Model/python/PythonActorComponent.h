@@ -15,33 +15,25 @@ class PythonClassVisibilityModule;
 
 class PythonActorComponent : public Component {
     IActor *actor_;
-    std::shared_ptr<PythonModule> python_;
-    PythonClassVisibilityModule<PythonActorComponent, std::shared_ptr<PythonModule>> *module_; // this should not be ptr, but shared_ptr has some const problems
+    PythonModule &python_;
+    PythonClassVisibilityModule<PythonActorComponent, PythonModule&> *module_; // this should not be ptr, but shared_ptr has some const problems
 public:
 
-    PythonActorComponent(std::shared_ptr<PythonModule> python);
+    PythonActorComponent(PythonModule &python);
+
+    PythonActorComponent & operator=(const PythonActorComponent &other);
 
     virtual void OnStart(IActor &actor) override;
 
-    virtual void OnUpdate() override{
+    IActor * getActor();
 
-    }
-
-    virtual void OnStop() override{
-
-    }
-
-     IActor *getActor(){
-        return actor_;
-    }
-
-    bool operator==( const PythonActorComponent &other){
-        return actor_ == other.actor_;
-    }
+    bool operator==(const PythonActorComponent &other);
 
     virtual ~PythonActorComponent(){
         //delete module_; should delete that really todo
     }
+
+    int getActorId();
 };
 
 

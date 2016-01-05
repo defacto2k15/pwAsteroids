@@ -45,7 +45,7 @@ void RocketMovingComponent::accelerate() {
 }
 
 RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
-											 std::shared_ptr<PythonModule> pythonModule, GameConfiguration &gameConfiguration )
+											 PythonModule &pythonModule, GameConfiguration &gameConfiguration )
 		: inputStateProvider_(inputStateProvider), visibilityModule_(pythonModule),
 		  gameConfiguration_(gameConfiguration) {
 }

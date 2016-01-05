@@ -23,7 +23,8 @@ std::string PythonModule::getOutput() {
 	return joinedString;
 }
 
-void PythonModule::OnStart() {
+PythonModule::PythonModule() {
+	isPythonEnabled_ = true;
 	if (isPythonEnabled_) {
 		try{
 			Py_Initialize();
@@ -40,21 +41,8 @@ void PythonModule::OnStart() {
 	}
 }
 
-void PythonModule::OnStop() {
+PythonModule::~PythonModule() {
 	if (isPythonEnabled_) {
 		Py_Finalize();
 	}
-}
-
-void PythonModule::OnUpdate() {
-	if( onceUpdated_ == false ){
-
-		//	auto cls = 	class_<A>("A");
-		//	cls.add_property("a", +[](const A& a){return a.a;});
-		//	main_namespace["A"] = cls;
-	}
-}
-
-PythonModule::PythonModule() {
-	isPythonEnabled_ = true;
 }

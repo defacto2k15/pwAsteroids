@@ -10,21 +10,15 @@
 #include "Component.h"
 
 class ActorTypeComponent : public Component {
-    PythonClassVisibilityModule<ActorTypeComponent, std::shared_ptr<PythonModule>>  classVisibility_;
+    PythonClassVisibilityModule<ActorTypeComponent, PythonModule &>  classVisibility_;
     ActorType type_;
 
 public:
-    ActorTypeComponent(ActorType type, std::shared_ptr<PythonModule> pythonModule )
-            : classVisibility_(pythonModule), type_(type){
-    }
+    ActorTypeComponent(ActorType type, PythonModule &pythonModule );
 
-    virtual void OnStart( IActor &actor){
-        classVisibility_.registerActorMethod("getActorType", &ActorTypeComponent::getActorType );
-    }
+    virtual void OnStart(IActor &actor);
 
-    std::string getActorType(){
-        return getActorTypeString(type_);
-    }
+    std::string getActorType();
 
 };
 

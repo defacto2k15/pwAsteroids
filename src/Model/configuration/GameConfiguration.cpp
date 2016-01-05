@@ -17,7 +17,7 @@ double GameConfiguration::getRocketAccelerationRate() const {
 }
 
 double GameConfiguration::getRocketTurnRate() const {
-	return 0.2;
+	return 0.8;
 }
 
 ScaleToScreen GameConfiguration::getRocketScaleToScreen() const {

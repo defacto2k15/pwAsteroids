@@ -27,6 +27,7 @@
 #include <Model/Actors/ScoreDisplay/ScoreDisplayer.h>
 #include <Model/modelInterfaces/IInputStateGetter.h>
 #include <Model/Actors/secondPlayer/SecondPlayerTargetComponent.h>
+#include <Model/components/PositionSettingComponent.h>
 
 
 class MockClass;
@@ -46,22 +47,12 @@ Game::Game() :
 		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_),
 		projectilesGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_){
 
-	rootServiceContainer_.addService(pythonModule_); // must be one of first
-
-	//std::shared_ptr<ActorsContainer> actorsContainer = std::make_shared<ActorsContainer>(pythonModule_);
 	rootServiceContainer_.addService(actorsContainer_);
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
-//	asteroidGenerator_ = std::make_shared<AsteroidsGenerator>(actorsContainer, idGenerator,
-//		pythonModule_, drawingSystem_, gameConfiguration_, boxService_,
-//		 box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_);
 	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
 			asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_
 	));
-
-//	projectilesGenerator_ = std::make_shared< ProjectilesGenerator>(actorsContainer_, idGenerator,
-//			pythonModule_, drawingSystem_, gameConfiguration_, boxService_,
-//			box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_);
 
 
 	rootServiceContainer_.addService(boxService_);
@@ -86,7 +77,7 @@ Game::Game() :
 	rocket->addComponent(rocketMovingComponent);
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
 	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket,  pythonModule_));
-	rocket->addComponent( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
+	rocket->addComponent( std::make_shared<PositionSettingComponent >(true, pythonModule_));
 	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(gameConfiguration_));
 	rocket->addComponent( std::make_shared<RocketShootingComponent>(gameConfiguration_, projectilesGenerator_, inputManager_, gameTimeProvider));
 	rocket->addComponent( std::make_shared<RocketCollisionComponent>( contactComponentsContainer_, rocketLife_, gameConfiguration_, gameTimeProvider));
@@ -101,7 +92,7 @@ Game::Game() :
 	borderIndicator->addComponent( std::make_shared<PositionComponent>(pythonModule_));
 	auto borderIndicatorComponent =  std::make_shared<BorderIndicatorComponent>(gameConfiguration_, inputManager_);
 	borderIndicator->addComponent(borderIndicatorComponent);
-	borderIndicator->addComponent( std::make_shared<StaticPositionSettingComponent>());
+	borderIndicator->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	actorsContainer_->addActor(borderIndicator);
 
 	actorsContainer_->addActor(rocket);
@@ -114,10 +105,8 @@ Game::Game() :
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionComponent>(pythonModule_));
 	secondPlayerTargetingActor->addComponent(
 			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider, inputManager_, asteroidGenerator_, gameConfiguration_));
-	secondPlayerTargetingActor->addComponent( std::make_shared<StaticPositionSettingComponent>());
+	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	actorsContainer_->addActor( secondPlayerTargetingActor );
-	//auto actorTypeVisualisator = std::make_shared<ActorTypeEnumInPythonVisualisator>( pythonModule_ );
-	//rootServiceContainer_.addService(actorTypeVisualisator);
 	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
 	rootServiceContainer_.addService(commonTypesVisualizer);
 
@@ -125,14 +114,7 @@ Game::Game() :
 	rootServiceContainer_.OnStart();
 	outGameScreenModel_->OnStart();
 
-
-
-	//asteroidGenerator_.generateAsteroid(Point(gameConfiguration_.getInitialPosition().getX(),0), 270.0f, 1, Point(0.0,0.1), 0.00);
-	asteroidGenerator_.generateAsteroid(Point(8, gameConfiguration_.getInitialPosition().getY()/2), 0.0f, 1, Point(0.0,0.0), 0.00);
-	//projectilesGenerator_.generateProjectile( Point(6, 1), 0.0f, Point(-0.2, 0.0), 0.0);
-	//asteroidGenerator_.generateAsteroid(Point(6, 1.6), 0.0f, 1, Point(-0.2,0.0), 0.00);
-
-	pythonModule_->addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
+	pythonModule_.addVectorOfClass<PythonActorComponent>("PythonActorComponentVector");
 }
 
 std::shared_ptr<IOutGameScreenModel> Game::getOutGameScreenModel() {
@@ -143,11 +125,11 @@ std::shared_ptr<IInputStateGetter> Game::getInputStateGetter() {
 	return inputStateGetter_;
 }
 
-std::shared_ptr<IInPythonModule> Game::getInPythonModule() {
+IInPythonModule &Game::getInPythonModule() {
 	return pythonModule_;
 }
 
-std::shared_ptr<IOutPythonModule> Game::getOutPythonModule() {
+IOutPythonModule &Game::getOutPythonModule() {
 	return pythonModule_;
 }
 

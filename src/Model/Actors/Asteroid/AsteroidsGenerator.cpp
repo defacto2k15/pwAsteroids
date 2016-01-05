@@ -2,11 +2,12 @@
 // Created by defacto on 2015.12.26..
 //
 
+#include <Model/components/PositionSettingComponent.h>
 #include "AsteroidsGenerator.h"
 
 AsteroidsGenerator::AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsContainer,
                                        ActorIdGenerator &idGenerator,
-                                       std::shared_ptr<PythonModule> pythonModule,
+                                       PythonModule &pythonModule,
                                        DrawingSystem &drawingSystem,
                                        GameConfiguration &gameConfiguration,
                                        std::shared_ptr<Box2DService> boxService,
@@ -17,6 +18,10 @@ AsteroidsGenerator::AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsCo
         : ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
                           gameConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer),
           asteroidsCounter_( asteroidsCounter), python_( pythonModule ) {
+
+        std::function< void (Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed)>
+                func =  [this](Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed){ generateAsteroid(position, rotation, size, speedVector, rotationSpeed);};
+        python_.addRootFunction("generateAsteroid", func );
 }
 
 void AsteroidsGenerator::generateAsteroid(Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed) {
@@ -26,7 +31,7 @@ void AsteroidsGenerator::generateAsteroid(Point position, Rotation rotation, dou
         componentsForAsteroid.push_back(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Asteroid, imageScalesContainer_.getBasicAsteroidImageScale() * size));
         componentsForAsteroid.push_back( std::make_shared<PythonActorComponent>(pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Asteroid, pythonModule_));
-        componentsForAsteroid.push_back( std::make_shared<Box2dPositionSettingComponent>(pythonModule_));
+        componentsForAsteroid.push_back( std::make_shared<PositionSettingComponent >(true, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<AsteroidsCountingComponent>(asteroidsCounter_));
         componentsForAsteroid.push_back( std::make_shared<ActorOnOutOfScreenDestroyerComponent>(gameConfiguration_, actorsContainer_));
         componentsForAsteroid.push_back( std::make_shared<AsteroidCollisionComponent>(

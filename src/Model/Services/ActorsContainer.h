@@ -17,16 +17,19 @@
 
 class ActorsContainer  : public ServiceContainer {
 	std::vector<std::shared_ptr<IActor>> actorsVec_;
-	std::shared_ptr< PythonModule >python_;
+	PythonModule &python_;
 	bool weHaveStarted = false;
 public:
-	ActorsContainer(std::shared_ptr< PythonModule > python) : python_(python){
+	ActorsContainer(PythonModule &python) : python_(python){
 
 	}
 
 	virtual void OnStart() override {
 		std::function<std::vector<PythonActorComponent>(void) > func =  [this](){ return getAllActors();};
-		python_->addRootFunction("getAllActors", func);
+		python_.addRootFunction("getAllActors", func);
+		std::function<void(PythonActorComponent &)> removeFunc
+				= [this](PythonActorComponent comp){ removeActor(comp);};
+		python_.addRootFunction("removeActor", removeFunc);
 		ServiceContainer::OnStart();
 		weHaveStarted = true;
 	}
@@ -47,6 +50,10 @@ public:
 	void addActorDuringRuntime(std::shared_ptr<IActor> newActor);
 
 	void removeActor(std::shared_ptr<IActor> newActor);
+
+	void removeActor( PythonActorComponent &pythonActorComponent){
+		removeActorById(pythonActorComponent.getActorId());
+	}
 
 	void removeActorById(ActorId id ){
 		auto iterator = std::find_if( begin(actorsVec_), end(actorsVec_), [id](std::shared_ptr<IActor> actor){

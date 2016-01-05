@@ -13,7 +13,7 @@
 #include "GameTimeProvider.h"
 
 class GameStopService : public IService {
-    std::shared_ptr<PythonModule> python_;
+    PythonModule &python_;
     std::shared_ptr<GameTimeProvider> gameTimeProvider_;
     std::shared_ptr<Box2DService> box2dService_;
     std::shared_ptr<InputStateManager> inputManager;
@@ -21,7 +21,7 @@ class GameStopService : public IService {
 
 
 public:
-    GameStopService(const std::shared_ptr<PythonModule> python_,
+    GameStopService(PythonModule &python_,
                     const std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                     const std::shared_ptr<Box2DService> box2dService_, std::shared_ptr<InputStateManager> inputManager);
 

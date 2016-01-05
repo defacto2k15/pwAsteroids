@@ -63,7 +63,7 @@ namespace boost {
 }
 using namespace boost::python;
 
-class PythonModule : public IOutPythonModule, public IInPythonModule, public IService{
+class PythonModule : public IOutPythonModule, public IInPythonModule {
 	PythonStdIoRedirect redirector;
 	boost::python::object main_namespace;
 	boost::python::object main_module;
@@ -77,15 +77,11 @@ public:
 
 	PythonModule();
 
+	~PythonModule();
+
 	virtual void addCommand(std::string commandText);
 
 	virtual std::string getOutput();
-
-	virtual void OnStart();;
-
-	virtual void OnStop();;
-
-	virtual void OnUpdate();;
 
 	template< typename T>
 	void addVectorOfClass(std::string name){
@@ -113,9 +109,9 @@ public:
 	}
 
 	template< typename T>
-	void registerClass( boost::python::class_<T, boost::shared_ptr<T> > &cls){
+	void registerClass( boost::python::class_<T, boost::shared_ptr<T> > &cls, std::string name = typeid(T).name()){
 		if (isPythonEnabled_) {
-			main_namespace[typeid(T).name()] = cls;
+			main_namespace[name] = cls;
 		}
 	}
 
