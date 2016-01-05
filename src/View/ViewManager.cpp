@@ -46,6 +46,9 @@ void ViewManager::start()
 	ConsoleScreen* consoleScreen = new ConsoleScreen(str);
 	screens.push_back(consoleScreen);
 
+	sm->playSample("Test drive", 0.45, false);
+	//sm->playSample("The Gauntlet", false);
+
 	/* str = "EmptyScreen";
 	EmptyScreen* emptyScreen = new EmptyScreen(str);
 	screens.push_back(emptyScreen); */
@@ -64,6 +67,7 @@ void ViewManager::start()
 ViewManager::ViewManager(int screenWidth, int screenHeight)
 {
 	display = new Display(screenWidth, screenHeight);
+	sm = new SoundModule();
 	timer = al_create_timer(1.0 / FPS);
 	event_queue = al_create_event_queue();
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));	// Timer events (refresh)

@@ -110,6 +110,7 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 
 		case ALLEGRO_KEY_SPACE:
 			key[KEY_SPACE] = true;
+			vm->playSample("Blaster Imperial", 0.4, true);
 			break;
 
 		case ALLEGRO_KEY_ESCAPE:
