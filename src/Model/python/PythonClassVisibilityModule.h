@@ -65,6 +65,9 @@ public:
     template<typename TComponent, typename TReturn, typename ... TArgs >
     void registerActorMethod( std::string methodName, TReturn( TComponent::* function)( TArgs ...) );//{
 
+    template<typename TComponent, typename TField >
+    void registerProperty(std::string propertyName, TField(TComponent::* getter)(void) const, void(TComponent::* setter)(TField));
+
 private:
     static std::vector<std::string> registeredMethods_;
     static std::shared_ptr<typename IsTypeEmpty<T, TConstructorArgs ...>::classType> pythonClass_;
@@ -129,6 +132,17 @@ void PythonClassVisibilityModule<T,TConstructorArgs ...>::registerActorMethod( s
             actorVisibilityModule.registerClass();
             actorVisibilityModule.registerMethodInternal(methodName, functionToPython);
         }
+    }
+};
+
+
+template< typename T, typename ... TConstructorArgs >
+template<typename TComponent, typename TField >
+
+void PythonClassVisibilityModule<T,TConstructorArgs ...>::registerProperty(
+        std::string propertyName, TField(TComponent::* getter)(void) const, void(TComponent::* setter)(TField)){
+    if( pythonModule_.isPythonEnabled_){
+        (*pythonClass_).add_property(propertyName.c_str(), getter, setter);
     }
 };
 

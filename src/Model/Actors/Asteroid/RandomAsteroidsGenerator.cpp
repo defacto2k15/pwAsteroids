@@ -16,9 +16,9 @@ RandomAsteroidsGenerator::RandomAsteroidsGenerator(AsteroidsGenerator &asteroids
 
 void RandomAsteroidsGenerator::OnUpdate() {
     if( timeProvider_->getMilisecondsSinceGameStart() - timeOfLastAsteroidCreation_
-        > configuration_.GetMinTimeBetweenAsteroidsCreation()) {
+        > configuration_.getMinTimeBetweenAsteroidsCreation()) {
         if (provider_.getRandomBool(configuration_.getAsteroidCreationPropabilityRatio())) {
-            if( asteroidsCounter_.getValue() < configuration_.GetMaxAsteroidsCount() ) {
+            if( asteroidsCounter_.getValue() < configuration_.getMaxAsteroidsCount() ) {
                 timeOfLastAsteroidCreation_ = timeProvider_->getMilisecondsSinceGameStart();
                 createAsteroid();
             }
@@ -28,11 +28,11 @@ void RandomAsteroidsGenerator::OnUpdate() {
 
 void RandomAsteroidsGenerator::createAsteroid() {
     Point asteroidsGenerationScreenSize(
-            configuration_.getBox2dScreenDimensions().getX() + (configuration_.GetAsteroidsGenerationBoundariesSize().getX()*2),
-            configuration_.getBox2dScreenDimensions().getY() + (configuration_.GetAsteroidsGenerationBoundariesSize().getY()*2));
+            configuration_.getBox2dScreenDimensions().getX() + (configuration_.getAsteroidsGenerationBoundariesSize().getX()*2),
+            configuration_.getBox2dScreenDimensions().getY() + (configuration_.getAsteroidsGenerationBoundariesSize().getY()*2));
     Rect borderCircuit ( Point(
-                                 -configuration_.GetAsteroidsGenerationBoundariesSize().getX(),
-                                 -configuration_.GetAsteroidsGenerationBoundariesSize().getY()),
+                                 -configuration_.getAsteroidsGenerationBoundariesSize().getX(),
+                                 -configuration_.getAsteroidsGenerationBoundariesSize().getY()),
                          Point(asteroidsGenerationScreenSize.getX(), asteroidsGenerationScreenSize.getY()));
     double circuitLength = borderCircuit.getLength();
     double x = provider_.getRandomDouble(0,circuitLength);
@@ -45,11 +45,11 @@ void RandomAsteroidsGenerator::createAsteroid() {
     accelerationNormalVector.normalize();
 
     auto accelerationVector  = accelerationNormalVector *= provider_.getRandomDouble(
-            configuration_.GetAsteroidMinInitialImpulse(), configuration_.GetAsteroidMaxInitialImpulse());
+            configuration_.getAsteroidMinInitialImpulse(), configuration_.getAsteroidMaxInitialImpulse());
     Rotation newRotation = DegreesCalculations::degreesToRadians(provider_.getRandom(360) );
 
-    double size = provider_.getRandomDouble(configuration_.GetAsteroidMinSize(), configuration_.GetAsteroidMaxSize());
-    double rotationSpeed = provider_.getRandomDouble(0, configuration_.GetAsteroidMaxRotationSpeed());
+    double size = provider_.getRandomDouble(configuration_.getAsteroidMinSize(), configuration_.getAsteroidMaxSize());
+    double rotationSpeed = provider_.getRandomDouble(0, configuration_.getAsteroidMaxRotationSpeed());
     // todo - size is not used for now!
     asteroidsGenerator_.generateAsteroid(creationPosition, newRotation, 1, accelerationVector, rotationSpeed  );
 }

@@ -101,6 +101,18 @@ public:
 		}
 	}
 
+
+	template< typename TRet, typename ... TArg>
+	void addRootFunctionX( std::string functionName, std::function<TRet&(TArg ...)> functionToCall ){
+		if (isPythonEnabled_) {
+			auto boostFunction = boost::python::make_function(
+					functionToCall,
+					boost::python::return_value_policy<boost::python::reference_existing_object>(),
+					boost::mpl::vector<TRet&, TArg ...>());
+			main_namespace[functionName.c_str()] = boostFunction;
+		}
+	}
+
 	template< typename T>
 	void registerInMainNamespace(const char *name, T &elem){
 		if (isPythonEnabled_) {

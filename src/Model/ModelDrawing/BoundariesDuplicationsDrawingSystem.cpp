@@ -14,16 +14,16 @@ void BoundariesDuplicationsDrawingSystem::drawImage(ImagePrimitiveType type, Poi
     auto screenSize = configuration_.getBox2dScreenDimensions();
     normalDrawingSystem_.drawImage(type, position, rotation, scale, actorId);
     Point delta;
-    if( position.getX() < configuration_.GetDuplicationBoundariesSize().getX()){
+    if( position.getX() < configuration_.getDuplicationBoundariesSize().getX()){
         delta = delta + Point(screenSize.getX()+ position.getX(), 0);
-    } else if( position.getX() > screenSize.getX() -configuration_.GetDuplicationBoundariesSize().getX() ){
+    } else if( position.getX() > screenSize.getX() -configuration_.getDuplicationBoundariesSize().getX() ){
         delta = delta + Point( -screenSize.getX() ,0);
     }
 
 
-    if( position.getY() < configuration_.GetDuplicationBoundariesSize().getY()){
+    if( position.getY() < configuration_.getDuplicationBoundariesSize().getY()){
         delta = delta + Point(0, screenSize.getY()+ position.getY());
-    } else if( position.getY() > screenSize.getY() -configuration_.GetDuplicationBoundariesSize().getY() ){
+    } else if( position.getY() > screenSize.getY() -configuration_.getDuplicationBoundariesSize().getY() ){
         delta = delta + Point(0, -screenSize.getY());
     }
 

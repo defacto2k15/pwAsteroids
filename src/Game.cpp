@@ -33,6 +33,7 @@
 class MockClass;
 
 Game::Game() :
+		gameConfiguration_(pythonModule_),
 		outGameScreenModel_( new  OutGameScreenModelImageCentering(
 								std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModelScaler(
 										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
