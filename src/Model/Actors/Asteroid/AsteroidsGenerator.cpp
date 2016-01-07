@@ -5,19 +5,15 @@
 #include <Model/components/PositionSettingComponent.h>
 #include "AsteroidsGenerator.h"
 
-AsteroidsGenerator::AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsContainer,
-                                       ActorIdGenerator &idGenerator,
-                                       PythonModule &pythonModule,
-                                       DrawingSystem &drawingSystem,
-                                       GameConfiguration &gameConfiguration,
-                                       std::shared_ptr<Box2DService> boxService,
-                                       Box2dObjectsContainer &container,
+AsteroidsGenerator::AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsContainer, ActorIdGenerator &idGenerator,
+                                       PythonModule &pythonModule, DrawingSystem &drawingSystem, GameConfiguration &gameConfiguration,
+                                       std::shared_ptr<Box2DService> boxService, Box2dObjectsContainer &container,
                                        ImageScalesContainer &imageScalesContainer,
-                                       ContactComponentsContainer &contactComponentsContainer,
-                                       AsteroidsCounter &asteroidsCounter)
+                                       ContactComponentsContainer &contactComponentsContainer, AsteroidsCounter &asteroidsCounter,
+                                       std::shared_ptr<MusicManager> musicManager)
         : ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
                           gameConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer),
-          asteroidsCounter_( asteroidsCounter), python_( pythonModule ) {
+          asteroidsCounter_( asteroidsCounter), python_( pythonModule ), musicManager_(musicManager) {
 
         std::function< void (Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed)>
                 func =  [this](Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed){ generateAsteroid(position, rotation, size, speedVector, rotationSpeed);};
@@ -35,7 +31,7 @@ void AsteroidsGenerator::generateAsteroid(Point position, Rotation rotation, dou
         componentsForAsteroid.push_back( std::make_shared<AsteroidsCountingComponent>(asteroidsCounter_));
         componentsForAsteroid.push_back( std::make_shared<ActorOnOutOfScreenDestroyerComponent>(gameConfiguration_, actorsContainer_));
         componentsForAsteroid.push_back( std::make_shared<AsteroidCollisionComponent>(
-                contactComponentsContainer_, actorsContainer_, *this));
+                contactComponentsContainer_, actorsContainer_, *this, musicManager_));
         componentsForAsteroid.push_back( std::make_shared<AsteroidSizeComponent>(size));
 
         generateActor(componentsForAsteroid, position, rotation, speedVector, rotationSpeed);

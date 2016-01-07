@@ -8,6 +8,7 @@ add_definitions(-std=c++14 -Wfatal-errors)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/")
 
 file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help/*.h" "src/Model/PrimitiveTypes/*.cpp" "src/Model/PrimitiveTypes/*.h"
+        "src/Sound/*.cpp" "src/Sound/*.h"
         "src/Model/exceptions/*.cpp" "src/Model/exceptions/*.h" "src/Model/ModelDrawing/*.h" "src/Model/ModelDrawing/*.cpp" "src/Model/Observer/*.h" "src/Model/Observer/*.cpp"
         "src/Model/ModelDrawing/IDrawablePrimitive.h" "src/Model/modelInterfaces/*.cpp" "src/Model/modelInterfaces/*.h" "src/Model/Services/*.cpp"
         "src/Model/Services/*.h" "src/Model/components/*.h" "src/Model/components/*.cpp" "src/Model/Actors/Rocket/*.cpp" "src/Model/Actors/Rocket/*.h"
@@ -17,6 +18,7 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/Model/Actors/Asteroid/*.cpp" "src/Model/Actors/Asteroid/*.h" "src/Model/Actors/Projectile/*.cpp" "src/Model/Actors/Projectile/*.h"
         "src/Model/Actors/lifeIndicator/*.cpp" "src/Model/Actors/lifeIndicator/*.h" "src/Model/Actors/secondPlayer/*.cpp" "src/Model/Actors/secondPlayer/*.h"
         "src/Model/collisions/*.cpp" "src/Model/collisions/*.h" "src/Model/Actors/ScoreDisplay/*.h" "src/Model/Actors/ScoreDisplay/*.cpp"
+        "src/Model/sounds/*.cpp" "src/Model/sounds/*.h"
   )
 
 add_executable(pwAsteroids ${SRC_FILES}  )
@@ -77,7 +79,7 @@ include_directories(src)
 # allegro - works on linux and only if allegro is installed- need to be changed
 if(UNIX)
     include_directories(/usr/include/x86_64-linux-gnu)
-    TARGET_LINK_LIBRARIES( pwAsteroids allegro_ttf allegro_font allegro_image allegro )
+    TARGET_LINK_LIBRARIES( pwAsteroids allegro_ttf allegro_font allegro_image allegro allegro_audio allegro_acodec )
 else()
     # TARGET_LINK_LIBRARIES(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/Box2D.lib )
 endif()

@@ -10,10 +10,12 @@
 #include <Model/collisions/Box2dCollisionsComponent.h>
 #include <Model/Services/GameTimeProvider.h>
 #include <Model/components/DrawingComponent.h>
+#include <Model/sounds/MusicManager.h>
 #include "RocketLife.h"
 
 class RocketCollisionComponent : public Box2dCollisionsComponent {
     std::shared_ptr<GameTimeProvider> timeProvider_;
+    std::shared_ptr<MusicManager> musicManager_;
     GameConfiguration &gameConfiguration_;
     RocketLife &rocketLife_;
     unsigned long lastTimeOfReset_ = 0;
@@ -24,8 +26,8 @@ class RocketCollisionComponent : public Box2dCollisionsComponent {
 public:
 
     RocketCollisionComponent(ContactComponentsContainer &contactContainer, RocketLife &rocketLife_,
-                             GameConfiguration &gameConfiguration_,
-                             std::shared_ptr<GameTimeProvider> timeProvider_);
+                                 GameConfiguration &gameConfiguration_, std::shared_ptr<GameTimeProvider> timeProvider_,
+                                 std::shared_ptr<MusicManager> musicManager);
 
     void OnStart(IActor &actor);
 

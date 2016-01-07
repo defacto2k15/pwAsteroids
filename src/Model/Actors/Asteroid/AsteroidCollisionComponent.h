@@ -7,6 +7,7 @@
 
 
 #include <Model/collisions/Box2dCollisionsComponent.h>
+#include <Model/sounds/MusicManager.h>
 #include "AsteroidSizeComponent.h"
 
 class AsteroidsGenerator;
@@ -17,11 +18,13 @@ class AsteroidCollisionComponent : public Box2dCollisionsComponent{
     AsteroidsGenerator &asteroidsGenerator_;
     std::shared_ptr<PositionComponent> positionComponent_;
     std::shared_ptr<AsteroidSizeComponent> sizeComponent_;
+    std::shared_ptr<MusicManager> musicManager_;
     ActorId id_;
     double size_;
 public:
-    AsteroidCollisionComponent(ContactComponentsContainer &contactContainer, std::shared_ptr<ActorsContainer> actorsContainer,
-                               AsteroidsGenerator &asteroidsGenerator);
+    AsteroidCollisionComponent(ContactComponentsContainer &contactContainer,
+                                   std::shared_ptr<ActorsContainer> actorsContainer, AsteroidsGenerator &asteroidsGenerator,
+                                   std::shared_ptr<MusicManager> musicManager);
 
     void OnStart(IActor &actor );
 

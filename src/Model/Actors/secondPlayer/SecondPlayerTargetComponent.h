@@ -21,8 +21,8 @@ class SecondPlayerTargetComponent : public Component {
     std::shared_ptr<GameTimeProvider> gameTimeProvider_;
     std::shared_ptr<IInputStateProvider> inputStateProvider_;
     AsteroidsGenerator &asteroidGenerator_;
-
     GameConfiguration &configuration_;
+    std::shared_ptr<MusicManager> musicManager_;
 
     std::shared_ptr<IPositionSettingComponent> positionSettingComponent_;
     unsigned long timeOfLastShoot_ = 0;
@@ -32,7 +32,8 @@ public:
                                 std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                 std::shared_ptr<IInputStateProvider> inputStateProvider_,
                                 AsteroidsGenerator &asteroidGenerator_,
-                                GameConfiguration &configuration_);
+                                GameConfiguration &configuration_,
+                                std::shared_ptr<MusicManager> );
 
     virtual void OnStart(IActor &actor);
 

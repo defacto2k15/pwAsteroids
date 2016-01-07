@@ -6,10 +6,11 @@
 
 #include <Model/Actors/Asteroid/AsteroidsGenerator.h>
 
-AsteroidCollisionComponent::AsteroidCollisionComponent(ContactComponentsContainer &contactContainer, std::shared_ptr<ActorsContainer> actorsContainer,
-                                                       AsteroidsGenerator &asteroidsGenerator)
+AsteroidCollisionComponent::AsteroidCollisionComponent(ContactComponentsContainer &contactContainer,
+                                                       std::shared_ptr<ActorsContainer> actorsContainer, AsteroidsGenerator &asteroidsGenerator,
+                                                       std::shared_ptr<MusicManager> musicManager)
         : Box2dCollisionsComponent(contactContainer), actorsContainer_(actorsContainer),
-          asteroidsGenerator_( asteroidsGenerator) {
+          asteroidsGenerator_( asteroidsGenerator), musicManager_(musicManager) {
 }
 
 void AsteroidCollisionComponent::OnStart(IActor &actor ) {
@@ -29,11 +30,12 @@ bool AsteroidCollisionComponent::manageCollision(double impulseValue ) {
         return false;
     }
 
+    musicManager_->addMusicElement(MusicElements::AsteroidCollisionSound, sqrt(asteroidMass / 40) );
+    std::cout << "Current size is " << sqrt(asteroidMass/40) << std::endl;
     if( impulseValue > destructionMassFactor*asteroidMass){
         actorsContainer_->removeActorById(id_);
         return true;
     }
-
 
     createAsteroidAtAngleRelativeToCurrentAsteroid( impulseValue, 90, 2);
     createAsteroidAtAngleRelativeToCurrentAsteroid( impulseValue, 270, 2);

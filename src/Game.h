@@ -27,12 +27,14 @@
 #include <Model/modelInterfaces/ScallingMousePositionGetter.h>
 #include <Model/configuration/GameConfiguration.h>
 #include <Model/Services/GameStopService.h>
+#include <Model/sounds/MusicManager.h>
 
 
 class Game {
 private:
 	RootServiceContainer rootServiceContainer_;
 	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
+	std::shared_ptr<MusicManager> musicManager_;
 	std::shared_ptr<InputStateManager> inputManager_ = std::make_shared<InputStateManager>();
 	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, gameConfiguration_);
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
@@ -66,6 +68,10 @@ public:
 	IInPythonModule &getInPythonModule();
 
 	IOutPythonModule &getOutPythonModule();
+
+	std::shared_ptr<IOutGameMusicModel> getOutGameMusicModel(){
+		return musicManager_;
+	}
 
 	void update();;
 };

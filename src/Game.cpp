@@ -40,15 +40,17 @@ Game::Game() :
 										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
 										gameConfiguration_)),
 								gameConfiguration_)),
+		musicManager_( new MusicManager()),
 		box2dObjectsContainer_(imageScalesContainer_, gameConfiguration_),
 		contactListener_(contactComponentsContainer_),
 		rocketLife_(gameConfiguration_),
 		drawingSystem_(outGameScreenModel_),
 		 boundariesDuplicationsDrawingSystem_(drawingSystem_, gameConfiguration_),
 		actorsContainer_( new ActorsContainer(pythonModule_)),
-		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_),
+		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_, musicManager_),
 		projectilesGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_){
 
+	rootServiceContainer_.addService(musicManager_);
 	rootServiceContainer_.addService(actorsContainer_);
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
@@ -58,6 +60,7 @@ Game::Game() :
 
 
 	rootServiceContainer_.addService(boxService_);
+
 
 	lifeIndicatorService_ = std::make_shared<LifeIndicatorService>(
 			actorsContainer_, pythonModule_, drawingSystem_, imageScalesContainer_, idGenerator, gameConfiguration_, rocketLife_);
@@ -81,8 +84,8 @@ Game::Game() :
 	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket,  pythonModule_));
 	rocket->addComponent( std::make_shared<PositionSettingComponent >(true, pythonModule_));
 	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(gameConfiguration_));
-	rocket->addComponent( std::make_shared<RocketShootingComponent>(gameConfiguration_, projectilesGenerator_, inputManager_, gameTimeProvider));
-	rocket->addComponent( std::make_shared<RocketCollisionComponent>( contactComponentsContainer_, rocketLife_, gameConfiguration_, gameTimeProvider));
+	rocket->addComponent( std::make_shared<RocketShootingComponent>(gameConfiguration_, projectilesGenerator_, inputManager_, gameTimeProvider, musicManager_));
+	rocket->addComponent( std::make_shared<RocketCollisionComponent>( contactComponentsContainer_, rocketLife_, gameConfiguration_, gameTimeProvider, musicManager_));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, gameConfiguration_));
@@ -107,7 +110,7 @@ Game::Game() :
 			std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::SecondPlayerTarget, imageScalesContainer_.getSecondPlayerTargetImageScale() ));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionComponent>(pythonModule_));
 	secondPlayerTargetingActor->addComponent(
-			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider, inputManager_, asteroidGenerator_, gameConfiguration_));
+			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider, inputManager_, asteroidGenerator_, gameConfiguration_, musicManager_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
 

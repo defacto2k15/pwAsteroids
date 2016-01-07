@@ -28,19 +28,16 @@
 class AsteroidsGenerator : public ActorsGenerator{
     AsteroidsCounter &asteroidsCounter_;
     PythonModule &python_;
+    std::shared_ptr<MusicManager> musicManager_;
 
 public:
 
-    AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsContainer,
-                       ActorIdGenerator &idGenerator,
-                       PythonModule &pythonModule,
-                       DrawingSystem &drawingSystem,
-                       GameConfiguration &gameConfiguration,
-                       std::shared_ptr<Box2DService> boxService,
-                       Box2dObjectsContainer &container,
-                       ImageScalesContainer &imageScalesContainer,
-                       ContactComponentsContainer &contactComponentsContainer,
-                       AsteroidsCounter &asteroidsCounter);
+    AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsContainer, ActorIdGenerator &idGenerator,
+                           PythonModule &pythonModule, DrawingSystem &drawingSystem, GameConfiguration &gameConfiguration,
+                           std::shared_ptr<Box2DService> boxService, Box2dObjectsContainer &container,
+                           ImageScalesContainer &imageScalesContainer,
+                           ContactComponentsContainer &contactComponentsContainer, AsteroidsCounter &asteroidsCounter,
+                           std::shared_ptr<MusicManager> musicManager);
 
     void generateAsteroid(Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed);
 };

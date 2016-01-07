@@ -5,10 +5,10 @@
 #include "RocketCollisionComponent.h"
 
 RocketCollisionComponent::RocketCollisionComponent(ContactComponentsContainer &contactContainer, RocketLife &rocketLife_,
-                                                   GameConfiguration &gameConfiguration_,
-                                                   std::shared_ptr<GameTimeProvider> timeProvider_)
+                                                   GameConfiguration &gameConfiguration_, std::shared_ptr<GameTimeProvider> timeProvider_,
+                                                   std::shared_ptr<MusicManager> musicManager)
         : Box2dCollisionsComponent(contactContainer), rocketLife_(rocketLife_),
-          gameConfiguration_(gameConfiguration_), timeProvider_(timeProvider_) {
+          gameConfiguration_(gameConfiguration_), timeProvider_(timeProvider_), musicManager_(musicManager) {
 }
 
 void RocketCollisionComponent::OnStart(IActor &actor) {
@@ -44,6 +44,7 @@ bool RocketCollisionComponent::manageCollision(double impulseValue ) {
     }
 
     isRocketReseting_ = true;
+    musicManager_->addMusicElement(MusicElements::RocketDestructionSound, 0.6);
     rocketLife_.decreaseLife();
     positionSettingComponent_->setPosition(
             gameConfiguration_.getInitialPosition().getX(), gameConfiguration_.getInitialPosition().getY());

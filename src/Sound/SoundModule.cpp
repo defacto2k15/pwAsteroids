@@ -30,6 +30,9 @@ SoundModule::SoundModule()
 	samples["Test drive"].first = al_load_sample("../res/sound/11-Test_drive.ogg");
 	samples["Blaster Imperial"].first = al_load_sample("../res/sound/Blaster-Imperial.wav");
 	samples["The Gauntlet"].first = al_load_sample("../res/sound/The Gauntlet.ogg");
+	samples["RocketFailure"].first = al_load_sample("../res/sound/rocketFailure.wav");
+	samples["AsteroidCollision"].first = al_load_sample("../res/sound/bomb.wav");
+	samples["SecondPlayerShoot"].first = al_load_sample("../res/sound/secondPlayerShoot.wav");
 
 	for (auto sample : samples) {
 		if (!(sample.second).first) {

@@ -8,10 +8,11 @@ SecondPlayerTargetComponent::SecondPlayerTargetComponent(std::shared_ptr<IBorder
                                                          std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                                                          std::shared_ptr<IInputStateProvider> inputStateProvider_,
                                                          AsteroidsGenerator &asteroidGenerator_,
-                                                         GameConfiguration &configuration_)
+                                                         GameConfiguration &configuration_,
+                                                         std::shared_ptr<MusicManager> musicManager)
         : indicatorPositionProvider_(indicatorPositionProvider_), gameTimeProvider_(gameTimeProvider_),
           inputStateProvider_(inputStateProvider_), asteroidGenerator_(asteroidGenerator_),
-          configuration_(configuration_) {
+          configuration_(configuration_), musicManager_(musicManager) {
 }
 
 void SecondPlayerTargetComponent::OnStart(IActor &actor) {
@@ -30,6 +31,7 @@ void SecondPlayerTargetComponent::OnUpdate() {
             double asteroidSize = calculateAsteroidSize( newAsteroidVelocityVector);
             asteroidGenerator_.generateAsteroid( indicatorPositionProvider_->getBorderIndicatorPosition(),
                                                   0, asteroidSize, newAsteroidVelocityVector, 0);
+            musicManager_->addMusicElement(MusicElements::SecondPlayerAsteroidShoot, 0.8);
         }
     }
 }

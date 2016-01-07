@@ -5,10 +5,10 @@
 #include "RocketShootingComponent.h"
 
 RocketShootingComponent::RocketShootingComponent(GameConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
-                                                 std::shared_ptr<IInputStateProvider> inputStateProvider, std::shared_ptr<GameTimeProvider> timeProvider )
+                                                 std::shared_ptr<IInputStateProvider> inputStateProvider,
+                                                 std::shared_ptr<GameTimeProvider> timeProvider, std::shared_ptr<MusicManager> musicManager)
         : configuration_(configuration), projectilesGenerator_(projectilesGenerator),
-          inputStateProvider_(inputStateProvider), timeProvider_(timeProvider) {
-    int todoDelete = 44;
+          inputStateProvider_(inputStateProvider), timeProvider_(timeProvider), musicManager_(musicManager) {
 }
 
 void RocketShootingComponent::OnStart(IActor &actor) {
@@ -21,6 +21,7 @@ void RocketShootingComponent::OnUpdate() {
         if( timeProvider_->getMilisecondsSinceGameStart() - timeOfLastShot_ > configuration_.getMinTimeBetweenShots()){
             timeOfLastShot_ = timeProvider_->getMilisecondsSinceGameStart();
             shootProjectile();
+            musicManager_->addMusicElement(MusicElements::ShootSound, 0.7);
         }
     }
 }
