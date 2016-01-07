@@ -27,3 +27,11 @@ void GameTimeProvider::OnUpdate() {
 		currentFrameTime = std::chrono::high_resolution_clock::now();
 	}
 }
+
+void GameTimeProvider::turnOff() {
+	isOn_ = false;
+}
+
+void GameTimeProvider::turnOn() {
+	isOn_ = true;
+}

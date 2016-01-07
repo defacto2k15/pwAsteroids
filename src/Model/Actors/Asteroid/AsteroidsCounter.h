@@ -9,17 +9,11 @@
 class AsteroidsCounter {
     int value=0;
 public:
-    void Increment(){
-        ++value;
-    }
+    void Increment();
 
-    void Decrement(){
-        --value;
-    }
+    void Decrement();
 
-    int getValue(){
-        return value;
-    }
+    int getValue();
 };
 
 

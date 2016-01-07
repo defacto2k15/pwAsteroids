@@ -3,3 +3,15 @@
 //
 
 #include "AsteroidsCounter.h"
+
+void AsteroidsCounter::Increment() {
+    ++value;
+}
+
+void AsteroidsCounter::Decrement() {
+    --value;
+}
+
+int AsteroidsCounter::getValue() {
+    return value;
+}

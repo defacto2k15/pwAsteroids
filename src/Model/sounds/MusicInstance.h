@@ -10,17 +10,12 @@ class MusicInstance {
     MusicElements element_;
     float volume_;
 public:
-    MusicInstance(MusicElements element_, float volume_) : element_(element_), volume_(volume_) {
-    }
+    MusicInstance(MusicElements element_, float volume_);
 
 
-    MusicElements getElement() const {
-        return element_;
-    }
+    MusicElements getElement() const;
 
-    float getVolume() const {
-        return volume_;
-    }
+    float getVolume() const;
 };
 
 

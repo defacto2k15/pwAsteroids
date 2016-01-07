@@ -20,30 +20,11 @@ class ActorsContainer  : public ServiceContainer {
 	PythonModule &python_;
 	bool weHaveStarted = false;
 public:
-	ActorsContainer(PythonModule &python) : python_(python){
+	ActorsContainer(PythonModule &python);
 
-	}
+	virtual void OnStart();
 
-	virtual void OnStart() override {
-		std::function<std::vector<PythonActorComponent>(void) > func =  [this](){ return getAllActors();};
-		python_.addRootFunction("getAllActors", func);
-		std::function<void(PythonActorComponent &)> removeFunc
-				= [this](PythonActorComponent comp){ removeActor(comp);};
-		python_.addRootFunction("removeActor", removeFunc);
-		ServiceContainer::OnStart();
-		weHaveStarted = true;
-	}
-
-	std::vector<PythonActorComponent> getAllActors(){
-		std::vector<PythonActorComponent> outVec;
-		for( auto &oneActor : actorsVec_ ){
-			if( oneActor->isComponentPresent<PythonActorComponent>() ) {
-				auto comp = oneActor->getOnlyComponent<PythonActorComponent>();
-				outVec.push_back(*comp);
-			}
-		}
-		return outVec;
-	}
+	std::vector<PythonActorComponent> getAllActors();
 
 	void addActor(std::shared_ptr<IActor> newActor);
 
@@ -51,19 +32,9 @@ public:
 
 	void removeActor(std::shared_ptr<IActor> newActor);
 
-	void removeActor( PythonActorComponent &pythonActorComponent){
-		removeActorById(pythonActorComponent.getActorId());
-	}
+	void removeActor(PythonActorComponent &pythonActorComponent);
 
-	void removeActorById(ActorId id ){
-		auto iterator = std::find_if( begin(actorsVec_), end(actorsVec_), [id](std::shared_ptr<IActor> actor){
-			return actor->getActorId() == id;
-		});
-		if( iterator == actorsVec_.end() ){
-			throw RemovingNotAddedActorException();
-		}
-		removeActor( *iterator );
-	}
+	void removeActorById(ActorId id );
 protected:
 	virtual std::vector<std::shared_ptr<IService>> getServices();
 };

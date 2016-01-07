@@ -21,13 +21,9 @@ public:
 	long getMilisecondsSinceGameStart();
 	long getMilisecondsBetweenFrames();
 
-	void turnOff(){
-		isOn_ = false;
-	}
+	void turnOff();
 
-	void turnOn(){
-		isOn_ = true;
-	}
+	void turnOn();
 };
 
 #endif //PWASTEROIDS_GAMETIMEPROVIDER_H
