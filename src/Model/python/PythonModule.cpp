@@ -24,7 +24,12 @@ std::string PythonModule::getOutput() {
 }
 
 PythonModule::PythonModule() {
+    isPythonEnabled_ = false;
+
+#ifdef USE_PYTHON
 	isPythonEnabled_ = true;
+#endif
+
 	if (isPythonEnabled_) {
 		try{
 			Py_Initialize();

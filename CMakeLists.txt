@@ -31,6 +31,7 @@ include_directories(${Box2D_SOURCE_DIR})
 if(UNIX)
     INCLUDE_DIRECTORIES( "/usr/include/python2.7") # linki bezpośrednie, potem to naprawie todo
     TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython2.7.so )
+    add_definitions( -DUSE_PYTHON )
 else()
     # TU DODAJ Własny python
 endif()
