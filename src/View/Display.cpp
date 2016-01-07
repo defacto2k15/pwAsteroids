@@ -49,6 +49,9 @@ Display::Display(int width, int height)
 	}
 	
 	al_init_image_addon();
+	ALLEGRO_BITMAP* icon = al_load_bitmap("../res/pwAsteroids.bmp");
+	if (!icon) std::cout << "Failed to load icon: \"../res/pwAsteroids.bmp\"\n";
+	else al_set_display_icon(display, icon);
 
 	al_clear_to_color(al_map_rgb(40, 120, 120));
 
