@@ -53,15 +53,14 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 
 				assert(imageDataMap_.count(primitive.getImageType()) == 1);
 				const char *pathToImage = imageDataMap_[primitive.getImageType()].path;
-				if(primitive.getImageType() == ImagePrimitiveType::Rocket) drawableObjects[primitive.getActorId()] = background->addDrawableObject(512, 300, pathToImage, "Jeste rakieta!");
-				else drawableObjects[primitive.getActorId()] = background->addDrawableObject(512, 300, pathToImage);
+				drawableObjects[primitive.getActorId()] = background->addDrawableObject(512, 300, pathToImage);
 				if( primitive.getImageType() == ImagePrimitiveType::SecondPlayerTarget){
 					int k = 22;
 				}
 				int xImageSize = 1024;
 				float zoom = (xImageSize * primitive.getScale().getX())/ (imageDataMap_[primitive.getImageType()].xSize);
 
-				drawableObjects[primitive.getActorId()]->setZoom(zoom);	// sets scale only for Bitmaps, not models!
+				drawableObjects[primitive.getActorId()]->setZoom(zoom/4);	// sets scale only for Bitmaps, not models!
 			}
 			drawableObjects[primitive.getActorId()]->setPozX(primitive.getPosition().getX());
 			drawableObjects[primitive.getActorId()]->setPozY(primitive.getPosition().getY());
@@ -192,13 +191,13 @@ void GameScreen::initializeScreenElements()
 GameScreen::GameScreen(std::string& t)
 {
 	title = t;
-	imageDataMap_[ImagePrimitiveType::Asteroid] = ImageData{ 55, 61,  "../res/asteroid.bmp" };
+	imageDataMap_[ImagePrimitiveType::Asteroid] = ImageData{ 60, 60,  "../res/asteroid3.bmp" };
 	imageDataMap_[ImagePrimitiveType::BorderIndicator] = ImageData{15, 15, "../res/arrow.bmp"};
-	imageDataMap_[ImagePrimitiveType::Projectile] = ImageData{15, 15, "../res/proj.bmp"};
-	imageDataMap_[ImagePrimitiveType::Rocket] = ImageData{60, 60, "../res/rocket.bmp"};
-	imageDataMap_[ImagePrimitiveType::RocketTail] = ImageData{55, 61, "../res/aa.bmp"};
-	imageDataMap_[ImagePrimitiveType::Heart] = ImageData{ 55, 61, "../res/aa.bmp"};
-	imageDataMap_[ImagePrimitiveType::SecondPlayerTarget] = ImageData{ 55, 61, "../res/aa.bmp"};
+	imageDataMap_[ImagePrimitiveType::Projectile] = ImageData{15, 15, "../res/projectile.bmp"};
+	imageDataMap_[ImagePrimitiveType::Rocket] = ImageData{60, 60, "../res/rocket2.bmp"};
+	imageDataMap_[ImagePrimitiveType::RocketTail] = ImageData{60, 30, "../res/rockettail.bmp"};
+	imageDataMap_[ImagePrimitiveType::Heart] = ImageData{ 60, 60, "../res/rocket2.bmp"};
+	imageDataMap_[ImagePrimitiveType::SecondPlayerTarget] = ImageData{ 60, 60, "../res/target.bmp"};
 }
 
 GameScreen::~GameScreen()

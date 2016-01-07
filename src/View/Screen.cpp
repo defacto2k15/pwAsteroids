@@ -9,7 +9,7 @@ void Screen::eventAction(ALLEGRO_EVENT& ev, ViewManager *, Game *)
 
 void Screen::drawAllScenesOnDisplay(Display* display)
 {
-	display->clearDisplay(40, 120, 120);
+	display->clearDisplay(0,0,0);
 	for (auto scene : scenes)
 	{
 		if (scene->isActive()) display->drawSceneOnDisplay(scene);
