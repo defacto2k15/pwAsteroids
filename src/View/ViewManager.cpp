@@ -29,6 +29,15 @@ void ViewManager::initializeScreens()
 	activeScreen = screens.begin();
 }
 
+void ViewManager::updateScreensAfterDisplayChanges()
+{
+	for (it = screens.begin(); it != screens.end(); ++it)
+	{
+		(*it)->updateScreenAfterDisplayChanges();
+	}
+	std::cout << "Updated " << screens.size() << " screens\n";
+}
+
 void ViewManager::start()
 {
 	Game g;
@@ -46,7 +55,7 @@ void ViewManager::start()
 	ConsoleScreen* consoleScreen = new ConsoleScreen(str);
 	screens.push_back(consoleScreen);
 
-	sm->playSample("Test drive", 0.45, false);
+	sm->playSample("Test drive", 0.2, false);
 	//sm->playSample("The Gauntlet", false);
 
 	/* str = "EmptyScreen";

@@ -17,6 +17,7 @@ public:
 	void changeActiveScreen(std::string);
 	void playSample(std::string sampleName, float volume, bool playOnce = true) { sm->playSample(sampleName, volume, playOnce); }
 	void initializeScreens();
+	void updateScreensAfterDisplayChanges();
 	void start();
 	void exit() { isExit = true; }
 	Display* getDisplay() { return display; }

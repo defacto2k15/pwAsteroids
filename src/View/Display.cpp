@@ -9,8 +9,8 @@ void Display::drawSceneOnDisplay(Scene *scene)
 				al_draw_tinted_scaled_rotated_bitmap(object->getBitmap(), al_map_rgb(object->getTintR(), object->getTintG(), object->getTintB()), 0, 0,
 					object->getPozX(), object->getPozY(), object->getZoom(), object->getZoom(), object->getAngle(), 0);
 			}
-			al_draw_text(font, al_map_rgb(255, 255, 255), object->getPozX()+object->getTextX(), object->getPozY()+object->getTextY(),
-							0, (object->getText()).c_str());
+			al_draw_text(font, al_map_rgb(255, 255, 255), object->getPozX()+object->getTextX(), object->getPozY()+object->getTextY(), 0,
+							(object->getText()).c_str());
 		}
 	}
 }
@@ -19,6 +19,11 @@ void Display::clearDisplay(int r, int g, int b)
 {
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255) al_clear_to_color(al_map_rgb(255, 255, 255));
 	else al_clear_to_color(al_map_rgb(r, g, b));
+}
+
+void Display::resizeDisplay(int width, int height)
+{
+	al_resize_display(display, width, height);
 }
 
 Display::Display(int width, int height)

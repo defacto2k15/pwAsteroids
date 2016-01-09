@@ -47,16 +47,16 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 		for( MusicInstance oneInstance : musicInstances){
 			switch (oneInstance.getElement()){
 				case MusicElements::AsteroidCollisionSound:
-					vm->playSample("AsteroidCollision", oneInstance.getVolume(), true);
+					vm->playSample("AsteroidCollision", oneInstance.getVolume() * 0.5f, true);
 					break;
 				case MusicElements::RocketDestructionSound:
-					vm->playSample("RocketFailure", oneInstance.getVolume(), true);
+					vm->playSample("RocketFailure", oneInstance.getVolume() * 0.5f, true);
 					break;
 				case ShootSound:
-					vm->playSample("Blaster Imperial", oneInstance.getVolume(), true);
+					vm->playSample("Blaster Imperial", oneInstance.getVolume() * 0.5f, true);
 					break;
 				case SecondPlayerAsteroidShoot:
-					vm->playSample("SecondPlayerShoot", oneInstance.getVolume(), true);
+					vm->playSample("SecondPlayerShoot", oneInstance.getVolume() * 0.5f, true);
 					break;
 			}
 		}
@@ -192,6 +192,11 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 				break;
 		}
 	}
+}
+
+void GameScreen::updateScreenAfterDisplayChanges()
+{
+
 }
 
 void GameScreen::initializeScreenElements()
