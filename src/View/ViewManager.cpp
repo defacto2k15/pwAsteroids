@@ -62,6 +62,7 @@ void ViewManager::start()
 		(*activeScreen)->eventAction(ev, this, &g);
 		if (isExit) break;
 	}
+
 }
 
 ViewManager::ViewManager(int screenWidth, int screenHeight)
