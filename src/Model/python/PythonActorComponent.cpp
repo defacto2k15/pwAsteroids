@@ -22,6 +22,7 @@ PythonActorComponent &PythonActorComponent::operator=(const PythonActorComponent
     this->actor_ = other.actor_;
     this->python_ = other.python_;
     this->module_ = other.module_;
+	return *this;
 }
 
 IActor *PythonActorComponent::getActor() {

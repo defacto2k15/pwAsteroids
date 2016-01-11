@@ -13,6 +13,7 @@ class DrawableObject;
 class GameScreen : public Screen {
 public:
 	void eventAction(ALLEGRO_EVENT&, ViewManager*, Game*);
+	void updateScreenAfterDisplayChanges();
 	void initializeScreenElements();
 	std::string getTitle() { return title; }
 	GameScreen(std::string&);

@@ -7,6 +7,11 @@ void Screen::eventAction(ALLEGRO_EVENT& ev, ViewManager *, Game *)
 	std::cout << "Screen base event action!\n";
 }
 
+void Screen::updateScreenAfterDisplayChanges()
+{
+	std::cout << "Screen update after display changes\n";
+}
+
 void Screen::drawAllScenesOnDisplay(Display* display)
 {
 	display->clearDisplay(0,0,0);

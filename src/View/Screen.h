@@ -15,6 +15,7 @@ public:
 	virtual void eventAction(ALLEGRO_EVENT&, ViewManager*, Game*);
 	virtual void initializeScreenElements() {}
 	virtual std::string getTitle() { return "Screen"; }
+	virtual void updateScreenAfterDisplayChanges();
 	void drawAllScenesOnDisplay(Display*);
 	Scene* createNewScene();
 	Screen();

@@ -2,8 +2,12 @@
 #include "ViewManager.h"
 #include "DrawableObject.h"
 
-enum OPTION { START, OPTIONS, ABOUT, EXIT };
-int option = START;
+enum OPTION { FIRST, SECOND, THIRD, FOURTH };
+enum SUBMENU { SUBMENU_MAIN, SUBMENU_PLAY, SUBMENU_OPTIONS, SUBMENU_ABOUT };
+int option = FIRST;
+
+std::pair<int, int> resolutions[6];
+int selectedResolution = 0;
 
 void MenuScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 {
@@ -30,34 +34,98 @@ void MenuScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 			break;
 
 		case ALLEGRO_KEY_LEFT:
+			if (menus[SUBMENU_OPTIONS]->isActive()) {
+				if (option == FIRST && selectedResolution > 0) {
+					--selectedResolution;
+					std::string str = "Resolution: " + boost::lexical_cast<std::string>(resolutions[selectedResolution].first);
+					str+= " x " + boost::lexical_cast<std::string>(resolutions[selectedResolution].second);
+					resolutionButton->setText(str);
+				}
+			}
 			break;
 
 		case ALLEGRO_KEY_RIGHT:
+			if (menus[SUBMENU_OPTIONS]->isActive()) {
+				if (option == FIRST && selectedResolution < 5) {
+					++selectedResolution;
+					std::string str = "Resolution: " + boost::lexical_cast<std::string>(resolutions[selectedResolution].first);
+					str += " x " + boost::lexical_cast<std::string>(resolutions[selectedResolution].second);
+					resolutionButton->setText(str);
+				}
+			}
 			break;
 		case ALLEGRO_KEY_SPACE:
-			if (option == START) {
-				std::string str = "GameScreen";
-				vm->changeActiveScreen(str);
+			if (menus[SUBMENU_MAIN]->isActive()) {
+				if (option == FIRST) {
+					std::string str = "GameScreen";
+					vm->changeActiveScreen(str);
+				}
+				else if (option == SECOND) {
+					menus[SUBMENU_MAIN]->changeActiveState();
+					menus[SUBMENU_OPTIONS]->changeActiveState();
+					option = FIRST;
+					selectedButton->setPozY(170);
+				}
+				else if (option == FOURTH) {
+					vm->exit();
+				}
 			}
-			else if (option == EXIT) {
-				vm->exit();
+			else if (menus[SUBMENU_OPTIONS]->isActive()) {
+				if (option == FOURTH) {
+					menus[SUBMENU_OPTIONS]->changeActiveState();
+					menus[SUBMENU_MAIN]->changeActiveState();
+					option = FIRST;
+					selectedButton->setPozY(170);
+				}
+				else if (option == THIRD) {
+					vm->getDisplay()->resizeDisplay(resolutions[selectedResolution].first, resolutions[selectedResolution].second);
+					vm->updateScreensAfterDisplayChanges();
+				}
 			}
 			break;
 		}
 	}
 }
 
+void MenuScreen::updateScreenAfterDisplayChanges()
+{
+	for (int i = 0; i < 6; ++i) obj[i]->setPozX(al_get_display_width(al_get_current_display())/2 - 175);
+	resolutionButton->setPozX(al_get_display_width(al_get_current_display()) / 2 - 175);
+	selectedButton->setPozX(al_get_display_width(al_get_current_display()) / 2 - 195);
+	logo->setPozX(al_get_display_width(al_get_current_display()) / 2 - 85);
+}
+
 void MenuScreen::initializeScreenElements()
 {
 	// scenes
 	background = createNewScene();
+	for (int i = 0; i < NUMBER_OF_MENUS; ++i) {
+		menus[i] = createNewScene();
+		menus[i]->changeActiveState();
+	}
+	// resolutions
+	resolutions[0] = { 800, 600 };
+	resolutions[1] = { 1024, 600 };
+	resolutions[2] = { 1280, 720 };
+	resolutions[3] = { 1368, 768 };
+	resolutions[4] = { 1600, 900 };
+	resolutions[5] = { 1920, 1080 };
+	selectedResolution = 0;
 	// drawable objects
-	text = background->addDrawableObject(410, 80, NULL, "pwAsteroids (cool logo)");
-	button1 = background->addDrawableObject(340, 160, "../res/button.bmp", "Start the game", 0.0f, 1.0f, 110, 15);
-	button2 = background->addDrawableObject(340, 240, "../res/button.bmp", "Options", 0.0f, 1.0f, 140, 15);
-	button3 = background->addDrawableObject(340, 320, "../res/button.bmp", "About", 0.0f, 1.0f, 150, 15);
-	button4 = background->addDrawableObject(340, 400, "../res/button.bmp", "Exit", 0.0f, 1.0f, 155, 15);
+	logo = background->addDrawableObject(410, 80, NULL, "pwAsteroids (cool logo)");
 	selectedButton = background->addDrawableObject(320, 170, "../res/aa.bmp", NULL, 1.570796f, 0.75f);
+
+	obj[0] = menus[SUBMENU_MAIN]->addDrawableObject(340, 160, "../res/button.bmp", "Start the game", 0.0f, 1.0f, 110, 15);
+	obj[1] = menus[SUBMENU_MAIN]->addDrawableObject(340, 240, "../res/button.bmp", "Options", 0.0f, 1.0f, 140, 15);
+	obj[2] = menus[SUBMENU_MAIN]->addDrawableObject(340, 320, "../res/button.bmp", "About", 0.0f, 1.0f, 150, 15);
+	obj[3] = menus[SUBMENU_MAIN]->addDrawableObject(340, 400, "../res/button.bmp", "Exit", 0.0f, 1.0f, 155, 15);
+	menus[SUBMENU_MAIN]->changeActiveState();
+
+	std::string str = "Resolution: " + boost::lexical_cast<std::string>(resolutions[0].first) + " x " + boost::lexical_cast<std::string>(resolutions[0].second);
+	resolutionButton = menus[SUBMENU_OPTIONS]->addDrawableObject(340, 160, "../res/button.bmp", str.c_str(), 0.0f, 1.0f, 40, 15);
+	obj[4] = menus[SUBMENU_OPTIONS]->addDrawableObject(340, 320, "../res/button.bmp", "Apply", 0.0f, 1.0f, 150, 15);
+	obj[5] = menus[SUBMENU_OPTIONS]->addDrawableObject(340, 400, "../res/button.bmp", "Back", 0.0f, 1.0f, 155, 15);
+
 	std::cout << title << " initialized\n";
 }
 

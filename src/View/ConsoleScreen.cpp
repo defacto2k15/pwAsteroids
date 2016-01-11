@@ -66,6 +66,18 @@ void ConsoleScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 	}
 }
 
+void ConsoleScreen::updateScreenAfterDisplayChanges()
+{
+	gameScreen->setTextX(al_get_display_width(al_get_current_display()) / 2 - 20);
+	gameScreen->setTextY(al_get_display_height(al_get_current_display()) / 2 - 20);
+	std::cout << "X: " << gameScreen->getTextX() << ", Y: " << gameScreen->getTextY() << "\n";
+	int i = (al_get_display_height(al_get_current_display()) - 40);
+	for (int j = 0; j < NUMBER_OF_LINES; ++j) {
+		commandLine[j]->setPozY(i);
+		i -= 25;
+	}
+}
+
 void ConsoleScreen::initializeScreenElements()
 {
 	// TODO: initialize additional elements

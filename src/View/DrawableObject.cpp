@@ -20,3 +20,9 @@ DrawableObject::DrawableObject(int x, int y, const char* path, const char* t, fl
 	textX = tx;
 	textY = ty;
 }
+
+void DrawableObject::setBitmap(ALLEGRO_BITMAP * newBitmap)
+{
+	if (bitmap != NULL) al_destroy_bitmap(bitmap);
+	bitmap = newBitmap;
+}
