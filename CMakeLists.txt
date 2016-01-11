@@ -22,7 +22,7 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/Model/Actors/Asteroid/*.cpp" "src/Model/Actors/Asteroid/*.h" "src/Model/Actors/Projectile/*.cpp" "src/Model/Actors/Projectile/*.h"
         "src/Model/Actors/lifeIndicator/*.cpp" "src/Model/Actors/lifeIndicator/*.h" "src/Model/Actors/secondPlayer/*.cpp" "src/Model/Actors/secondPlayer/*.h"
         "src/Model/collisions/*.cpp" "src/Model/collisions/*.h" "src/Model/Actors/ScoreDisplay/*.h" "src/Model/Actors/ScoreDisplay/*.cpp"
-        "src/Model/sounds/*.cpp" "src/Model/sounds/*.h"
+        "src/Model/sounds/*.cpp" "src/Model/sounds/*.h" "src/Controller/*.h" "src/Controller/*.cpp"
   )
 
 add_executable(pwAsteroids ${SRC_FILES}  )
