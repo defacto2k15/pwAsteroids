@@ -33,8 +33,8 @@
 
 class MockClass;
 
-Game::Game() :
-		gameConfiguration_(pythonModule_),
+Game::Game( Point screenResolution ) :
+		gameConfiguration_(pythonModule_, screenResolution/100),
 		outGameScreenModel_( new  OutGameScreenModelImageCentering(
 								std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModelScaler(
 										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
@@ -146,5 +146,9 @@ IOutPythonModule &Game::getOutPythonModule() {
 void Game::update() {
 	outGameScreenModel_->OnUpdate();
 	rootServiceContainer_.OnUpdate(); // ugly but works!
+	std::cout << "Curr conf is " << gameConfiguration_.getBox2dScreenDimensions().toString() << std::endl;
+}
 
+void Game::setResolution(Point newResolution ) {
+	gameConfiguration_.setBox2dScreenDimensions(newResolution/100);
 }

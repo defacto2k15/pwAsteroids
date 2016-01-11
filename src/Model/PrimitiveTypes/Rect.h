@@ -14,6 +14,8 @@ class Rect {
 public:
     Rect(Point leftTopPoint, Point dimensions );
 
+    Rect();
+
     bool isPointInRectangle(Point point );
 
     double getLength(){

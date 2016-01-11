@@ -12,8 +12,12 @@ GameConfiguration & configurationGettingFunction(){
    return *GameConfiguration::onlyInstancePointer;
 }
 
-GameConfiguration::GameConfiguration(PythonModule &python) : python_(python), visibility_(python) {
+GameConfiguration::GameConfiguration(PythonModule &python,  Point box2dScreenDimensions) :
+		python_(python), visibility_(python) {
 	onlyInstancePointer = this;
+
+	setBox2dScreenDimensions(box2dScreenDimensions);
+	setActorsDestroyRectangle( Rect( -Point(2,2), box2dScreenDimensions) );
 
 	InitialPosition = Point( getBox2dScreenDimensions().getX()/2, getBox2dScreenDimensions().getY()/2 );
 	Point destroyBoundaries(2,2);

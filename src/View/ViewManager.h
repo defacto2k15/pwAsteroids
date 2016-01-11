@@ -2,6 +2,7 @@
 #ifndef PWASTEROIDS_VIEWMANAGER_H
 #define PWASTEROIDS_VIEWMANAGER_H
 
+#include <Game.h>
 #include <vector>
 #include "Scene.h"
 #include "Screen.h"
@@ -19,6 +20,7 @@ public:
 	void initializeScreens();
 	void updateScreensAfterDisplayChanges();
 	void start();
+	void resizeDisplay( int newWidth, int newHeight );
 	void exit() { isExit = true; }
 	Display* getDisplay() { return display; }
 	ViewManager(int, int);
@@ -33,6 +35,7 @@ private:
 	ALLEGRO_EVENT_QUEUE *event_queue;
 	boost::thread* timerThread;
 	bool isExit = false;
+	Game game;
 };
 
 #endif

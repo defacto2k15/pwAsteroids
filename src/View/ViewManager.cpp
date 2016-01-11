@@ -40,8 +40,7 @@ void ViewManager::updateScreensAfterDisplayChanges()
 
 void ViewManager::start()
 {
-	Game g;
-	g.update();
+	game.update();
 
 	std::string str = "MenuScreen";
 	MenuScreen* menuScreen = new MenuScreen(str);
@@ -68,13 +67,13 @@ void ViewManager::start()
 	{
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-		(*activeScreen)->eventAction(ev, this, &g);
+		(*activeScreen)->eventAction(ev, this, &game);
 		if (isExit) break;
 	}
 
 }
 
-ViewManager::ViewManager(int screenWidth, int screenHeight)
+ViewManager::ViewManager(int screenWidth, int screenHeight) : game(Point(screenWidth, screenHeight))
 {
 	display = new Display(screenWidth, screenHeight);
 	sm = new SoundModule();
@@ -94,4 +93,10 @@ ViewManager::~ViewManager()
 	std::cout << "Timer stopped\n";
 	delete display;
 	// TO DO: also delete each scene in scenes
+}
+
+/* Bartkowy kod */
+void ViewManager::resizeDisplay(int newWidth, int newHeight) {
+	display->resizeDisplay(newWidth, newHeight);
+	game.setResolution(Point(newWidth, newHeight));
 }

@@ -63,8 +63,7 @@ class GameConfiguration {
 public:
 	static GameConfiguration* onlyInstancePointer;
 
-	GameConfiguration(PythonModule &python);
-
+	GameConfiguration(PythonModule &python, Point box2dScreenDimensions);
 
 	Point getInitialPosition() const {
 		return InitialPosition;
@@ -127,15 +126,16 @@ public:
 	}
 
 	void setAllegroToBox2dScale(ScaleToScreen AllegroToBox2dScale) {
-		GameConfiguration::AllegroToBox2dScale = AllegroToBox2dScale;
+		this->AllegroToBox2dScale = AllegroToBox2dScale;
 	}
 
 	Point getBox2dScreenDimensions() const {
+		Point np = Box2dScreenDimensions;
 		return Box2dScreenDimensions;
 	}
 
-	void setBox2dScreenDimensions(Point Box2dScreenDimensions) {
-		GameConfiguration::Box2dScreenDimensions = Box2dScreenDimensions;
+	void setBox2dScreenDimensions(Point Box2dScreenDimensionsX) {
+		this->Box2dScreenDimensions = Box2dScreenDimensionsX;
 	}
 
 	Point getDuplicationBoundariesSize() const {

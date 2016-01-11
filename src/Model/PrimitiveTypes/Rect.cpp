@@ -12,3 +12,7 @@ bool Rect::isPointInRectangle(Point point ) {
            ( point.getX() <= leftTopPoint_.getX() + dimensions_.getX()) &&
            ( point.getY() <= leftTopPoint_.getY() + dimensions_.getY() );
 }
+
+Rect::Rect() : Rect(Point(0, 0), Point(0, 0)) {
+
+}

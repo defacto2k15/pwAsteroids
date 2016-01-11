@@ -56,6 +56,8 @@ Point operator-(Point p1, Point p2 );
 
 Point operator*(Point p1, double scale);
 
+Point operator/(Point p1, double divisor);
+
 std::ostream & operator<<(std::ostream& stream,  Point& point);
 
 #endif //PWASTEROIDS_POINT_H

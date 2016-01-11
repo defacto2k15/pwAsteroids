@@ -7,8 +7,7 @@
 
 BorderIndicatorComponent::BorderIndicatorComponent(GameConfiguration &configuration,
                                                    std::shared_ptr<IInputStateProvider> inputStateProvider)
-        : configuration_(configuration), inputStateProvider_(inputStateProvider),
-          indicatorMovingCircuitRect_(Point(0,0), configuration.getBox2dScreenDimensions()) {
+        : configuration_(configuration), inputStateProvider_(inputStateProvider){
 }
 
 void BorderIndicatorComponent::OnStart(IActor &actor) {
@@ -16,6 +15,8 @@ void BorderIndicatorComponent::OnStart(IActor &actor) {
 }
 
 void BorderIndicatorComponent::OnUpdate() {
+    indicatorMovingCircuitRect_ = Rect(Point(0,0), configuration_.getBox2dScreenDimensions() );
+
     double indicatorMoveDelta = 0.05;
     if( inputStateProvider_->isPressed(Keys::Player2LeftKey)){
         lastIndicatorPosition_ -= indicatorMoveDelta;

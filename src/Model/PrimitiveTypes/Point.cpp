@@ -69,3 +69,7 @@ Point operator-(Point p1, Point p2 ) {
 Point operator*(Point p1, double scale) {
 	return Point(p1.getX()*scale, p1.getY()*scale);
 }
+
+Point operator/(Point p1, double divisor) {
+	return Point(p1.getX()/divisor, p1.getY()/divisor);
+}

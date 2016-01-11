@@ -78,7 +78,7 @@ void MenuScreen::eventAction(ALLEGRO_EVENT &ev, ViewManager *vm, Game *g)
 					selectedButton->setPozY(170);
 				}
 				else if (option == THIRD) {
-					vm->getDisplay()->resizeDisplay(resolutions[selectedResolution].first, resolutions[selectedResolution].second);
+					vm->resizeDisplay(resolutions[selectedResolution].first, resolutions[selectedResolution].second);
 					vm->updateScreensAfterDisplayChanges();
 				}
 			}

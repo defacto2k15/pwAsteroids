@@ -59,7 +59,7 @@ private:
 	RocketLife rocketLife_;
 	ScoreCount scoreCount_;
 public:
-	Game();
+	Game( Point screenResolution );
 
 	std::shared_ptr<IOutGameScreenModel> getOutGameScreenModel();;
 
@@ -74,6 +74,8 @@ public:
 	}
 
 	void update();;
+
+	void setResolution(Point newResolution );
 };
 
 
