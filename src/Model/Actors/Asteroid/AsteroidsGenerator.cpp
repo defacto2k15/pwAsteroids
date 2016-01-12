@@ -24,7 +24,7 @@ void AsteroidsGenerator::generateAsteroid(Point position, Rotation rotation, dou
         std::vector<std::shared_ptr<Component>> componentsForAsteroid;
         componentsForAsteroid.push_back(std::make_shared<Box2dComponent>(boxService_, gameConfiguration_, container_.getAsteriodObject(size)));
         componentsForAsteroid.push_back(std::make_shared<PositionComponent>(pythonModule_));
-        componentsForAsteroid.push_back(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Asteroid, imageScalesContainer_.getBasicAsteroidImageScale() * size));
+        componentsForAsteroid.push_back(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Asteroid, imageScalesContainer_.getImageScale(ImagePrimitiveType::Asteroid) * size));
         componentsForAsteroid.push_back( std::make_shared<PythonActorComponent>(pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Asteroid, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<PositionSettingComponent >(true, pythonModule_));

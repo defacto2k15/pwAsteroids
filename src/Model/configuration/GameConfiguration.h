@@ -57,6 +57,7 @@ class GameConfiguration {
 	double  MaxSecondPlayerAsteroidSize = 3.5f;
 	std::string OnStartPythonScriptPath = "../res/OnStart.py";
 	std::string OnUpdatePythonScriptPath = "../res/OnUpdate.py";
+	Point ScreenSizeInPixels = Point(1024, 600);
 
 	PythonClassVisibilityModule<GameConfiguration> visibility_;
 	PythonModule &python_;
@@ -64,6 +65,16 @@ public:
 	static GameConfiguration* onlyInstancePointer;
 
 	GameConfiguration(PythonModule &python, Point box2dScreenDimensions);
+
+	Point getScreenSizeInPixels() const {
+		return ScreenSizeInPixels;
+	}
+
+	void setScreenSizeInPixels( Point newSize){
+		ScreenSizeInPixels = newSize;
+		Box2dScreenDimensions = Box2dToAllegroScale.getInverted().scalePoint(ScreenSizeInPixels);
+		std::cout << "Screen dim are " << Box2dScreenDimensions.toString() << std::endl;
+	}
 
 	Point getInitialPosition() const {
 		return InitialPosition;

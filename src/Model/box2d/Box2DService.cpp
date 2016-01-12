@@ -5,6 +5,7 @@
 #include "Box2DService.h"
 
 void Box2DService::addObject( std::shared_ptr<Box2dObject> object ) {
+
 	auto body = world_.CreateBody( object->getDef() );
 	object->setBodyAndCreateFixtures(body);
 }

@@ -33,8 +33,9 @@
 
 class MockClass;
 
-Game::Game( Point screenResolution ) :
-		gameConfiguration_(pythonModule_, screenResolution/100),
+Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSizesMap ) :
+		gameConfiguration_(pythonModule_, screenResolution),
+		imageScalesContainer_(gameConfiguration_, imageSizesMap),
 		outGameScreenModel_( new  OutGameScreenModelImageCentering(
 								std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModelScaler(
 										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
@@ -54,17 +55,17 @@ Game::Game( Point screenResolution ) :
 	rootServiceContainer_.addService(actorsContainer_);
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
-	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-			asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_
-	));
+	//rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
+	//		asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_
+	//));
 
 
-	rootServiceContainer_.addService(boxService_);
+	//rootServiceContainer_.addService(boxService_);
 
 
 	lifeIndicatorService_ = std::make_shared<LifeIndicatorService>(
 			actorsContainer_, pythonModule_, drawingSystem_, imageScalesContainer_, idGenerator, gameConfiguration_, rocketLife_);
-	rootServiceContainer_.addService(lifeIndicatorService_);
+	//rootServiceContainer_.addService(lifeIndicatorService_);
 
 	gameStopService_ = std::make_shared<GameStopService>( pythonModule_, gameTimeProvider, boxService_, inputManager_);
 	rootServiceContainer_.addService(gameStopService_);
@@ -77,7 +78,7 @@ Game::Game( Point screenResolution ) :
 
 	rocket->addComponent(std::make_shared<Box2dComponent>(boxService_, gameConfiguration_, box2dObjectsContainer_.getRocketObject()));
 	rocket->addComponent(std::make_shared<PositionComponent>(pythonModule_));
-	rocket->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::Rocket, imageScalesContainer_.getRocketImageScale()));
+	rocket->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::Rocket, imageScalesContainer_.getImageScale(ImagePrimitiveType::Rocket)));
 	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(inputManager_, pythonModule_, gameConfiguration_);
 	rocket->addComponent(rocketMovingComponent);
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
@@ -89,17 +90,17 @@ Game::Game( Point screenResolution ) :
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, gameConfiguration_));
-	rocketTail->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::RocketTail, imageScalesContainer_.getRocketTailImageScale()));
+	rocketTail->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::RocketTail, imageScalesContainer_.getImageScale(ImagePrimitiveType::RocketTail)));
 	rocketTail->addComponent(std::make_shared<PositionComponent>(pythonModule_));
 
 	auto borderIndicator = std::make_shared<Actor>(idGenerator.getActorId());
-	borderIndicator->addComponent( std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::BorderIndicator, imageScalesContainer_.getBorderIndicatorImageScale() ));
+	borderIndicator->addComponent( std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::BorderIndicator, imageScalesContainer_.getImageScale(ImagePrimitiveType::BorderIndicator) ));
 	borderIndicator->addComponent( std::make_shared<PositionComponent>(pythonModule_));
 	auto borderIndicatorComponent =  std::make_shared<BorderIndicatorComponent>(gameConfiguration_, inputManager_);
 	borderIndicator->addComponent(borderIndicatorComponent);
 	borderIndicator->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	borderIndicator->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
-	actorsContainer_->addActor(borderIndicator);
+	//actorsContainer_->addActor(borderIndicator);
 
 	actorsContainer_->addActor(rocket);
 	actorsContainer_->addActor(rocketTail);
@@ -107,14 +108,14 @@ Game::Game( Point screenResolution ) :
 
 	auto secondPlayerTargetingActor = std::make_shared<Actor>(idGenerator.getActorId());
 	secondPlayerTargetingActor->addComponent(
-			std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::SecondPlayerTarget, imageScalesContainer_.getSecondPlayerTargetImageScale() ));
+			std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::SecondPlayerTarget, imageScalesContainer_.getImageScale(ImagePrimitiveType::SecondPlayerTarget) ));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionComponent>(pythonModule_));
 	secondPlayerTargetingActor->addComponent(
 			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider, inputManager_, asteroidGenerator_, gameConfiguration_, musicManager_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
 
-	actorsContainer_->addActor( secondPlayerTargetingActor );
+	//actorsContainer_->addActor( secondPlayerTargetingActor );
 	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
 	rootServiceContainer_.addService(commonTypesVisualizer);
 
@@ -146,9 +147,8 @@ IOutPythonModule &Game::getOutPythonModule() {
 void Game::update() {
 	outGameScreenModel_->OnUpdate();
 	rootServiceContainer_.OnUpdate(); // ugly but works!
-	std::cout << "Curr conf is " << gameConfiguration_.getBox2dScreenDimensions().toString() << std::endl;
 }
 
 void Game::setResolution(Point newResolution ) {
-	gameConfiguration_.setBox2dScreenDimensions(newResolution/100);
+	gameConfiguration_.setScreenSizeInPixels(newResolution);
 }

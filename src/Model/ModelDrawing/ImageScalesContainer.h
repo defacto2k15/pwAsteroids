@@ -7,40 +7,29 @@
 
 
 #include <Model/PrimitiveTypes/ScaleToScreen.h>
+#include <Model/configuration/GameConfiguration.h>
+#include "ImagePrimitiveType.h"
 
 class ImageScalesContainer {
+    GameConfiguration &gameConfiguration_;
+    std::map<ImagePrimitiveType, Point> imagePrimitivesSizeMap_;
 public:
+    ImageScalesContainer(GameConfiguration &gameConfiguration_,
+                         const std::map<ImagePrimitiveType, Point> &imagePrimitivesSizeMap_) : gameConfiguration_(
+            gameConfiguration_), imagePrimitivesSizeMap_(imagePrimitivesSizeMap_) { }
+
+    ScaleToScreen getImageScale( ImagePrimitiveType type){
+        assert(imagePrimitivesSizeMap_.count(type) > 0);
+        Point sizeInPixels = imagePrimitivesSizeMap_[type];
+        ScaleToScreen out = ScaleToScreen( sizeInPixels / gameConfiguration_.getScreenSizeInPixels());
+        std::cout << "Scale is " << out.getX() << "  " << out.getY() << std::endl;
+        return out;
+    }
+
     Point getScreenSize(){
-        return Point(1024, 600);
+        return gameConfiguration_.getScreenSizeInPixels();
     }
 
-    ScaleToScreen getRocketImageScale(){
-        return ScaleToScreen(0.053, 0.1);
-    }
-
-    ScaleToScreen getRocketTailImageScale(){
-        return ScaleToScreen(0.053, 0.1);
-    }
-
-    ScaleToScreen getBasicAsteroidImageScale(){
-        return ScaleToScreen(0.053, 0.1);
-    }
-
-    ScaleToScreen getSecondPlayerTargetImageScale(){
-        return ScaleToScreen(0.053, 0.1);
-    }
-
-    ScaleToScreen getProjectileImageScale(){
-        return ScaleToScreen(15.0f / getScreenSize().getX(), 15.0f / getScreenSize().getY());
-    }
-
-    ScaleToScreen getBorderIndicatorImageScale(){
-        return getProjectileImageScale();
-    }
-
-    ScaleToScreen getHeartImageScale(){
-        return getProjectileImageScale();
-    }
 };
 
 

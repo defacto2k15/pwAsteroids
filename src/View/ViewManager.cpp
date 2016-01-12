@@ -73,7 +73,8 @@ void ViewManager::start()
 
 }
 
-ViewManager::ViewManager(int screenWidth, int screenHeight) : game(Point(screenWidth, screenHeight))
+ViewManager::ViewManager(int screenWidth, int screenHeight, std::map<ImagePrimitiveType, Point> imageSizes)
+		: game(Point(screenWidth, screenHeight), imageSizes)
 {
 	display = new Display(screenWidth, screenHeight);
 	sm = new SoundModule();

@@ -12,12 +12,13 @@ GameConfiguration & configurationGettingFunction(){
    return *GameConfiguration::onlyInstancePointer;
 }
 
-GameConfiguration::GameConfiguration(PythonModule &python,  Point box2dScreenDimensions) :
+GameConfiguration::GameConfiguration(PythonModule &python,  Point AllegroScreenDimensions) :
 		python_(python), visibility_(python) {
 	onlyInstancePointer = this;
 
-	setBox2dScreenDimensions(box2dScreenDimensions);
-	setActorsDestroyRectangle( Rect( -Point(2,2), box2dScreenDimensions) );
+	setScreenSizeInPixels(AllegroScreenDimensions);
+	setBox2dScreenDimensions(AllegroToBox2dScale.scalePoint(AllegroScreenDimensions));
+	setActorsDestroyRectangle( Rect( -Point(2,2), Box2dScreenDimensions) );
 
 	InitialPosition = Point( getBox2dScreenDimensions().getX()/2, getBox2dScreenDimensions().getY()/2 );
 	Point destroyBoundaries(2,2);
@@ -62,6 +63,7 @@ GameConfiguration::GameConfiguration(PythonModule &python,  Point box2dScreenDim
 	visibility_.registerProperty("MaxSecondPlayerAsteroidSize", &GameConfiguration::getMaxSecondPlayerAsteroidSize, &GameConfiguration::setMaxSecondPlayerAsteroidSize   );
 	visibility_.registerProperty("OnStartPythonScriptPath", &GameConfiguration::getOnStartPythonScriptPath, &GameConfiguration::setOnStartPythonScriptPath);
 	visibility_.registerProperty("OnUpdatePythonScriptPath", &GameConfiguration::getOnUpdatePythonScriptPath, &GameConfiguration::setOnUpdatePythonScriptPath);
+	visibility_.registerProperty("ScreenSizeInPixels", &GameConfiguration::getScreenSizeInPixels, &GameConfiguration::setScreenSizeInPixels);
 
 	using gameRef = GameConfiguration&;
 	std::function< GameConfiguration&() > func = configurationGettingFunction;
