@@ -10,16 +10,15 @@ Box2dObjectsContainer::Box2dObjectsContainer(ImageScalesContainer &imageScalesCo
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getRocketObject() {
-    return createObjectWithBoxShape(imageScalesContainer_.getRocketImageScale(), 120, CollisionGroupsData::getRocketData());
+    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::Rocket), 120, CollisionGroupsData::getRocketData());
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getAsteriodObject(double size) {
-    // todo use size!!!!
-    return createObjectWithBoxShape(imageScalesContainer_.getBasicAsteroidImageScale() * size, 120, CollisionGroupsData::getAsteroidData());
+    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::Asteroid)* size, 120, CollisionGroupsData::getAsteroidData());
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getProjectileObject() {
-    return createObjectWithBoxShape(imageScalesContainer_.getProjectileImageScale(), 250, CollisionGroupsData::getProjectileData());
+    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::Projectile), 250, CollisionGroupsData::getProjectileData());
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::createObjectWithBoxShape(ScaleToScreen imageScale,

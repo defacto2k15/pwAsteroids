@@ -28,7 +28,7 @@ void ProjectilesGenerator::generateProjectile(Point position, Rotation rotation,
         std::vector<std::shared_ptr<Component>> componentsForAsteroid;
         componentsForAsteroid.push_back(std::make_shared<Box2dComponent>(boxService_, gameConfiguration_, container_.getProjectileObject()));
         componentsForAsteroid.push_back(std::make_shared<PositionComponent>(pythonModule_));
-        componentsForAsteroid.push_back(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Projectile, imageScalesContainer_.getProjectileImageScale()));
+        componentsForAsteroid.push_back(std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Projectile, imageScalesContainer_.getImageScale(ImagePrimitiveType::Projectile)));
         componentsForAsteroid.push_back( std::make_shared<PythonActorComponent>(pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<ActorTypeComponent>(ActorType_Projectile, pythonModule_));
         componentsForAsteroid.push_back( std::make_shared<PositionSettingComponent >(true, pythonModule_));

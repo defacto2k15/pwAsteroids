@@ -3,6 +3,7 @@
 //
 
 #include "Box2dObject.h"
+#include <iostream>
 
 const b2BodyDef *Box2dObject::getDef() {
 	return &bodyDef_;

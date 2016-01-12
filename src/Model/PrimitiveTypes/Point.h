@@ -54,6 +54,8 @@ Point operator-(Point p1);
 
 Point operator-(Point p1, Point p2 );
 
+Point operator/(Point p1, Point p2);
+
 Point operator*(Point p1, double scale);
 
 Point operator/(Point p1, double divisor);

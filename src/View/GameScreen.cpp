@@ -78,6 +78,9 @@ void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 				}
 				int xImageSize = 1024;
 				float zoom = (xImageSize * primitive.getScale().getX())/ (imageDataMap_[primitive.getImageType()].xSize);
+				//if( primitive.getImageType() == ImagePrimitiveType::RocketTail) {
+					std::cout << " Zoom is " << zoom;
+				//}
 
 				drawableObjects[primitive.getActorId()]->setZoom(zoom/4);	// sets scale only for Bitmaps, not models!
 			}
@@ -218,7 +221,7 @@ GameScreen::GameScreen(std::string& t)
 	imageDataMap_[ImagePrimitiveType::BorderIndicator] = ImageData{15, 15, "../res/arrow.bmp"};
 	imageDataMap_[ImagePrimitiveType::Projectile] = ImageData{15, 15, "../res/projectile.bmp"};
 	imageDataMap_[ImagePrimitiveType::Rocket] = ImageData{60, 60, "../res/rocket2.bmp"};
-	imageDataMap_[ImagePrimitiveType::RocketTail] = ImageData{60, 30, "../res/rockettail.bmp"};
+	imageDataMap_[ImagePrimitiveType::RocketTail] = ImageData{60, 60, "../res/rockettail2.bmp"};
 	imageDataMap_[ImagePrimitiveType::Heart] = ImageData{ 60, 60, "../res/rocket2.bmp"};
 	imageDataMap_[ImagePrimitiveType::SecondPlayerTarget] = ImageData{ 60, 60, "../res/target.bmp"};
 }

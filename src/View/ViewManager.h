@@ -15,7 +15,7 @@ const float FPS = 60;
 
 class ViewManager {
 public:
-	void changeActiveScreen(std::string);
+	void changeActiveScreen(std::string );
 	void playSample(std::string sampleName, float volume, bool playOnce = true) { sm->playSample(sampleName, volume, playOnce); }
 	void initializeScreens();
 	void updateScreensAfterDisplayChanges();
@@ -23,7 +23,7 @@ public:
 	void resizeDisplay( int newWidth, int newHeight );
 	void exit() { isExit = true; }
 	Display* getDisplay() { return display; }
-	ViewManager(int, int);
+	ViewManager(int, int,  std::map<ImagePrimitiveType, Point> imageSizes);
 	~ViewManager();
 
 private:

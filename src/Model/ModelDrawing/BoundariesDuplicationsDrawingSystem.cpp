@@ -12,7 +12,6 @@ BoundariesDuplicationsDrawingSystem::BoundariesDuplicationsDrawingSystem(IDrawin
 void BoundariesDuplicationsDrawingSystem::drawImage(ImagePrimitiveType type, Point position, Rotation rotation, ScaleToScreen scale,
                                                             ActorId actorId) {
     auto screenSize = configuration_.getBox2dScreenDimensions();
-    std::cout << "ss is " << screenSize.toString() << std::endl;
     normalDrawingSystem_.drawImage(type, position, rotation, scale, actorId);
     Point delta;
     if( position.getX() < configuration_.getDuplicationBoundariesSize().getX()){
