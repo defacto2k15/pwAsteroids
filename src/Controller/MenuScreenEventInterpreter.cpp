@@ -12,10 +12,6 @@ MenuScreenEventInterpreter::MenuScreenEventInterpreter(MenuScreen *menuScreen, R
         : resolutions_(resolutions), menuScreen_(menuScreen) {
 }
 
-void MenuScreenEventInterpreter::setViewManager(ViewManager *manager ) {
-    viewManager_ = manager;
-}
-
 void MenuScreenEventInterpreter::keyDown(int keynum) {
     if( keynum == ALLEGRO_KEY_DOWN){
         menuScreen_->goDown();
@@ -65,4 +61,8 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
 
 void MenuScreenEventInterpreter::timeEvent() {
     menuScreen_->updateScreen();
+}
+
+std::string MenuScreenEventInterpreter::getScreenName() {
+    return "MenuScreen";
 }

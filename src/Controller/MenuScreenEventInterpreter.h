@@ -8,27 +8,26 @@
 
 
 #include <menu/MenuOptionTypes.h>
+#include "ScreenEventInterpreter.h"
 #include "AbstractAllegroEventListener.h"
-#include "IScreenEventInterpreter.h"
-
+#include <string>
 
 class MenuScreen;
 class ViewManager;
 class ResolutionsContainer;
 
 
-class MenuScreenEventInterpreter : public AbstractAllegroEventListener {
+class MenuScreenEventInterpreter : public ScreenEventInterpreter {
     MenuScreen *menuScreen_;
-    ViewManager *viewManager_;
     ResolutionsContainer &resolutions_;
 public:
     MenuScreenEventInterpreter(MenuScreen *menuScreen, ResolutionsContainer &resolutions);
 
-    void setViewManager(ViewManager *manager );
-
     virtual void keyDown(int keynum);
 
     virtual void timeEvent();
+
+    virtual std::string getScreenName();
 };
 
 

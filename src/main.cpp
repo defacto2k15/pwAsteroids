@@ -11,6 +11,7 @@
 #include <Controller/MenuScreenEventInterpreter.h>
 #include <Controller/ResolutionsContainer.h>
 #include <menu/MenuModel.h>
+#include <Controller/ConsoleScreenEventInterpreter.h>
 #include "View/MenuScreen.h"
 //#include <allegro5/allegro5.h>
 
@@ -54,8 +55,6 @@ int main(int, char**){
 			{1, Keys::Player2AttackKey}
 	};
 
-	Display *display = new Display(1024, 600);
-	GameScreen* gameScreen = new GameScreen("GameScreen", display);
 
 	AllegroToGameKeyMapper keyMapper(keyStateFetcher, keyboardToGameMap, mouseToGameMap);
 
@@ -68,12 +67,17 @@ int main(int, char**){
 	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 60, 60, "../res/rocket2.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 60, 60, "../res/target.bmp"});
 
+	char y[2000];
 	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap());
+	char x[1000];
+	Display display(1024, 600);
+	GameScreen gameScreen("GameScreen", &display);
+
 	ScreenSize screenSize( Point(1024, 600));
 
 	std::vector<AbstractAllegroEventListener *>eventListenersVector{ &keyStateFetcher, &mousePositionFetcher};
 
-	GameScreenEventInterpreter gameScreenInterpreter(keyMapper, mousePositionFetcher, gameScreen, imageDataContainer, game
+	GameScreenEventInterpreter gameScreenInterpreter(keyMapper, mousePositionFetcher, &gameScreen, imageDataContainer, game
 			, screenSize);
 
 	ResolutionsContainer resolutionsContainer({ std::make_pair(1024, 600), std::make_pair(800, 600), std::make_pair(1280, 1024)});
@@ -91,15 +95,31 @@ int main(int, char**){
 
 	menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_OPTIONS, {resolutionOption, backOption, applyOption} });
 
-	MenuScreen menuScreen(std::string("MenuScreen"), menusVector, display );
+	MenuScreen menuScreen(std::string("MenuScreen"), menusVector, &display );
 
-	MenuScreenEventInterpreter interpreter(&menuScreen, resolutionsContainer);
+	MenuScreenEventInterpreter menuScreenInterpreter(&menuScreen, resolutionsContainer);
+
+	ConsoleScreen consoleScreen("ConsoleScreen", &display);
+
+	ConsoleScreenEventInterpreter consoleScreenEventInterpreter( &consoleScreen, game );
+
+	std::vector< ScreenEventInterpreter*> screenEventInterpreters{
+			&menuScreenInterpreter, &gameScreenInterpreter, &consoleScreenEventInterpreter
+	};
+
+	std::vector< Screen *>screensVec{
+			&gameScreen, &consoleScreen, &menuScreen
+	};
 
 
-	std::shared_ptr<ViewManager> manager(
-			new ViewManager(1024, 600, game, eventListenersVector, gameScreenInterpreter, gameScreen, display,
-							interpreter, &menuScreen));
-	manager->start();
+	ViewManager manager(game, eventListenersVector,
+						&display, screenEventInterpreters, screensVec, "GameScreen" );
+
+
+//	std::shared_ptr<ViewManager> manager(
+//			new ViewManager(1024, 600, game, eventListenersVector, &display,
+//							interpreter, &menuScreen));
+	manager.start();
 	system("read  -r -p \"Press any key to continue...\" key");
 	//system("read  -r -p \"Press any key to continue...\" key");
 	//system("read  -r -p \"Press any key to continue...\" key");

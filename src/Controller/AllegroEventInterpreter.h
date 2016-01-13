@@ -8,7 +8,10 @@
 
 #include <allegro5/events.h>
 #include <vector>
+#include <Model/help/StdContainers.h>
+#include <assert.h>
 #include "AbstractAllegroEventListener.h"
+#include "ScreenEventInterpreter.h"
 
 class AllegroEventInterpreter {
     std::vector<AbstractAllegroEventListener *>listeners_;
@@ -23,6 +26,14 @@ public:
     void addListener( AbstractAllegroEventListener *listener){
         listeners_.push_back(listener);
     }
+
+    void removeListener(ScreenEventInterpreter *interpreter){
+        if( std::find(std::begin(listeners_), listeners_.end(), interpreter) == listeners_.end()){
+            assert(false);
+        }
+        listeners_.erase(std::remove(listeners_.begin(), listeners_.end(), interpreter), listeners_.end());
+    }
+
 private:
     void interpretEvent(AbstractAllegroEventListener *listener, ALLEGRO_EVENT event ){
         if( event.type == ALLEGRO_EVENT_TIMER){
@@ -35,6 +46,8 @@ private:
             listener->mouseKeyDown(event.mouse.button);
         } else if ( event.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             listener->mouseKeyUp(event.mouse.button);
+        } else if (event.type == ALLEGRO_EVENT_KEY_CHAR ){
+            listener->charKeyDown( event.keyboard.unichar );
         }
     }
 };

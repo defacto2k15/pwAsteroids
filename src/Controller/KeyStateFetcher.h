@@ -8,6 +8,7 @@
 #include "AbstractAllegroEventListener.h"
 #include <map>
 #include <iostream>
+#include <vector>
 
 class KeyStateFetcher : public AbstractAllegroEventListener {
     std::map<int, bool> keyStateMap_;

@@ -18,10 +18,30 @@ public:
 	void updateScreenAfterDisplayChanges();
 	void initializeScreenElements();
 	std::string getTitle() { return title; }
-	ConsoleScreen(std::string&);
+
+	void updateScreen();
+	ConsoleScreen(std::string, Display *display);
 	~ConsoleScreen();
+
+	void addCharacter(int character);
+
+	void removeScreenshot();
+
+	void removeCharacter();
+
+	std::string getLastLine();
+
+	void addNewLine();
+
+	bool isScreenshotTaken();
+
+	void takeScreenshot();
+
+	void writeText(std::string line);
+
 private:
 	std::string title;
+	Display *display_;
 	// add additional elements in that place - scenes, objects, variables etc.
 	Scene* background, *texts;
 	DrawableObject* text;

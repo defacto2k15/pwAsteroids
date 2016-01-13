@@ -11,6 +11,7 @@ class AbstractAllegroEventListener {
 public:
     virtual void keyDown(int keynum ){
     };
+
     virtual void keyUp( int keynum ){
     };
     virtual void mouseKeyDown(int keynum ){
@@ -20,7 +21,7 @@ public:
     virtual void timeEvent(){
     };
 
-    virtual void setViewManager(ViewManager * manager){
+    virtual void charKeyDown(int unicode ){
     }
 };
 
