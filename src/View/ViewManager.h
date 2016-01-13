@@ -21,10 +21,10 @@ class ViewManager {
 public:
 	ViewManager(Game &game, std::vector<AbstractAllegroEventListener *> allegroEventListeners,
                     Display *display, std::vector<ScreenEventInterpreter *> screenEventInterpreters,
-                    std::vector<Screen *> screens, std::string initialScreen);
+                    std::vector<Screen *> screens, std::string initialScreen, SoundModule &soundModule);
 
 	void changeActiveScreen(std::string );
-	void playSample(std::string sampleName, float volume, bool playOnce = true) { sm.playSample(sampleName, volume, playOnce); }
+	void playSample(std::string sampleName, float volume, bool playOnce = true) { soundModule_.playSample(sampleName, volume, playOnce); }
 	void initializeScreens();
 	void updateScreensAfterDisplayChanges();
 	void start();
@@ -38,7 +38,7 @@ private:
 	std::vector<Screen*> screens;
 	std::vector<Screen*>::iterator activeScreen, it;
 	Display* display;
-	SoundModule sm;
+	SoundModule &soundModule_;
 	ALLEGRO_TIMER *timer;
 	ALLEGRO_EVENT_QUEUE *event_queue;
 	boost::thread* timerThread;

@@ -10,9 +10,10 @@ std::string GameScreenEventInterpreter::getScreenName() {
 }
 
 GameScreenEventInterpreter::GameScreenEventInterpreter(AllegroToGameKeyMapper &keyMapper, MousePositionFetcher &mousePositionFetcher,
-                                                       GameScreen *gameScreen, ImageDataContainer &imageDataContainer, Game &game, ScreenSize &screenSize)
-        : keyMapper_(keyMapper), mousePositionFetcher_(mousePositionFetcher),
-          gameScreen_(gameScreen), imageDataContainer_(imageDataContainer), game_(game), screenSize_(screenSize) {
+                                                       GameScreen *gameScreen, ImageDataContainer &imageDataContainer,
+                                                       Game &game, ScreenSize &screenSize, SoundModule &soundModule)
+        : keyMapper_(keyMapper), mousePositionFetcher_(mousePositionFetcher), gameScreen_(gameScreen),
+          imageDataContainer_(imageDataContainer), game_(game), screenSize_(screenSize) , soundModule_(soundModule){
 }
 
 void GameScreenEventInterpreter::keyDown(int keynum) {
@@ -53,6 +54,23 @@ void GameScreenEventInterpreter::timeEvent() {
     for( auto actorId : game_.getOutGameScreenModel()->getRemovedActorsIds()){
         /* TODO deleting */
         gameScreen_->updateObject(actorId, Point(-100, -100), 0, 0);
+    }
+
+    for( MusicInstance oneInstance : game_.getOutGameMusicModel()->getMusicInstances()){
+        switch (oneInstance.getElement()){
+            case MusicElements::AsteroidCollisionSound:
+                soundModule_.playSample("AsteroidCollision", oneInstance.getVolume() * 0.5f, true);
+                break;
+            case MusicElements::RocketDestructionSound:
+                soundModule_.playSample("RocketFailure", oneInstance.getVolume() * 0.5f, true);
+                break;
+            case ShootSound:
+                soundModule_.playSample("Blaster Imperial", oneInstance.getVolume() * 0.5f, true);
+                break;
+            case SecondPlayerAsteroidShoot:
+                soundModule_.playSample("SecondPlayerShoot", oneInstance.getVolume() * 0.5f, true);
+                break;
+        }
     }
 
     gameScreen_->refreshScreen();

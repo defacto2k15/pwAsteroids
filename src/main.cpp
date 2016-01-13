@@ -77,8 +77,10 @@ int main(int, char**){
 
 	std::vector<AbstractAllegroEventListener *>eventListenersVector{ &keyStateFetcher, &mousePositionFetcher};
 
+	SoundModule soundModule;
+
 	GameScreenEventInterpreter gameScreenInterpreter(keyMapper, mousePositionFetcher, &gameScreen, imageDataContainer, game
-			, screenSize);
+			, screenSize, soundModule);
 
 	ResolutionsContainer resolutionsContainer({ std::make_pair(1024, 600), std::make_pair(800, 600), std::make_pair(1280, 1024)});
 
@@ -113,7 +115,7 @@ int main(int, char**){
 
 
 	ViewManager manager(game, eventListenersVector,
-						&display, screenEventInterpreters, screensVec, "GameScreen" );
+						&display, screenEventInterpreters, screensVec, "GameScreen", soundModule );
 
 
 //	std::shared_ptr<ViewManager> manager(

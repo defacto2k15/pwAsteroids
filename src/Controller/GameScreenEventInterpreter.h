@@ -7,6 +7,7 @@
 
 
 #include <View/GameScreen.h>
+#include <Sound/SoundModule.h>
 #include "AbstractAllegroEventListener.h"
 #include "KeyStateFetcher.h"
 #include "MousePositionFetcher.h"
@@ -22,10 +23,12 @@ class GameScreenEventInterpreter : public ScreenEventInterpreter {
     ScreenSize &screenSize_;
     GameScreen *gameScreen_;
     Game &game_;
+    SoundModule &soundModule_;
     std::vector<ActorId> createdObjectsIds_;
 public:
     GameScreenEventInterpreter(AllegroToGameKeyMapper &keyMapper, MousePositionFetcher &mousePositionFetcher,
-                               GameScreen *gameScreen, ImageDataContainer &imageDataContainer, Game &game, ScreenSize &screenSize);
+                               GameScreen *gameScreen, ImageDataContainer &imageDataContainer,
+                               Game &game, ScreenSize &screenSize, SoundModule &soundModule);
 
 
     virtual void keyDown(int keynum);

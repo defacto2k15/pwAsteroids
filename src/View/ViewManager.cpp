@@ -57,7 +57,7 @@ void ViewManager::start()
 	game.update();
 
 
-	sm.playSample("Test drive", 0.2, false);
+	soundModule_.playSample("Test drive", 0.2, false);
 	//sm->playSample("The Gauntlet", false);
 
 	initializeScreens();	// must be called before drawing screens!
@@ -73,34 +73,6 @@ void ViewManager::start()
 	}
 
 }
-
-//ViewManager::ViewManager(int screenWidth, int screenHeight, Game &g,
-//						 std::vector<AbstractAllegroEventListener *> eventListeners,
-//						 GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay,
-//						 MenuScreenEventInterpreter &menuInterpreter, MenuScreen *menuScreen)
-//		: game(g), eventsListener_(eventListeners), interpreter_(interpreter), display(inDisplay),
-//		  menuInterpreter_(menuInterpreter)
-//{
-//	for( auto oneListener : eventListeners){
-//		allegroEventInterpreter_.addListener(oneListener);
-//		oneListener->setViewManager(this);
-//	}
-//	//allegroEventInterpreter_.addListener(&interpreter);
-//	allegroEventInterpreter_.addListener(&menuInterpreter);
-//	menuInterpreter.setViewManager(this);
-//
-//
-//	sm = new SoundModule();
-//	timer = al_create_timer(1.0 / FPS);
-//	event_queue = al_create_event_queue();
-//	al_register_event_source(event_queue, al_get_timer_event_source(timer));	// Timer events (refresh)
-//	al_register_event_source(event_queue, al_get_display_event_source(display->getDisplay()));	// Display events (like "close" with 'X')
-//	al_register_event_source(event_queue, al_get_keyboard_event_source());	// Input events
-//	al_register_event_source(event_queue, al_get_mouse_event_source());		// Mouse events
-//	al_start_timer(timer);
-//
-//	screens.push_back(menuScreen);
-//}
 
 ViewManager::~ViewManager()
 {
@@ -119,9 +91,9 @@ void ViewManager::resizeDisplay(int newWidth, int newHeight) {
 
 ViewManager::ViewManager(Game &inGame, std::vector<AbstractAllegroEventListener *> allegroEventListeners,
 						 Display *inDisplay, std::vector<ScreenEventInterpreter *> screenEventInterpreters,
-						 std::vector<Screen *> inScreens, std::string initialScreen)
+						 std::vector<Screen *> inScreens, std::string initialScreen, SoundModule &soundModule)
 		: game(inGame), eventsListeners_(allegroEventListeners), screenEventInterpreters_(screenEventInterpreters),
-			screens(inScreens), display(inDisplay), activeInterpreter(nullptr){
+			screens(inScreens), display(inDisplay), soundModule_(soundModule), activeInterpreter(nullptr){
 	for( auto oneListener : allegroEventListeners){
 		allegroEventInterpreter_.addListener(oneListener);
 	}
