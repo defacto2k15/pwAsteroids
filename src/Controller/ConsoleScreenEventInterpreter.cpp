@@ -40,3 +40,8 @@ void ConsoleScreenEventInterpreter::charKeyDown(int unicode) {
         consoleScreen_->addCharacter(unicode);
     }
 }
+
+ConsoleScreenEventInterpreter::ConsoleScreenEventInterpreter(ConsoleScreen *consoleScreen, Game &game)
+        : consoleScreen_(consoleScreen),
+          game_(game) {
+}

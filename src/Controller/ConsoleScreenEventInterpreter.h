@@ -16,9 +16,7 @@ class ConsoleScreenEventInterpreter : public ScreenEventInterpreter {
     Game &game_;
 public:
 
-    ConsoleScreenEventInterpreter(ConsoleScreen *consoleScreen, Game &game) : consoleScreen_(consoleScreen),
-                                                                                game_(game) {
-    }
+    ConsoleScreenEventInterpreter(ConsoleScreen *consoleScreen, Game &game);
 
     virtual void keyDown(int keynum);
 

@@ -16,9 +16,8 @@ protected:
     ViewManager *viewManager_;
 public:
     virtual std::string getScreenName()=0;
-    virtual void setViewManager(ViewManager *manager){
-        viewManager_ = manager;
-    }
+
+    virtual void setViewManager(ViewManager *manager);
 };
 
 

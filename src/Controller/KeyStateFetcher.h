@@ -15,37 +15,20 @@ class KeyStateFetcher : public AbstractAllegroEventListener {
     std::map<int, bool> mouseKeyStateMap_;
 public:
 
-    virtual void keyDown(int keynum) override{
-        keyStateMap_[keynum] = true;
-    }
+    virtual void keyDown(int keynum);
 
-    virtual void keyUp(int keynum) override{
-        keyStateMap_[keynum] = false;
-    }
+    virtual void keyUp(int keynum);
 
-    virtual void mouseKeyDown(int keynum) override{
-        mouseKeyStateMap_[keynum] = true;
-    }
+    virtual void mouseKeyDown(int keynum);
 
-    virtual void mouseKeyUp(int keynum) override{
-        mouseKeyStateMap_[keynum] = false;
-    }
+    virtual void mouseKeyUp(int keynum);
 
-    bool isKeyPressed(int keynum){
-        return isKeyPressedAccordingToMap(keyStateMap_, keynum);
-    }
+    bool isKeyPressed(int keynum);
 
-    bool isMouseKeyPressed(int keynum ){
-        return isKeyPressedAccordingToMap(mouseKeyStateMap_, keynum);
-    }
+    bool isMouseKeyPressed(int keynum );
 
 private:
-    bool isKeyPressedAccordingToMap(std::map<int, bool> &keysMap, int keynum ){
-        if( keysMap.find(keynum) == keysMap.end()){
-            keysMap[keynum] = false;
-        }
-        return keysMap[keynum];
-    }
+    bool isKeyPressedAccordingToMap(std::map<int, bool> &keysMap, int keynum );
 };
 
 

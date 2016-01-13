@@ -15,25 +15,11 @@
 class ImageDataContainer {
     std::map<ImagePrimitiveType, ImageData > pathsMap_;
 public:
-    void addData(ImagePrimitiveType type, ImageData data){
-        pathsMap_[type] = data;
-    }
+    void addData(ImagePrimitiveType type, ImageData data);
 
-    ImageData getData(ImagePrimitiveType type){
-        if( pathsMap_.count(type) == 0){
-            throw std::runtime_error("There is no path for primitive type of type "+std::to_string(type));
-        }
-        return  pathsMap_[type];
-    }
+    ImageData getData(ImagePrimitiveType type);
 
-    std::map< ImagePrimitiveType, Point> getImageSizesMap(){
-        std::map<ImagePrimitiveType , Point> outMap;
-        for( auto &pair : pathsMap_ ){
-            Point size = Point( pair.second.xSize, pair.second.ySize);
-            outMap[pair.first] = size;
-        }
-        return outMap;
-    };
+    std::map< ImagePrimitiveType, Point> getImageSizesMap();;
 };
 
 

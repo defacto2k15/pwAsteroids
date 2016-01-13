@@ -13,14 +13,9 @@
 class MousePositionFetcher : public AbstractAllegroEventListener {
     ALLEGRO_MOUSE_STATE msestate;
 public:
-    virtual void timeEvent() override{
-        al_get_mouse_state(&msestate);
-    }
+    virtual void timeEvent();
 
-    Point getMousePosition(){
-        return Point (al_get_mouse_state_axis(&msestate, 0),
-                      al_get_mouse_state_axis(&msestate, 1) );
-    }
+    Point getMousePosition();
 };
 
 

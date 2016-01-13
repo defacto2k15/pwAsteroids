@@ -14,30 +14,14 @@
 class ResolutionsContainer {
     std::vector< std::pair<int, int>>  resolutions_;
 public:
-    ResolutionsContainer(std::vector< std::pair<int, int>>  resolutions ) : resolutions_(resolutions){
-    }
+    ResolutionsContainer(std::vector< std::pair<int, int>>  resolutions );
 
-    std::vector< std::string > getResoutionsAsText(){
-        std::vector<std::string> outVec;
-        for( auto pair : resolutions_){
-            outVec.push_back( createResolutionString( pair ));
-        }
-        return outVec;
-    }
+    std::vector< std::string > getResoutionsAsText();
 
-    std::pair<int, int> getResolutionForText(std::string str){
-        auto it = std::find_if(begin(resolutions_), end(resolutions_),
-                               [this, str](std::pair<int,int> pair){ return createResolutionString(pair) == str;});
-        assert(it != resolutions_.end());
-        return *it;
-    };
+    std::pair<int, int> getResolutionForText(std::string str);;
 
 private:
-    std::string createResolutionString( std::pair<int, int> pair){
-        std::stringstream ss;
-        ss << pair.first << " x " << pair.second;
-        return ss.str();
-    }
+    std::string createResolutionString(std::pair<int, int> pair);
 };
 
 

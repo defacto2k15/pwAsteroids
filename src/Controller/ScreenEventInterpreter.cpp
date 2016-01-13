@@ -3,3 +3,7 @@
 //
 
 #include "ScreenEventInterpreter.h"
+
+void ScreenEventInterpreter::setViewManager(ViewManager *manager) {
+    viewManager_ = manager;
+}
