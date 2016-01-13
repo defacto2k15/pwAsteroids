@@ -7,6 +7,7 @@
 
 #include "AbstractAllegroEventListener.h"
 #include <map>
+#include <iostream>
 
 class KeyStateFetcher : public AbstractAllegroEventListener {
     std::map<int, bool> keyStateMap_;
@@ -14,11 +15,11 @@ class KeyStateFetcher : public AbstractAllegroEventListener {
 public:
 
     virtual void keyDown(int keynum) override{
-        keyStateMap_[keynum] = false;
+        keyStateMap_[keynum] = true;
     }
 
     virtual void keyUp(int keynum) override{
-        keyStateMap_[keynum] = true;
+        keyStateMap_[keynum] = false;
     }
 
     virtual void mouseKeyDown(int keynum) override{
@@ -40,7 +41,7 @@ public:
 private:
     bool isKeyPressedAccordingToMap(std::map<int, bool> &keysMap, int keynum ){
         if( keysMap.find(keynum) == keysMap.end()){
-            return false;
+            keysMap[keynum] = false;
         }
         return keysMap[keynum];
     }

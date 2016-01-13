@@ -12,6 +12,14 @@ class ViewManager;
 class Game;
 class DrawableObject;
 
+enum SUBMENU { SUBMENU_MAIN, SUBMENU_PLAY, SUBMENU_OPTIONS, SUBMENU_ABOUT };
+
+struct MenuDescription{
+public:
+	SUBMENU submenu;
+	std::vector<std::string> buttonsDesctiption;
+};
+
 class MenuScreen : public Screen {
 public:
 	void eventAction(ALLEGRO_EVENT&, ViewManager*, Game*);

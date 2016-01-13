@@ -7,7 +7,7 @@
 
 
 #include <Model/modelInterfaces/Keys.h>
-#include <bits/stl_bvector.h>
+#include <vector>
 #include "KeyStateFetcher.h"
 
 class AllegroToGameKeyMapper {

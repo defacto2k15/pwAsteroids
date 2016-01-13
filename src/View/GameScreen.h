@@ -16,28 +16,17 @@ public:
 	void updateScreenAfterDisplayChanges();
 	void initializeScreenElements();
 	std::string getTitle() { return title; }
-	GameScreen(std::string&);
+	GameScreen(std::string, Display *display );
 	~GameScreen();
 
 
-	void createImage(ActorId id, std::string path){
-		drawableObjects[id] = background->addDrawableObject(512, 300, path.c_str());
-	}
+	void createImage(ActorId id, std::string path);
 
-	void createText(ActorId id, std::string text){
-		drawableObjects[id] = background->addDrawableObject(512, 300, NULL, text.c_str());
-	}
+	void createText(ActorId id, std::string text);
 
-	void updateObject(ActorId id, Point point, Rotation rotation, ScaleToScreen screen){
-		assert( drawableObjects.count(id) > 0);
-		drawableObjects[id]->setPozX(point.getX());
-		drawableObjects[id]->setPozY(point.getY());
-		drawableObjects[id]->setAngle(rotation* 0.0174532925f);
+	void updateObject(ActorId id, Point point, Rotation rotation, float zoom);
 
-		int xImageSize = 1024;
-		float zoom = (xImageSize * screen.getX())/ (imageDataMap_[primitive.getImageType()].xSize);
-		drawableObjects[id]->set
-	}
+	void refreshScreen();
 
 private:
 	std::string title;
@@ -46,14 +35,8 @@ private:
 	Scene* texts;
 
 	std::map<ActorId, DrawableObject*> drawableObjects;
-	DrawableObject* spaceClickText;
-	DrawableObject* mouseInfo;
-	DrawableObject* numberOfObjects;
 
-	ALLEGRO_MOUSE_STATE msestate;
-	bool key[9] = { false, false, false, false, false, false ,false,false };
-
-	int spaceClicks = 0;
+	Display *display_;
 };
 
 #endif

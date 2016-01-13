@@ -60,7 +60,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	//));
 
 
-	//rootServiceContainer_.addService(boxService_);
+	rootServiceContainer_.addService(boxService_);
 
 
 	lifeIndicatorService_ = std::make_shared<LifeIndicatorService>(

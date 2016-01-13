@@ -5,6 +5,8 @@
 #ifndef PWASTEROIDS_IALLEGROEVENTLISTENER_H
 #define PWASTEROIDS_IALLEGROEVENTLISTENER_H
 
+class ViewManager;
+
 class AbstractAllegroEventListener {
 public:
     virtual void keyDown(int keynum ){
@@ -17,6 +19,9 @@ public:
     };
     virtual void timeEvent(){
     };
+
+    virtual void setViewManager(ViewManager * manager){
+    }
 };
 
 #endif //PWASTEROIDS_IALLEGROEVENTLISTENER_H

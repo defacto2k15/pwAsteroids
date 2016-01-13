@@ -6,6 +6,8 @@
 #include "View/ViewManager.h"
 #include "Game.h"
 #include <map>
+#include <Controller/GameScreenEventInterpreter.h>
+#include <Controller/AllegroEventInterpreter.h>
 //#include <allegro5/allegro5.h>
 
 int main(int, char**){
@@ -21,6 +23,7 @@ int main(int, char**){
 //
 //    }
 
+
 	std::map<ImagePrimitiveType, Point> imageSizes{
 			{ImagePrimitiveType::Asteroid, Point( 60, 60)},
 			{ImagePrimitiveType::BorderIndicator, Point(15, 15)},
@@ -31,7 +34,46 @@ int main(int, char**){
 			{ImagePrimitiveType::SecondPlayerTarget, Point( 60, 60)}
 	};
 
-	std::shared_ptr<ViewManager> manager(new ViewManager(1024, 600, imageSizes));
+	KeyStateFetcher keyStateFetcher; // todo set as listener
+	MousePositionFetcher mousePositionFetcher; // todo set as listener
+
+
+	std::map<int, Keys> keyboardToGameMap{
+			{ALLEGRO_KEY_W, Keys::Player1AccelerateKey},
+			{ALLEGRO_KEY_A, Keys::Player1LeftKey},
+			{ALLEGRO_KEY_D, Keys::Player1RightKey},
+			{ALLEGRO_KEY_SPACE, Keys::Player1AttackKey},
+			{ALLEGRO_KEY_LEFT, Keys::Player2LeftKey},
+			{ALLEGRO_KEY_RIGHT, Keys::Player2RightKey},
+	};
+	std::map<int, Keys> mouseToGameMap{
+			{1, Keys::Player2AttackKey}
+	};
+
+	Display *display = new Display(1024, 600);
+	GameScreen* gameScreen = new GameScreen("Game screen", display);
+
+	AllegroToGameKeyMapper keyMapper(keyStateFetcher, keyboardToGameMap, mouseToGameMap);
+
+	ImageDataContainer imageDataContainer;
+	imageDataContainer.addData(ImagePrimitiveType::Asteroid , ImageData{ 60, 60,  "../res/asteroid3.bmp" });
+	imageDataContainer.addData(ImagePrimitiveType::BorderIndicator , ImageData{15, 15, "../res/arrow.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Projectile , ImageData{15, 15, "../res/projectile.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Rocket , ImageData{60, 60, "../res/rocket2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::RocketTail , ImageData{60, 60, "../res/rockettail2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 60, 60, "../res/rocket2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 60, 60, "../res/target.bmp"});
+
+	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap());
+	ScreenSize screenSize( Point(1024, 600));
+
+	std::vector<AbstractAllegroEventListener *>eventListenersVector{ &keyStateFetcher, &mousePositionFetcher};
+
+	GameScreenEventInterpreter gameScreenInterpreter(keyMapper, mousePositionFetcher, gameScreen, imageDataContainer, game
+			, screenSize);
+
+
+	std::shared_ptr<ViewManager> manager(new ViewManager(1024, 600, game, eventListenersVector, gameScreenInterpreter, gameScreen, display));
 	manager->start();
 	system("read  -r -p \"Press any key to continue...\" key");
 	//system("read  -r -p \"Press any key to continue...\" key");

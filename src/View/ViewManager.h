@@ -10,6 +10,9 @@
 #include "Sound/SoundModule.h"
 #include <boost/thread/thread.hpp>
 #include <string>
+#include <Controller/AbstractAllegroEventListener.h>
+#include <Controller/GameScreenEventInterpreter.h>
+#include <Controller/AllegroEventInterpreter.h>
 
 const float FPS = 60;
 
@@ -23,7 +26,8 @@ public:
 	void resizeDisplay( int newWidth, int newHeight );
 	void exit() { isExit = true; }
 	Display* getDisplay() { return display; }
-	ViewManager(int, int,  std::map<ImagePrimitiveType, Point> imageSizes);
+	ViewManager(int, int, Game &game, std::vector<AbstractAllegroEventListener *>,
+				GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay);
 	~ViewManager();
 
 private:
@@ -35,7 +39,10 @@ private:
 	ALLEGRO_EVENT_QUEUE *event_queue;
 	boost::thread* timerThread;
 	bool isExit = false;
-	Game game;
+	Game &game;
+	std::vector<AbstractAllegroEventListener *> eventsListener_;
+	GameScreenEventInterpreter &interpreter_;
+	AllegroEventInterpreter allegroEventInterpreter_;
 };
 
 #endif

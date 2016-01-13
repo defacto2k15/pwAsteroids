@@ -11,25 +11,28 @@
 #include "KeyStateFetcher.h"
 #include "MousePositionFetcher.h"
 #include "AllegroToGameKeyMapper.h"
-#include "ImagePathsContainer.h"
+#include "ImageDataContainer.h"
+#include "ScreenSize.h"
 
 class GameScreenEventInterpreter : public AbstractAllegroEventListener {
     AllegroToGameKeyMapper &keyMapper_;
     MousePositionFetcher &mousePositionFetcher_;
-    ImagePathsContainer &imagePathsContainer_;
+    ImageDataContainer &imageDataContainer_;
+    ScreenSize &screenSize_;
     GameScreen *gameScreen_;
     Game &game_;
     std::vector<ActorId> createdObjectsIds_;
 public:
     GameScreenEventInterpreter(AllegroToGameKeyMapper &keyMapper, MousePositionFetcher &mousePositionFetcher,
-                               GameScreen *gameScreen, ImagePathsContainer &imagePathsContainer, Game &game)
+                               GameScreen *gameScreen, ImageDataContainer &imageDataContainer, Game &game, ScreenSize &screenSize)
             : keyMapper_(keyMapper), mousePositionFetcher_(mousePositionFetcher),
-                gameScreen_(gameScreen), imagePathsContainer_(imagePathsContainer), game_(game) {
+                gameScreen_(gameScreen), imageDataContainer_(imageDataContainer), game_(game), screenSize_(screenSize) {
     }
 
 
     virtual void timeEvent() override{
         for( auto key : keyMapper_.getPressedKeys()){
+            std::cout << "pressed is " << int(key) << std::endl;
             game_.getInputStateGetter()->gameKeyIsPressed(key);
         }
 
@@ -37,25 +40,38 @@ public:
         game_.getInputStateGetter()->setMousePosition( mousePos.getX(), mousePos.getY());
 
         for( auto imagePrimitive : game_.getOutGameScreenModel()->getImagePrimitives()){
-            if(std::find( begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive) == end(createdObjectsIds_) ){
+            if(std::find( begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) == end(createdObjectsIds_) ){
                 gameScreen_->createImage(imagePrimitive.getActorId(),
-                                                  imagePathsContainer_.getPath(imagePrimitive.getImageType()) );
+                                                  imageDataContainer_.getData(imagePrimitive.getImageType()).path );
+                createdObjectsIds_.push_back(imagePrimitive.getActorId());
             }
-           updateDrawableObject( imagePrimitive );
+            Size expectedSize = imagePrimitive.getScale().scalePoint( screenSize_.getSize());
+            double zoom = double(expectedSize.getX()) /double(imageDataContainer_.getData(imagePrimitive.getImageType()).xSize);
+            zoom = zoom / 4;
+           updateDrawableObject( imagePrimitive, zoom );
         }
 
         for( auto textPrimitive : game_.getOutGameScreenModel()->getTextPrimitives()){
-            if(std::find( begin(createdObjectsIds_), end(createdObjectsIds_), textPrimitive) == end(createdObjectsIds_) ){
+            if(std::find( begin(createdObjectsIds_), end(createdObjectsIds_), textPrimitive.getActorId()) == end(createdObjectsIds_) ){
                 gameScreen_->createText(textPrimitive.getActorId(), textPrimitive.getTextToWrite() );
+                createdObjectsIds_.push_back(textPrimitive.getActorId());
             }
-            updateDrawableObject( textPrimitive );
+            updateDrawableObject( textPrimitive, 1 );
         }
-        /* TODO deleting */
+        for( auto actorId : game_.getOutGameScreenModel()->getRemovedActorsIds()){
+            /* TODO deleting */
+            gameScreen_->updateObject(actorId, Point(-100, -100), 0, 0);
+        }
+
+        gameScreen_->refreshScreen();
+        game_.update();
+
     }
 private:
-    void updateDrawableObject(BaseDrawablePrimitive &primitive ){
-        gameScreen_->updateObject( primitive.getActorId(), primitive.getPosition(), primitive.getRotation(), primitive.getScale());
-    } TUTAJ kontynuluj jak wymyslisz co zrobic ze skala
+    void updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom ){
+
+        gameScreen_->updateObject( primitive.getActorId(), primitive.getPosition(), primitive.getRotation(), zoom) ;
+    }
 };
 
 

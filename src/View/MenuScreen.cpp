@@ -3,7 +3,7 @@
 #include "DrawableObject.h"
 
 enum OPTION { FIRST, SECOND, THIRD, FOURTH };
-enum SUBMENU { SUBMENU_MAIN, SUBMENU_PLAY, SUBMENU_OPTIONS, SUBMENU_ABOUT };
+
 int option = FIRST;
 
 std::pair<int, int> resolutions[6];
@@ -137,3 +137,4 @@ MenuScreen::MenuScreen(std::string &t)
 MenuScreen::~MenuScreen()
 {
 }
+

@@ -14,6 +14,7 @@ void ViewManager::changeActiveScreen(std::string screenTitle)
 		{
 			activeScreen = it;
 			std::cout << "- Changed screen to " << (*activeScreen)->getTitle() << "\n";
+			eventsListener_.push_back(&interpreter_);
 			break;
 		}
 	}
@@ -46,9 +47,9 @@ void ViewManager::start()
 	MenuScreen* menuScreen = new MenuScreen(str);
 	screens.push_back(menuScreen);
 
-	str = "GameScreen";
+	/*str = "GameScreen";
 	GameScreen* gameScreen = new GameScreen(str);
-	screens.push_back(gameScreen);
+	screens.push_back(gameScreen);*/
 
 	str = "ConsoleScreen";
 	ConsoleScreen* consoleScreen = new ConsoleScreen(str);
@@ -67,16 +68,25 @@ void ViewManager::start()
 	{
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-		(*activeScreen)->eventAction(ev, this, &game);
+		//(*activeScreen)->eventAction(ev, this, &game);
+		allegroEventInterpreter_.interpretEvent(ev);
 		if (isExit) break;
 	}
 
 }
 
-ViewManager::ViewManager(int screenWidth, int screenHeight, std::map<ImagePrimitiveType, Point> imageSizes)
-		: game(Point(screenWidth, screenHeight), imageSizes)
+ViewManager::ViewManager(int screenWidth, int screenHeight, Game &g,
+						 std::vector<AbstractAllegroEventListener *> eventListeners,
+						 GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay)
+		: game(g), eventsListener_(eventListeners), interpreter_(interpreter), display(inDisplay)
 {
-	display = new Display(screenWidth, screenHeight);
+	for( auto oneListener : eventListeners){
+		allegroEventInterpreter_.addListener(oneListener);
+	}
+	allegroEventInterpreter_.addListener(&interpreter);
+
+
+
 	sm = new SoundModule();
 	timer = al_create_timer(1.0 / FPS);
 	event_queue = al_create_event_queue();
@@ -85,6 +95,8 @@ ViewManager::ViewManager(int screenWidth, int screenHeight, std::map<ImagePrimit
 	al_register_event_source(event_queue, al_get_keyboard_event_source());	// Input events
 	al_register_event_source(event_queue, al_get_mouse_event_source());		// Mouse events
 	al_start_timer(timer);
+
+	screens.push_back(gameScreen);
 }
 
 ViewManager::~ViewManager()
