@@ -55,9 +55,9 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	rootServiceContainer_.addService(actorsContainer_);
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
-	//rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-	//		asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_
-	//));
+	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
+			asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_
+	));
 
 
 	rootServiceContainer_.addService(boxService_);
@@ -65,7 +65,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 
 	lifeIndicatorService_ = std::make_shared<LifeIndicatorService>(
 			actorsContainer_, pythonModule_, drawingSystem_, imageScalesContainer_, idGenerator, gameConfiguration_, rocketLife_);
-	//rootServiceContainer_.addService(lifeIndicatorService_);
+	rootServiceContainer_.addService(lifeIndicatorService_);
 
 	gameStopService_ = std::make_shared<GameStopService>( pythonModule_, gameTimeProvider, boxService_, inputManager_);
 	rootServiceContainer_.addService(gameStopService_);
@@ -100,7 +100,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	borderIndicator->addComponent(borderIndicatorComponent);
 	borderIndicator->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	borderIndicator->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
-	//actorsContainer_->addActor(borderIndicator);
+	actorsContainer_->addActor(borderIndicator);
 
 	actorsContainer_->addActor(rocket);
 	actorsContainer_->addActor(rocketTail);
@@ -115,7 +115,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
 
-	//actorsContainer_->addActor( secondPlayerTargetingActor );
+	actorsContainer_->addActor( secondPlayerTargetingActor );
 	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
 	rootServiceContainer_.addService(commonTypesVisualizer);
 

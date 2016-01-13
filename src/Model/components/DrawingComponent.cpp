@@ -13,10 +13,15 @@ void  DrawingComponent::OnStart(IActor &actor) {
 }
 
 void  DrawingComponent::OnUpdate() {
+	ScaleToScreen scale;
 	if( isVisible_ ) {
-		drawingSystem_.drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
-		                          scaleToScreen_, actorId_);
+		scale = scaleToScreen_;
+	} else {
+		scale = ScaleToScreen(0, 0);
 	}
+
+	drawingSystem_.drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
+		                          scale, actorId_);
 }
 
 void DrawingComponent::setVisibility(bool visibility ) {

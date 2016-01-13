@@ -22,7 +22,6 @@ public:
         assert(imagePrimitivesSizeMap_.count(type) > 0);
         Point sizeInPixels = imagePrimitivesSizeMap_[type];
         ScaleToScreen out = ScaleToScreen( sizeInPixels / gameConfiguration_.getScreenSizeInPixels());
-        std::cout << "Scale is " << out.getX() << "  " << out.getY() << std::endl;
         return out;
     }
 
