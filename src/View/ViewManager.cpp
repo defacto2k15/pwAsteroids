@@ -5,6 +5,7 @@
 #include "EmptyScreen.h"
 #include "ConsoleScreen.h"
 #include <map>
+#include <Controller/MenuScreenEventInterpreter.h>
 
 void ViewManager::changeActiveScreen(std::string screenTitle)
 {
@@ -43,15 +44,15 @@ void ViewManager::start()
 {
 	game.update();
 
-	std::string str = "MenuScreen";
-	MenuScreen* menuScreen = new MenuScreen(str);
-	screens.push_back(menuScreen);
+//	std::string str = "MenuScreen";
+//	MenuScreen* menuScreen = new MenuScreen(str);
+//	screens.push_back(menuScreen);
 
 	/*str = "GameScreen";
 	GameScreen* gameScreen = new GameScreen(str);
 	screens.push_back(gameScreen);*/
 
-	str = "ConsoleScreen";
+	std::string str = "ConsoleScreen";
 	ConsoleScreen* consoleScreen = new ConsoleScreen(str);
 	screens.push_back(consoleScreen);
 
@@ -77,14 +78,18 @@ void ViewManager::start()
 
 ViewManager::ViewManager(int screenWidth, int screenHeight, Game &g,
 						 std::vector<AbstractAllegroEventListener *> eventListeners,
-						 GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay)
-		: game(g), eventsListener_(eventListeners), interpreter_(interpreter), display(inDisplay)
+						 GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay,
+						 MenuScreenEventInterpreter &menuInterpreter, MenuScreen *menuScreen)
+		: game(g), eventsListener_(eventListeners), interpreter_(interpreter), display(inDisplay),
+		  menuInterpreter_(menuInterpreter)
 {
 	for( auto oneListener : eventListeners){
 		allegroEventInterpreter_.addListener(oneListener);
+		oneListener->setViewManager(this);
 	}
-	allegroEventInterpreter_.addListener(&interpreter);
-
+	//allegroEventInterpreter_.addListener(&interpreter);
+	allegroEventInterpreter_.addListener(&menuInterpreter);
+	menuInterpreter.setViewManager(this);
 
 
 	sm = new SoundModule();
@@ -96,7 +101,7 @@ ViewManager::ViewManager(int screenWidth, int screenHeight, Game &g,
 	al_register_event_source(event_queue, al_get_mouse_event_source());		// Mouse events
 	al_start_timer(timer);
 
-	screens.push_back(gameScreen);
+	screens.push_back(menuScreen);
 }
 
 ViewManager::~ViewManager()

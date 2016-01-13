@@ -5,10 +5,11 @@
 #ifndef PWASTEROIDS_MENUMODEL_H
 #define PWASTEROIDS_MENUMODEL_H
 
-#include <View/MenuScreen.h>
+#include <menu/Submenu.h>
 #include "MenuOption.h"
 
 class MenuModel{
+public:
     SUBMENU menuType;
     std::vector<MenuOption> menuOptions;
 };

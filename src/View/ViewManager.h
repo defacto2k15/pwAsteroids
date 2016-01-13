@@ -13,6 +13,7 @@
 #include <Controller/AbstractAllegroEventListener.h>
 #include <Controller/GameScreenEventInterpreter.h>
 #include <Controller/AllegroEventInterpreter.h>
+#include <Controller/MenuScreenEventInterpreter.h>
 
 const float FPS = 60;
 
@@ -26,8 +27,10 @@ public:
 	void resizeDisplay( int newWidth, int newHeight );
 	void exit() { isExit = true; }
 	Display* getDisplay() { return display; }
-	ViewManager(int, int, Game &game, std::vector<AbstractAllegroEventListener *>,
-				GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay);
+	ViewManager(int,  int , Game &game,
+                    std::vector<AbstractAllegroEventListener *> ,
+                    GameScreenEventInterpreter &interpreter, GameScreen *gameScreen, Display *inDisplay,
+                    MenuScreenEventInterpreter &menuInterpreter, MenuScreen *menuScreen);
 	~ViewManager();
 
 private:
@@ -42,6 +45,7 @@ private:
 	Game &game;
 	std::vector<AbstractAllegroEventListener *> eventsListener_;
 	GameScreenEventInterpreter &interpreter_;
+	MenuScreenEventInterpreter &menuInterpreter_;
 	AllegroEventInterpreter allegroEventInterpreter_;
 };
 

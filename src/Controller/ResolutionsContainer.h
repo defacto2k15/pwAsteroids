@@ -27,7 +27,7 @@ public:
 
     std::pair<int, int> getResolutionForText(std::string str){
         auto it = std::find_if(begin(resolutions_), end(resolutions_),
-                               [str](auto pair)->{ return createResolutionString(pair) == str;});
+                               [this, str](std::pair<int,int> pair){ return createResolutionString(pair) == str;});
         assert(it != resolutions_.end());
         return *it;
     };

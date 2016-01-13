@@ -8,6 +8,10 @@
 #include <map>
 #include <Controller/GameScreenEventInterpreter.h>
 #include <Controller/AllegroEventInterpreter.h>
+#include <Controller/MenuScreenEventInterpreter.h>
+#include <Controller/ResolutionsContainer.h>
+#include <menu/MenuModel.h>
+#include "View/MenuScreen.h"
 //#include <allegro5/allegro5.h>
 
 int main(int, char**){
@@ -51,7 +55,7 @@ int main(int, char**){
 	};
 
 	Display *display = new Display(1024, 600);
-	GameScreen* gameScreen = new GameScreen("Game screen", display);
+	GameScreen* gameScreen = new GameScreen("GameScreen", display);
 
 	AllegroToGameKeyMapper keyMapper(keyStateFetcher, keyboardToGameMap, mouseToGameMap);
 
@@ -72,8 +76,29 @@ int main(int, char**){
 	GameScreenEventInterpreter gameScreenInterpreter(keyMapper, mousePositionFetcher, gameScreen, imageDataContainer, game
 			, screenSize);
 
+	ResolutionsContainer resolutionsContainer({ std::make_pair(1024, 600), std::make_pair(800, 600), std::make_pair(1280, 1024)});
 
-	std::shared_ptr<ViewManager> manager(new ViewManager(1024, 600, game, eventListenersVector, gameScreenInterpreter, gameScreen, display));
+	std::vector<MenuModel> menusVector;
+	MenuOption startGameOption{ MenuOptionTypes::StartGame, {"StartGame"}, 0 };
+	MenuOption optionsOption{ MenuOptionTypes::Options, {"Options"}, 0 };
+	MenuOption aboutOption{ MenuOptionTypes::About, {"About"}, 0 };
+	MenuOption exitOption { MenuOptionTypes::Exit, {"Exit"}, 0 };
+	menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_MAIN, {startGameOption, optionsOption, aboutOption, exitOption} });
+
+	MenuOption backOption {MenuOptionTypes::Back, {"Back"}, 0 };
+	MenuOption applyOption{MenuOptionTypes::Apply, {"Apply"}, 0 };
+	MenuOption resolutionOption{MenuOptionTypes::Resolution, resolutionsContainer.getResoutionsAsText(), 0 };
+
+	menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_OPTIONS, {resolutionOption, backOption, applyOption} });
+
+	MenuScreen menuScreen(std::string("MenuScreen"), menusVector, display );
+
+	MenuScreenEventInterpreter interpreter(&menuScreen, resolutionsContainer);
+
+
+	std::shared_ptr<ViewManager> manager(
+			new ViewManager(1024, 600, game, eventListenersVector, gameScreenInterpreter, gameScreen, display,
+							interpreter, &menuScreen));
 	manager->start();
 	system("read  -r -p \"Press any key to continue...\" key");
 	//system("read  -r -p \"Press any key to continue...\" key");

@@ -9,8 +9,10 @@
 #include "MenuOptionTypes.h"
 
 class MenuOption{
+public:
     MenuOptionTypes type;
     std::vector<std::string> optionTexts;
+    int currentlySelectedText;
 };
 
 #endif //PWASTEROIDS_MENUOPTION_H
