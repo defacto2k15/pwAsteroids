@@ -52,7 +52,7 @@ int main(int, char**){
 	imageDataContainer.addData(ImagePrimitiveType::Asteroid , ImageData{ 240, 240,  "../res/asteroid3.bmp" });
 	imageDataContainer.addData(ImagePrimitiveType::BorderIndicator , ImageData{60, 60, "../res/arrow.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::Projectile , ImageData{60, 60, "../res/projectile.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::Rocket , ImageData{240, 240, "../res/rocket2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Rocket , ImageData{160, 240, "../res/rX.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::RocketTail , ImageData{240, 240, "../res/rockettail2.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 240, 240, "../res/rocket2.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 240, 240, "../res/target.bmp"});

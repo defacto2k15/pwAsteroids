@@ -11,6 +11,8 @@ DrawableObject::DrawableObject(int x, int y, const char* path, const char* t, fl
 		if (bitmap != NULL) {
 			// bitmap loaded
 			al_convert_mask_to_alpha(bitmap, al_map_rgb(255, 255, 255));	// alpha color - pure white
+		} else {
+			std::cerr << " Error while loading bitmap with path " << path << std::endl;
 		}
 	}
 	if(t == NULL) text = ' ';

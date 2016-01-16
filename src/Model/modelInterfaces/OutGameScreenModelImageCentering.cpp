@@ -1,7 +1,7 @@
 //
 // Created by defacto on 02.12.15.
 //
-
+#include <iostream>
 #include "OutGameScreenModelImageCentering.h"
 
 std::vector<ImagePrimitive>  OutGameScreenModelImageCentering::getImagePrimitives() {
@@ -16,12 +16,12 @@ void  OutGameScreenModelImageCentering::OnUpdate() {
 void OutGameScreenModelImageCentering::AddPrimitive(std::shared_ptr<IDrawablePrimitive> primitive) {
 	Point imageSize =primitive->getScale().scalePoint( configuration_.getBox2dScreenDimensions());
 	Point newPos(
-			primitive->getPosition().getX() + (0.5f)*imageSize.getX() * myMath::sinDeg( primitive->getRotation() ),
-			primitive->getPosition().getY() - (0.5)*imageSize.getX() * myMath::cosDeg(primitive->getRotation())
+			primitive->getPosition().getX() + (0.5f)*imageSize.getY() * myMath::sinDeg( primitive->getRotation() ),
+			primitive->getPosition().getY() - (0.5)*imageSize.getY() * myMath::cosDeg(primitive->getRotation())
 	);
 	Point newPos2(
-			newPos.getX() - (0.5f)*imageSize.getY() * myMath::cosDeg( primitive->getRotation() ),
-			newPos.getY() - (0.5f)*imageSize.getY() * myMath::sinDeg( primitive->getRotation() )
+			newPos.getX() - (0.5f)*imageSize.getX() * myMath::cosDeg( primitive->getRotation() ),
+			newPos.getY() - (0.5f)*imageSize.getX() * myMath::sinDeg( primitive->getRotation() )
 	);
 	primitive->setPosition(newPos2);
 	originalOutGameScreenModel_->AddPrimitive(primitive);
