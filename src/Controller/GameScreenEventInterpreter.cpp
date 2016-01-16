@@ -32,16 +32,21 @@ void GameScreenEventInterpreter::timeEvent() {
     Point mousePos = mousePositionFetcher_.getMousePosition();
     game_.getInputStateGetter()->setMousePosition( mousePos.getX(), mousePos.getY());
 
-    for( auto imagePrimitive : game_.getOutGameScreenModel()->getImagePrimitives()){
-        if(std::find( begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) == end(createdObjectsIds_) ){
-            gameScreen_->createImage(imagePrimitive.getActorId(),
-                                     imageDataContainer_.getData(imagePrimitive.getImageType()).path );
-            createdObjectsIds_.push_back(imagePrimitive.getActorId());
+    for( auto imagePrimitive : game_.getOutGameScreenModel()->getImagePrimitives()) {
+        if (imagePrimitive.getImageType() != ImagePrimitiveType::NotVisibleElement) {
+            if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) ==
+                end(createdObjectsIds_)) {
+                gameScreen_->createImage(imagePrimitive.getActorId(),
+                                         imageDataContainer_.getData(imagePrimitive.getImageType()).path);
+                createdObjectsIds_.push_back(imagePrimitive.getActorId());
+            }
+            Size expectedSize = imagePrimitive.getScale().scalePoint(screenSize_.getSize());
+            double zoom = double(expectedSize.getX()) /
+                          double(imageDataContainer_.getData(imagePrimitive.getImageType()).xSize);
+            //zoom = zoom / 4;
+
+            updateDrawableObject(imagePrimitive, zoom);
         }
-        Size expectedSize = imagePrimitive.getScale().scalePoint( screenSize_.getSize());
-        double zoom = double(expectedSize.getX()) /double(imageDataContainer_.getData(imagePrimitive.getImageType()).xSize);
-        zoom = zoom / 4;
-        updateDrawableObject( imagePrimitive, zoom );
     }
 
     for( auto textPrimitive : game_.getOutGameScreenModel()->getTextPrimitives()){
@@ -49,7 +54,7 @@ void GameScreenEventInterpreter::timeEvent() {
             gameScreen_->createText(textPrimitive.getActorId(), textPrimitive.getTextToWrite() );
             createdObjectsIds_.push_back(textPrimitive.getActorId());
         }
-        updateDrawableObject( textPrimitive, 1 );
+        updateDrawableObject(textPrimitive, 1);
     }
     for( auto actorId : game_.getOutGameScreenModel()->getRemovedActorsIds()){
         /* TODO deleting */
@@ -78,7 +83,6 @@ void GameScreenEventInterpreter::timeEvent() {
 
 }
 
-void GameScreenEventInterpreter::updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom ) {
-
-    gameScreen_->updateObject( primitive.getActorId(), primitive.getPosition(), primitive.getRotation(), zoom) ;
+void GameScreenEventInterpreter::updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom) {
+    gameScreen_->updateObject( primitive.getActorId(), primitive.getPosition(), primitive.getRotation(), float(zoom)) ;
 }

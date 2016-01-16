@@ -119,7 +119,7 @@ if(BuildTests)
     file(GLOB TEST_FILES "test/*.cpp" "test/*h"  "mock/*.cpp" "mock/*.h" "test/PrimitiveTypes/*.cpp" "test/PrimitiveTypes/*.h"
             "test/EndToEndTests/*.cpp" "test/EndToEndTests/help/*.cpp" "test/EndToEndTests/help/*.h"
             "test/EndToEndTests/expectations/*.cpp" "test/EndToEndTests/expectations/*.h" "test/EndToEndTests/when/*.h"
-            "test/EndToEndTests/when/*.cpp" "test/Services/*.cpp"
+            "test/EndToEndTests/when/*.cpp" "test/Services/*.cpp" "test/defaultTestValues/*.cpp" "test/defaultTestValues/*.h"
             )
 
     # Don't include Main.cpp from src
@@ -132,8 +132,9 @@ if(BuildTests)
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" /home/defacto/ProgrammingProjects/pwAsteroids/lib/libBox2D.a) # todo repair
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" ${Boost_LIBRARIES} )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_system )
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_python )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_thread)
-    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" allegro_image allegro)
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" allegro_ttf allegro_font allegro_image allegro allegro_audio allegro_acodec)
     # Include root directory
     include_directories(BEFORE ".")
     include_directories(BEFORE "src/")

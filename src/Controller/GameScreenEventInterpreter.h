@@ -38,7 +38,7 @@ public:
     virtual std::string getScreenName();
 
 private:
-    void updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom );
+    void updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom);
 };
 
 

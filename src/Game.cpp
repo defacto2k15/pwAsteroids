@@ -56,9 +56,8 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
 	rootServiceContainer_.addService(gameTimeProvider);
 	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-			asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_
+			asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_, pythonModule_
 	));
-
 
 	rootServiceContainer_.addService(boxService_);
 

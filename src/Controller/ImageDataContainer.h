@@ -19,7 +19,7 @@ public:
 
     ImageData getData(ImagePrimitiveType type);
 
-    std::map< ImagePrimitiveType, Point> getImageSizesMap();;
+    std::map<ImagePrimitiveType, Point> getImageSizesMap(double scalingFactor);;
 };
 
 

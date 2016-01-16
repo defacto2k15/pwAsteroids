@@ -10,7 +10,7 @@ FakeKeyboardStateToGameProvider::FakeKeyboardStateToGameProvider(std::shared_ptr
 
 void FakeKeyboardStateToGameProvider::sendKeysPressedToGame() {
 	for(auto &key : keysBeingPressed_){
-		g_->getInKeyboardStateGetter()->gameKeyIsPressed(key); // maybe gameKeyIsPressed?
+		g_->getInputStateGetter()->gameKeyIsPressed(key); // maybe gameKeyIsPressed?
 	}
 }
 

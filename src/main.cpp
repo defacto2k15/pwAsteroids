@@ -29,16 +29,6 @@ int main(int, char**){
 //    }
 
 
-	std::map<ImagePrimitiveType, Point> imageSizes{
-			{ImagePrimitiveType::Asteroid, Point( 60, 60)},
-			{ImagePrimitiveType::BorderIndicator, Point(15, 15)},
-			{ImagePrimitiveType::Projectile, Point(15, 15)},
-			{ImagePrimitiveType::Rocket, Point(60, 60)},
-			{ImagePrimitiveType::RocketTail, Point(60, 60)},
-			{ImagePrimitiveType::Heart, Point( 60, 60)},
-			{ImagePrimitiveType::SecondPlayerTarget, Point( 60, 60)}
-	};
-
 	KeyStateFetcher keyStateFetcher; // todo set as listener
 	MousePositionFetcher mousePositionFetcher; // todo set as listener
 
@@ -59,16 +49,17 @@ int main(int, char**){
 	AllegroToGameKeyMapper keyMapper(keyStateFetcher, keyboardToGameMap, mouseToGameMap);
 
 	ImageDataContainer imageDataContainer;
-	imageDataContainer.addData(ImagePrimitiveType::Asteroid , ImageData{ 60, 60,  "../res/asteroid3.bmp" });
-	imageDataContainer.addData(ImagePrimitiveType::BorderIndicator , ImageData{15, 15, "../res/arrow.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::Projectile , ImageData{15, 15, "../res/projectile.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::Rocket , ImageData{60, 60, "../res/rocket2.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::RocketTail , ImageData{60, 60, "../res/rockettail2.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 60, 60, "../res/rocket2.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 60, 60, "../res/target.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Asteroid , ImageData{ 240, 240,  "../res/asteroid3.bmp" });
+	imageDataContainer.addData(ImagePrimitiveType::BorderIndicator , ImageData{60, 60, "../res/arrow.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Projectile , ImageData{60, 60, "../res/projectile.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Rocket , ImageData{240, 240, "../res/rocket2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::RocketTail , ImageData{240, 240, "../res/rockettail2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 240, 240, "../res/rocket2.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 240, 240, "../res/target.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::NotVisibleElement, ImageData{ 240, 240, "../res/target.bmp"});
 
 	char y[2000];
-	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap());
+	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap(0.25f));
 	char x[1000];
 	Display display(1024, 600);
 	GameScreen gameScreen("GameScreen", &display);

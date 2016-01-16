@@ -73,7 +73,6 @@ public:
 	void setScreenSizeInPixels( Point newSize){
 		ScreenSizeInPixels = newSize;
 		Box2dScreenDimensions = Box2dToAllegroScale.getInverted().scalePoint(ScreenSizeInPixels);
-		std::cout << "Screen dim are " << Box2dScreenDimensions.toString() << std::endl;
 	}
 
 	Point getInitialPosition() const {

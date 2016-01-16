@@ -17,15 +17,21 @@ class RandomAsteroidsGenerator : public IService{
     GameConfiguration &configuration_;
     std::shared_ptr<GameTimeProvider> timeProvider_;
     RandomNumbersProvider &provider_;
+    PythonModule &python_;
     unsigned int timeOfLastAsteroidCreation_ = 0;
+    bool generatorEnabled = true;
 public:
-    RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_,
-                             AsteroidsCounter &asteroidsCounter_,
-                             GameConfiguration &configuration_,
-                             std::shared_ptr<GameTimeProvider> &timeProvider_,
-                             RandomNumbersProvider &provider_);
+    RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_, AsteroidsCounter &asteroidsCounter_,
+                                 GameConfiguration &configuration_, std::shared_ptr<GameTimeProvider> &timeProvider_,
+                                 RandomNumbersProvider &provider_, PythonModule &python);
 
     void OnUpdate();
+
+    void OnStart();
+
+    void enableAsteroidsGeneration();
+
+    void disableAsteroidsGeneration();
 
 private:
     void createAsteroid();

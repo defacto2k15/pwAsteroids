@@ -4,13 +4,11 @@
 
 #include "RandomAsteroidsGenerator.h"
 
-RandomAsteroidsGenerator::RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_,
-                                                   AsteroidsCounter &asteroidsCounter_,
-                                                   GameConfiguration &configuration_,
-                                                   std::shared_ptr<GameTimeProvider> &timeProvider_,
-                                                   RandomNumbersProvider &provider_)
+RandomAsteroidsGenerator::RandomAsteroidsGenerator(AsteroidsGenerator &asteroidsGenerator_, AsteroidsCounter &asteroidsCounter_,
+                                                   GameConfiguration &configuration_, std::shared_ptr<GameTimeProvider> &timeProvider_,
+                                                   RandomNumbersProvider &provider_, PythonModule &python)
         : asteroidsGenerator_(asteroidsGenerator_), asteroidsCounter_(asteroidsCounter_),
-          configuration_(configuration_), timeProvider_(timeProvider_), provider_(provider_) {
+          configuration_(configuration_), timeProvider_(timeProvider_), provider_(provider_), python_(python) {
 
 }
 
@@ -51,6 +49,22 @@ void RandomAsteroidsGenerator::createAsteroid() {
     double size = provider_.getRandomDouble(configuration_.getAsteroidMinSize(), configuration_.getAsteroidMaxSize());
     double rotationSpeed = provider_.getRandomDouble(0, configuration_.getAsteroidMaxRotationSpeed());
     // todo - size is not used for now!
-    asteroidsGenerator_.generateAsteroid(creationPosition, newRotation, 1, accelerationVector, rotationSpeed  );
+    if( generatorEnabled ) {
+        asteroidsGenerator_.generateAsteroid(creationPosition, newRotation, 1, accelerationVector, rotationSpeed);
+    }
 }
 
+void RandomAsteroidsGenerator::OnStart() {
+    std::function<void(void) > enable =  [this](){ enableAsteroidsGeneration(); };
+    python_.addRootFunction("enableAsteroidsGeneration", enable);
+    std::function<void(void) > disable =  [this](){ disableAsteroidsGeneration(); };
+    python_.addRootFunction("disableAsteroidsGeneration", disable);
+}
+
+void RandomAsteroidsGenerator::enableAsteroidsGeneration() {
+    generatorEnabled = true;
+}
+
+void RandomAsteroidsGenerator::disableAsteroidsGeneration() {
+    generatorEnabled = false;
+}

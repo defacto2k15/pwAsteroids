@@ -140,10 +140,12 @@ TEST(EndToEndTests, ThereIsRocketTailImageWhenAccelerateKeyIsPressed ){
 	auto noTailExpectation = std::make_shared<NegativeExpectation>( tailVisibleExpectation );
 	runner.AddEachLoopExpectations( noTailExpectation ) ;
 	runner.makeUncheckedUpdate();
+	runner.makeUncheckedUpdate();
 	runner.RunForLoops(10);
 	runner.removeExpectation( noTailExpectation );
 	runner.AddEachLoopExpectations( tailVisibleExpectation );
 	runner.AddKeyPressed(Keys::Player1AccelerateKey);
+	runner.makeUncheckedUpdate();
 	runner.makeUncheckedUpdate();
 	runner.RunForLoops(10);
 }

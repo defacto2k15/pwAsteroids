@@ -14,13 +14,16 @@ void  DrawingComponent::OnStart(IActor &actor) {
 
 void  DrawingComponent::OnUpdate() {
 	ScaleToScreen scale;
+	ImagePrimitiveType  type;
 	if( isVisible_ ) {
 		scale = scaleToScreen_;
+		type = imageType_;
 	} else {
 		scale = ScaleToScreen(0, 0);
+		type = ImagePrimitiveType::NotVisibleElement;
 	}
 
-	drawingSystem_.drawImage(imageType_, positionComponent_->getPosition(), positionComponent_->getRotation(),
+	drawingSystem_.drawImage(type, positionComponent_->getPosition(), positionComponent_->getRotation(),
 		                          scale, actorId_);
 }
 

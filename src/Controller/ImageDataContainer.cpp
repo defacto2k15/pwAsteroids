@@ -15,11 +15,11 @@ ImageData ImageDataContainer::getData(ImagePrimitiveType type) {
     return  pathsMap_[type];
 }
 
-std::map< ImagePrimitiveType, Point> ImageDataContainer::getImageSizesMap() {
+std::map<ImagePrimitiveType, Point> ImageDataContainer::getImageSizesMap(double scalingFactor) {
     std::map<ImagePrimitiveType , Point> outMap;
     for( auto &pair : pathsMap_ ){
         Point size = Point( pair.second.xSize, pair.second.ySize);
-        outMap[pair.first] = size;
+        outMap[pair.first] = size * scalingFactor;
     }
     return outMap;
 }

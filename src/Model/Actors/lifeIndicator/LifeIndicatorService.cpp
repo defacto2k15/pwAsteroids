@@ -24,7 +24,6 @@ void LifeIndicatorService::OnStart() {
         positionComponent ->setX(position.getX());
         positionComponent ->setY(position.getY());
         newActor->addComponent( std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Heart, imageScalesContainer_.getImageScale(ImagePrimitiveType::Heart)) );
-        std::cout << "Created component in " << position.toString() << std::endl;
         actorsContainer_->addActorDuringRuntime(newActor );
         heartsActors.push_back(newActor);
     }

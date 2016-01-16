@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <test/EndToEndTests/expectations/IEndToEndExpectation.h>
+#include <test/defaultTestValues/TestValues.h>
 #include "GameRunner.h"
 
 
@@ -11,7 +12,8 @@ std::string GameRunner::createErrorMessage(std::shared_ptr<IEndToEndExpectation>
 	return "FAILED:\n"+failedExpectation->getExpectationDescription()+"\n BECOUSE OF: \n " + failedExpectation->getFailureMessage();
 }
 
-GameRunner::GameRunner() : g_(std::make_shared<Game>()), input_(g_) ,  allExpectations_(3){}
+GameRunner::GameRunner() : g_(std::make_shared<Game>(TestValues::getScreenSize(), TestValues::getImageSizesMap())),
+						   input_(g_) ,  allExpectations_(3){}
 
 void GameRunner::AddEachLoopExpectations(std::shared_ptr<IEndToEndExpectation> newExpectation) {
 	getExpectations(ExpectationType::EachLoop).push_back(newExpectation);
@@ -70,13 +72,13 @@ void GameRunner::makeUncheckedUpdate() {
 }
 
 void GameRunner::AddInPythonCommand(std::string commandText) {
-	g_->getInPythonModule()->addCommand(commandText);
+	g_->getInPythonModule().addCommand(commandText);
 }
 
 void GameRunner::removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove ) {
 	bool someExpectationWasRemoved = false;
 
-	for( std::vector<std::shared_ptr<IEndToEndExpectation>> oneVec : allExpectations_){
+	for( std::vector<std::shared_ptr<IEndToEndExpectation>> &oneVec : allExpectations_){
 		if( contains(oneVec, expectationToRemove ) ){
 			someExpectationWasRemoved = true;
 			removeItem(oneVec, expectationToRemove);
