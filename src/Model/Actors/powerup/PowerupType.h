@@ -4,7 +4,7 @@
 
 #ifndef PWASTEROIDS_POWERUPTYPE_H
 #define PWASTEROIDS_POWERUPTYPE_H
-enum class PowerupType{
+enum  PowerupType{
      TripleShoot, Health, EndPowerup
 };
 

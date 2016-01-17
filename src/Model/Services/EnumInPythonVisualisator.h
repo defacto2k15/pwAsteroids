@@ -6,14 +6,15 @@
 #define PWASTEROIDS_ACTORTYPEENUMINPYTHONVISUALISATOR_H
 
 #include <Model/python/PythonEnumVisibilityModule.h>
+#include <Model/Actors/powerup/PowerupType.h>
 #include <Model/Actors/ActorType.h>
 #include "IService.h"
 
-class ActorTypeEnumInPythonVisualisator : public IService{
-    PythonEnumVisibilityModule<ActorType> visibilityModule_;
-
+class EnumInPythonVisualisator : public IService{
+    PythonEnumVisibilityModule<ActorType> actorTypeVisibilityModule_;
+    PythonEnumVisibilityModule<PowerupType > powerupTypeVisibilityModule_;
 public:
-    ActorTypeEnumInPythonVisualisator(PythonModule &module );
+    EnumInPythonVisualisator(PythonModule &module );
 
     virtual void OnStart();
 };

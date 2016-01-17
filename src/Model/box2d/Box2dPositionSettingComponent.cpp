@@ -5,13 +5,13 @@
 //#include "Box2dPositionSettingComponent.h"
 //
 //Box2dPositionSettingComponent::Box2dPositionSettingComponent(PythonModule &python )
-//        : visibilityModule_(python) {
+//        : actorTypeVisibilityModule_(python) {
 //}
 //
 //void Box2dPositionSettingComponent::OnStart(IActor &actor) {
 //    box2dComponent_ = actor.getOnlyComponent<Box2dComponent>();
-//    visibilityModule_.registerActorMethod("setPosition", &Box2dPositionSettingComponent::setPosition);
-//    visibilityModule_.registerActorMethod("setRotation", &Box2dPositionSettingComponent::setRotation);
+//    actorTypeVisibilityModule_.registerActorMethod("setPosition", &Box2dPositionSettingComponent::setPosition);
+//    actorTypeVisibilityModule_.registerActorMethod("setRotation", &Box2dPositionSettingComponent::setRotation);
 //}
 //
 //void Box2dPositionSettingComponent::setPosition(double x, double y) {

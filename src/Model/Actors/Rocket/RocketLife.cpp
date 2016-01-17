@@ -4,8 +4,14 @@
 
 #include "RocketLife.h"
 
-RocketLife::RocketLife(GameConfiguration &gameConfiguration)
-        : life_(gameConfiguration.getInitialRocketLife()), gameConfiguration_(gameConfiguration) {
+RocketLife::RocketLife(GameConfiguration &gameConfiguration, PythonModule &python)
+        : life_(gameConfiguration.getInitialRocketLife()), gameConfiguration_(gameConfiguration),
+            python_(python){
+    std::function< int() > getLifeFunc = [this](){ return life_;};
+    python.addRootFunction("getLife", getLifeFunc);
+
+    std::function< void(int) > setLifeFunc = [this](int newLife){ life_ = newLife;};
+    python.addRootFunction("setLife", setLifeFunc);
 }
 
 void RocketLife::decreaseLife() {

@@ -14,7 +14,7 @@
 //
 //
 //class Box2dPositionSettingComponent : public IPositionSettingComponent{
-//    PythonClassVisibilityModule<Box2dPositionSettingComponent, PythonModule &> visibilityModule_;
+//    PythonClassVisibilityModule<Box2dPositionSettingComponent, PythonModule &> actorTypeVisibilityModule_;
 //    std::shared_ptr<Box2dComponent> box2dComponent_;
 //public:
 //    Box2dPositionSettingComponent(PythonModule &python );

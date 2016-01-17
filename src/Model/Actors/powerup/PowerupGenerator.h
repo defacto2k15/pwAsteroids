@@ -27,8 +27,6 @@ class PowerupGenerator : public ActorsGenerator {
     RocketLife &rocketLife_;
 
 public:
-
-
     PowerupGenerator(const std::shared_ptr<ActorsContainer> &actorsContainer_, ActorIdGenerator &idGenerator_,
                      PythonModule &pythonModule_, DrawingSystem &drawingSystem_, GameConfiguration &gameConfiguration_,
                      const std::shared_ptr<Box2DService> &boxService_, Box2dObjectsContainer &container_,
@@ -50,7 +48,11 @@ public:
                                                inputStateProvider_(inputStateProvider_),
                                                timeProvider_(timeProvider_),
                                                musicManager_(musicManager_), counter_(counter),
-                                               rocketLife_(rocketLife){ }
+                                               rocketLife_(rocketLife){
+        std::function< void(Point, int) > generatingFunction
+                = [this](Point pos, int type){ generatePowerup(pos, PowerupType( type));};
+        pythonModule_.addRootFunction("generatePowerup", generatingFunction);
+    }
 
     void generatePowerup(Point position, PowerupType type){
         std::vector<std::shared_ptr<Component>> componentsForAsteroid;

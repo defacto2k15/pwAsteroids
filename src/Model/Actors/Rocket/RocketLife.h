@@ -13,8 +13,9 @@
 class RocketLife {
     unsigned int life_;
     GameConfiguration &gameConfiguration_;
+    PythonModule &python_;
 public:
-    RocketLife(GameConfiguration &gameConfiguration);
+    RocketLife(GameConfiguration &gameConfiguration, PythonModule &python);
 
     void decreaseLife();
 

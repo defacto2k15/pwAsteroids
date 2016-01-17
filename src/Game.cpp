@@ -12,7 +12,7 @@
 #include <Model/modelInterfaces/OutGameScreenModelScaler.h>
 #include <Model/modelInterfaces/OutGameScreenModelImageCentering.h>
 #include <Model/python/PythonActorComponent.h>
-#include <Model/Services/ActorTypeEnumInPythonVisualisator.h>
+#include <Model/Services/EnumInPythonVisualisator.h>
 #include <Model/components/ActorTypeComponent.h>
 #include <Model/box2d/Box2dPositionSettingComponent.h>
 #include <Model/python/CommonTypesVisualizer.h>
@@ -45,7 +45,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 		musicManager_( new MusicManager()),
 		box2dObjectsContainer_(imageScalesContainer_, gameConfiguration_),
 		contactListener_(contactComponentsContainer_),
-		rocketLife_(gameConfiguration_),
+		rocketLife_(gameConfiguration_, pythonModule_),
 		drawingSystem_(outGameScreenModel_),
 		 boundariesDuplicationsDrawingSystem_(drawingSystem_, gameConfiguration_),
 		actorsContainer_( new ActorsContainer(pythonModule_)),
@@ -131,6 +131,9 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 
 	auto pythonScriptsExecutor = std::make_shared<PythonScriptsExecutingSerrive>( pythonModule_, gameConfiguration_);
 	rootServiceContainer_.addService(pythonScriptsExecutor);
+
+	auto enumsVisualizer = std::make_shared<EnumInPythonVisualisator>( pythonModule_);
+	//rootServiceContainer_.addService(enumsVisualizer);
 
 	rootServiceContainer_.addService(inputManager_); // MUST BE ONE OF LAST!
 	rootServiceContainer_.OnStart();
