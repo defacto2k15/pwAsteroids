@@ -119,7 +119,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider_, inputManager_, asteroidGenerator_, gameConfiguration_, musicManager_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
-
+	actorsContainer_->addActor(secondPlayerTargetingActor);
 
 
 

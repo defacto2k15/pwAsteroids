@@ -33,7 +33,12 @@ void GameScreenEventInterpreter::timeEvent() {
     game_.getInputStateGetter()->setMousePosition( mousePos.getX(), mousePos.getY());
 
     for( auto imagePrimitive : game_.getOutGameScreenModel()->getImagePrimitives()) {
-        if (imagePrimitive.getImageType() != ImagePrimitiveType::NotVisibleElement) {
+        if (imagePrimitive.getImageType() == ImagePrimitiveType::NotVisibleElement) {
+            if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) !=
+                end(createdObjectsIds_)) {
+                updateDrawableObject(imagePrimitive, 0);
+            }
+        } else {
             if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) ==
                 end(createdObjectsIds_)) {
                 gameScreen_->createImage(imagePrimitive.getActorId(),
