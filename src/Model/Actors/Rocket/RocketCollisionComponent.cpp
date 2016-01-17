@@ -34,8 +34,12 @@ void RocketCollisionComponent::OnUpdate() {
     }
 }
 
-bool RocketCollisionComponent::manageCollision(double impulseValue ) {
-    if( impulseValue < 0.2){
+bool RocketCollisionComponent::manageCollision(CollisionData &data ) {
+    if( data.collisionGroup == CollisionGroup_Powerup ){
+        return false;
+    }
+    double impulseValue = data.impulseValue;
+    if( impulseValue < 0.004){
         return false;
     }
 

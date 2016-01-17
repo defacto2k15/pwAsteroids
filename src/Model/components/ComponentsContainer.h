@@ -38,6 +38,8 @@ public:
 	std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker);
 
 	bool isComponentPresent(ComponentTypeChecker checker);
+
+	void removeComponent(Component *component);
 };
 
 

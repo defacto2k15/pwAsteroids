@@ -76,3 +76,7 @@ Point operator/(Point p1, double divisor) {
 Point operator/(Point p1, Point p2) {
 	return Point( p1.getX() / p2.getX(), p1.getY() / p2.getY());
 }
+
+double Point::getDistanceFrom(Point point) {
+	return ( this->getX() * point.getX( )) + (this->getY() * point.getY());
+}

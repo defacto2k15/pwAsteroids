@@ -75,6 +75,9 @@ void GameScreenEventInterpreter::timeEvent() {
             case SecondPlayerAsteroidShoot:
                 soundModule_.playSample("SecondPlayerShoot", oneInstance.getVolume() * 0.5f, true);
                 break;
+            case PowerupGainSound:
+                soundModule_.playSample("PowerupGainSound", oneInstance.getVolume() * 0.5f, true);
+                break;
         }
     }
 

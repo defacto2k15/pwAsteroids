@@ -17,6 +17,7 @@ class Component;
 class IActor : public IService {
 public:
 	virtual void addComponent(std::shared_ptr<Component> component)=0;
+	virtual void removeComponent( Component *componentToDelete)=0;
 
 	template<typename ComponentType>
 	std::shared_ptr<ComponentType> getOnlyComponent(){

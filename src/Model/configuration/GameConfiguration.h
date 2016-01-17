@@ -23,6 +23,7 @@ class GameConfiguration {
 	Rotation  InitialRotation = 90;
 	double  RocketAccelerationRate = -3;
 	double  RocketTurnRate = 0.8f;
+	double RocketOppositeAccelerationMultiplyRate = 2.0f;
 	ScaleToScreen  RocketScaleToScreen = ScaleToScreen(0.05f, 0.05f);
 	float  DistanceBetweenRocketAndTail = 0.5f;
 	ScaleToScreen  Box2dToAllegroScale = ScaleToScreen( 100.0f, 100.0f);
@@ -58,6 +59,11 @@ class GameConfiguration {
 	std::string OnStartPythonScriptPath = "../res/OnStart.py";
 	std::string OnUpdatePythonScriptPath = "../res/OnUpdate.py";
 	Point ScreenSizeInPixels = Point(1024, 600);
+	long TemporaryRocketShootingComponentLifeTime = 10000;
+	long MinTimeBetweenPowerupGeneration = 8000;
+	unsigned int MaxPowerupsCount = 2;
+	unsigned int PowerupCreationPropabilityRatio = 2;
+	double MinPowerupDistanceFromRocket = 1.5f;
 
 	PythonClassVisibilityModule<GameConfiguration> visibility_;
 	PythonModule &python_;
@@ -65,6 +71,55 @@ public:
 	static GameConfiguration* onlyInstancePointer;
 
 	GameConfiguration(PythonModule &python, Point box2dScreenDimensions);
+
+
+	long getMinTimeBetweenPowerupGeneration() const {
+		return MinTimeBetweenPowerupGeneration;
+	}
+
+	void setMinTimeBetweenPowerupGeneration(long MinTimeBetweenPowerupGeneration) {
+		GameConfiguration::MinTimeBetweenPowerupGeneration = MinTimeBetweenPowerupGeneration;
+	}
+
+	unsigned int getMaxPowerupsCount() const {
+		return MaxPowerupsCount;
+	}
+
+	void setMaxPowerupsCount(unsigned int MaxPowerupsCount) {
+		GameConfiguration::MaxPowerupsCount = MaxPowerupsCount;
+	}
+
+	unsigned int getPowerupCreationPropabilityRatio() const {
+		return PowerupCreationPropabilityRatio;
+	}
+
+	void setPowerupCreationPropabilityRatio(unsigned int PowerupCreationPropabilityRatio) {
+		GameConfiguration::PowerupCreationPropabilityRatio = PowerupCreationPropabilityRatio;
+	}
+
+	double getMinPowerupDistanceFromRocket() const {
+		return MinPowerupDistanceFromRocket;
+	}
+
+	void setMinPowerupDistanceFromRocket(double MinPowerupDistanceFromRocket) {
+		GameConfiguration::MinPowerupDistanceFromRocket = MinPowerupDistanceFromRocket;
+	}
+
+	long getTemporaryRocketShootingComponentLifeTime() const {
+		return TemporaryRocketShootingComponentLifeTime;
+	}
+
+	void setTemporaryRocketShootingComponentLifeTime(long TemporaryRocketShootingComponentLifeTime) {
+		GameConfiguration::TemporaryRocketShootingComponentLifeTime = TemporaryRocketShootingComponentLifeTime;
+	}
+
+	double getRocketOppositeAccelerationMultiplyRate() const {
+		return RocketOppositeAccelerationMultiplyRate;
+	}
+
+	void setRocketOppositeAccelerationMultiplyRate(double RocketOppositeAccelerationMultiplyRate) {
+		GameConfiguration::RocketOppositeAccelerationMultiplyRate = RocketOppositeAccelerationMultiplyRate;
+	}
 
 	Point getScreenSizeInPixels() const {
 		return ScreenSizeInPixels;

@@ -13,6 +13,7 @@ class ComponentsContainer;
 class Actor : public IActor {
 	ComponentsContainer container_;
 	ActorId  actorId_;
+	bool hasActorStarted_ = false;
 public:
 
 
@@ -26,6 +27,8 @@ public:
 	virtual void OnUpdate();
 
 	virtual void OnStop();
+
+	virtual void removeComponent(Component *component) override;
 
 	virtual void addComponent(std::shared_ptr<Component> component) override;
 

@@ -17,7 +17,7 @@ void ProjectileCollisionComponent::OnStart(IActor &actor ) {
     id_ = actor.getActorId();
 }
 
-bool ProjectileCollisionComponent::manageCollision(double impulseValue ) {
+bool ProjectileCollisionComponent::manageCollision(CollisionData &data ) {
     actorsContainer_->removeActorById(id_);
     scoreCount_.addScore( gameConfiguration_.getScoreByDestroyingAsteroid());
     return true;

@@ -18,25 +18,14 @@ public:
 
     bool isPointInRectangle(Point point );
 
-    double getLength(){
-        return dimensions_.getX() * 2 + dimensions_.getY() * 2;
-    }
+    double getLength();
 
-    Point getPointByLength( double x ){
-        if( x < dimensions_.getX( )){
-            return Point(x, 0) + leftTopPoint_;
-        }
-        x -= dimensions_.getX();
-        if( x < dimensions_.getY( )){
-            return Point( dimensions_.getX(), x) + leftTopPoint_;
-        }
-        x -= dimensions_.getY();
-        if( x < dimensions_.getX()){
-            return Point( dimensions_.getX() - x, dimensions_.getY()) + leftTopPoint_;
-        } else {
-            return Point(0, dimensions_.getY() - (x - dimensions_.getX())) + leftTopPoint_;
-        }
-    }
+    Point getPointByLength(double x );
+
+
+    Point getLeftTopPoint() const;
+
+    Point getDimensions() const;
 };
 
 

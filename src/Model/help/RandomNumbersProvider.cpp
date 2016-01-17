@@ -24,3 +24,9 @@ bool RandomNumbersProvider::getRandomBool(unsigned int propabilityRatio ) {
 bool RandomNumbersProvider::getRandomBool() {
     return getRandomBool(1);
 }
+
+Point RandomNumbersProvider::generateRandomPointInRectangle(Rect rect) {
+    Point randomPoint( getRandomDouble(0, rect.getDimensions().getX()),
+                       getRandomDouble(0, rect.getDimensions().getY()));
+    return randomPoint + rect.getLeftTopPoint();
+}

@@ -21,15 +21,14 @@ void Box2dCollisionsComponent::OnStop() {
 }
 
 void Box2dCollisionsComponent::OnUpdate() {
-    for( auto oneImpulse : collisionImpulses_ ){
-        if( manageCollision(oneImpulse )){
-
+    for( auto oneData : collisionDatas_ ){
+        if( manageCollision(oneData )){
             break; // has to be last command in method
         }
     }
-    collisionImpulses_.clear();
+    collisionDatas_.clear();
 }
 
-void Box2dCollisionsComponent::addColision(double impulse ) {
-    collisionImpulses_.push_back(impulse);
+void Box2dCollisionsComponent::addColision(CollisionData data) {
+    collisionDatas_.push_back(data);
 }

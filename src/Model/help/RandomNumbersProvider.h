@@ -6,6 +6,8 @@
 #define PWASTEROIDS_RANDOMNUMBERSPROVIDER_H
 
 #include <cstdlib>
+#include <Model/PrimitiveTypes/Point.h>
+#include <Model/PrimitiveTypes/Rect.h>
 
 class RandomNumbersProvider {
 
@@ -19,6 +21,8 @@ public:
     bool getRandomBool(unsigned int propabilityRatio );
 
     bool getRandomBool();
+
+    Point generateRandomPointInRectangle(Rect rect);
 };
 
 

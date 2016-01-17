@@ -28,7 +28,7 @@ public:
 
     void OnStart(IActor &actor );
 
-    bool manageCollision(double impulseValue ) override;
+    bool manageCollision(CollisionData &data ) override;
 
     void createAsteroidAtAngleRelativeToCurrentAsteroid(double impulseValue, Rotation angle, int asteroidFranctions);
 

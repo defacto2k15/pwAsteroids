@@ -17,6 +17,7 @@
 #include <stdexcept>
 #include <Model/python/PythonClassVisibilityModule.h>
 #include <Model/configuration/GameConfiguration.h>
+#include <Model/Services/GameTimeProvider.h>
 
 
 class RocketMovingComponent : public Component {
@@ -25,12 +26,12 @@ class RocketMovingComponent : public Component {
 	std::shared_ptr<DrawingComponent> rocketTailDrawing_;
 	GameConfiguration &gameConfiguration_;
 	std::shared_ptr<PositionComponent> rocketPositionComponent_;
-	PythonClassVisibilityModule<RocketMovingComponent,  std::shared_ptr<IInputStateProvider>,
-			PythonModule &, GameConfiguration &> visibilityModule_;
+	PythonClassVisibilityModule<RocketMovingComponent> visibilityModule_;
+	std::shared_ptr<GameTimeProvider> timeProvider_;
 
 public:
-	RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
-						  PythonModule &pythonModule, GameConfiguration &gameConfiguration );
+	RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider, PythonModule &pythonModule,
+                              GameConfiguration &gameConfiguration, std::shared_ptr<GameTimeProvider> timeProvider);
 
 	virtual void OnStart(IActor &actor);
 
@@ -47,5 +48,6 @@ public:
 private:
 	void accelerate();
 
+	double calculateAccelerationDelta(double velocity, double acceleration);
 };
 #endif //PWASTEROIDS_ROCKETMOVINGCOMPONENT_H

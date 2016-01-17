@@ -28,6 +28,7 @@
 #include <Model/configuration/GameConfiguration.h>
 #include <Model/Services/GameStopService.h>
 #include <Model/sounds/MusicManager.h>
+#include <Model/Actors/powerup/PowerupCounter.h>
 
 
 class Game {
@@ -58,6 +59,7 @@ private:
 	GameConfiguration gameConfiguration_;
 	RocketLife rocketLife_;
 	ScoreCount scoreCount_;
+	PowerupCounter powerupCounter_;
 public:
 	Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imagesSizesMap );
 

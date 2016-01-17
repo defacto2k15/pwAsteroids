@@ -42,6 +42,8 @@ public:
 	}
 
 	void normalize();
+
+	double getDistanceFrom(Point point);
 };
 
 bool operator==( Point p1,  Point p2);

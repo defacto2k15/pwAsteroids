@@ -3,12 +3,16 @@
 //
 
 #include "RocketShootingComponent.h"
+#include <iostream>
 
-RocketShootingComponent::RocketShootingComponent(GameConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
+RocketShootingComponent::RocketShootingComponent(GameConfiguration &configuration,
+                                                 ProjectilesGenerator &projectilesGenerator,
                                                  std::shared_ptr<IInputStateProvider> inputStateProvider,
-                                                 std::shared_ptr<GameTimeProvider> timeProvider, std::shared_ptr<MusicManager> musicManager)
+                                                 std::shared_ptr<GameTimeProvider> timeProvider,
+                                                 std::shared_ptr<MusicManager> musicManager, Rotation angleOfShoot)
         : configuration_(configuration), projectilesGenerator_(projectilesGenerator),
-          inputStateProvider_(inputStateProvider), timeProvider_(timeProvider), musicManager_(musicManager) {
+          inputStateProvider_(inputStateProvider), timeProvider_(timeProvider),
+          musicManager_(musicManager), angleOfShoot_(angleOfShoot) {
 }
 
 void RocketShootingComponent::OnStart(IActor &actor) {
@@ -32,8 +36,8 @@ void RocketShootingComponent::shootProjectile() {
 
     auto distanceBetweenRocketAndProjectile = configuration_.getDistanceBetweenRocketAndProjectile();
     Point projectileAndRocketDelta = Point(
-            distanceBetweenRocketAndProjectile * sin(DegreesCalculations::degreesToRadians(rocketRotation)),
-            - distanceBetweenRocketAndProjectile * cos(DegreesCalculations::degreesToRadians(rocketRotation)));
+            distanceBetweenRocketAndProjectile * sin(DegreesCalculations::degreesToRadians(rocketRotation + angleOfShoot_)),
+            - distanceBetweenRocketAndProjectile * cos(DegreesCalculations::degreesToRadians(rocketRotation + angleOfShoot_)));
     Point speedVector = projectileAndRocketDelta;
     speedVector.normalize();
     speedVector *= configuration_.getProjectileSpeed();

@@ -24,7 +24,7 @@ public:
 
     void OnStart(IActor &actor );
 
-    bool manageCollision(double impulseValue );
+    bool manageCollision(CollisionData &data );
 
 
 };

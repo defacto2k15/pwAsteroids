@@ -64,6 +64,13 @@ GameConfiguration::GameConfiguration(PythonModule &python,  Point AllegroScreenD
 	visibility_.registerProperty("OnStartPythonScriptPath", &GameConfiguration::getOnStartPythonScriptPath, &GameConfiguration::setOnStartPythonScriptPath);
 	visibility_.registerProperty("OnUpdatePythonScriptPath", &GameConfiguration::getOnUpdatePythonScriptPath, &GameConfiguration::setOnUpdatePythonScriptPath);
 	visibility_.registerProperty("ScreenSizeInPixels", &GameConfiguration::getScreenSizeInPixels, &GameConfiguration::setScreenSizeInPixels);
+	visibility_.registerProperty("RocketOppositeAccelerationMultiplyRate", &GameConfiguration::getRocketOppositeAccelerationMultiplyRate , &GameConfiguration::setRocketOppositeAccelerationMultiplyRate );
+	visibility_.registerProperty("TemporaryRocketShootingComponentLifeTime", &GameConfiguration::getTemporaryRocketShootingComponentLifeTime , &GameConfiguration::setTemporaryRocketShootingComponentLifeTime );
+
+	visibility_.registerProperty("MinTimeBetweenPowerupGeneration", &GameConfiguration::getMinTimeBetweenPowerupGeneration, &GameConfiguration::setMinTimeBetweenPowerupGeneration  );
+	visibility_.registerProperty("MaxPowerupsCount", &GameConfiguration::getMaxPowerupsCount, &GameConfiguration::setMaxPowerupsCount  );
+	visibility_.registerProperty("PowerupCreationPropabilityRatio", &GameConfiguration::getPowerupCreationPropabilityRatio, &GameConfiguration::setPowerupCreationPropabilityRatio  );
+	visibility_.registerProperty("MinPowerupDistanceFromRocket", &GameConfiguration::getMinPowerupDistanceFromRocket, &GameConfiguration::setMinPowerupDistanceFromRocket  );
 
 	using gameRef = GameConfiguration&;
 	std::function< GameConfiguration&() > func = configurationGettingFunction;

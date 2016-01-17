@@ -33,6 +33,7 @@ SoundModule::SoundModule()
 	samples["RocketFailure"].first = al_load_sample("../res/sound/rocketFailure.wav");
 	samples["AsteroidCollision"].first = al_load_sample("../res/sound/bomb.wav");
 	samples["SecondPlayerShoot"].first = al_load_sample("../res/sound/secondPlayerShoot.wav");
+	samples["PowerupGainSound"].first = al_load_sample("../res/sound/secondPlayerShoot.wav"); // todo change
 
 	for (auto sample : samples) {
 		if (!(sample.second).first) {

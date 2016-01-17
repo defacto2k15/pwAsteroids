@@ -1,15 +1,20 @@
 //
 
+#include <Model/help/StdContainers.h>
 #include "Actor.h"
 
 void Actor::addComponent(std::shared_ptr<Component> component) {
 	container_.addComponent(component);
+	if( hasActorStarted_ ){
+		component->OnStart(*this);
+	}
 }
 
 void Actor::OnStart() {
 	for( auto &component : container_.getAllComponents() ){
 		component->OnStart(*this);
 	}
+	hasActorStarted_ = true;
 }
 
 void Actor::OnUpdate() {
@@ -36,4 +41,9 @@ bool Actor::isComponentPresent(ComponentTypeChecker checker) {
 
 ActorId  Actor::getActorId() const {
 	return actorId_;
+}
+
+void Actor::removeComponent(Component *component) {
+	component->OnStop();
+	container_.removeComponent( component );
 }

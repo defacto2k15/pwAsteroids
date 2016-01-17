@@ -20,18 +20,20 @@ void AsteroidCollisionComponent::OnStart(IActor &actor ) {
     size_ = actor.getOnlyComponent<AsteroidSizeComponent>()->getSize();
 }
 
-bool AsteroidCollisionComponent::manageCollision(double impulseValue ) {
-    double minCollisionImpulseValueToManage = 0.8;
+bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
+    double minCollisionImpulseValueToManage = 1.2;
     double destructionMassFactor = 0.20f;
     double asteroidMass = box2dComponent_->getMass();
 
+    double impulseValue = data.impulseValue;
 
     if( impulseValue < minCollisionImpulseValueToManage){
         return false;
     }
 
     musicManager_->addMusicElement(MusicElements::AsteroidCollisionSound, sqrt(asteroidMass / 40) );
-    std::cout << "Current size is " << sqrt(asteroidMass/40) << std::endl;
+    std::cout << "Current size is " << sqrt(asteroidMass/40)<< "mass is" <<
+            asteroidMass << " aft mul " << destructionMassFactor * asteroidMass << std::endl;
     if( impulseValue > destructionMassFactor*asteroidMass){
         actorsContainer_->removeActorById(id_);
         return true;

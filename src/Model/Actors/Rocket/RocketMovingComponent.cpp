@@ -4,6 +4,11 @@
 
 #include <Model/python/PythonActorComponent.h>
 #include "RocketMovingComponent.h"
+#include <iostream>
+
+template <typename T> int sgn(T val) {
+	return (T(0) < val) - (val < T(0));
+}
 
 void RocketMovingComponent::OnStart(IActor &actor) {
 	rocketPositionComponent_ = actor.getOnlyComponent<PositionComponent>();
@@ -25,11 +30,13 @@ void RocketMovingComponent::OnUpdate() {
 	}  else {
 		rocketTailDrawing_->setVisibility(false);
 	}
+	auto turnRate = (double(timeProvider_->getMilisecondsBetweenFrames()) / 1000) * -gameConfiguration_.getRocketTurnRate();
+
 	if (inputStateProvider_->isPressed(Keys::Player1LeftKey)){
-		box2dComponent_->applyTorque(-gameConfiguration_.getRocketTurnRate());
+		box2dComponent_->applyTorque(turnRate);
 	}
 	if (inputStateProvider_->isPressed(Keys::Player1RightKey)){
-		box2dComponent_->applyTorque(gameConfiguration_.getRocketTurnRate());
+		box2dComponent_->applyTorque(-turnRate);
 	}
 }
 
@@ -38,14 +45,31 @@ void RocketMovingComponent::setRocketTail( std::shared_ptr<IActor> tailActor) {
 }
 
 void RocketMovingComponent::accelerate() {
-	Point accVec = Point((-1)*(gameConfiguration_.getRocketAccelerationRate() * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
-							gameConfiguration_.getRocketAccelerationRate() * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
+	auto currentSpeed = box2dComponent_->getLineralVelocity();
+
+	auto acceleration = (double(timeProvider_->getMilisecondsBetweenFrames()) / 1000) * -gameConfiguration_.getRocketAccelerationRate();
+	Point accVec = Point((-1)*(acceleration * sin( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation()))),
+						 acceleration * cos( DegreesCalculations::degreesToRadians(rocketPositionComponent_->getRotation())));
+	//double xDelta =;
+	accVec += Point( calculateAccelerationDelta(currentSpeed.getX(), accVec.getX() ),
+					 calculateAccelerationDelta(currentSpeed.getY(), accVec.getY() ));
+
+	//std::cout << "AFS " << adjustedSpeed.toString() << " and " <<  ()<< std::endl;
 	box2dComponent_->applyForce(accVec);
 
 }
 
-RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider,
-											 PythonModule &pythonModule, GameConfiguration &gameConfiguration )
+RocketMovingComponent::RocketMovingComponent(std::shared_ptr<IInputStateProvider> inputStateProvider, PythonModule &pythonModule,
+											 GameConfiguration &gameConfiguration, std::shared_ptr<GameTimeProvider> timeProvider)
 		: inputStateProvider_(inputStateProvider), visibilityModule_(pythonModule),
-		  gameConfiguration_(gameConfiguration) {
+		  gameConfiguration_(gameConfiguration), timeProvider_(timeProvider) {
+}
+
+double RocketMovingComponent::calculateAccelerationDelta(double velocity, double acceleration) {
+	double xDelta =  fabs(velocity + acceleration ) - fabs(velocity );
+	if(xDelta < 0){
+		return sgn(velocity)*xDelta*2;
+	} else {
+		return 0;
+	}
 }

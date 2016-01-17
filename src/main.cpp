@@ -57,6 +57,7 @@ int main(int, char**){
 	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 240, 240, "../res/rocket2.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 240, 240, "../res/target.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::NotVisibleElement, ImageData{ 240, 240, "../res/target.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::TripleShootPowerup, ImageData{ 240, 240, "../res/target.bmp"});
 
 	char y[2000];
 	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap(0.25f));

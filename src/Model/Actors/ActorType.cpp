@@ -18,6 +18,8 @@ std::string getActorTypeString(ActorType type){
                         return "Asteroid";
                 case ActorType_Projectile:
                         return "Projectile";
+                case ActorType_TripleShootPowerup:
+                        return "TripleShootPowerup";
                 case ActorType_Other:
                         return "Other";
                 default:

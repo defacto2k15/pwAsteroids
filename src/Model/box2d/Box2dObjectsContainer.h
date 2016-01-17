@@ -13,7 +13,7 @@
 #include "Box2dObject.h"
 
 class Box2dObjectsContainer {
-    std::vector<std::shared_ptr<b2PolygonShape>> polygonShapesVector_;
+    std::vector<std::shared_ptr<b2Shape>> polygonShapesVector_;
     ImageScalesContainer &imageScalesContainer_;
     GameConfiguration &gameConfiguration_;
 
@@ -27,11 +27,17 @@ public:
 
     std::shared_ptr<Box2dObject> getProjectileObject();
 
+    std::shared_ptr<Box2dObject> getPowerupObject();
+
 
 private:
     std::shared_ptr<Box2dObject> createObjectWithBoxShape(ScaleToScreen imageScale,
                                                               double densityPerSquareUnit,
                                                               CollisionGroupsData collisionGroupData);
+
+    std::shared_ptr<Box2dObject> createObjectWithCircleShape(ScaleToScreen imageScale,
+                                                          double densityPerSquareUnit,
+                                                          CollisionGroupsData collisionGroupData);
 };
 
 

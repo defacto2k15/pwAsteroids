@@ -34,7 +34,7 @@ public:
     void OnUpdate();
 
 private:
-    bool manageCollision(double impulseValue );
+    bool manageCollision(CollisionData &data );
 
 };
 

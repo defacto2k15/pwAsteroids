@@ -21,17 +21,19 @@ class RocketShootingComponent : public Component {
     GameConfiguration &configuration_;
     ProjectilesGenerator &projectilesGenerator_;
     std::shared_ptr<MusicManager> musicManager_;
+    Rotation angleOfShoot_;
 
     unsigned long timeOfLastShot_ = 0;
 public:
-    RocketShootingComponent(GameConfiguration &configuration, ProjectilesGenerator &projectilesGenerator,
+    RocketShootingComponent(GameConfiguration &configuration,
+                                ProjectilesGenerator &projectilesGenerator,
                                 std::shared_ptr<IInputStateProvider> inputStateProvider,
                                 std::shared_ptr<GameTimeProvider> timeProvider,
-                            std::shared_ptr<MusicManager> musicManager);
+                                std::shared_ptr<MusicManager> musicManager, Rotation angleOfShoot);
 
-    void OnStart(IActor &actor);
+    virtual void OnStart(IActor &actor);
 
-    void OnUpdate();
+    virtual void OnUpdate();
 
 private:
     void shootProjectile();

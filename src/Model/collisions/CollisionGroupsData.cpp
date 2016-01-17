@@ -11,10 +11,14 @@ CollisionGroupsData CollisionGroupsData::getAsteroidData() {
 
 CollisionGroupsData CollisionGroupsData::getRocketData() {
     return CollisionGroupsData( CollisionGroup::CollisionGroup_Rocket,
-                                CollisionGroup::CollisionGroup_Asteroid);
+                                CollisionGroup::CollisionGroup_Asteroid| CollisionGroup_Powerup);
 }
 
 CollisionGroupsData CollisionGroupsData::getProjectileData() {
     return CollisionGroupsData( CollisionGroup::CollisionGroup_Projectile,
                                   CollisionGroup::CollisionGroup_Asteroid);
+}
+
+CollisionGroupsData CollisionGroupsData::getPowerupData() {
+    return  CollisionGroupsData( CollisionGroup_Powerup, CollisionGroup::CollisionGroup_Rocket );
 }

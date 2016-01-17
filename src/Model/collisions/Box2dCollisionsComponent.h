@@ -8,13 +8,14 @@
 #include <Model/components/Component.h>
 #include <Model/Actors/Rocket/Box2dComponent.h>
 #include <Model/Services/ActorsContainer.h>
+#include "CollisionData.h"
 
 class ContactComponentsContainer;
 
 class Box2dCollisionsComponent : public Component {
     ContactComponentsContainer & contactContainer_;
 
-    std::vector<double> collisionImpulses_;
+    std::vector<CollisionData> collisionDatas_;
     b2Body *body_ = nullptr;
 protected:
     std::shared_ptr<Box2dComponent> box2dComponent_;
@@ -27,10 +28,10 @@ public:
 
     void OnUpdate();
 
-    void addColision(double impulse );
+    void addColision(CollisionData data );
 
 private:
-    virtual bool manageCollision( double impulseValue )=0;
+    virtual bool manageCollision( CollisionData &data )=0;
 
 };
 

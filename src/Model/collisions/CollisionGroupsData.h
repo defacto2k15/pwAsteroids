@@ -21,6 +21,8 @@ public:
     static CollisionGroupsData getRocketData();
 
     static CollisionGroupsData getProjectileData();
+
+    static CollisionGroupsData getPowerupData();
 };
 
 

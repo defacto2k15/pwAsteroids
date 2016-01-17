@@ -35,3 +35,20 @@ std::shared_ptr<Component> ComponentsContainer::getOnlyComponent(ComponentTypeCh
 bool ComponentsContainer::isComponentPresent(ComponentTypeChecker checker) {
 	return getComponents(checker).size() != 0;
 }
+
+void ComponentsContainer::removeComponent(Component *component) {
+	auto iter = std::find_if( begin( componentsVector_), end( componentsVector_),
+							  [component]( std::shared_ptr<Component> oneComponent ){
+								  return oneComponent.get() == component;
+							  });
+	if( iter == componentsVector_.end() ){
+		assert(false);
+	}
+
+	iter =	std::remove_if( begin( componentsVector_), end( componentsVector_),
+							[component]( std::shared_ptr<Component> oneComponent ){
+								return oneComponent.get() == component;
+							});
+
+	componentsVector_.erase( iter, componentsVector_.end());
+}
