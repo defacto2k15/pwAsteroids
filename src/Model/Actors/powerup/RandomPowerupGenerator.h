@@ -18,7 +18,7 @@ class RandomPowerupGenerator : public IService {
     std::shared_ptr<IActor> rocketActor_;
     GameConfiguration &configuration_;
     std::shared_ptr<GameTimeProvider> timeProvider_;
-    std::shared_ptr<PowerupGenerator> generator_;
+    PowerupGenerator &generator_;
     PowerupCounter &counter_;
     RandomNumbersProvider &randomNumbers_;
 
@@ -28,7 +28,7 @@ public:
 
 
     RandomPowerupGenerator(std::shared_ptr<IActor> rocketActor_, GameConfiguration &configuration_,
-                           std::shared_ptr<GameTimeProvider> timeProvider_, std::shared_ptr<PowerupGenerator> generator_,
+                           std::shared_ptr<GameTimeProvider> timeProvider_, PowerupGenerator &generator,
                            PowerupCounter &counter_, RandomNumbersProvider &randomNumbers_);
 
     void OnUpdate();
