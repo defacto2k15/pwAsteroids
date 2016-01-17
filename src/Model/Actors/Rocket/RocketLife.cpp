@@ -16,7 +16,9 @@ void RocketLife::decreaseLife() {
 }
 
 void RocketLife::increaseLife() {
-    life_;
+    if( life_ <  gameConfiguration_.getMaxRocketLifes() ) {
+        ++life_;
+    }
 }
 
 void RocketLife::resetLife() {

@@ -14,6 +14,7 @@
 #include "PowerupType.h"
 #include "PowerupCounterComponent.h"
 #include "TripleShootPowerupCollisionComponent.h"
+#include "HealthPowerupCollisionComponent.h"
 
 class PowerupGenerator : public ActorsGenerator {
     PythonModule &python_;
@@ -23,6 +24,7 @@ class PowerupGenerator : public ActorsGenerator {
     std::shared_ptr<GameTimeProvider> timeProvider_;
     std::shared_ptr<MusicManager> musicManager_;
     PowerupCounter &counter_;
+    RocketLife &rocketLife_;
 
 public:
 
@@ -35,7 +37,8 @@ public:
                      const std::shared_ptr<IInputStateProvider> &inputStateProvider_,
                      const std::shared_ptr<GameTimeProvider> &timeProvider_,
                      const std::shared_ptr<MusicManager> &musicManager_,
-                     PowerupCounter &counter) : ActorsGenerator(actorsContainer_,
+                     PowerupCounter &counter, RocketLife &rocketLife) :
+                                                               ActorsGenerator(actorsContainer_,
                                                                idGenerator_, pythonModule_,
                                                                drawingSystem_,
                                                                gameConfiguration_,
@@ -46,7 +49,8 @@ public:
                                                projectilesGenerator_(projectilesGenerator_),
                                                inputStateProvider_(inputStateProvider_),
                                                timeProvider_(timeProvider_),
-                                               musicManager_(musicManager_), counter_(counter) { }
+                                               musicManager_(musicManager_), counter_(counter),
+                                               rocketLife_(rocketLife){ }
 
     void generatePowerup(Point position, PowerupType type){
         std::vector<std::shared_ptr<Component>> componentsForAsteroid;
@@ -64,6 +68,15 @@ public:
                     std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::TripleShootPowerup,
                                                        imageScalesContainer_.getImageScale(
                                                                ImagePrimitiveType::TripleShootPowerup)));
+        } else  if ( type == PowerupType::Health ) {
+            componentsForAsteroid.push_back(std::make_shared<ActorTypeComponent>(ActorType_HealthPowerup, pythonModule_));
+            componentsForAsteroid.push_back(std::make_shared<HealthPowerupCollisionComponent>(
+                    contactComponentsContainer_, actorsContainer_, musicManager_, rocketLife_));
+            componentsForAsteroid.push_back(
+                    std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::HealthPowerup,
+                                                       imageScalesContainer_.getImageScale(
+                                                               ImagePrimitiveType::HealthPowerup)));
+
         } else {
             assert(false);
         }

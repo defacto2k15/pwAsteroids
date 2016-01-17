@@ -6,9 +6,5 @@
 #include "PowerupType.h"
 
 PowerupType generateRandomPowerup() {
-    int optionsCount = 1;
-    if( ( rand() % optionsCount) == 0 ){
-        return PowerupType::TripleShoot;
-    }
-    assert(false);
+    return PowerupType( rand() % int(PowerupType::EndPowerup) );
 }

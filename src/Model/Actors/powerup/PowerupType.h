@@ -5,7 +5,7 @@
 #ifndef PWASTEROIDS_POWERUPTYPE_H
 #define PWASTEROIDS_POWERUPTYPE_H
 enum class PowerupType{
-    Invalid = 0, TripleShoot
+     TripleShoot, Health, EndPowerup
 };
 
 PowerupType generateRandomPowerup();

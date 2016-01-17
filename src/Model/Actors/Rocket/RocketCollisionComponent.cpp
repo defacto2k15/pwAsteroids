@@ -35,6 +35,7 @@ void RocketCollisionComponent::OnUpdate() {
 }
 
 bool RocketCollisionComponent::manageCollision(CollisionData &data ) {
+    int z = int(CollisionGroup_Powerup);
     if( data.collisionGroup == CollisionGroup_Powerup ){
         return false;
     }

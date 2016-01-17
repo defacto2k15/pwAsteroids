@@ -3,6 +3,7 @@
 //
 
 #include "LifeIndicatorService.h"
+#include <iostream>
 
 LifeIndicatorService::LifeIndicatorService(std::shared_ptr<ActorsContainer> actorsContainer,
                                            PythonModule &pythonModule_,
@@ -31,6 +32,7 @@ void LifeIndicatorService::OnStart() {
 
 void LifeIndicatorService::OnUpdate() {
     unsigned int activeHearts = life_.getLife();
+    std::cout << "Our life is " << activeHearts << std::endl;
     for( int i = 0; i < configuration_.getMaxRocketLifes(); i++){
         bool visibility = false;
         if( i < activeHearts ){

@@ -23,7 +23,7 @@ std::shared_ptr<Box2dObject> Box2dObjectsContainer::getProjectileObject() {
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getPowerupObject() {
-    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::TripleShootPowerup), 100, CollisionGroupsData::getPowerupData());
+    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::TripleShootPowerup), 1, CollisionGroupsData::getPowerupData());
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::createObjectWithBoxShape(ScaleToScreen imageScale,

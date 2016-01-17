@@ -123,7 +123,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	auto powerupGenerator = std::make_shared<PowerupGenerator>(
 			actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_,
 			imageScalesContainer_, contactComponentsContainer_, rocket, projectilesGenerator_, inputManager_,
-			gameTimeProvider, musicManager_, powerupCounter_);
+			gameTimeProvider, musicManager_, powerupCounter_, rocketLife_);
 
 	auto randomPowerupGenerator = std::make_shared<RandomPowerupGenerator>(
 			rocket, gameConfiguration_, gameTimeProvider, powerupGenerator, powerupCounter_, randomNumbersProvider_);
