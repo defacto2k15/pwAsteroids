@@ -21,9 +21,9 @@ class GameConfiguration {
 
 	Point  InitialPosition = Point( 0,0);
 	Rotation  InitialRotation = 90;
-	double  RocketAccelerationRate = 0.5f;
-	double  RocketTurnRate = 0.02f;
-	double RocketOppositeAccelerationMultiplyRate = 0.8f;
+	double  RocketAccelerationRate = -3;
+	double  RocketTurnRate = 0.8f;
+	double RocketOppositeAccelerationMultiplyRate = 2.0f;
 	ScaleToScreen  RocketScaleToScreen = ScaleToScreen(0.05f, 0.05f);
 	float  DistanceBetweenRocketAndTail = 0.5f;
 	ScaleToScreen  Box2dToAllegroScale = ScaleToScreen( 100.0f, 100.0f);
