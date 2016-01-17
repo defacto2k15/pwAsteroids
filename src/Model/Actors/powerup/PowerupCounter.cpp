@@ -3,3 +3,15 @@
 //
 
 #include "PowerupCounter.h"
+
+void PowerupCounter::increase() {
+    countOfPowerups_++;
+}
+
+void PowerupCounter::decrease() {
+    countOfPowerups_--;
+}
+
+unsigned  int PowerupCounter::getCount() {
+    return countOfPowerups_;
+}

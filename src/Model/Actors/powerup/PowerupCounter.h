@@ -9,17 +9,11 @@
 class PowerupCounter {
     unsigned int countOfPowerups_;
 public:
-    void increase(){
-        countOfPowerups_++;
-    }
+    void increase();
 
-    void decrease(){
-        countOfPowerups_--;
-    }
+    void decrease();
 
-    unsigned  int getCount(){
-        return countOfPowerups_;
-    }
+    unsigned  int getCount();
 };
 
 

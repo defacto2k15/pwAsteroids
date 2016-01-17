@@ -13,15 +13,11 @@
 class PowerupCounterComponent : public Component {
     PowerupCounter &counter_;
 public:
-    PowerupCounterComponent(PowerupCounter &counter_) : counter_(counter_) { }
+    PowerupCounterComponent(PowerupCounter &counter_);
 
-    void OnStart(IActor &actor) override {
-        counter_.increase();
-    }
+    void OnStart(IActor &actor);
 
-    void OnStop() override {
-        counter_.decrease();
-    }
+    void OnStop();
 
 };
 

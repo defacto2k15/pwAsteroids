@@ -18,21 +18,11 @@ class HealthPowerupCollisionComponent : public Box2dCollisionsComponent {
 public:
     HealthPowerupCollisionComponent(ContactComponentsContainer &contactContainer,
                                     std::shared_ptr<ActorsContainer> actorsContainer_,
-                                    std::shared_ptr<MusicManager> musicManager_, RocketLife &rocketLife)
-            : Box2dCollisionsComponent(contactContainer), actorsContainer_(actorsContainer_),
-              musicManager_(musicManager_), rocketLife(rocketLife) {
-    }
+                                    std::shared_ptr<MusicManager> musicManager_, RocketLife &rocketLife);
 
-    void OnStart(IActor &actor) override{
-        id_ = actor.getActorId();
-        Box2dCollisionsComponent::OnStart(actor);
-    }
+    void OnStart(IActor &actor);
 
-    bool manageCollision(CollisionData &data) override{
-        rocketLife.increaseLife();
-        //musicManager_->addMusicElement(MusicElements::PowerupGainSound, 0.5f);
-        actorsContainer_->removeActorById(id_);
-    }
+    bool manageCollision(CollisionData &data);
 
 };
 
