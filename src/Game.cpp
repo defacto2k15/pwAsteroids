@@ -49,28 +49,33 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 		drawingSystem_(outGameScreenModel_),
 		 boundariesDuplicationsDrawingSystem_(drawingSystem_, gameConfiguration_),
 		actorsContainer_( new ActorsContainer(pythonModule_)),
+		idGenerator(),
 		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_, musicManager_),
-		projectilesGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_){
+		projectilesGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_),
+		gameTimeProvider_( new GameTimeProvider()),
+		randomAsteroidsGenerator_( new RandomAsteroidsGenerator(asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider_, randomNumbersProvider_, pythonModule_)),
+		lifeIndicatorService_( new LifeIndicatorService(actorsContainer_, pythonModule_, drawingSystem_, imageScalesContainer_, idGenerator, gameConfiguration_, rocketLife_)),
+		gameStopService_( new GameStopService( pythonModule_, gameTimeProvider_, boxService_, inputManager_)),
+		powerupGenerator_(	actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_,
+							  imageScalesContainer_, contactComponentsContainer_, rocket, projectilesGenerator_, inputManager_,
+							  gameTimeProvider_, musicManager_, powerupCounter_, rocketLife_),
+		randomPowerupsGenerator_( new RandomPowerupGenerator(rocket, gameConfiguration_, gameTimeProvider_, powerupGenerator_, powerupCounter_, randomNumbersProvider_)),
+		commonTypesVisualizer_( new CommonTypesVisualizer(pythonModule_)),
+		rocket( new Actor(idGenerator.getActorId())),
+		pythonScriptsExecutor_( new PythonScriptsExecutingSerrive(pythonModule_, gameConfiguration_)){
 
 	rootServiceContainer_.addService(musicManager_);
 	rootServiceContainer_.addService(actorsContainer_);
-	std::shared_ptr<GameTimeProvider> gameTimeProvider( new GameTimeProvider) ;
-	rootServiceContainer_.addService(gameTimeProvider);
-	rootServiceContainer_.addService(std::make_shared<RandomAsteroidsGenerator>(
-			asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider, randomNumbersProvider_, pythonModule_
-	));
-
+	rootServiceContainer_.addService(gameTimeProvider_);
+	rootServiceContainer_.addService(randomAsteroidsGenerator_);
 	rootServiceContainer_.addService(boxService_);
-
-
-	lifeIndicatorService_ = std::make_shared<LifeIndicatorService>(
-			actorsContainer_, pythonModule_, drawingSystem_, imageScalesContainer_, idGenerator, gameConfiguration_, rocketLife_);
 	rootServiceContainer_.addService(lifeIndicatorService_);
-
-	gameStopService_ = std::make_shared<GameStopService>( pythonModule_, gameTimeProvider, boxService_, inputManager_);
 	rootServiceContainer_.addService(gameStopService_);
+	rootServiceContainer_.addService(randomPowerupsGenerator_);
+	rootServiceContainer_.addService(commonTypesVisualizer_);
+	rootServiceContainer_.addService(pythonScriptsExecutor_);
+	rootServiceContainer_.addService(inputManager_); // MUST BE ONE OF LAST!
 
-	auto rocket = std::make_shared<Actor>(idGenerator.getActorId());
 
 	auto scoreActor = std::make_shared<Actor>(idGenerator.getActorId());
 	scoreActor->addComponent( std::make_shared<ScoreDisplayer>(scoreCount_, drawingSystem_, gameConfiguration_));
@@ -79,14 +84,14 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	rocket->addComponent(std::make_shared<Box2dComponent>(boxService_, gameConfiguration_, box2dObjectsContainer_.getRocketObject()));
 	rocket->addComponent(std::make_shared<PositionComponent>(pythonModule_));
 	rocket->addComponent(std::make_shared<DrawingComponent>(boundariesDuplicationsDrawingSystem_ , ImagePrimitiveType::Rocket, imageScalesContainer_.getImageScale(ImagePrimitiveType::Rocket)));
-	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(inputManager_, pythonModule_, gameConfiguration_, gameTimeProvider);
+	auto rocketMovingComponent = std::make_shared<RocketMovingComponent>(inputManager_, pythonModule_, gameConfiguration_, gameTimeProvider_);
 	rocket->addComponent(rocketMovingComponent);
 	rocket->addComponent( std::make_shared<PythonActorComponent>(pythonModule_));
 	rocket->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Rocket,  pythonModule_));
 	rocket->addComponent( std::make_shared<PositionSettingComponent >(true, pythonModule_));
 	rocket->addComponent( std::make_shared<ScreenBoundariesTeleportationComponent>(gameConfiguration_));
-	rocket->addComponent( std::make_shared<RocketShootingComponent>(gameConfiguration_, projectilesGenerator_, inputManager_, gameTimeProvider, musicManager_, Rotation(0)));
-	rocket->addComponent( std::make_shared<RocketCollisionComponent>( contactComponentsContainer_, rocketLife_, gameConfiguration_, gameTimeProvider, musicManager_));
+	rocket->addComponent( std::make_shared<RocketShootingComponent>(gameConfiguration_, projectilesGenerator_, inputManager_, gameTimeProvider_, musicManager_, Rotation(0)));
+	rocket->addComponent( std::make_shared<RocketCollisionComponent>( contactComponentsContainer_, rocketLife_, gameConfiguration_, gameTimeProvider_, musicManager_));
 
 	auto rocketTail = std::make_shared<Actor>(idGenerator.getActorId());
 	rocketTail->addComponent(std::make_shared<RocketTailPositionComponent>(rocket, gameConfiguration_));
@@ -111,31 +116,16 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 			std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::SecondPlayerTarget, imageScalesContainer_.getImageScale(ImagePrimitiveType::SecondPlayerTarget) ));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionComponent>(pythonModule_));
 	secondPlayerTargetingActor->addComponent(
-			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider, inputManager_, asteroidGenerator_, gameConfiguration_, musicManager_));
+			std::make_shared<SecondPlayerTargetComponent>( borderIndicatorComponent, gameTimeProvider_, inputManager_, asteroidGenerator_, gameConfiguration_, musicManager_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
 
-	actorsContainer_->addActor( secondPlayerTargetingActor );
-	auto commonTypesVisualizer = std::make_shared<CommonTypesVisualizer>( pythonModule_);
-	rootServiceContainer_.addService(commonTypesVisualizer);
 
 
-	auto powerupGenerator = std::make_shared<PowerupGenerator>(
-			actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_,
-			imageScalesContainer_, contactComponentsContainer_, rocket, projectilesGenerator_, inputManager_,
-			gameTimeProvider, musicManager_, powerupCounter_, rocketLife_);
 
-	auto randomPowerupGenerator = std::make_shared<RandomPowerupGenerator>(
-			rocket, gameConfiguration_, gameTimeProvider, powerupGenerator, powerupCounter_, randomNumbersProvider_);
-	rootServiceContainer_.addService(randomPowerupGenerator);
-
-	auto pythonScriptsExecutor = std::make_shared<PythonScriptsExecutingSerrive>( pythonModule_, gameConfiguration_);
-	rootServiceContainer_.addService(pythonScriptsExecutor);
-
-	auto enumsVisualizer = std::make_shared<EnumInPythonVisualisator>( pythonModule_);
+	//auto enumsVisualizer = std::make_shared<EnumInPythonVisualisator>( pythonModule_);
 	//rootServiceContainer_.addService(enumsVisualizer);
 
-	rootServiceContainer_.addService(inputManager_); // MUST BE ONE OF LAST!
 	rootServiceContainer_.OnStart();
 	outGameScreenModel_->OnStart();
 
