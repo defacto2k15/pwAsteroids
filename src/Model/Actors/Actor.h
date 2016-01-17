@@ -21,9 +21,7 @@ public:
 
 	virtual bool isComponentPresent( ComponentTypeChecker checker );
 
-	Actor(ActorId id) : actorId_(id){
-		int h=7;
-	}
+	Actor(ActorId id) : actorId_(id){}
 	virtual void OnStart();
 
 	virtual void OnUpdate();

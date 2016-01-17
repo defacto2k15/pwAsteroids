@@ -29,43 +29,29 @@
 #include <Model/Services/GameStopService.h>
 #include <Model/sounds/MusicManager.h>
 #include <Model/Actors/powerup/PowerupCounter.h>
-#include <Model/Actors/powerup/PowerupGenerator.h>
-#include <Model/Actors/powerup/RandomPowerupGenerator.h>
-#include <Model/python/CommonTypesVisualizer.h>
-#include <Model/python/PythonScriptsExecutingSerivce.h>
-#include <Model/Actors/Asteroid/RandomAsteroidsGenerator.h>
 
 
 class Game {
 private:
-	ActorIdGenerator idGenerator;
-	PythonModule pythonModule_;
-	std::shared_ptr<IActor> rocket;
 	RootServiceContainer rootServiceContainer_;
-	std::shared_ptr<ActorsContainer> actorsContainer_;
 	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
 	std::shared_ptr<MusicManager> musicManager_;
 	std::shared_ptr<InputStateManager> inputManager_ = std::make_shared<InputStateManager>();
 	std::shared_ptr<IInputStateGetter> inputStateGetter_ = std::make_shared<ScallingMousePositionGetter>( inputManager_, gameConfiguration_);
 	std::shared_ptr<Box2DService> boxService_ = std::make_shared<Box2DService>( &contactListener_);
-	std::shared_ptr<GameTimeProvider> gameTimeProvider_;
-	std::shared_ptr<RandomAsteroidsGenerator> randomAsteroidsGenerator_;
+	PythonModule pythonModule_;
+	std::shared_ptr<ActorsContainer> actorsContainer_;
 	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 	std::shared_ptr<GameStopService> gameStopService_;
-	std::shared_ptr<RandomPowerupGenerator> randomPowerupsGenerator_;
-	std::shared_ptr<CommonTypesVisualizer> commonTypesVisualizer_;
-
-	std::shared_ptr<PythonScriptsExecutingSerrive> pythonScriptsExecutor_;
-
 	DrawingSystem drawingSystem_;
 	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
 	ContactComponentsContainer contactComponentsContainer_;
 	MyContactListener contactListener_;
+	ActorIdGenerator idGenerator;
 	AsteroidsGenerator asteroidGenerator_;
 	ProjectilesGenerator projectilesGenerator_;
 	AsteroidsCounter asteroidsCounter_;
 	RandomNumbersProvider randomNumbersProvider_;
-	PowerupGenerator powerupGenerator_;
 
 	ImageScalesContainer imageScalesContainer_;
 	Box2dObjectsContainer box2dObjectsContainer_;
@@ -74,8 +60,6 @@ private:
 	RocketLife rocketLife_;
 	ScoreCount scoreCount_;
 	PowerupCounter powerupCounter_;
-
-	bool isGameFinished_ = false;
 public:
 	Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imagesSizesMap );
 
@@ -94,10 +78,6 @@ public:
 	void update();;
 
 	void setResolution(Point newResolution );
-
-	bool isGameFinished(){
-		return isGameFinished_;
-	}
 };
 
 
