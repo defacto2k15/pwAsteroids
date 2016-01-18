@@ -75,7 +75,8 @@ int main(int, char**){
 	GameScreenEventInterpreter gameScreenInterpreter(keyMapper, mousePositionFetcher, &gameScreen, imageDataContainer, game
 			, screenSize, soundModule);
 
-	ResolutionsContainer resolutionsContainer({ std::make_pair(1024, 600), std::make_pair(800, 600), std::make_pair(1280, 1024)});
+	ResolutionsContainer resolutionsContainer({ std::make_pair(800, 600), std::make_pair(1024, 600), std::make_pair(1280, 1024),
+												std::make_pair(1600, 900), std::make_pair(1920, 1080) });
 
 	std::vector<MenuModel> menusVector;
 	MenuOption startGameOption{ MenuOptionTypes::StartGame, {"StartGame"}, 0 };
@@ -108,7 +109,7 @@ int main(int, char**){
 
 
 	ViewManager manager(game, eventListenersVector,
-						&display, screenEventInterpreters, screensVec, "GameScreen", soundModule );
+						&display, screenEventInterpreters, screensVec, "MenuScreen", soundModule );
 
 
 //	std::shared_ptr<ViewManager> manager(

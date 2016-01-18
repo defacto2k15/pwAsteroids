@@ -15,7 +15,6 @@ void MenuScreen::updateScreenAfterDisplayChanges()
 			drawableObject->setPozX(al_get_display_width(al_get_current_display())/2 - 175);
 		}
 	}
-	resolutionButton->setPozX(al_get_display_width(al_get_current_display()) / 2 - 175);
 	selectedButton->setPozX(al_get_display_width(al_get_current_display()) / 2 - 195);
 	logo->setPozX(al_get_display_width(al_get_current_display()) / 2 - 85);
 }

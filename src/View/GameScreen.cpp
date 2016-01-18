@@ -53,3 +53,9 @@ void GameScreen::updateObject(ActorId id, Point point, Rotation rotation, float 
 	drawableObjects[id]->setAngle(rotation* 0.0174532925f);
 	drawableObjects[id]->setZoom(zoom);
 }
+
+void GameScreen::deleteObject(ActorId id)
+{
+	assert(drawableObjects.count(id) > 0);
+	background->removeDrawableObject(drawableObjects[id]);
+}

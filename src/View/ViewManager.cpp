@@ -15,7 +15,6 @@ void ViewManager::changeActiveScreen(std::string screenTitle)
 		{
 			activeScreen = it;
 			std::cout << "- Changed screen to " << (*activeScreen)->getTitle() << "\n";
-
 			break;
 		}
 	}
@@ -77,10 +76,13 @@ void ViewManager::start()
 ViewManager::~ViewManager()
 {
 	al_stop_timer(timer);
-	//timerThread->interrupt();
 	std::cout << "Timer stopped\n";
-	delete display;
 	// TO DO: also delete each scene in scenes
+	/*for (int i = 0; i < screens.size(); ++i)
+	{
+		delete screens[i];
+	}*/
+	//delete display;	// destroy display after scenes!
 }
 
 /* Bartkowy kod */

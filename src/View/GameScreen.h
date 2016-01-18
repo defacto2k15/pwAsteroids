@@ -26,6 +26,8 @@ public:
 
 	void updateObject(ActorId id, Point point, Rotation rotation, float zoom);
 
+	void deleteObject(ActorId id);
+
 	void refreshScreen();
 
 private:

@@ -33,6 +33,7 @@ public:
 	void setTintB(int newTintB) { tintB = newTintB; }
 	void setTint(int newTintR, int newTintG, int newTintB) { tintR = newTintR; tintG = newTintG; tintB = newTintB; }
 	DrawableObject(int x, int y, const char* path = NULL, const char* t = NULL, float a = 0.0f, float z = 1.0f, int tx = 0, int ty = 0);
+	~DrawableObject();
 private:
 	ALLEGRO_BITMAP* bitmap = NULL;
 	std::string text;

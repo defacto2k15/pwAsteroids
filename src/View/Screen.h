@@ -18,6 +18,7 @@ public:
 	virtual void updateScreenAfterDisplayChanges();
 	void drawAllScenesOnDisplay(Display*);
 	Scene* createNewScene();
+	void deleteScene(Scene*);
 	Screen();
 	~Screen();
 private:

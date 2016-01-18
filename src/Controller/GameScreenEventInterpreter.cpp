@@ -63,9 +63,9 @@ void GameScreenEventInterpreter::timeEvent() {
     }
     for( auto actorId : game_.getOutGameScreenModel()->getRemovedActorsIds()){
         /* TODO deleting */
-        gameScreen_->updateObject(actorId, Point(-100, -100), 0, 0);
+		gameScreen_->deleteObject(actorId);
+		//gameScreen_->updateObject(actorId, Point(-100, -100), 0, 0);
     }
-
     for( MusicInstance oneInstance : game_.getOutGameMusicModel()->getMusicInstances()){
         switch (oneInstance.getElement()){
             case MusicElements::AsteroidCollisionSound:
