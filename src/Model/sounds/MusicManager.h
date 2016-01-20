@@ -9,12 +9,16 @@
 #include <Model/Services/IService.h>
 #include <Model/modelInterfaces/IOutGameMusicModel.h>
 #include <map>
+#include <Model/configuration/GameConfiguration.h>
 #include "MusicElements.h"
 #include "MusicInstance.h"
 
 class MusicManager : public IOutGameMusicModel, public IService {
     std::map<MusicElements, float> elementsWithVolume_;
+    GameConfiguration &gameConfiguration_;
 public:
+    MusicManager(GameConfiguration &gameConfiguration_);
+
     void addMusicElement(MusicElements element, float volume );
 
     virtual std::vector<MusicInstance> getMusicInstances();

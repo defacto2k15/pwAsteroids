@@ -74,6 +74,8 @@ GameConfiguration::GameConfiguration(PythonModule &python,  Point AllegroScreenD
     visibility_.registerProperty("GoodbyeMessagePosition", &GameConfiguration::getGoodbyeMessagePosition, &GameConfiguration::setGoodbyeMessagePosition  );
     visibility_.registerProperty("ExplosionCloudGrowthRatio", &GameConfiguration::getExplosionCloudGrowthRatio, &GameConfiguration::setExplosionCloudGrowthRatio  );
     visibility_.registerProperty("ExplosionCloudFadingRatio", &GameConfiguration::getExplosionCloudFadingRatio, &GameConfiguration::setExplosionCloudFadingRatio  );
+    visibility_.registerProperty("MaxVolume", &GameConfiguration::getMaxVolume, &GameConfiguration::setMaxVolume  );
+    visibility_.registerProperty("VolumeMultiplyer", &GameConfiguration::getVolumeMultiplyer, &GameConfiguration::setVolumeMultiplyer );
 
 
 

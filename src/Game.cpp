@@ -42,7 +42,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 										std::shared_ptr<IOutGameScreenModel>( new OutGameScreenModel()),
 										gameConfiguration_)),
 								gameConfiguration_)),
-		musicManager_( new MusicManager()),
+		musicManager_( new MusicManager(gameConfiguration_)),
 		box2dObjectsContainer_(imageScalesContainer_, gameConfiguration_),
 		contactListener_(contactComponentsContainer_),
 		rocketLife_(gameConfiguration_, pythonModule_),

@@ -67,6 +67,8 @@ class GameConfiguration {
     Point GoodbyeMessagePosition = Point(2, 2);
     double ExplosionCloudGrowthRatio = 0.005f;
     double ExplosionCloudFadingRatio = 0.002f;
+    double MaxVolume = 1.4f;
+    double VolumeMultiplyer = 1.0f;
 
 	PythonClassVisibilityModule<GameConfiguration> visibility_;
 	PythonModule &python_;
@@ -74,6 +76,22 @@ public:
 	static GameConfiguration* onlyInstancePointer;
 
 	GameConfiguration(PythonModule &python, Point box2dScreenDimensions);
+
+    double getMaxVolume() const {
+        return MaxVolume;
+    }
+
+    void setMaxVolume(double MaxVolume) {
+        GameConfiguration::MaxVolume = MaxVolume;
+    }
+
+    double getVolumeMultiplyer() const {
+        return VolumeMultiplyer;
+    }
+
+    void setVolumeMultiplyer(double VolumeMultiplyer) {
+        GameConfiguration::VolumeMultiplyer = VolumeMultiplyer;
+    }
 
     double getExplosionCloudFadingRatio() const {
         return ExplosionCloudFadingRatio;

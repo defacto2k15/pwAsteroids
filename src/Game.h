@@ -40,6 +40,7 @@
 
 class Game {
 private:
+    GameConfiguration gameConfiguration_;
 	ActorIdGenerator idGenerator;
 	PythonModule pythonModule_;
 	std::shared_ptr<IActor> rocket;
@@ -74,7 +75,7 @@ private:
 	ImageScalesContainer imageScalesContainer_;
 	Box2dObjectsContainer box2dObjectsContainer_;
 
-	GameConfiguration gameConfiguration_;
+
 	RocketLife rocketLife_;
 	ScoreCount scoreCount_;
 	PowerupCounter powerupCounter_;
