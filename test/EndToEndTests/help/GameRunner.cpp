@@ -7,13 +7,17 @@
 #include <test/defaultTestValues/TestValues.h>
 #include "GameRunner.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 std::string GameRunner::createErrorMessage(std::shared_ptr<IEndToEndExpectation> failedExpectation) {
 	return "FAILED:\n"+failedExpectation->getExpectationDescription()+"\n BECOUSE OF: \n " + failedExpectation->getFailureMessage();
 }
 
 GameRunner::GameRunner() : g_(std::make_shared<Game>(TestValues::getScreenSize(), TestValues::getImageSizesMap())),
-						   input_(g_) ,  allExpectations_(3){}
+						   input_(g_) ,  allExpectations_(3){
+    g_->startMultiplayerGame(3);
+}
 
 void GameRunner::AddEachLoopExpectations(std::shared_ptr<IEndToEndExpectation> newExpectation) {
 	getExpectations(ExpectationType::EachLoop).push_back(newExpectation);
@@ -36,6 +40,7 @@ void GameRunner::RunForLoops(int loopsToRun) {
 	}
 
 	for( int i = 0; i < loopsToRun; i++ ){
+        std::this_thread::sleep_for(std::chrono::milliseconds(15));
 		input_.sendKeysPressedToGame();
 		g_->update();
 		if( i == 0){

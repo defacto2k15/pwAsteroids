@@ -58,15 +58,15 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
             }
         } else if ( currentSubmenu == SUBMENU_GAME ){
             switch (option){
-                case MenuOptionTypes::Play:
+                case MenuOptionTypes::Play: {
                     auto gameMode = menuScreen_->getValueOfOption(MenuOptionTypes::GameMode);
-                    if( game_.isGameFinished()  || (gameMode !=currentGameMode_)) {
+                    if (game_.isGameFinished() || (gameMode != currentGameMode_)) {
                         currentGameMode_ = gameMode;
                         auto dificultyLevel = menuScreen_->getValueOfOption(MenuOptionTypes::Difficulty);
-                        int level =  *(dificultyLevel.rbegin()) - '0';
-                        assert( level > 0);
-                        assert( level < 9);
-                        if (gameMode.find( "Single") != std::string::npos) {
+                        int level = *(dificultyLevel.rbegin()) - '0';
+                        assert(level > 0);
+                        assert(level < 9);
+                        if (gameMode.find("Single") != std::string::npos) {
                             game_.startSinglePlayerGame(level);
                         } else {
                             game_.startMultiplayerGame(level);
@@ -74,6 +74,10 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
                     }
                     viewManager_->changeActiveScreen("GameScreen");
                     break;
+                }
+                case MenuOptionTypes::Back : {
+                    menuScreen_->enterSubmenu(SUBMENU::SUBMENU_MAIN);
+                }
             }
         }
     }

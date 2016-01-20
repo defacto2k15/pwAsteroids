@@ -189,3 +189,15 @@ void Game::createMultiplayerActors() {
     secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
     actorsContainer_->addActor(secondPlayerTargetingActor);
 }
+
+std::shared_ptr<IOutGameMusicModel> Game::getOutGameMusicModel() {
+    return musicManager_;
+}
+
+void Game::setGameFinished(int newResult) {
+    isGameFinished_ = true;
+}
+
+bool Game::isGameFinished() {
+    return isGameFinished_;
+}

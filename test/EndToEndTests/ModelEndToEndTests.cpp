@@ -126,8 +126,8 @@ TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
 	runner.AddKeyPressed(Keys::Player1LeftKey);
 	runner.RunForLoops(40);
 
-	if( (firstPositionOfRocket.getY() > lastPositionOfRocket.getY())
-	        ||( firstPositionOfRocket.getX() > lastPositionOfRocket.getX()) ){
+	if( (firstPositionOfRocket.getY() < lastPositionOfRocket.getY())
+	        ||( firstPositionOfRocket.getX() < lastPositionOfRocket.getX()) ){
 		FAIL() << " after 40 loops  rocket didnt move up and left. First pos  "
 		       << firstPositionOfRocket.toString() << " second "
 		       << lastPositionOfRocket.toString() << std::endl;

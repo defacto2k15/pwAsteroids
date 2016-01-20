@@ -16,22 +16,10 @@
 //#include <allegro5/allegro5.h>
 
 int main(int, char**){
-	std::cout << " END of program " << std::endl;	//the most important part of the program - the beginning of the journey..
-
-//    Game g;
-//    while( true ){
-//        std::string input;
-//        std::getline( std::cin, input );
-//        std::cout << "GOT "<< input << std::endl;
-//        g.getInPythonModule()->addCommand(input);
-//        g.update();
-//
-//    }
 
 
-	KeyStateFetcher keyStateFetcher; // todo set as listener
-	MousePositionFetcher mousePositionFetcher; // todo set as listener
-
+	KeyStateFetcher keyStateFetcher;
+	MousePositionFetcher mousePositionFetcher;
 
 	std::map<int, Keys> keyboardToGameMap{
 			{ALLEGRO_KEY_W, Keys::Player1AccelerateKey},
@@ -61,9 +49,8 @@ int main(int, char**){
 	imageDataContainer.addData(ImagePrimitiveType::HealthPowerup, ImageData{ 240, 240, "../res/heart.bmp"});
     imageDataContainer.addData(ImagePrimitiveType::ExplosionCloud , ImageData{ 240, 240,  "../res/explode.bmp" });
 
-	char y[2000];
 	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap(0.25f));
-	char x[1000];
+
 	Display display(1024, 600);
 	GameScreen gameScreen("GameScreen", &display);
 
@@ -93,9 +80,10 @@ int main(int, char**){
 
     MenuOption gameModeAboutOption{ MenuOptionTypes::About, {"vvv Select game mode vvv"}, 0};
     MenuOption gameModeOption{ MenuOptionTypes::GameMode, {"Single player ", "Two players"}, 0};
-    MenuOption difficultyOption{ MenuOptionTypes::Difficulty, {"Difficulty: 1", "Difficulty: 2", "Difficulty 3"}, 0 };
+    MenuOption difficultyOption{ MenuOptionTypes::Difficulty, {"Difficulty: 1", "Difficulty: 2", "Difficulty: 3"}, 0 };
     MenuOption playOption{ MenuOptionTypes::Play, {"Play!"}, 0 };
-    menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_GAME, {gameModeOption, difficultyOption, playOption}});
+    MenuOption gameMenuBackOption{ MenuOptionTypes::Back, {"Back"}, 0 };
+    menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_GAME, {gameModeOption, difficultyOption, playOption, gameMenuBackOption}});
 
 	MenuScreen menuScreen(std::string("MenuScreen"), menusVector, &display );
 
@@ -113,19 +101,11 @@ int main(int, char**){
 			&gameScreen, &consoleScreen, &menuScreen
 	};
 
-
 	ViewManager manager(game, eventListenersVector,
 						&display, screenEventInterpreters, screensVec, "MenuScreen", soundModule );
 
-
-//	std::shared_ptr<ViewManager> manager(
-//			new ViewManager(1024, 600, game, eventListenersVector, &display,
-//							interpreter, &menuScreen));
 	manager.start();
-	system("read  -r -p \"Press any key to continue...\" key");
-	//system("read  -r -p \"Press any key to continue...\" key");
-	//system("read  -r -p \"Press any key to continue...\" key");
-	system("read  -r -p \"Press any key to continue...\" key");
+    std::cout << " END of program " << std::endl;	//the most important part of the program - the beginning of the journey..
 
-	return 0;
+    return 0;
 }

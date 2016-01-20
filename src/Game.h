@@ -134,21 +134,15 @@ public:
      */
 	IOutPythonModule &getOutPythonModule();
 
-	std::shared_ptr<IOutGameMusicModel> getOutGameMusicModel(){
-		return musicManager_;
-	}
+    std::shared_ptr<IOutGameMusicModel> getOutGameMusicModel();
 
 	void update();;
 
-	void setGameFinished( int newResult){
-		isGameFinished_ = true;
-	}
+    void setGameFinished(int newResult);
 
 	void setResolution(Point newResolution );
 
-	bool isGameFinished(){
-		return isGameFinished_;
-	}
+    bool isGameFinished();
 
     void createBothModesActors();
 
