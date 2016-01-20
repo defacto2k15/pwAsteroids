@@ -9,6 +9,7 @@ void MyContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* im
 
         double impulseValue = impulse->tangentImpulses[0] + impulse->tangentImpulses[1] + impulse->normalImpulses[0] +
                               impulse->normalImpulses[1];
+		impulseValue *= 1000;
 
         container_.getComponentForBody( contact->GetFixtureA()->GetBody())
                 ->addColision(CollisionData(CollisionGroup(contact->GetFixtureB()->GetFilterData().categoryBits),

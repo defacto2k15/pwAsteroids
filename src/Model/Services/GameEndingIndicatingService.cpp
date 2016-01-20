@@ -35,5 +35,6 @@ void GameEndingIndicatingService::OnUpdate() {
 
 void GameEndingIndicatingService::reset() {
     isEndScoreDisplayed_ = false;
+    drawingSystem_.drawText("", configuration_.getGoodbyeMessagePosition(), scoreId_);
     gameStopService_->startGame();
 }

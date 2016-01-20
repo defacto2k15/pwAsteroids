@@ -77,12 +77,6 @@ ViewManager::~ViewManager()
 {
 	al_stop_timer(timer);
 	std::cout << "Timer stopped\n";
-	// TO DO: also delete each scene in scenes
-	/*for (int i = 0; i < screens.size(); ++i)
-	{
-		delete screens[i];
-	}*/
-	//delete display;	// destroy display after scenes!
 }
 
 /* Bartkowy kod */
