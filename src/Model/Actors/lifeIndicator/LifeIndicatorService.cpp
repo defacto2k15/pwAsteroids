@@ -35,6 +35,7 @@ void LifeIndicatorService::OnStop() {
 }
 
 void LifeIndicatorService::createHearts() {
+    heartsActors.clear();
     for( int i = 0; i < configuration_.getMaxRocketLifes(); i++ ){
         Point position = configuration_.getInitialHeartPosition();
         position += Point(1, 0) * i;

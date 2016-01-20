@@ -57,9 +57,9 @@ int main(int, char**){
 	imageDataContainer.addData(ImagePrimitiveType::Heart , ImageData{ 240, 240, "../res/rocket2.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::SecondPlayerTarget , ImageData{ 240, 240, "../res/target.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::NotVisibleElement, ImageData{ 240, 240, "../res/target.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::TripleShootPowerup, ImageData{ 240, 240, "../res/target.bmp"});
-	imageDataContainer.addData(ImagePrimitiveType::HealthPowerup, ImageData{ 240, 240, "../res/rX.bmp"});
-    imageDataContainer.addData(ImagePrimitiveType::ExplosionCloud , ImageData{ 240, 240,  "../res/asteroid3.bmp" });
+	imageDataContainer.addData(ImagePrimitiveType::TripleShootPowerup, ImageData{ 240, 240, "../res/bolt.bmp"});
+	imageDataContainer.addData(ImagePrimitiveType::HealthPowerup, ImageData{ 240, 240, "../res/heart.bmp"});
+    imageDataContainer.addData(ImagePrimitiveType::ExplosionCloud , ImageData{ 240, 240,  "../res/explode.bmp" });
 
 	char y[2000];
 	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap(0.25f));
@@ -82,9 +82,8 @@ int main(int, char**){
 	std::vector<MenuModel> menusVector;
 	MenuOption startGameOption{ MenuOptionTypes::StartGame, {"StartGame"}, 0 };
 	MenuOption optionsOption{ MenuOptionTypes::Options, {"Options"}, 0 };
-	MenuOption aboutOption{ MenuOptionTypes::About, {"About"}, 0 };
 	MenuOption exitOption { MenuOptionTypes::Exit, {"Exit"}, 0 };
-	menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_MAIN, {startGameOption, optionsOption, aboutOption, exitOption} });
+	menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_MAIN, {startGameOption, optionsOption, exitOption} });
 
 	MenuOption backOption {MenuOptionTypes::Back, {"Back"}, 0 };
 	MenuOption applyOption{MenuOptionTypes::Apply, {"Apply"}, 0 };
@@ -92,7 +91,8 @@ int main(int, char**){
 
     menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_OPTIONS, {resolutionOption, backOption, applyOption} });
 
-    MenuOption gameModeOption{ MenuOptionTypes::GameMode, {"Single player -->", "<-- Two players"}, 0};
+    MenuOption gameModeAboutOption{ MenuOptionTypes::About, {"vvv Select game mode vvv"}, 0};
+    MenuOption gameModeOption{ MenuOptionTypes::GameMode, {"Single player ", "Two players"}, 0};
     MenuOption difficultyOption{ MenuOptionTypes::Difficulty, {"Difficulty: 1", "Difficulty: 2", "Difficulty 3"}, 0 };
     MenuOption playOption{ MenuOptionTypes::Play, {"Play!"}, 0 };
     menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_GAME, {gameModeOption, difficultyOption, playOption}});

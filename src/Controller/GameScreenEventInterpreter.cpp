@@ -25,6 +25,10 @@ void GameScreenEventInterpreter::keyDown(int keynum) {
 }
 
 void GameScreenEventInterpreter::timeEvent() {
+    if( game_.isGameFinished() ){
+        viewManager_->changeActiveScreen("MenuScreen");
+    }
+
     for( auto key : keyMapper_.getPressedKeys()){
         game_.getInputStateGetter()->gameKeyIsPressed(key);
     }

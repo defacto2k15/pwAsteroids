@@ -20,7 +20,7 @@ GameConfiguration & configurationGettingFunction();
 class GameConfiguration {
 
 	Point  InitialPosition = Point( 0,0);
-	Rotation  InitialRotation = 90;
+	Rotation  InitialRotation = 0;
 	double  RocketAccelerationRate = 0.5f;
 	double  RocketTurnRate = 0.02f;
 	double RocketOppositeAccelerationMultiplyRate = 0.8f;
@@ -65,7 +65,7 @@ class GameConfiguration {
 	unsigned int PowerupCreationPropabilityRatio = 2;
 	double MinPowerupDistanceFromRocket = 1.5f;
     Point GoodbyeMessagePosition = Point(2, 2);
-    double ExplosionCloudGrowthRatio = 0.005f;
+    double ExplosionCloudGrowthRatio = 0.08f;
     double ExplosionCloudFadingRatio = 0.002f;
     double MaxVolume = 1.4f;
     double VolumeMultiplyer = 1.0f;

@@ -56,7 +56,7 @@ void ViewManager::start()
 	game.update();
 
 
-	soundModule_.playSample("Test drive", 0.2, false);
+	soundModule_.playSample("Test drive", 0.5, false);
 	//sm->playSample("The Gauntlet", false);
 
 	initializeScreens();	// must be called before drawing screens!

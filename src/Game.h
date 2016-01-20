@@ -39,6 +39,9 @@
 #include <Model/Actors/Rocket/RocketActorProxy.h>
 
 
+/**
+ * @brief Main class of model, encapsulates logic of game in separation of graphics liblaries. All servicies used in game are placed as fields.
+ */
 class Game {
 private:
     PythonModule pythonModule_;
@@ -85,18 +88,50 @@ private:
 
 	int result_ = 0;
 public:
+    /**
+     * @brief Only constructor of Game class
+     *
+     * @param screenResolution The resolution which game will start with, this can be changed later.
+     * @param imagesSizesMap Sizes of objects simulated in Box2d are taken from this paramerer/
+     */
 	Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imagesSizesMap );
 
+    /**
+     * @param difficulty Some settings in GameConfiguraion are calculated using difficulty setting passed as argument here.
+     */
     void startSinglePlayerGame( int difficulty );
 
+    /**
+     * @param difficulty Some settings in GameConfiguraion are calculated using difficulty setting passed as argument here.
+     */
     void startMultiplayerGame( int difficulty);
 
+    /**
+     * @brief Part of Controller - Model interface
+     *
+     * @return Shared pointer to field of Game, which contains data about images and text to be displayed;
+     */
 	std::shared_ptr<IOutGameScreenModel> getOutGameScreenModel();;
 
+    /**
+     * @brief Part of Controller - Model interface
+     *
+     * @return object to which input of user is passed to
+     */
 	std::shared_ptr<IInputStateGetter> getInputStateGetter();
 
+    /**
+     * @brief Part of Controller - Model interface"
+     *
+     * @return object to which python commands are passed
+     */
 	IInPythonModule &getInPythonModule();
 
+    /**
+     * @brief Part of Controller - Model interface"
+     *
+     * @return  objects that contains output of python generated in one loop.
+     */
 	IOutPythonModule &getOutPythonModule();
 
 	std::shared_ptr<IOutGameMusicModel> getOutGameMusicModel(){

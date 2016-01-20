@@ -38,7 +38,7 @@ bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
         auto ourPos = box2dComponent_->getBody()->GetPosition();
         auto theirPos = data.otherContacterFixture->GetBody()->GetPosition();
         Point cloudPos( (ourPos.x + theirPos.x)/2, (ourPos.y + theirPos.y) / 2);
-        cloudGenerator_.generateExplosionCloud(cloudPos,  box2dComponent_->getBoxSize().getX()*2);
+        cloudGenerator_.generateExplosionCloud(cloudPos,  box2dComponent_->getBoxSize().getX()*6);
     }
 
     musicManager_->addMusicElement(MusicElements::AsteroidCollisionSound, sqrt(asteroidMass / 40) );

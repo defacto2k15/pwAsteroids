@@ -19,7 +19,6 @@ GameEndingIndicatingService::GameEndingIndicatingService(RocketLife &rocketLife_
 void GameEndingIndicatingService::OnUpdate() {
     if(!isEndScoreDisplayed_ && (rocketLife_.getLife() == 0)){
         gameStopService_->stopGame();
-        game_.setGameFinished( scoreCount_.getScore());
         isEndScoreDisplayed_ = true;
     }
 
@@ -36,4 +35,5 @@ void GameEndingIndicatingService::OnUpdate() {
 
 void GameEndingIndicatingService::reset() {
     isEndScoreDisplayed_ = false;
+    gameStopService_->startGame();
 }

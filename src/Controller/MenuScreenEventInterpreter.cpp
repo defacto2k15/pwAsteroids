@@ -59,8 +59,9 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
         } else if ( currentSubmenu == SUBMENU_GAME ){
             switch (option){
                 case MenuOptionTypes::Play:
-                    if( game_.isGameFinished() ) {
-                        auto gameMode = menuScreen_->getValueOfOption(MenuOptionTypes::GameMode);
+                    auto gameMode = menuScreen_->getValueOfOption(MenuOptionTypes::GameMode);
+                    if( game_.isGameFinished()  || (gameMode !=currentGameMode_)) {
+                        currentGameMode_ = gameMode;
                         auto dificultyLevel = menuScreen_->getValueOfOption(MenuOptionTypes::Difficulty);
                         int level =  *(dificultyLevel.rbegin()) - '0';
                         assert( level > 0);

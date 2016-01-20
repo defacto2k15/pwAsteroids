@@ -1,0 +1,32 @@
+\hypertarget{classPythonClassVisibilityModule}{}\section{Python\+Class\+Visibility\+Module$<$ T, T\+Constructor\+Args $>$ Class Template Reference}
+\label{classPythonClassVisibilityModule}\index{Python\+Class\+Visibility\+Module$<$ T, T\+Constructor\+Args $>$@{Python\+Class\+Visibility\+Module$<$ T, T\+Constructor\+Args $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Python\+Class\+Visibility\+Module} (\hyperlink{classPythonModule}{Python\+Module} \&python\+Module)\hypertarget{classPythonClassVisibilityModule_a9f4211b08a952cb4a7ce5a0a9a866161}{}\label{classPythonClassVisibilityModule_a9f4211b08a952cb4a7ce5a0a9a866161}
+
+\item 
+void {\bfseries register\+Class} ()\hypertarget{classPythonClassVisibilityModule_ad724ff894b558bb539aae468c588a7e8}{}\label{classPythonClassVisibilityModule_ad724ff894b558bb539aae468c588a7e8}
+
+\item 
+void {\bfseries register\+Class} (std\+::string name)\hypertarget{classPythonClassVisibilityModule_ad369ee188db0b3106d95475a04c20142}{}\label{classPythonClassVisibilityModule_ad369ee188db0b3106d95475a04c20142}
+
+\item 
+{\footnotesize template$<$typename T\+Return , typename... T\+Args$>$ }\\void {\bfseries register\+Method\+Internal} (std\+::string name, std\+::function$<$ T\+Return(T\+Args...)$>$ method)\hypertarget{classPythonClassVisibilityModule_ab1a8185ec540e9b7ab87bbc28645b04e}{}\label{classPythonClassVisibilityModule_ab1a8185ec540e9b7ab87bbc28645b04e}
+
+\item 
+{\footnotesize template$<$typename T\+Return , typename... T\+Args$>$ }\\void {\bfseries register\+Method} (std\+::string method\+Name, T\+Return(T\+::$\ast$function)(T\+Args...))\hypertarget{classPythonClassVisibilityModule_ae487e49178aa20104ff287bc2b08d9ac}{}\label{classPythonClassVisibilityModule_ae487e49178aa20104ff287bc2b08d9ac}
+
+\item 
+{\footnotesize template$<$typename T\+Component , typename T\+Return , typename... T\+Args$>$ }\\void {\bfseries register\+Actor\+Method} (std\+::string method\+Name, T\+Return(T\+Component\+::$\ast$function)(T\+Args...))\hypertarget{classPythonClassVisibilityModule_a9c100ca2b2947428299a57cd9eaf5f58}{}\label{classPythonClassVisibilityModule_a9c100ca2b2947428299a57cd9eaf5f58}
+
+\item 
+{\footnotesize template$<$typename T\+Component , typename T\+Field $>$ }\\void {\bfseries register\+Property} (std\+::string property\+Name, T\+Field(T\+Component\+::$\ast$getter)(void) const, void(T\+Component\+::$\ast$setter)(T\+Field))\hypertarget{classPythonClassVisibilityModule_a12523e96d00705f43bb9ffef1c7091e4}{}\label{classPythonClassVisibilityModule_a12523e96d00705f43bb9ffef1c7091e4}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Model/python/Python\+Actor\+Component.\+h\item 
+src/\+Model/python/Python\+Class\+Visibility\+Module.\+h\end{DoxyCompactItemize}

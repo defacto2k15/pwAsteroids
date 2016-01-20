@@ -92,6 +92,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 
 void Game::startSinglePlayerGame(int difficulty) {
     isGameFinished_ = false;
+    gameEndingIndicatingService_->reset();
     rocketLife_.resetLife();
     scoreCount_.resetScore();
     actorsContainer_->resetAndRemoveAllActors();
@@ -103,6 +104,7 @@ void Game::startSinglePlayerGame(int difficulty) {
 
 void Game::startMultiplayerGame(int difficulty ){
     isGameFinished_ = false;
+    gameEndingIndicatingService_->reset();
     rocketLife_.resetLife();
     scoreCount_.resetScore();
     actorsContainer_->resetAndRemoveAllActors();

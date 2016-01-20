@@ -22,6 +22,7 @@ class MenuScreenEventInterpreter : public ScreenEventInterpreter {
     MenuScreen *menuScreen_;
     ResolutionsContainer &resolutions_;
     Game &game_;
+    std::string currentGameMode_;
 public:
     MenuScreenEventInterpreter(MenuScreen *menuScreen, ResolutionsContainer &resolutions, Game &game);
 
