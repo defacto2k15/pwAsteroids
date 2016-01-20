@@ -48,7 +48,7 @@ else()
 endif()
 
 ### WHEN PYTHON DOESNT WORK
-add_definitions("-DNO_USE_PYTHON")
+#   add_definitions("-DNO_USE_PYTHON")
 
 if(UNIX)
     FIND_PACKAGE( Boost 1.48 REQUIRED COMPONENTS python system thread )
