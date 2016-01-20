@@ -8,7 +8,7 @@
 
 void GameScreen::eventAction(ALLEGRO_EVENT& ev, ViewManager* vm, Game* g)
 {
-
+	
 }
 
 void GameScreen::updateScreenAfterDisplayChanges()
