@@ -52,7 +52,6 @@ private:
 	Scene* background;
 
 	DrawableObject* logo;
-	DrawableObject* resolutionButton;
 	DrawableObject* selectedButton;
 	std::map<SUBMENU, std::pair<MenuModel, std::pair<Scene *, std::vector<DrawableObject *>>>> menus_;
 	SUBMENU currentMenu;

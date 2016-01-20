@@ -20,4 +20,5 @@ bool HealthPowerupCollisionComponent::manageCollision(CollisionData &data) {
     rocketLife.increaseLife();
     //musicManager_->addMusicElement(MusicElements::PowerupGainSound, 0.5f);
     actorsContainer_->removeActorById(id_);
+	return true;
 }

@@ -29,10 +29,28 @@ Scene* Screen::createNewScene()
 	return newScene;
 }
 
+void Screen::deleteScene(Scene *removedScene)
+{
+	int removedIndex = -1;
+	for (int i = 0; i < scenes.size(); ++i) {
+		if (scenes[i] == removedScene) {
+			removedIndex = i;
+			break;
+		}
+	}
+	if (removedIndex != -1) {
+		delete scenes[removedIndex];
+		scenes.erase(scenes.begin() + removedIndex);
+	}
+}
+
 Screen::Screen()
 {
 }
 
 Screen::~Screen()
 {
+	for (int i = 0; i < scenes.size(); ++i) {
+		delete scenes[i];
+	}
 }

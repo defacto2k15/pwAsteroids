@@ -5,9 +5,14 @@
 #include "AllegroEventInterpreter.h"
 
 void AllegroEventInterpreter::interpretEvent(ALLEGRO_EVENT event ) {
-    for( auto &oneListener : listeners_){
+	
+    /*for( auto &oneListener : listeners_)
+	{
         interpretEvent(oneListener, event);
-    }
+    }*/
+	for (int i = 0; i < listeners_.size(); ++i) {
+		interpretEvent(listeners_[i], event);
+	}
 }
 
 void AllegroEventInterpreter::addListener(AbstractAllegroEventListener *listener) {

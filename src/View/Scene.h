@@ -8,11 +8,13 @@
 class Scene {
 public:
 	DrawableObject* addDrawableObject(int x, int y, const char* path = NULL, const char* t = NULL, float a = 0.0f, float z = 1.0f, int tx = 0, int ty = 0);
+	void removeDrawableObject(DrawableObject*);
 	std::vector<DrawableObject*> getSceneObjects();
 	int getNumberOfObjects() { return objects.size(); }
 	void changeActiveState();
 	bool isActive() { return active; }
 	Scene();
+	~Scene();
 private:
 	std::vector<DrawableObject*> objects;
 	bool active;
