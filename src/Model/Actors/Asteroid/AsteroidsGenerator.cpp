@@ -10,10 +10,10 @@ AsteroidsGenerator::AsteroidsGenerator(std::shared_ptr<ActorsContainer> actorsCo
                                        std::shared_ptr<Box2DService> boxService, Box2dObjectsContainer &container,
                                        ImageScalesContainer &imageScalesContainer,
                                        ContactComponentsContainer &contactComponentsContainer, AsteroidsCounter &asteroidsCounter,
-                                       std::shared_ptr<MusicManager> musicManager)
+                                       std::shared_ptr<MusicManager> musicManager, ExplosionCloudGenerator &cloudGenerator)
         : ActorsGenerator(actorsContainer, idGenerator, pythonModule, drawingSystem,
                           gameConfiguration, boxService, container, imageScalesContainer, contactComponentsContainer),
-          asteroidsCounter_( asteroidsCounter), python_( pythonModule ), musicManager_(musicManager) {
+          asteroidsCounter_( asteroidsCounter), python_( pythonModule ), musicManager_(musicManager), cloudGenerator_(cloudGenerator) {
 
         std::function< void (Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed)>
                 func =  [this](Point position, Rotation rotation, double size, Point speedVector, double rotationSpeed){ generateAsteroid(position, rotation, size, speedVector, rotationSpeed);};
@@ -31,7 +31,7 @@ void AsteroidsGenerator::generateAsteroid(Point position, Rotation rotation, dou
         componentsForAsteroid.push_back( std::make_shared<AsteroidsCountingComponent>(asteroidsCounter_));
         componentsForAsteroid.push_back( std::make_shared<ActorOnOutOfScreenDestroyerComponent>(gameConfiguration_, actorsContainer_));
         componentsForAsteroid.push_back( std::make_shared<AsteroidCollisionComponent>(
-                contactComponentsContainer_, actorsContainer_, *this, musicManager_));
+                contactComponentsContainer_, actorsContainer_, *this, musicManager_, cloudGenerator_));
         componentsForAsteroid.push_back( std::make_shared<AsteroidSizeComponent>(size));
 
         generateActor(componentsForAsteroid, position, rotation, speedVector, rotationSpeed);

@@ -59,6 +59,7 @@ int main(int, char**){
 	imageDataContainer.addData(ImagePrimitiveType::NotVisibleElement, ImageData{ 240, 240, "../res/target.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::TripleShootPowerup, ImageData{ 240, 240, "../res/target.bmp"});
 	imageDataContainer.addData(ImagePrimitiveType::HealthPowerup, ImageData{ 240, 240, "../res/rX.bmp"});
+    imageDataContainer.addData(ImagePrimitiveType::ExplosionCloud , ImageData{ 240, 240,  "../res/asteroid3.bmp" });
 
 	char y[2000];
 	Game game(Point( 1024, 600), imageDataContainer.getImageSizesMap(0.25f));

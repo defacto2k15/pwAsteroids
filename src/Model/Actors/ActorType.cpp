@@ -22,6 +22,8 @@ std::string getActorTypeString(ActorType type){
                         return "TripleShootPowerup";
                 case ActorType_HealthPowerup:
                         return "HealthPowerup";
+                case ActorType_ExplosionCloud:
+                        return "ExplosionCloud";
                 case ActorType_Other:
                         return "Other";
                 default:

@@ -5,5 +5,6 @@
 #ifndef PWASTEROIDS_IMAGEPRIMITIVETYPES_H
 #define PWASTEROIDS_IMAGEPRIMITIVETYPES_H
 enum ImagePrimitiveType {BadType, Rocket, RocketTail, Asteroid, Projectile,
-    BorderIndicator, Heart, SecondPlayerTarget, NotVisibleElement, TripleShootPowerup, HealthPowerup};
+    BorderIndicator, Heart, SecondPlayerTarget, NotVisibleElement, TripleShootPowerup, HealthPowerup, ExplosionCloud
+};
 #endif //PWASTEROIDS_IMAGEPRIMITIVETYPES_H

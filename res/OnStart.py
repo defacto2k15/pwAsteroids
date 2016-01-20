@@ -15,3 +15,4 @@ generateAsteroid( Point(1,1), Rotation(0),1, Point(0,0), 0)
 getConfiguration().RocketAccelerationRate = 0.5
 getConfiguration().RocketTurnRate = 0.02
 getConfiguration().RocketOppositeAccelerationMultiplyRate = 0.8;
+getConfiguration().ExplosionCloudGrowthRatio = 0.08;

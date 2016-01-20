@@ -64,6 +64,9 @@ class GameConfiguration {
 	unsigned int MaxPowerupsCount = 2;
 	unsigned int PowerupCreationPropabilityRatio = 2;
 	double MinPowerupDistanceFromRocket = 1.5f;
+    Point GoodbyeMessagePosition = Point(2, 2);
+    double ExplosionCloudGrowthRatio = 0.005f;
+    double ExplosionCloudFadingRatio = 0.002f;
 
 	PythonClassVisibilityModule<GameConfiguration> visibility_;
 	PythonModule &python_;
@@ -72,8 +75,31 @@ public:
 
 	GameConfiguration(PythonModule &python, Point box2dScreenDimensions);
 
+    double getExplosionCloudFadingRatio() const {
+        return ExplosionCloudFadingRatio;
+    }
 
-	long getMinTimeBetweenPowerupGeneration() const {
+    void setExplosionCloudFadingRatio(double ExplosionCloudFadingRatio) {
+        GameConfiguration::ExplosionCloudFadingRatio = ExplosionCloudFadingRatio;
+    }
+
+    double getExplosionCloudGrowthRatio() const {
+        return ExplosionCloudGrowthRatio;
+    }
+
+    void setExplosionCloudGrowthRatio(double ExplosionCloudGrowthRatio) {
+        GameConfiguration::ExplosionCloudGrowthRatio = ExplosionCloudGrowthRatio;
+    }
+
+    Point getGoodbyeMessagePosition() const {
+        return GoodbyeMessagePosition;
+    }
+
+    void setGoodbyeMessagePosition( Point GoodbyeMessagePosition) {
+        GameConfiguration::GoodbyeMessagePosition = GoodbyeMessagePosition;
+    }
+
+    long getMinTimeBetweenPowerupGeneration() const {
 		return MinTimeBetweenPowerupGeneration;
 	}
 

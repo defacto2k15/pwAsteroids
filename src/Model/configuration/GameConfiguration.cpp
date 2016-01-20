@@ -71,6 +71,11 @@ GameConfiguration::GameConfiguration(PythonModule &python,  Point AllegroScreenD
 	visibility_.registerProperty("MaxPowerupsCount", &GameConfiguration::getMaxPowerupsCount, &GameConfiguration::setMaxPowerupsCount  );
 	visibility_.registerProperty("PowerupCreationPropabilityRatio", &GameConfiguration::getPowerupCreationPropabilityRatio, &GameConfiguration::setPowerupCreationPropabilityRatio  );
 	visibility_.registerProperty("MinPowerupDistanceFromRocket", &GameConfiguration::getMinPowerupDistanceFromRocket, &GameConfiguration::setMinPowerupDistanceFromRocket  );
+    visibility_.registerProperty("GoodbyeMessagePosition", &GameConfiguration::getGoodbyeMessagePosition, &GameConfiguration::setGoodbyeMessagePosition  );
+    visibility_.registerProperty("ExplosionCloudGrowthRatio", &GameConfiguration::getExplosionCloudGrowthRatio, &GameConfiguration::setExplosionCloudGrowthRatio  );
+    visibility_.registerProperty("ExplosionCloudFadingRatio", &GameConfiguration::getExplosionCloudFadingRatio, &GameConfiguration::setExplosionCloudFadingRatio  );
+
+
 
 	using gameRef = GameConfiguration&;
 	std::function< GameConfiguration&() > func = configurationGettingFunction;

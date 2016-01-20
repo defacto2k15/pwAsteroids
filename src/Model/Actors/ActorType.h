@@ -17,7 +17,8 @@ enum ActorType{
     ActorType_Projectile = 4,
     ActorType_Other = 5,
     ActorType_TripleShootPowerup = 6,
-    ActorType_HealthPowerup = 7
+    ActorType_HealthPowerup = 7,
+    ActorType_ExplosionCloud = 8
 };
 
 std::string getActorTypeString(ActorType type);

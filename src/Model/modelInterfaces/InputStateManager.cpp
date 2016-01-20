@@ -23,7 +23,7 @@ bool  InputStateManager::isPressed(Keys key) {
 }
 
 void  InputStateManager::gameKeyIsPressed(Keys key) { // called from input State provider
-	if( isInterpretingGameInput_ || key == Keys::PauseKey ) {
+	if( isInterpretingGameInput_ || keyIsExceptional(key) ) {
 		pressedKeysMap_[key] = true;
 	}
 }

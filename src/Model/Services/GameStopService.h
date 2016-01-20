@@ -25,9 +25,11 @@ public:
                     const std::shared_ptr<GameTimeProvider> gameTimeProvider_,
                     const std::shared_ptr<Box2DService> box2dService_, std::shared_ptr<InputStateManager> inputManager);
 
-private:
     void OnUpdate();
 
+    void stopGame();
+
+    void startGame();
 
 };
 

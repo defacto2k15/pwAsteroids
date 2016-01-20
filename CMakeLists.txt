@@ -23,10 +23,10 @@ file(GLOB SRC_FILES "src/*.cpp" "src/*.h" "src/Model/help/*.cpp" "src/Model/help
         "src/Model/Actors/lifeIndicator/*.cpp" "src/Model/Actors/lifeIndicator/*.h" "src/Model/Actors/secondPlayer/*.cpp" "src/Model/Actors/secondPlayer/*.h"
         "src/Model/collisions/*.cpp" "src/Model/collisions/*.h" "src/Model/Actors/ScoreDisplay/*.h" "src/Model/Actors/ScoreDisplay/*.cpp"
         "src/Model/sounds/*.cpp" "src/Model/sounds/*.h" "src/Controller/*.h" "src/Controller/*.cpp" "src/menu/*.cpp" "src/menu/*.h"
-        "src/Model/Actors/powerup/*.cpp" "src/Model/Actors/powerup/*.h"
+        "src/Model/Actors/powerup/*.cpp" "src/Model/Actors/powerup/*.h" "src/Model/Actors/explosionCloud/*.h" "src/Model/Actors/explosionCloud/*.cpp"
   )
 
-add_executable(pwAsteroids ${SRC_FILES}  )
+add_executable(pwAsteroids ${SRC_FILES} src/Model/Services/GameEndingIndicatingService.cpp src/Model/Services/GameEndingIndicatingService.h src/Model/Actors/explosionCloud/ExplosionCloudGenerator.cpp src/Model/Actors/explosionCloud/ExplosionCloudGenerator.h)
 
 set(BOX2D_VERSION 2.3.0)
 add_subdirectory(lib/Box2D)

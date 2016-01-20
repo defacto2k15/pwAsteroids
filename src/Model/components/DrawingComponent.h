@@ -25,12 +25,21 @@ public:
 
 	void setVisibility(bool visibility );
 
+    void setSize(double newSize){
+        size_ = newSize;
+    }
+
+    void setOpacity( double newOpacity){
+        opacity_ = newOpacity;
+    }
 private:
 	IDrawingSystem &drawingSystem_;
 	std::shared_ptr<PositionComponent> positionComponent_;
 	ImagePrimitiveType imageType_;
 	bool isVisible_ = true;
 	ActorId actorId_;
+    double size_ = 1;
+    double opacity_ = 1;
 };
 
 #endif //PWASTEROIDS_DRAWINGCOMPONENT_H

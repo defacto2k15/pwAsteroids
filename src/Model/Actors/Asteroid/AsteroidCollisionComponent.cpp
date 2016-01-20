@@ -8,14 +8,15 @@
 
 AsteroidCollisionComponent::AsteroidCollisionComponent(ContactComponentsContainer &contactContainer,
                                                        std::shared_ptr<ActorsContainer> actorsContainer, AsteroidsGenerator &asteroidsGenerator,
-                                                       std::shared_ptr<MusicManager> musicManager)
+                                                       std::shared_ptr<MusicManager> musicManager, ExplosionCloudGenerator &cloudGenerator)
         : Box2dCollisionsComponent(contactContainer), actorsContainer_(actorsContainer),
-          asteroidsGenerator_( asteroidsGenerator), musicManager_(musicManager) {
+          asteroidsGenerator_( asteroidsGenerator), musicManager_(musicManager), cloudGenerator_(cloudGenerator) {
 }
 
 void AsteroidCollisionComponent::OnStart(IActor &actor ) {
     Box2dCollisionsComponent::OnStart(actor);
     positionComponent_ = actor.getOnlyComponent<PositionComponent>();
+    box2dComponent_ = actor.getOnlyComponent<Box2dComponent>();
     id_ = actor.getActorId();
     size_ = actor.getOnlyComponent<AsteroidSizeComponent>()->getSize();
 }
@@ -31,9 +32,14 @@ bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
         return false;
     }
 
+    if( box2dComponent_->getBody()->GetMass() > data.otherContacterFixture->GetBody()->GetMass() ){
+        auto ourPos = box2dComponent_->getBody()->GetPosition();
+        auto theirPos = data.otherContacterFixture->GetBody()->GetPosition();
+        Point cloudPos( (ourPos.x + theirPos.x)/2, (ourPos.y + theirPos.y) / 2);
+        cloudGenerator_.generateExplosionCloud(cloudPos,  box2dComponent_->getBoxSize().getX()*2);
+    }
+
     musicManager_->addMusicElement(MusicElements::AsteroidCollisionSound, sqrt(asteroidMass / 40) );
-    std::cout << "Current size is " << sqrt(asteroidMass/40)<< "mass is" <<
-            asteroidMass << " aft mul " << destructionMassFactor * asteroidMass << std::endl;
     if( impulseValue > destructionMassFactor*asteroidMass){
         actorsContainer_->removeActorById(id_);
         return true;
@@ -47,7 +53,7 @@ bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
 
 void AsteroidCollisionComponent::createAsteroidAtAngleRelativeToCurrentAsteroid(double impulseValue, Rotation angle,
             int partsOfAsteroid) {
-    double distanceBetweenAsteroids = 0.1f;
+    double distanceBetweenAsteroids = 0.02f;
     double massDissappearanceFactor = 0.9f;
     double impulseToSpeedRatio = 0.5f;
 

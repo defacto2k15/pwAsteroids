@@ -50,7 +50,7 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 		 boundariesDuplicationsDrawingSystem_(drawingSystem_, gameConfiguration_),
 		actorsContainer_( new ActorsContainer(pythonModule_)),
 		idGenerator(),
-		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_, musicManager_),
+		asteroidGenerator_( actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, asteroidsCounter_, musicManager_, explosionCloudGenerator_),
 		projectilesGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_, boxService_, box2dObjectsContainer_, imageScalesContainer_, contactComponentsContainer_, scoreCount_),
 		gameTimeProvider_( new GameTimeProvider()),
 		randomAsteroidsGenerator_( new RandomAsteroidsGenerator(asteroidGenerator_, asteroidsCounter_, gameConfiguration_, gameTimeProvider_, randomNumbersProvider_, pythonModule_)),
@@ -62,8 +62,12 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 		randomPowerupsGenerator_( new RandomPowerupGenerator(rocket, gameConfiguration_, gameTimeProvider_, powerupGenerator_, powerupCounter_, randomNumbersProvider_)),
 		commonTypesVisualizer_( new CommonTypesVisualizer(pythonModule_)),
 		rocket( new Actor(idGenerator.getActorId())),
-		pythonScriptsExecutor_( new PythonScriptsExecutingSerrive(pythonModule_, gameConfiguration_)){
-
+		pythonScriptsExecutor_( new PythonScriptsExecutingSerrive(pythonModule_, gameConfiguration_)),
+		gameEndingIndicatingService_(
+                new GameEndingIndicatingService(rocketLife_, scoreCount_, gameStopService_, *this, idGenerator.getActorId(),
+                                                gameConfiguration_, drawingSystem_, inputManager_)),
+        explosionCloudGenerator_(actorsContainer_, idGenerator, pythonModule_, drawingSystem_, gameConfiguration_,
+                                 imageScalesContainer_, gameTimeProvider_){
 	rootServiceContainer_.addService(musicManager_);
 	rootServiceContainer_.addService(actorsContainer_);
 	rootServiceContainer_.addService(gameTimeProvider_);
@@ -74,7 +78,8 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	rootServiceContainer_.addService(randomPowerupsGenerator_);
 	rootServiceContainer_.addService(commonTypesVisualizer_);
 	rootServiceContainer_.addService(pythonScriptsExecutor_);
-	rootServiceContainer_.addService(inputManager_); // MUST BE ONE OF LAST!
+    rootServiceContainer_.addService(gameEndingIndicatingService_);
+    rootServiceContainer_.addService(inputManager_); // MUST BE ONE OF LAST!
 
 
 	auto scoreActor = std::make_shared<Actor>(idGenerator.getActorId());
@@ -120,8 +125,6 @@ Game::Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imageSiz
 	secondPlayerTargetingActor->addComponent( std::make_shared<PositionSettingComponent >(false, pythonModule_));
 	secondPlayerTargetingActor->addComponent( std::make_shared<ActorTypeComponent>(ActorType_Other, pythonModule_));
 	actorsContainer_->addActor(secondPlayerTargetingActor);
-
-
 
 	//auto enumsVisualizer = std::make_shared<EnumInPythonVisualisator>( pythonModule_);
 	//rootServiceContainer_.addService(enumsVisualizer);

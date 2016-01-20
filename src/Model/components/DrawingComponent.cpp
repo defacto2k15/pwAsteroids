@@ -22,6 +22,8 @@ void  DrawingComponent::OnUpdate() {
 		scale = ScaleToScreen(0, 0);
 		type = ImagePrimitiveType::NotVisibleElement;
 	}
+    scale *= size_;
+    // todo zrob cos z opacity
 
 	drawingSystem_.drawImage(type, positionComponent_->getPosition(), positionComponent_->getRotation(),
 		                          scale, actorId_);

@@ -34,6 +34,8 @@
 #include <Model/python/CommonTypesVisualizer.h>
 #include <Model/python/PythonScriptsExecutingSerivce.h>
 #include <Model/Actors/Asteroid/RandomAsteroidsGenerator.h>
+#include <Model/Services/GameEndingIndicatingService.h>
+#include <Model/Actors/explosionCloud/ExplosionCloudGenerator.h>
 
 
 class Game {
@@ -52,20 +54,22 @@ private:
 	std::shared_ptr<RandomAsteroidsGenerator> randomAsteroidsGenerator_;
 	std::shared_ptr<LifeIndicatorService> lifeIndicatorService_;
 	std::shared_ptr<GameStopService> gameStopService_;
-	std::shared_ptr<RandomPowerupGenerator> randomPowerupsGenerator_;
+    std::shared_ptr<RandomPowerupGenerator> randomPowerupsGenerator_;
+    std::shared_ptr<GameEndingIndicatingService> gameEndingIndicatingService_;
+
 	std::shared_ptr<CommonTypesVisualizer> commonTypesVisualizer_;
 
 	std::shared_ptr<PythonScriptsExecutingSerrive> pythonScriptsExecutor_;
-
-	DrawingSystem drawingSystem_;
-	BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
-	ContactComponentsContainer contactComponentsContainer_;
-	MyContactListener contactListener_;
-	AsteroidsGenerator asteroidGenerator_;
-	ProjectilesGenerator projectilesGenerator_;
-	AsteroidsCounter asteroidsCounter_;
-	RandomNumbersProvider randomNumbersProvider_;
-	PowerupGenerator powerupGenerator_;
+    DrawingSystem drawingSystem_;
+    ExplosionCloudGenerator explosionCloudGenerator_;
+    BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
+    ContactComponentsContainer contactComponentsContainer_;
+    MyContactListener contactListener_;
+    AsteroidsGenerator asteroidGenerator_;
+    ProjectilesGenerator projectilesGenerator_;
+    AsteroidsCounter asteroidsCounter_;
+    RandomNumbersProvider randomNumbersProvider_;
+    PowerupGenerator powerupGenerator_;
 
 	ImageScalesContainer imageScalesContainer_;
 	Box2dObjectsContainer box2dObjectsContainer_;
@@ -76,6 +80,8 @@ private:
 	PowerupCounter powerupCounter_;
 
 	bool isGameFinished_ = false;
+
+	int result_ = 0;
 public:
 	Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imagesSizesMap );
 
@@ -93,10 +99,18 @@ public:
 
 	void update();;
 
+	void setGameFinished( int newResult){
+		result_ = newResult;
+	}
+
 	void setResolution(Point newResolution );
 
 	bool isGameFinished(){
 		return isGameFinished_;
+	}
+
+	int getResult(){
+		return result_;
 	}
 };
 

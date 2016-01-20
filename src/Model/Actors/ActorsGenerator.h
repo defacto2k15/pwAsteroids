@@ -20,7 +20,7 @@
 #include <Model/box2d/Box2dObjectsContainer.h>
 #include <Model/components/OnStartLambdaComponent.h>
 #include <Model/components/ActorOnOutOfScreenDestroyerComponent.h>
-
+ // TODO zmien nazwe na box2dActorsGenerator
 class ActorsGenerator {
 protected:
     std::shared_ptr<ActorsContainer> actorsContainer_;

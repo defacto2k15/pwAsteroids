@@ -15,15 +15,25 @@ GameStopService::GameStopService(PythonModule &python_,
 void GameStopService::OnUpdate() {
     if( inputManager->wasClicked(Keys::PauseKey)){
         if( isPaused_ == false ){
-            inputManager->turnOffGameKeysInterpretation();
-            gameTimeProvider_->turnOff();
-            box2dService_->turnOffSimulation();
+            stopGame();
         } else {
-            std::cout << "TURNED ON " << std::endl;
-            inputManager->turnOnGameKeysInterpretation();
-            gameTimeProvider_->turnOn();
-            box2dService_->turnOnSimulation();
+            startGame();
         }
-        isPaused_ = !isPaused_;
     }
+}
+
+void GameStopService::stopGame() {
+    inputManager->turnOffAllKeysInterpretationBut( std::vector<Keys>{Keys::PauseKey});
+    //inputManager->turnOffGameKeysInterpretation();
+    gameTimeProvider_->turnOff();
+    box2dService_->turnOffSimulation();
+    isPaused_ = false;
+}
+
+void GameStopService::startGame() {
+    inputManager->turnOnAllKeysInterpretation();
+    //inputManager->turnOnGameKeysInterpretation();
+    gameTimeProvider_->turnOn();
+    box2dService_->turnOnSimulation();
+    isPaused_ = true;
 }
