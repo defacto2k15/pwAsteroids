@@ -32,11 +32,11 @@ bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
         return false;
     }
 
-    if( (box2dComponent_->getBody()->GetMass() > data.otherContacterFixture->GetBody()->GetMass()) ||
-        (( box2dComponent_->getBody()->GetMass() == data.otherContacterFixture->GetBody()->GetMass() ) &&
-                (box2dComponent_->getBody()->GetPosition().x >= data.otherContacterFixture->GetBody()->GetPosition().x))){
+    if( (box2dComponent_->getBody()->GetMass() > data.otherContactMass) ||
+        (( box2dComponent_->getBody()->GetMass() == data.otherContactMass ) &&
+                (box2dComponent_->getBody()->GetPosition().x >= data.otherContactPosition.x))){
         auto ourPos = box2dComponent_->getBody()->GetPosition();
-        auto theirPos = data.otherContacterFixture->GetBody()->GetPosition();
+        auto theirPos = data.otherContactPosition;
         Point cloudPos( (ourPos.x + theirPos.x)/2, (ourPos.y + theirPos.y) / 2);
         cloudGenerator_.generateExplosionCloud(cloudPos,  box2dComponent_->getBoxSize().getX()*6);
     }

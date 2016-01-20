@@ -7,17 +7,22 @@
 
 
 #include <lib/Box2D/Dynamics/b2Fixture.h>
+#include <Model/PrimitiveTypes/Point.h>
 #include "CollisionGroups.h"
 
 struct CollisionData {
-    CollisionData(const CollisionGroup collisionGroup, double impulseValue, b2Fixture *otherContacterFixture)
-            : collisionGroup(collisionGroup), impulseValue(impulseValue),
-              otherContacterFixture(otherContacterFixture) {
+public:
+    CollisionData(const CollisionGroup &collisionGroup, double impulseValue, float otherContactMass,
+                  const b2Vec2 &otherContactPosition) : collisionGroup(collisionGroup), impulseValue(impulseValue),
+                                                       otherContactMass(otherContactMass),
+                                                       otherContactPosition(otherContactPosition) {
+
     }
 
     CollisionGroup collisionGroup;
     double impulseValue;
-    b2Fixture *otherContacterFixture;
+    float otherContactMass;
+    b2Vec2 otherContactPosition;
 };
 
 
