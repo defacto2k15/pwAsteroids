@@ -1,4 +1,3 @@
-#pragma once
 #ifndef PWASTEROIDS_MENUSCREEN_H
 #define PWASTEROIDS_MENUSCREEN_H
 
@@ -59,5 +58,4 @@ private:
 	Display *display_;
 };
 
-#endif#pragma once
-#pragma once
+#endif

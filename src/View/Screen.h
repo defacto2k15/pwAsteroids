@@ -1,4 +1,3 @@
-#pragma once
 #ifndef PWASTEROIDS_SCREEN_H
 #define PWASTEROIDS_SCREEN_H
 

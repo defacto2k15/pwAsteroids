@@ -62,14 +62,14 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
                     auto gameMode = menuScreen_->getValueOfOption(MenuOptionTypes::GameMode);
                     if (game_.isGameFinished() || (gameMode != currentGameMode_)) {
                         currentGameMode_ = gameMode;
-                        auto dificultyLevel = menuScreen_->getValueOfOption(MenuOptionTypes::Difficulty);
-                        int level = *(dificultyLevel.rbegin()) - '0';
-                        assert(level > 0);
-                        assert(level < 9);
+//                        auto dificultyLevel = menuScreen_->getValueOfOption(MenuOptionTypes::Difficulty);
+//                        int level = *(dificultyLevel.rbegin()) - '0';
+//                        assert(level > 0);
+//                        assert(level < 9);
                         if (gameMode.find("Single") != std::string::npos) {
-                            game_.startSinglePlayerGame(level);
+                            game_.startSinglePlayerGame(1);
                         } else {
-                            game_.startMultiplayerGame(level);
+                            game_.startMultiplayerGame(1);
                         }
                     }
                     viewManager_->changeActiveScreen("GameScreen");

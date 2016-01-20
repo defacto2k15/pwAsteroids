@@ -1,4 +1,3 @@
-#pragma once
 #ifndef PWASTEROIDS_SOUNDMODULE_H
 #define PWASTEROIDS_SOUNDMODULE_H
 

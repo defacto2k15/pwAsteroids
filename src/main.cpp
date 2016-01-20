@@ -80,10 +80,10 @@ int main(int, char**){
 
     MenuOption gameModeAboutOption{ MenuOptionTypes::About, {"vvv Select game mode vvv"}, 0};
     MenuOption gameModeOption{ MenuOptionTypes::GameMode, {"Single player ", "Two players"}, 0};
-    MenuOption difficultyOption{ MenuOptionTypes::Difficulty, {"Difficulty: 1", "Difficulty: 2", "Difficulty: 3"}, 0 };
+    //MenuOption difficultyOption{ MenuOptionTypes::Difficulty, {"Difficulty: 1", "Difficulty: 2", "Difficulty: 3"}, 0 };
     MenuOption playOption{ MenuOptionTypes::Play, {"Play!"}, 0 };
     MenuOption gameMenuBackOption{ MenuOptionTypes::Back, {"Back"}, 0 };
-    menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_GAME, {gameModeOption, difficultyOption, playOption, gameMenuBackOption}});
+    menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_GAME, {gameModeOption/*, difficultyOption*/, playOption, gameMenuBackOption}});
 
 	MenuScreen menuScreen(std::string("MenuScreen"), menusVector, &display );
 

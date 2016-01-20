@@ -1,4 +1,3 @@
-#pragma once
 #ifndef PWASTEROIDS_EMPTYSCREEN_H
 #define PWASTEROIDS_EMPTYSCREEN_H
 
@@ -24,4 +23,4 @@ private:
 	DrawableObject* text;
 };
 
-#endif#pragma once
+#endif

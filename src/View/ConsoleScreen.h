@@ -1,4 +1,3 @@
-#pragma once
 #ifndef PWASTEROIDS_CONSOLESCREEN_H
 #define PWASTEROIDS_CONSOLESCREEN_H
 
@@ -52,5 +51,4 @@ private:
 	std::string str, screen;
 };
 
-#endif#pragma once
-#pragma once
+#endif
