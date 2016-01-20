@@ -38,6 +38,8 @@ public:
 
 	void removeExpectation( std::shared_ptr<IEndToEndExpectation> expectationToRemove );
 
+    void clearExpectations();
+
 	void AddInPythonCommand(std::string command);
 private:
 	std::vector<std::shared_ptr<IEndToEndExpectation>> & getExpectations(ExpectationType type);

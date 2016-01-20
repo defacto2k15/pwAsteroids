@@ -6,7 +6,7 @@
 #include <test/EndToEndTests/expectations/IEndToEndExpectation.h>
 #include <test/defaultTestValues/TestValues.h>
 #include "GameRunner.h"
-
+#include <iostream>
 
 std::string GameRunner::createErrorMessage(std::shared_ptr<IEndToEndExpectation> failedExpectation) {
 	return "FAILED:\n"+failedExpectation->getExpectationDescription()+"\n BECOUSE OF: \n " + failedExpectation->getFailureMessage();
@@ -72,6 +72,7 @@ void GameRunner::makeUncheckedUpdate() {
 }
 
 void GameRunner::AddInPythonCommand(std::string commandText) {
+    std::cout << " PyIn: " << commandText << std::endl;
 	g_->getInPythonModule().addCommand(commandText);
 }
 
@@ -93,4 +94,10 @@ void GameRunner::removeExpectation( std::shared_ptr<IEndToEndExpectation> expect
 
 std::vector<std::shared_ptr<IEndToEndExpectation>> &GameRunner::getExpectations(ExpectationType type) {
 	return allExpectations_[type];
+}
+
+void GameRunner::clearExpectations() {
+    for( auto &vec : allExpectations_){
+        vec.clear();
+    }
 }

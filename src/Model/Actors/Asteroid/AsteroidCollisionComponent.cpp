@@ -28,11 +28,13 @@ bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
 
     double impulseValue = data.impulseValue;
 
-    if( impulseValue < minCollisionImpulseValueToManage){
+    if( impulseValue < destructionMassFactor * asteroidMass*0.51){
         return false;
     }
 
-    if( box2dComponent_->getBody()->GetMass() > data.otherContacterFixture->GetBody()->GetMass() ){
+    if( (box2dComponent_->getBody()->GetMass() > data.otherContacterFixture->GetBody()->GetMass()) ||
+        (( box2dComponent_->getBody()->GetMass() == data.otherContacterFixture->GetBody()->GetMass() ) &&
+                (box2dComponent_->getBody()->GetPosition().x >= data.otherContacterFixture->GetBody()->GetPosition().x))){
         auto ourPos = box2dComponent_->getBody()->GetPosition();
         auto theirPos = data.otherContacterFixture->GetBody()->GetPosition();
         Point cloudPos( (ourPos.x + theirPos.x)/2, (ourPos.y + theirPos.y) / 2);
