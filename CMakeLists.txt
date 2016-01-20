@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+﻿cmake_minimum_required(VERSION 3.1)
 project(pwAsteroids)
 
 add_definitions(-std=c++14 )
@@ -43,9 +43,10 @@ if(UNIX)
         message( FATAL_ERROR "Python liblaries were not found, CMake will exit." )
     endif()
 else()
-    # TU DODAJ Własny python
+    SET(PYTHON_ROOT "$ENV{PYTHONHOME}" )
+    SET(PYTHON_INCLUDEDIR "$ENV{PYTHONHOME}/include" )
+    INCLUDE_DIRECTORIES( ${PYTHON_INCLUDEDIR} )
 endif()
-
 
 if(UNIX)
     FIND_PACKAGE( Boost 1.48 REQUIRED COMPONENTS python system thread )
@@ -70,7 +71,7 @@ else()
     TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/libboost_system-vc140-mt-gd-1_59.lib )
     TARGET_LINK_LIBRARIES( pwAsteroids ${boostpath}/stage/lib/libboost_chrono-vc140-mt-gd-1_59.lib )
     TARGET_LINK_LIBRARIES( pwAsteroids ${allegropath}/lib/allegro-5.0.10-monolith-mt.lib )
-
+    
     SET(BOOST_ROOT ${boostpath} )
     SET(BOOST_LIBRARYDIR ${boostpath}/stage/lib )
     FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )

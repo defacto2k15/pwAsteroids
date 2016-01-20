@@ -15,7 +15,7 @@ std::shared_ptr<Box2dObject> Box2dObjectsContainer::getRocketObject() {
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getAsteriodObject(double size) {
-    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::Asteroid)* size, 120, CollisionGroupsData::getAsteroidData());
+    return createObjectWithBoxShape(imageScalesContainer_.getImageScale(ImagePrimitiveType::Asteroid)* size, 52000, CollisionGroupsData::getAsteroidData());
 }
 
 std::shared_ptr<Box2dObject> Box2dObjectsContainer::getProjectileObject() {

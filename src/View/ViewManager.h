@@ -78,8 +78,17 @@ public:
 	~ViewManager();
 
 private:
+	/**
+	 *	Allegro Event Interpreter.
+	*/
 	AllegroEventInterpreter allegroEventInterpreter_;
+	/**
+	 *	Screens added to the ViewManager.
+	*/
 	std::vector<Screen*> screens;
+	/**
+	 *	Iterators which helps to operate on Screens.
+	*/
 	std::vector<Screen*>::iterator activeScreen, it;
 	Display* display;
 	SoundModule &soundModule_;

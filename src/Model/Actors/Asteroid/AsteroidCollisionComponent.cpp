@@ -32,9 +32,9 @@ bool AsteroidCollisionComponent::manageCollision(CollisionData &data ) {
         return false;
     }
 
-    if( (box2dComponent_->getBody()->GetMass() > data.otherContacterFixture->GetBody()->GetMass()) ||
-        (( box2dComponent_->getBody()->GetMass() == data.otherContacterFixture->GetBody()->GetMass() ) &&
-                (box2dComponent_->getBody()->GetPosition().x >= data.otherContacterFixture->GetBody()->GetPosition().x))){
+    if( (box2dComponent_->getBody()->GetMass() > 0.5f) ||
+        (( box2dComponent_->getBody()->GetMass() == 0.5f ) &&
+                (box2dComponent_->getBody()->GetPosition().x >= 2))){
         auto ourPos = box2dComponent_->getBody()->GetPosition();
         auto theirPos = data.otherContacterFixture->GetBody()->GetPosition();
         Point cloudPos( (ourPos.x + theirPos.x)/2, (ourPos.y + theirPos.y) / 2);

@@ -6,8 +6,12 @@
 #include <allegro5/allegro_image.h>
 #include <string>
 
+/**
+ *	Basic object which is used to be drawn on Display.
+*/
 class DrawableObject {
 public:
+	/* getters and setters */
 	ALLEGRO_BITMAP* getBitmap() { return bitmap; }
 	void setBitmap(ALLEGRO_BITMAP* newBitmap);
 	std::string getText() { return text; }
@@ -31,16 +35,29 @@ public:
 	void setTintG(int newTintG) { tintG = newTintG; }
 	int getTintB() { return tintB; }
 	void setTintB(int newTintB) { tintB = newTintB; }
+	/**
+	 *	Sets tint arguments - changes in colors of the bitmap.
+	 *	@param tint for R color
+	 *	@param tint for G color
+	 *	@param tint for B color
+	*/
 	void setTint(int newTintR, int newTintG, int newTintB) { tintR = newTintR; tintG = newTintG; tintB = newTintB; }
 	DrawableObject(int x, int y, const char* path = NULL, const char* t = NULL, float a = 0.0f, float z = 1.0f, int tx = 0, int ty = 0);
 	~DrawableObject();
 private:
+	/** pointer to the ALLEGRO_BITMAP object */
 	ALLEGRO_BITMAP* bitmap = NULL;
+	/** text which is shown on the Display */
 	std::string text;
+	/** determines if the object is the text or the bitmap */
 	bool typeIsText;
+	/** horizontal position on the screen */
 	int pozX;
+	/** vertical position on the screen */
 	int pozY;
+	/** horizontal offset for the text */
 	int textX;
+	/** vertical offset for the text */
 	int textY;
 	float angle;
 	float zoom;

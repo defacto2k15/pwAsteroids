@@ -6,7 +6,8 @@
 #include <Game.h>
 #include <map>
 
-class ViewManager;	//forward declaration
+/* forward declarations */
+class ViewManager;
 class Game;
 class DrawableObject;
 
