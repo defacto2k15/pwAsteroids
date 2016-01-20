@@ -7,6 +7,8 @@
 
 std::vector<std::string> PythonStdIoRedirect::m_outputs; // must be static, otherwise output is missing
 
+
+
 void PythonModule::addCommand(std::string commandText) {
 	if (isPythonEnabled_) {
 		try {
@@ -35,16 +37,25 @@ PythonModule::PythonModule() {
 
 	if (isPythonEnabled_) {
 		try{
-			Py_Initialize();
-			main_module = import("__main__");
-			main_namespace = main_module.attr("__dict__");
-			main_namespace["PythonStdIoRedirect"] = class_<PythonStdIoRedirect>("PythonStdIoRedirect", init<>())
-					.def("write", &PythonStdIoRedirect::Write);
-			import("sys").attr("stderr") = redirector;
-			import("sys").attr("stdout") = redirector;
+            int val = Py_IsInitialized();
+                Py_Initialize();
+                main_module = import("__main__");
+                main_namespace = main_module.attr("__dict__");
+                boost::python::type_info info = boost::python::type_id<PythonStdIoRedirect>();
+                const boost::python::converter::registration* reg = boost::python::converter::registry::query(info);
+                if (reg == NULL || ((*reg).m_to_python == NULL))
+                {
+                    main_namespace["PythonStdIoRedirect"] = class_<PythonStdIoRedirect>("PythonStdIoRedirect", init<>())
+                            .def("write", &PythonStdIoRedirect::Write);
+                }
 
-		} catch( boost::python::error_already_set ){
+                import("sys").attr("stderr") = redirector;
+                import("sys").attr("stdout") = redirector;
+
+        } catch( boost::python::error_already_set ){
+#ifndef TESTING
 			PyErr_Print();
+#endif
 		}
 	}
 }

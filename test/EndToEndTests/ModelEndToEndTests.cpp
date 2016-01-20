@@ -93,10 +93,10 @@ TEST(EndToEndTests, WhenPlayer1UpButtonIsPressedRocketMovesUp ){
 		return LastCheck(true, "");
 	}));
 	runner.AddKeyPressed(Keys::Player1AccelerateKey);
-	runner.RunForLoops(10);
+	runner.RunForLoops(30);
 
 	if( firstPositionOfRocket.getY() < lastPositionOfRocket.getY() ){
-		FAIL() << " after 10 loops still rocket didnt move up. First pos  " << firstPositionOfRocket.toString() << " second"
+		FAIL() << " after 30 loops still rocket didnt move up. First pos  " << firstPositionOfRocket.toString() << " second"
 			<< lastPositionOfRocket.toString() << std::endl;
 	}
 }
@@ -126,8 +126,8 @@ TEST(EndToEndTests, WhenButtonsLeftAndAccelerateIsPressedRocketFlightsLeft ){
 	runner.AddKeyPressed(Keys::Player1LeftKey);
 	runner.RunForLoops(10);
 
-	if( (firstPositionOfRocket.getY() < lastPositionOfRocket.getY())
-	        ||( firstPositionOfRocket.getX() < lastPositionOfRocket.getX()) ){
+	if( (firstPositionOfRocket.getY() > lastPositionOfRocket.getY())
+	        ||( firstPositionOfRocket.getX() > lastPositionOfRocket.getX()) ){
 		FAIL() << " after 10 loops  rocket didnt move up and left. First pos  "
 		       << firstPositionOfRocket.toString() << " second "
 		       << lastPositionOfRocket.toString() << std::endl;

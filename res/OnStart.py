@@ -16,3 +16,4 @@ getConfiguration().RocketAccelerationRate = 0.5
 getConfiguration().RocketTurnRate = 0.02
 getConfiguration().RocketOppositeAccelerationMultiplyRate = 0.8;
 getConfiguration().ExplosionCloudGrowthRatio = 0.08;
+getConfiguration().InitialRotation = Rotation(0);

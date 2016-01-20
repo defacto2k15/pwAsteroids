@@ -45,13 +45,13 @@ public:
 
     void registerClass(std::string name){
         if (pythonModule_.isPythonEnabled_) {
-            //std::string name = typeid(T).name();
-            if( pythonClass_ == false){
+            boost::python::type_info info = boost::python::type_id<T>();
+            const boost::python::converter::registration* reg = boost::python::converter::registry::query(info);
+            if ((reg == NULL) || ((*reg).m_to_python == NULL) )
+            {
                 pythonClass_ = IsTypeEmpty<T, TConstructorArgs ...>::createClass(name);
-                /* pythonClass_ = std::make_shared<class_<T, boost::shared_ptr<T>> >
-                         (name.c_str(), boost::python::init<TConstructorArgs ... >() );*/
-                pythonModule_.registerClass(*pythonClass_, name);
             }
+            pythonModule_.registerClass(*pythonClass_, name);
         }
     }
 

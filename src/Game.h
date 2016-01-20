@@ -40,9 +40,9 @@
 
 class Game {
 private:
+    PythonModule pythonModule_;
     GameConfiguration gameConfiguration_;
-	ActorIdGenerator idGenerator;
-	PythonModule pythonModule_;
+    ActorIdGenerator idGenerator;
 	std::shared_ptr<IActor> rocket;
 	RootServiceContainer rootServiceContainer_;
 	std::shared_ptr<ActorsContainer> actorsContainer_;
@@ -66,14 +66,14 @@ private:
     BoundariesDuplicationsDrawingSystem boundariesDuplicationsDrawingSystem_;
     ContactComponentsContainer contactComponentsContainer_;
     MyContactListener contactListener_;
+    ImageScalesContainer imageScalesContainer_;
+    Box2dObjectsContainer box2dObjectsContainer_;
     AsteroidsGenerator asteroidGenerator_;
     ProjectilesGenerator projectilesGenerator_;
     AsteroidsCounter asteroidsCounter_;
     RandomNumbersProvider randomNumbersProvider_;
-    PowerupGenerator powerupGenerator_;
 
-	ImageScalesContainer imageScalesContainer_;
-	Box2dObjectsContainer box2dObjectsContainer_;
+    PowerupGenerator powerupGenerator_;
 
 
 	RocketLife rocketLife_;

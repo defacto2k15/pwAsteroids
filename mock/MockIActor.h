@@ -11,6 +11,7 @@
 class MockIActor : public IActor {
 public:
 	MOCK_METHOD1(addComponent, void(std::shared_ptr<Component> component));
+    MOCK_METHOD1(removeComponent, void(Component *component));
 	MOCK_CONST_METHOD0(getActorId, ActorId());
 protected:
 	MOCK_METHOD1(getOnlyComponent, std::shared_ptr<Component> (ComponentTypeChecker checker));

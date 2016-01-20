@@ -108,6 +108,7 @@ include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
 if(BuildTests)
+
     set(GMOCK_ROOT lib/gmock-1.7.0 )
     # Google Mock & Test
     ###############################################################################
@@ -128,6 +129,7 @@ if(BuildTests)
     list(REMOVE_ITEM SRC_FILES ${MAIN_SRC})
 
     add_executable("${TEST_EXECUTABLE_NAME}" ${TEST_FILES} ${SRC_FILES} )
+    set_target_properties("${TEST_EXECUTABLE_NAME}" PROPERTIES COMPILE_DEFINITIONS "TESTING=1")
     # Set link libraries (order matters)
     target_link_libraries("${TEST_EXECUTABLE_NAME}" gmock gtest pthread ${Boost_LIBRARIES} )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" /home/defacto/ProgrammingProjects/pwAsteroids/lib/libBox2D.a) # todo repair

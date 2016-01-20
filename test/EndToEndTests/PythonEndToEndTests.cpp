@@ -7,6 +7,18 @@
 #include <test/EndToEndTests/expectations/LambdaExpectation.h>
 #include <test/EndToEndTests/expectations/OutPythonCollectorExpectation.h>
 
+TEST(PythonEndToEndTests, PrintingWorks ){
+    GameRunner runner;
+    runner.AddInPythonCommand("print(\"Wiadomosc\")");
+    runner.AddAfterRunExpectations(std::make_shared<OutPythonCollectorExpectation>( [](std::string outPython){
+        if( outPython.find("Wiadomosc") == std::string::npos ){
+            return LastCheck(false, "There was no power result 16 that we expected");
+        } else {
+            return LastCheck(true,"");
+        }
+    }));
+    runner.RunForLoops(3);
+}
 TEST(PythonEndToEndTests, SimpleMathTest ){
 	GameRunner runner;
 	runner.AddAfterRunExpectations(std::make_shared<OutPythonCollectorExpectation>( [](std::string outPython){
