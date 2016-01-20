@@ -31,7 +31,7 @@ std::string PythonModule::getOutput() {
 PythonModule::PythonModule() {
     isPythonEnabled_ = false;
 
-#ifdef USE_PYTHON
+#ifndef NO_USE_PYTHON
 	isPythonEnabled_ = true;
 #endif
 

@@ -38,7 +38,6 @@ if(UNIX)
     if( PYTHONLIBS_FOUND )
         INCLUDE_DIRECTORIES( "${PYTHON_INCLUDE_DIRS}")
         TARGET_LINK_LIBRARIES(pwAsteroids "${PYTHON_LIBRARIES}" )
-        add_definitions( -DUSE_PYTHON )
     else()
         message( FATAL_ERROR "Python liblaries were not found, CMake will exit." )
     endif()
@@ -47,6 +46,9 @@ else()
     SET(PYTHON_INCLUDEDIR "$ENV{PYTHONHOME}/include" )
     INCLUDE_DIRECTORIES( ${PYTHON_INCLUDEDIR} )
 endif()
+
+### WHEN PYTHON DOESNT WORK
+add_definitions("-DNO_USE_PYTHON")
 
 if(UNIX)
     FIND_PACKAGE( Boost 1.48 REQUIRED COMPONENTS python system thread )
