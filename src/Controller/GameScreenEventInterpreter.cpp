@@ -40,7 +40,7 @@ void GameScreenEventInterpreter::timeEvent() {
         if (imagePrimitive.getImageType() == ImagePrimitiveType::NotVisibleElement) {
             if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) !=
                 end(createdObjectsIds_)) {
-                updateDrawableObject(imagePrimitive, 0.001f, "XX");
+                updateDrawableObject(imagePrimitive, 0.001f, "");
             }
         } else {
             if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) ==

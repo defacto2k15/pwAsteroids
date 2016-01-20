@@ -93,7 +93,7 @@ std::string MenuScreen::getValueOfOption(MenuOptionTypes typeToFind) {
 }
 
 void MenuScreen::updateScreen() {
-	selectedButton->setPozY(160 + currentOption*80);
+	selectedButton->setPozY(170 + currentOption*80);
 	drawAllScenesOnDisplay(display_);
 }
 
@@ -101,7 +101,7 @@ MenuScreen::MenuScreen(std::string newTitle, std::vector<MenuModel> menus, Displ
 		: title(newTitle), display_(display) {
 	background = createNewScene();
 	logo = background->addDrawableObject(410, 80, NULL, "pwAsteroids (cool logo)");
-	selectedButton = background->addDrawableObject(320, 170, "../res/aa.bmp", NULL, 1.570796f, 0.75f);
+	selectedButton = background->addDrawableObject(320, 10, "../res/aa.bmp", NULL, 1.570796f, 0.75f);
 
 	for( auto &menuModel : menus){
 		auto newScene = createNewScene();
