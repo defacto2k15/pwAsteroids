@@ -62,9 +62,7 @@ void GameScreenEventInterpreter::timeEvent() {
         updateDrawableObject(textPrimitive, 1);
     }
     for( auto actorId : game_.getOutGameScreenModel()->getRemovedActorsIds()){
-        /* TODO deleting */
 		gameScreen_->deleteObject(actorId);
-		//gameScreen_->updateObject(actorId, Point(-100, -100), 0, 0);
     }
     for( MusicInstance oneInstance : game_.getOutGameMusicModel()->getMusicInstances()){
         switch (oneInstance.getElement()){

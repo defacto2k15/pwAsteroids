@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.1)
 project(pwAsteroids)
 
 add_definitions(-std=c++14 )
@@ -34,13 +34,18 @@ include_directories(${Box2D_SOURCE_DIR})
 
 # Including python things...
 if(UNIX)
-    INCLUDE_DIRECTORIES( "/usr/include/python2.7") # linki bezpośrednie, potem to naprawie todo
-    TARGET_LINK_LIBRARIES(pwAsteroids /usr/lib/x86_64-linux-gnu/libpython2.7.so )
-    add_definitions( -DUSE_PYTHON )
+    find_package(PythonLibs 2.7 REQUIRED)
+    if( PYTHONLIBS_FOUND )
+        INCLUDE_DIRECTORIES( "${PYTHON_INCLUDE_DIRS}")
+        TARGET_LINK_LIBRARIES(pwAsteroids "${PYTHON_LIBRARIES}" )
+        add_definitions( -DUSE_PYTHON )
+    else()
+        message( FATAL_ERROR "Python liblaries were not found, CMake will exit." )
+    endif()
 else()
     # TU DODAJ Własny python
 endif()
-#set(Python_ADDITIONAL_VERSIONS 3.4)
+
 
 if(UNIX)
     FIND_PACKAGE( Boost 1.48 REQUIRED COMPONENTS python system thread )
@@ -83,8 +88,11 @@ endif()
 include_directories(src)
 
 # allegro - works on linux and only if allegro is installed- need to be changed
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmakeModules/")
 if(UNIX)
-    include_directories(/usr/include/x86_64-linux-gnu)
+    find_package(Allegro5 REQUIRED)
+    include_directories(${ALLEGRO_INCLUDE_DIRS})
+    #include_directories(/usr/include/x86_64-linux-gnu)
     TARGET_LINK_LIBRARIES( pwAsteroids allegro_ttf allegro_font allegro_image allegro allegro_audio allegro_acodec )
 else()
     # TARGET_LINK_LIBRARIES(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib/Windows/Box2D.lib )
