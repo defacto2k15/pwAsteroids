@@ -36,6 +36,7 @@
 #include <Model/Actors/Asteroid/RandomAsteroidsGenerator.h>
 #include <Model/Services/GameEndingIndicatingService.h>
 #include <Model/Actors/explosionCloud/ExplosionCloudGenerator.h>
+#include <Model/Actors/Rocket/RocketActorProxy.h>
 
 
 class Game {
@@ -43,7 +44,7 @@ private:
     PythonModule pythonModule_;
     GameConfiguration gameConfiguration_;
     ActorIdGenerator idGenerator;
-	std::shared_ptr<IActor> rocket;
+    std::shared_ptr<RocketActorProxy> rocketProxy_;
 	RootServiceContainer rootServiceContainer_;
 	std::shared_ptr<ActorsContainer> actorsContainer_;
 	std::shared_ptr<IOutGameScreenModel> outGameScreenModel_;
@@ -80,11 +81,15 @@ private:
 	ScoreCount scoreCount_;
 	PowerupCounter powerupCounter_;
 
-	bool isGameFinished_ = false;
+	bool isGameFinished_ = true;
 
 	int result_ = 0;
 public:
 	Game( Point screenResolution, std::map<ImagePrimitiveType, Point> imagesSizesMap );
+
+    void startSinglePlayerGame( int difficulty );
+
+    void startMultiplayerGame( int difficulty);
 
 	std::shared_ptr<IOutGameScreenModel> getOutGameScreenModel();;
 
@@ -101,7 +106,7 @@ public:
 	void update();;
 
 	void setGameFinished( int newResult){
-		result_ = newResult;
+		isGameFinished_ = true;
 	}
 
 	void setResolution(Point newResolution );
@@ -110,10 +115,10 @@ public:
 		return isGameFinished_;
 	}
 
-	int getResult(){
-		return result_;
-	}
-};
+    void createBothModesActors();
+
+    void createMultiplayerActors();
+ };
 
 
 #endif //PWASTEROIDS_GAME_H

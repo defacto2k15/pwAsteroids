@@ -21,7 +21,6 @@ void Scene::removeDrawableObject(DrawableObject *removedDO)
 	if (removedIndex != -1) {
 		delete objects[removedIndex];
 		objects.erase(objects.begin() + removedIndex);
-		std::cout << "Object removed, number of objects : " << objects.size() << "\n";
 	}
 	else {
 		std::cout << "  Object remove failed\n";

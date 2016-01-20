@@ -35,6 +35,8 @@ public:
 	void removeActor(PythonActorComponent &pythonActorComponent);
 
 	void removeActorById(ActorId id );
+
+    void resetAndRemoveAllActors();
 protected:
 	virtual std::vector<std::shared_ptr<IService>> getServices();
 };

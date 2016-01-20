@@ -16,18 +16,7 @@ LifeIndicatorService::LifeIndicatorService(std::shared_ptr<ActorsContainer> acto
 }
 
 void LifeIndicatorService::OnStart() {
-    for( int i = 0; i < configuration_.getMaxRocketLifes(); i++ ){
-        Point position = configuration_.getInitialHeartPosition();
-        position += Point(1, 0) * i;
-        auto newActor = std::make_shared<Actor>(idGenerator_.getActorId());
-        auto positionComponent = std::make_shared<PositionComponent>(pythonModule_);
-        newActor->addComponent( positionComponent );
-        positionComponent ->setX(position.getX());
-        positionComponent ->setY(position.getY());
-        newActor->addComponent( std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Heart, imageScalesContainer_.getImageScale(ImagePrimitiveType::Heart)) );
-        actorsContainer_->addActorDuringRuntime(newActor );
-        heartsActors.push_back(newActor);
-    }
+    createHearts();
 }
 
 void LifeIndicatorService::OnUpdate() {
@@ -43,4 +32,19 @@ void LifeIndicatorService::OnUpdate() {
 
 void LifeIndicatorService::OnStop() {
     heartsActors.clear();
+}
+
+void LifeIndicatorService::createHearts() {
+    for( int i = 0; i < configuration_.getMaxRocketLifes(); i++ ){
+        Point position = configuration_.getInitialHeartPosition();
+        position += Point(1, 0) * i;
+        auto newActor = std::make_shared<Actor>(idGenerator_.getActorId());
+        auto positionComponent = std::make_shared<PositionComponent>(pythonModule_);
+        newActor->addComponent( positionComponent );
+        positionComponent ->setX(position.getX());
+        positionComponent ->setY(position.getY());
+        newActor->addComponent( std::make_shared<DrawingComponent>(drawingSystem_, ImagePrimitiveType::Heart, imageScalesContainer_.getImageScale(ImagePrimitiveType::Heart)) );
+        actorsContainer_->addActorDuringRuntime(newActor );
+        heartsActors.push_back(newActor);
+    }
 }

@@ -46,16 +46,18 @@ void GameScreen::createText(ActorId id, std::string text) {
 	drawableObjects[id] = background->addDrawableObject(512, 300, NULL, text.c_str());
 }
 
-void GameScreen::updateObject(ActorId id, Point point, Rotation rotation, float zoom) {
+void GameScreen::updateObject(ActorId id, Point point, Rotation rotation, float zoom, std::string text) {
 	assert( drawableObjects.count(id) > 0);
 	drawableObjects[id]->setPozX(point.getX());
 	drawableObjects[id]->setPozY(point.getY());
 	drawableObjects[id]->setAngle(rotation* 0.0174532925f);
 	drawableObjects[id]->setZoom(zoom);
+    drawableObjects[id]->setText(text);
 }
 
 void GameScreen::deleteObject(ActorId id)
 {
-	assert(drawableObjects.count(id) > 0);
-	background->removeDrawableObject(drawableObjects[id]);
+	if( drawableObjects.count(id) > 0 ) {
+        background->removeDrawableObject(drawableObjects[id]);
+    }
 }

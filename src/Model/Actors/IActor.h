@@ -37,7 +37,7 @@ public:
 
 	virtual ~IActor(){};
 
-protected:
+public: // todo should be protected
 	virtual std::shared_ptr<Component> getOnlyComponent(ComponentTypeChecker checker)=0;
 	virtual bool isComponentPresent(ComponentTypeChecker checker)=0;
 

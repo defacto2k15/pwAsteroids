@@ -36,7 +36,7 @@ void GameScreenEventInterpreter::timeEvent() {
         if (imagePrimitive.getImageType() == ImagePrimitiveType::NotVisibleElement) {
             if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) !=
                 end(createdObjectsIds_)) {
-                updateDrawableObject(imagePrimitive, 0);
+                updateDrawableObject(imagePrimitive, 0.001f, "XX");
             }
         } else {
             if (std::find(begin(createdObjectsIds_), end(createdObjectsIds_), imagePrimitive.getActorId()) ==
@@ -50,7 +50,7 @@ void GameScreenEventInterpreter::timeEvent() {
                           double(imageDataContainer_.getData(imagePrimitive.getImageType()).xSize);
             //zoom = zoom / 4;
 
-            updateDrawableObject(imagePrimitive, zoom);
+            updateDrawableObject(imagePrimitive, zoom, "");
         }
     }
 
@@ -59,7 +59,8 @@ void GameScreenEventInterpreter::timeEvent() {
             gameScreen_->createText(textPrimitive.getActorId(), textPrimitive.getTextToWrite() );
             createdObjectsIds_.push_back(textPrimitive.getActorId());
         }
-        updateDrawableObject(textPrimitive, 1);
+        updateDrawableObject(textPrimitive, 1, textPrimitive.getTextToWrite());
+
     }
     for( auto actorId : game_.getOutGameScreenModel()->getRemovedActorsIds()){
 		gameScreen_->deleteObject(actorId);
@@ -89,6 +90,6 @@ void GameScreenEventInterpreter::timeEvent() {
 
 }
 
-void GameScreenEventInterpreter::updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom) {
-    gameScreen_->updateObject( primitive.getActorId(), primitive.getPosition(), primitive.getRotation(), float(zoom)) ;
+void GameScreenEventInterpreter::updateDrawableObject(BaseDrawablePrimitive &primitive, double zoom, std::string text) {
+    gameScreen_->updateObject( primitive.getActorId(), primitive.getPosition(), primitive.getRotation(), float(zoom), text) ;
 }

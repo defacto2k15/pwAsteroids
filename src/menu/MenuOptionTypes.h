@@ -6,7 +6,8 @@
 #define PWASTEROIDS_MENUOPTIONTYPES_H
 
 enum MenuOptionTypes{
-    StartGame = 1, About = 2, Options = 3, Exit = 4, Back = 5, Apply = 6, Resolution = 7
+    StartGame = 1, About = 2, Options = 3, Exit = 4, Back = 5, Apply = 6, Resolution = 7, GameMode = 8, Difficulty = 9,
+    Play = 10
 };
 
 #endif //PWASTEROIDS_MENUOPTIONTYPES_H

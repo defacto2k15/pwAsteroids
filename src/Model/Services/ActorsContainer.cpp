@@ -67,3 +67,11 @@ void ActorsContainer::removeActorById(ActorId id ) {
 	}
 	removeActor( *iterator );
 }
+
+void ActorsContainer::resetAndRemoveAllActors() {
+    for( auto oneActor : actorsVec_){
+        oneActor->OnStop();
+    }
+    actorsVec_.clear();
+    weHaveStarted = false;
+}

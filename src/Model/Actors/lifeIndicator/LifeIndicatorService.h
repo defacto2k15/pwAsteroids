@@ -40,6 +40,8 @@ public:
     void OnUpdate();
 
     void OnStop();
+
+    void createHearts();
 };
 
 

@@ -24,7 +24,7 @@ public:
 
 	void createText(ActorId id, std::string text);
 
-	void updateObject(ActorId id, Point point, Rotation rotation, float zoom);
+	void updateObject(ActorId id, Point point, Rotation rotation, float zoom, std::string text);
 
 	void deleteObject(ActorId id);
 

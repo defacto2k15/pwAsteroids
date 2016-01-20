@@ -20,3 +20,7 @@ void ScoreDisplayer::OnUpdate() {
     std::string textToDraw = "Score: "+std::to_string(count_.getScore());
     drawingSystem_.drawText(textToDraw, gameConfiguration_.getScoreTextPosition(), id_);
 }
+
+void ScoreDisplayer::OnStop(){
+    drawingSystem_.addRemovedActorId(id_);
+}

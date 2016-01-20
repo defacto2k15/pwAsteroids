@@ -11,6 +11,7 @@
 #include "ScreenEventInterpreter.h"
 #include "AbstractAllegroEventListener.h"
 #include <string>
+#include <Game.h>
 
 class MenuScreen;
 class ViewManager;
@@ -20,8 +21,9 @@ class ResolutionsContainer;
 class MenuScreenEventInterpreter : public ScreenEventInterpreter {
     MenuScreen *menuScreen_;
     ResolutionsContainer &resolutions_;
+    Game &game_;
 public:
-    MenuScreenEventInterpreter(MenuScreen *menuScreen, ResolutionsContainer &resolutions);
+    MenuScreenEventInterpreter(MenuScreen *menuScreen, ResolutionsContainer &resolutions, Game &game);
 
     virtual void keyDown(int keynum);
 

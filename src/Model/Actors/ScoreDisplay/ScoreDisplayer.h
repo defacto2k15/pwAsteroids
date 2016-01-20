@@ -24,6 +24,8 @@ public:
     virtual void OnStart(IActor &actor);
 
     virtual void OnUpdate();
+
+    virtual void OnStop();
 };
 
 

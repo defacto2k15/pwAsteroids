@@ -90,11 +90,16 @@ int main(int, char**){
 	MenuOption applyOption{MenuOptionTypes::Apply, {"Apply"}, 0 };
 	MenuOption resolutionOption{MenuOptionTypes::Resolution, resolutionsContainer.getResoutionsAsText(), 0 };
 
-	menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_OPTIONS, {resolutionOption, backOption, applyOption} });
+    menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_OPTIONS, {resolutionOption, backOption, applyOption} });
+
+    MenuOption gameModeOption{ MenuOptionTypes::GameMode, {"Single player -->", "<-- Two players"}, 0};
+    MenuOption difficultyOption{ MenuOptionTypes::Difficulty, {"Difficulty: 1", "Difficulty: 2", "Difficulty 3"}, 0 };
+    MenuOption playOption{ MenuOptionTypes::Play, {"Play!"}, 0 };
+    menusVector.push_back( MenuModel{ SUBMENU::SUBMENU_GAME, {gameModeOption, difficultyOption, playOption}});
 
 	MenuScreen menuScreen(std::string("MenuScreen"), menusVector, &display );
 
-	MenuScreenEventInterpreter menuScreenInterpreter(&menuScreen, resolutionsContainer);
+	MenuScreenEventInterpreter menuScreenInterpreter(&menuScreen, resolutionsContainer, game);
 
 	ConsoleScreen consoleScreen("ConsoleScreen", &display);
 

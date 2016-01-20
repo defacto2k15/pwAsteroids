@@ -8,8 +8,8 @@
 #include <View/ViewManager.h>
 
 
-MenuScreenEventInterpreter::MenuScreenEventInterpreter(MenuScreen *menuScreen, ResolutionsContainer &resolutions)
-        : resolutions_(resolutions), menuScreen_(menuScreen) {
+MenuScreenEventInterpreter::MenuScreenEventInterpreter(MenuScreen *menuScreen, ResolutionsContainer &resolutions,
+                        Game &game) : resolutions_(resolutions), menuScreen_(menuScreen), game_(game) {
 }
 
 void MenuScreenEventInterpreter::keyDown(int keynum) {
@@ -30,7 +30,8 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
         if( currentSubmenu == SUBMENU::SUBMENU_MAIN) {
             switch(option){
                 case MenuOptionTypes::StartGame:
-                    viewManager_->changeActiveScreen("GameScreen");
+                    menuScreen_->enterSubmenu(SUBMENU::SUBMENU_GAME);
+                    //viewManager_->changeActiveScreen("GameScreen");
                     break;
                 case MenuOptionTypes::Options:
                     menuScreen_->enterSubmenu( SUBMENU::SUBMENU_OPTIONS);
@@ -53,6 +54,24 @@ void MenuScreenEventInterpreter::keyDown(int keynum) {
                     auto res = resolutions_.getResolutionForText(resolutionButtonText);
                     viewManager_->resizeDisplay(res.first, res.second);
                     viewManager_->updateScreensAfterDisplayChanges();
+                    break;
+            }
+        } else if ( currentSubmenu == SUBMENU_GAME ){
+            switch (option){
+                case MenuOptionTypes::Play:
+                    if( game_.isGameFinished() ) {
+                        auto gameMode = menuScreen_->getValueOfOption(MenuOptionTypes::GameMode);
+                        auto dificultyLevel = menuScreen_->getValueOfOption(MenuOptionTypes::Difficulty);
+                        int level =  *(dificultyLevel.rbegin()) - '0';
+                        assert( level > 0);
+                        assert( level < 9);
+                        if (gameMode.find( "Single") != std::string::npos) {
+                            game_.startSinglePlayerGame(level);
+                        } else {
+                            game_.startMultiplayerGame(level);
+                        }
+                    }
+                    viewManager_->changeActiveScreen("GameScreen");
                     break;
             }
         }
