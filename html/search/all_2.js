@@ -3,6 +3,9 @@ var searchData=
   ['c1',['C1',['../classC1.html',1,'']]],
   ['c2',['C2',['../classC2.html',1,'']]],
   ['c3',['C3',['../classC3.html',1,'']]],
+  ['changeactivescreen',['changeActiveScreen',['../classViewManager.html#af91f677e59971904b9787ba8770b378e',1,'ViewManager']]],
+  ['changeactivestate',['changeActiveState',['../classScene.html#a27d5e7909f21726279092d722e095c57',1,'Scene']]],
+  ['cleardisplay',['clearDisplay',['../classDisplay.html#af4cf5b66237916d8c4b1baf135037202',1,'Display']]],
   ['collisiondata',['CollisionData',['../structCollisionData.html',1,'']]],
   ['collisiongroupsdata',['CollisionGroupsData',['../classCollisionGroupsData.html',1,'']]],
   ['commontypesvisualizer',['CommonTypesVisualizer',['../classCommonTypesVisualizer.html',1,'']]],
@@ -15,5 +18,6 @@ var searchData=
   ['componenttypechecker',['ComponentTypeChecker',['../classComponentTypeChecker.html',1,'']]],
   ['consolescreen',['ConsoleScreen',['../classConsoleScreen.html',1,'']]],
   ['consolescreeneventinterpreter',['ConsoleScreenEventInterpreter',['../classConsoleScreenEventInterpreter.html',1,'']]],
-  ['contactcomponentscontainer',['ContactComponentsContainer',['../classContactComponentsContainer.html',1,'']]]
+  ['contactcomponentscontainer',['ContactComponentsContainer',['../classContactComponentsContainer.html',1,'']]],
+  ['createnewscene',['createNewScene',['../classScreen.html#aee0fb634ec970fa915991093e98b0f34',1,'Screen']]]
 ];

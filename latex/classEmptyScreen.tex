@@ -9,18 +9,65 @@ Inheritance diagram for Empty\+Screen\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries event\+Action} (A\+L\+L\+E\+G\+R\+O\+\_\+\+E\+V\+E\+NT \&, \hyperlink{classViewManager}{View\+Manager} $\ast$, \hyperlink{classGame}{Game} $\ast$)\hypertarget{classEmptyScreen_acb3da5b502cfb7034c4455ad2ddd7510}{}\label{classEmptyScreen_acb3da5b502cfb7034c4455ad2ddd7510}
-
+void \hyperlink{classEmptyScreen_acb3da5b502cfb7034c4455ad2ddd7510}{event\+Action} (A\+L\+L\+E\+G\+R\+O\+\_\+\+E\+V\+E\+NT \&, \hyperlink{classViewManager}{View\+Manager} $\ast$, \hyperlink{classGame}{Game} $\ast$)
 \item 
-void {\bfseries initialize\+Screen\+Elements} ()\hypertarget{classEmptyScreen_aa2013df5685b5ef8ae87b3d8605da5b6}{}\label{classEmptyScreen_aa2013df5685b5ef8ae87b3d8605da5b6}
-
+void \hyperlink{classEmptyScreen_aa2013df5685b5ef8ae87b3d8605da5b6}{initialize\+Screen\+Elements} ()
 \item 
-std\+::string {\bfseries get\+Title} ()\hypertarget{classEmptyScreen_ac392a14c00283e4fff6856a3000b4ecd}{}\label{classEmptyScreen_ac392a14c00283e4fff6856a3000b4ecd}
-
+std\+::string \hyperlink{classEmptyScreen_ac392a14c00283e4fff6856a3000b4ecd}{get\+Title} ()
 \item 
 {\bfseries Empty\+Screen} (std\+::string \&)\hypertarget{classEmptyScreen_acdf0c5dab645394c04a7a28beab25acd}{}\label{classEmptyScreen_acdf0c5dab645394c04a7a28beab25acd}
 
 \end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Empty\+Screen@{Empty\+Screen}!event\+Action@{event\+Action}}
+\index{event\+Action@{event\+Action}!Empty\+Screen@{Empty\+Screen}}
+\subsubsection[{\texorpdfstring{event\+Action(\+A\+L\+L\+E\+G\+R\+O\+\_\+\+E\+V\+E\+N\+T \&, View\+Manager $\ast$, Game $\ast$)}{eventAction(ALLEGRO_EVENT &, ViewManager *, Game *)}}]{\setlength{\rightskip}{0pt plus 5cm}void Empty\+Screen\+::event\+Action (
+\begin{DoxyParamCaption}
+\item[{A\+L\+L\+E\+G\+R\+O\+\_\+\+E\+V\+E\+NT \&}]{ev, }
+\item[{{\bf View\+Manager} $\ast$}]{vm, }
+\item[{{\bf Game} $\ast$}]{g}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEmptyScreen_acb3da5b502cfb7034c4455ad2ddd7510}{}\label{classEmptyScreen_acb3da5b502cfb7034c4455ad2ddd7510}
+Virtual method which does some actions when event occurs. 
+\begin{DoxyParams}{Parameters}
+{\em ev} & event which occured. \\
+\hline
+{\em vm} & pointer to the \hyperlink{classViewManager}{View\+Manager}. \\
+\hline
+{\em g} & pointer to the \hyperlink{classGame}{Game}. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classScreen_a5fb59d03053c2d0aaca26f9480bbe433}{Screen}.
+
+\index{Empty\+Screen@{Empty\+Screen}!get\+Title@{get\+Title}}
+\index{get\+Title@{get\+Title}!Empty\+Screen@{Empty\+Screen}}
+\subsubsection[{\texorpdfstring{get\+Title()}{getTitle()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Empty\+Screen\+::get\+Title (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classEmptyScreen_ac392a14c00283e4fff6856a3000b4ecd}{}\label{classEmptyScreen_ac392a14c00283e4fff6856a3000b4ecd}
+Returns \hyperlink{classScreen}{Screen} title (\hyperlink{classScreen}{Screen} titles are used to organize Screens). \begin{DoxyReturn}{Returns}
+title of the screen. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classScreen_a28df2a95a64693e2e5b1238c07c92115}{Screen}.
+
+\index{Empty\+Screen@{Empty\+Screen}!initialize\+Screen\+Elements@{initialize\+Screen\+Elements}}
+\index{initialize\+Screen\+Elements@{initialize\+Screen\+Elements}!Empty\+Screen@{Empty\+Screen}}
+\subsubsection[{\texorpdfstring{initialize\+Screen\+Elements()}{initializeScreenElements()}}]{\setlength{\rightskip}{0pt plus 5cm}void Empty\+Screen\+::initialize\+Screen\+Elements (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEmptyScreen_aa2013df5685b5ef8ae87b3d8605da5b6}{}\label{classEmptyScreen_aa2013df5685b5ef8ae87b3d8605da5b6}
+Virtual method which is used to initialize special elements added to the \hyperlink{classScreen}{Screen} before it will be used 
+
+Reimplemented from \hyperlink{classScreen_a207320477f0e323dc4cd36dbd4706238}{Screen}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

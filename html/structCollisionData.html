@@ -94,9 +94,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a027fba5829b51a5079021c30381f11ca"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a027fba5829b51a5079021c30381f11ca"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CollisionData</b> (const CollisionGroup collisionGroup, double impulseValue, b2Fixture *otherContacterFixture)</td></tr>
-<tr class="separator:a027fba5829b51a5079021c30381f11ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2501b99e889257aa77552a408b8e4bee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2501b99e889257aa77552a408b8e4bee"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CollisionData</b> (const CollisionGroup &amp;collisionGroup, double impulseValue, float otherContactMass, const b2Vec2 &amp;otherContactPosition)</td></tr>
+<tr class="separator:a2501b99e889257aa77552a408b8e4bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -106,9 +106,12 @@ CollisionGroup&#160;</td><td class="memItemRight" valign="bottom"><b>collisionGr
 <tr class="memitem:adeb5b92a90ea55f87afa2df1263354cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adeb5b92a90ea55f87afa2df1263354cd"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>impulseValue</b></td></tr>
 <tr class="separator:adeb5b92a90ea55f87afa2df1263354cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a1d6f8a1814eb34a8f16239d189a02f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a1d6f8a1814eb34a8f16239d189a02f"></a>
-b2Fixture *&#160;</td><td class="memItemRight" valign="bottom"><b>otherContacterFixture</b></td></tr>
-<tr class="separator:a9a1d6f8a1814eb34a8f16239d189a02f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a069e4f45cd7b011b7ea8446e96983"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02a069e4f45cd7b011b7ea8446e96983"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>otherContactMass</b></td></tr>
+<tr class="separator:a02a069e4f45cd7b011b7ea8446e96983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada0f93ddc5b0fe41df272157133363f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aada0f93ddc5b0fe41df272157133363f"></a>
+b2Vec2&#160;</td><td class="memItemRight" valign="bottom"><b>otherContactPosition</b></td></tr>
+<tr class="separator:aada0f93ddc5b0fe41df272157133363f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/Model/collisions/<a class="el" href="CollisionData_8h_source.html">CollisionData.h</a></li>

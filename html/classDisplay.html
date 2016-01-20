@@ -90,17 +90,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Display Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="Display_8h_source.html">Display.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad735068ee75f69ff87373dc80607a6de"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad735068ee75f69ff87373dc80607a6de"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>drawSceneOnDisplay</b> (<a class="el" href="classScene.html">Scene</a> *)</td></tr>
+<tr class="memitem:ad735068ee75f69ff87373dc80607a6de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#ad735068ee75f69ff87373dc80607a6de">drawSceneOnDisplay</a> (<a class="el" href="classScene.html">Scene</a> *)</td></tr>
 <tr class="separator:ad735068ee75f69ff87373dc80607a6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4cf5b66237916d8c4b1baf135037202"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4cf5b66237916d8c4b1baf135037202"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>clearDisplay</b> (int, int, int)</td></tr>
+<tr class="memitem:af4cf5b66237916d8c4b1baf135037202"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#af4cf5b66237916d8c4b1baf135037202">clearDisplay</a> (int, int, int)</td></tr>
 <tr class="separator:af4cf5b66237916d8c4b1baf135037202"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6de73ad4135258995b2deee44e1e628a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6de73ad4135258995b2deee44e1e628a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resizeDisplay</b> (int, int)</td></tr>
+<tr class="memitem:a6de73ad4135258995b2deee44e1e628a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDisplay.html#a6de73ad4135258995b2deee44e1e628a">resizeDisplay</a> (int, int)</td></tr>
 <tr class="separator:a6de73ad4135258995b2deee44e1e628a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b945675bac2549db7a392c9ef242ee5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b945675bac2549db7a392c9ef242ee5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>flipDisplay</b> ()</td></tr>
@@ -112,6 +111,104 @@ ALLEGRO_DISPLAY *&#160;</td><td class="memItemRight" valign="bottom"><b>getDispl
 &#160;</td><td class="memItemRight" valign="bottom"><b>Display</b> (int=640, int=480)</td></tr>
 <tr class="separator:ac962d82df123871e4bdc6cae9c9613e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class whoch organizes ALLEGRO_DISPLAY. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af4cf5b66237916d8c4b1baf135037202"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Display::clearDisplay </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>g</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Clears <a class="el" href="classDisplay.html">Display</a> for the given color in RGB palette. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">R</td><td>color </td></tr>
+    <tr><td class="paramname">G</td><td>color </td></tr>
+    <tr><td class="paramname">B</td><td>color </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad735068ee75f69ff87373dc80607a6de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Display::drawSceneOnDisplay </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classScene.html">Scene</a> *&#160;</td>
+          <td class="paramname"><em>scene</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Draws given <a class="el" href="classScene.html">Scene</a> on <a class="el" href="classDisplay.html">Display</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pointer</td><td>to the <a class="el" href="classScene.html">Scene</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6de73ad4135258995b2deee44e1e628a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Display::resizeDisplay </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Resizes <a class="el" href="classDisplay.html">Display</a> for the given dimensions. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">width</td><td></td></tr>
+    <tr><td class="paramname">height</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/View/<a class="el" href="Display_8h_source.html">Display.h</a></li>
 <li>src/View/Display.cpp</li>

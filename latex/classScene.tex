@@ -1,26 +1,115 @@
 \hypertarget{classScene}{}\section{Scene Class Reference}
 \label{classScene}\index{Scene@{Scene}}
+
+
+{\ttfamily \#include $<$Scene.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classDrawableObject}{Drawable\+Object} $\ast$ {\bfseries add\+Drawable\+Object} (int x, int y, const char $\ast$path=N\+U\+LL, const char $\ast$t=N\+U\+LL, float a=0.\+0f, float z=1.\+0f, int tx=0, int ty=0)\hypertarget{classScene_a962104754fdb9efc987b339ac124f0bd}{}\label{classScene_a962104754fdb9efc987b339ac124f0bd}
-
+\hyperlink{classDrawableObject}{Drawable\+Object} $\ast$ \hyperlink{classScene_a962104754fdb9efc987b339ac124f0bd}{add\+Drawable\+Object} (int x, int y, const char $\ast$path=N\+U\+LL, const char $\ast$t=N\+U\+LL, float a=0.\+0f, float z=1.\+0f, int tx=0, int ty=0)
 \item 
-void {\bfseries remove\+Drawable\+Object} (\hyperlink{classDrawableObject}{Drawable\+Object} $\ast$)\hypertarget{classScene_aed48832892c47874a6996a57c5c49d51}{}\label{classScene_aed48832892c47874a6996a57c5c49d51}
-
+void \hyperlink{classScene_aba5ad7d8c23cb1afd4307d2cc16eb1db}{remove\+Drawable\+Object} (\hyperlink{classDrawableObject}{Drawable\+Object} $\ast$drawable\+Object)
 \item 
-std\+::vector$<$ \hyperlink{classDrawableObject}{Drawable\+Object} $\ast$ $>$ {\bfseries get\+Scene\+Objects} ()\hypertarget{classScene_a30cb2b4641a02432e962e6961b354318}{}\label{classScene_a30cb2b4641a02432e962e6961b354318}
-
+std\+::vector$<$ \hyperlink{classDrawableObject}{Drawable\+Object} $\ast$ $>$ \hyperlink{classScene_a30cb2b4641a02432e962e6961b354318}{get\+Scene\+Objects} ()
 \item 
-int {\bfseries get\+Number\+Of\+Objects} ()\hypertarget{classScene_a9764f41b417bf1f2ea4bb752b23ef1c5}{}\label{classScene_a9764f41b417bf1f2ea4bb752b23ef1c5}
-
+int \hyperlink{classScene_a9764f41b417bf1f2ea4bb752b23ef1c5}{get\+Number\+Of\+Objects} ()
 \item 
-void {\bfseries change\+Active\+State} ()\hypertarget{classScene_a27d5e7909f21726279092d722e095c57}{}\label{classScene_a27d5e7909f21726279092d722e095c57}
-
+void \hyperlink{classScene_a27d5e7909f21726279092d722e095c57}{change\+Active\+State} ()
 \item 
-bool {\bfseries is\+Active} ()\hypertarget{classScene_aac02dec89aa4d67ea4187b9decf4f772}{}\label{classScene_aac02dec89aa4d67ea4187b9decf4f772}
-
+bool \hyperlink{classScene_aac02dec89aa4d67ea4187b9decf4f772}{is\+Active} ()
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class \hyperlink{classScene}{Scene} organises Drawable\+Objects in one group. 
+
+\subsection{Member Function Documentation}
+\index{Scene@{Scene}!add\+Drawable\+Object@{add\+Drawable\+Object}}
+\index{add\+Drawable\+Object@{add\+Drawable\+Object}!Scene@{Scene}}
+\subsubsection[{\texorpdfstring{add\+Drawable\+Object(int x, int y, const char $\ast$path=\+N\+U\+L\+L, const char $\ast$t=\+N\+U\+L\+L, float a=0.\+0f, float z=1.\+0f, int tx=0, int ty=0)}{addDrawableObject(int x, int y, const char *path=NULL, const char *t=NULL, float a=0.0f, float z=1.0f, int tx=0, int ty=0)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Drawable\+Object} $\ast$ Scene\+::add\+Drawable\+Object (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{const char $\ast$}]{path = {\ttfamily NULL}, }
+\item[{const char $\ast$}]{t = {\ttfamily NULL}, }
+\item[{float}]{a = {\ttfamily 0.0f}, }
+\item[{float}]{z = {\ttfamily 1.0f}, }
+\item[{int}]{tx = {\ttfamily 0}, }
+\item[{int}]{ty = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\hypertarget{classScene_a962104754fdb9efc987b339ac124f0bd}{}\label{classScene_a962104754fdb9efc987b339ac124f0bd}
+Inserts new \hyperlink{classDrawableObject}{Drawable\+Object} to the \hyperlink{classScene}{Scene}. 
+\begin{DoxyParams}{Parameters}
+{\em x} & horizontal position on the screen \\
+\hline
+{\em y} & vertical position on the screen \\
+\hline
+{\em path} & path to the bitmap (default = N\+U\+LL) \\
+\hline
+{\em t} & text (default = N\+U\+LL) \\
+\hline
+{\em a} & angle (default = 0.\+0f) \\
+\hline
+{\em z} & zoom -\/ scale of the bitmap (default = 1.\+0f) \\
+\hline
+{\em tx} & horizontal offset for text (default = 0) \\
+\hline
+{\em ty} & vertical offset for text (default = 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the created \hyperlink{classDrawableObject}{Drawable\+Object} 
+\end{DoxyReturn}
+\index{Scene@{Scene}!change\+Active\+State@{change\+Active\+State}}
+\index{change\+Active\+State@{change\+Active\+State}!Scene@{Scene}}
+\subsubsection[{\texorpdfstring{change\+Active\+State()}{changeActiveState()}}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+::change\+Active\+State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classScene_a27d5e7909f21726279092d722e095c57}{}\label{classScene_a27d5e7909f21726279092d722e095c57}
+Changes the active atribut of the scene (deactivated scenes are not displayed). \index{Scene@{Scene}!get\+Number\+Of\+Objects@{get\+Number\+Of\+Objects}}
+\index{get\+Number\+Of\+Objects@{get\+Number\+Of\+Objects}!Scene@{Scene}}
+\subsubsection[{\texorpdfstring{get\+Number\+Of\+Objects()}{getNumberOfObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}int Scene\+::get\+Number\+Of\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classScene_a9764f41b417bf1f2ea4bb752b23ef1c5}{}\label{classScene_a9764f41b417bf1f2ea4bb752b23ef1c5}
+Return the number of objects in the scene. \begin{DoxyReturn}{Returns}
+number of objects in the scene. 
+\end{DoxyReturn}
+\index{Scene@{Scene}!get\+Scene\+Objects@{get\+Scene\+Objects}}
+\index{get\+Scene\+Objects@{get\+Scene\+Objects}!Scene@{Scene}}
+\subsubsection[{\texorpdfstring{get\+Scene\+Objects()}{getSceneObjects()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ {\bf Drawable\+Object} $\ast$ $>$ Scene\+::get\+Scene\+Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classScene_a30cb2b4641a02432e962e6961b354318}{}\label{classScene_a30cb2b4641a02432e962e6961b354318}
+Return vector of pointers to the objects added to scene. \begin{DoxyReturn}{Returns}
+vector of pointers to \hyperlink{classDrawableObject}{Drawable\+Object}. 
+\end{DoxyReturn}
+\index{Scene@{Scene}!is\+Active@{is\+Active}}
+\index{is\+Active@{is\+Active}!Scene@{Scene}}
+\subsubsection[{\texorpdfstring{is\+Active()}{isActive()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Scene\+::is\+Active (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classScene_aac02dec89aa4d67ea4187b9decf4f772}{}\label{classScene_aac02dec89aa4d67ea4187b9decf4f772}
+Return the value of active atribut. \begin{DoxyReturn}{Returns}
+active atribut -\/ bool value. 
+\end{DoxyReturn}
+\index{Scene@{Scene}!remove\+Drawable\+Object@{remove\+Drawable\+Object}}
+\index{remove\+Drawable\+Object@{remove\+Drawable\+Object}!Scene@{Scene}}
+\subsubsection[{\texorpdfstring{remove\+Drawable\+Object(\+Drawable\+Object $\ast$drawable\+Object)}{removeDrawableObject(DrawableObject *drawableObject)}}]{\setlength{\rightskip}{0pt plus 5cm}void Scene\+::remove\+Drawable\+Object (
+\begin{DoxyParamCaption}
+\item[{{\bf Drawable\+Object} $\ast$}]{drawable\+Object}
+\end{DoxyParamCaption}
+)}\hypertarget{classScene_aba5ad7d8c23cb1afd4307d2cc16eb1db}{}\label{classScene_aba5ad7d8c23cb1afd4307d2cc16eb1db}
+Removes and destroys pointed \hyperlink{classDrawableObject}{Drawable\+Object} from the scene. 
+\begin{DoxyParams}{Parameters}
+{\em drawable\+Object} & pointer to the object in the class. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

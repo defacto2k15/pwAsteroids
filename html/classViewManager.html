@@ -90,37 +90,301 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">ViewManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="ViewManager_8h_source.html">ViewManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a684ecb6174c1af078bb112fd568d24e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a684ecb6174c1af078bb112fd568d24e3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ViewManager</b> (<a class="el" href="classGame.html">Game</a> &amp;game, std::vector&lt; <a class="el" href="classAbstractAllegroEventListener.html">AbstractAllegroEventListener</a> * &gt; allegroEventListeners, <a class="el" href="classDisplay.html">Display</a> *display, std::vector&lt; <a class="el" href="classScreenEventInterpreter.html">ScreenEventInterpreter</a> * &gt; screenEventInterpreters, std::vector&lt; <a class="el" href="classScreen.html">Screen</a> * &gt; screens, std::string initialScreen, <a class="el" href="classSoundModule.html">SoundModule</a> &amp;soundModule)</td></tr>
+<tr class="memitem:a684ecb6174c1af078bb112fd568d24e3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a684ecb6174c1af078bb112fd568d24e3">ViewManager</a> (<a class="el" href="classGame.html">Game</a> &amp;game, std::vector&lt; <a class="el" href="classAbstractAllegroEventListener.html">AbstractAllegroEventListener</a> * &gt; allegroEventListeners, <a class="el" href="classDisplay.html">Display</a> *display, std::vector&lt; <a class="el" href="classScreenEventInterpreter.html">ScreenEventInterpreter</a> * &gt; screenEventInterpreters, std::vector&lt; <a class="el" href="classScreen.html">Screen</a> * &gt; screens, std::string initialScreen, <a class="el" href="classSoundModule.html">SoundModule</a> &amp;soundModule)</td></tr>
 <tr class="separator:a684ecb6174c1af078bb112fd568d24e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af91f677e59971904b9787ba8770b378e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af91f677e59971904b9787ba8770b378e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>changeActiveScreen</b> (std::string)</td></tr>
+<tr class="memitem:af91f677e59971904b9787ba8770b378e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#af91f677e59971904b9787ba8770b378e">changeActiveScreen</a> (std::string)</td></tr>
 <tr class="separator:af91f677e59971904b9787ba8770b378e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ce139d86ba73580c327cd2eac4763b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ce139d86ba73580c327cd2eac4763b4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>playSample</b> (std::string sampleName, float volume, bool playOnce=true)</td></tr>
+<tr class="memitem:a9ce139d86ba73580c327cd2eac4763b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a9ce139d86ba73580c327cd2eac4763b4">playSample</a> (std::string sampleName, float volume, bool playOnce=true)</td></tr>
 <tr class="separator:a9ce139d86ba73580c327cd2eac4763b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8201bca571eb89c02dc0fd6c1da5018e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8201bca571eb89c02dc0fd6c1da5018e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initializeScreens</b> ()</td></tr>
+<tr class="memitem:a8201bca571eb89c02dc0fd6c1da5018e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a8201bca571eb89c02dc0fd6c1da5018e">initializeScreens</a> ()</td></tr>
 <tr class="separator:a8201bca571eb89c02dc0fd6c1da5018e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac340733c77d4d0ed4dbe453a86b465b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac340733c77d4d0ed4dbe453a86b465b0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateScreensAfterDisplayChanges</b> ()</td></tr>
+<tr class="memitem:ac340733c77d4d0ed4dbe453a86b465b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#ac340733c77d4d0ed4dbe453a86b465b0">updateScreensAfterDisplayChanges</a> ()</td></tr>
 <tr class="separator:ac340733c77d4d0ed4dbe453a86b465b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f797d9cb4e2306276dd4419d20d3fc7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f797d9cb4e2306276dd4419d20d3fc7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>start</b> ()</td></tr>
+<tr class="memitem:a0f797d9cb4e2306276dd4419d20d3fc7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a0f797d9cb4e2306276dd4419d20d3fc7">start</a> ()</td></tr>
 <tr class="separator:a0f797d9cb4e2306276dd4419d20d3fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32c0f403834b720da90683066be6facc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32c0f403834b720da90683066be6facc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resizeDisplay</b> (int newWidth, int newHeight)</td></tr>
+<tr class="memitem:a32c0f403834b720da90683066be6facc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a32c0f403834b720da90683066be6facc">resizeDisplay</a> (int newWidth, int newHeight)</td></tr>
 <tr class="separator:a32c0f403834b720da90683066be6facc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06d7d534bc170365d39b4dba37f09005"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06d7d534bc170365d39b4dba37f09005"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>exit</b> ()</td></tr>
+<tr class="memitem:a06d7d534bc170365d39b4dba37f09005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a06d7d534bc170365d39b4dba37f09005">exit</a> ()</td></tr>
 <tr class="separator:a06d7d534bc170365d39b4dba37f09005"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7758c09a2eb1ddb2c43292f5e441991e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7758c09a2eb1ddb2c43292f5e441991e"></a>
-<a class="el" href="classDisplay.html">Display</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getDisplay</b> ()</td></tr>
+<tr class="memitem:a7758c09a2eb1ddb2c43292f5e441991e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classDisplay.html">Display</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewManager.html#a7758c09a2eb1ddb2c43292f5e441991e">getDisplay</a> ()</td></tr>
 <tr class="separator:a7758c09a2eb1ddb2c43292f5e441991e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Organises screens and sound in the game. Also handles Allegro main loop, which fires events. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a684ecb6174c1af078bb112fd568d24e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ViewManager::ViewManager </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classGame.html">Game</a> &amp;&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classAbstractAllegroEventListener.html">AbstractAllegroEventListener</a> * &gt;&#160;</td>
+          <td class="paramname"><em>allegroEventListeners</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classDisplay.html">Display</a> *&#160;</td>
+          <td class="paramname"><em>display</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classScreenEventInterpreter.html">ScreenEventInterpreter</a> * &gt;&#160;</td>
+          <td class="paramname"><em>screenEventInterpreters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classScreen.html">Screen</a> * &gt;&#160;</td>
+          <td class="paramname"><em>screens</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>initialScreen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSoundModule.html">SoundModule</a> &amp;&#160;</td>
+          <td class="paramname"><em>soundModule</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Constructor for the <a class="el" href="classViewManager.html">ViewManager</a> class. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">game</td><td>reference to the game object </td></tr>
+    <tr><td class="paramname">allegroEventListeners</td><td>vector of pointers to the <a class="el" href="classAbstractAllegroEventListener.html">AbstractAllegroEventListener</a> objects </td></tr>
+    <tr><td class="paramname">display</td><td>display object </td></tr>
+    <tr><td class="paramname">screenEventInterpreters</td><td>vector of pointers to the <a class="el" href="classScreenEventInterpreter.html">ScreenEventInterpreter</a> objects </td></tr>
+    <tr><td class="paramname">screens</td><td>vector of pointers to the <a class="el" href="classScreen.html">Screen</a> objects </td></tr>
+    <tr><td class="paramname">initialScreen</td><td>name of the first displayed screen </td></tr>
+    <tr><td class="paramname">soundModule</td><td>reference to the <a class="el" href="classSoundModule.html">SoundModule</a> object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="af91f677e59971904b9787ba8770b378e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::changeActiveScreen </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>screenTitle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Changes active screen for the other with the given name. Do nothing if other screen doesn't exist. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>title of the other screen </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a06d7d534bc170365d39b4dba37f09005"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::exit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets the variable isExit to true, which will finish infinite loop from the <a class="el" href="classViewManager.html#a0f797d9cb4e2306276dd4419d20d3fc7">start()</a> method. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7758c09a2eb1ddb2c43292f5e441991e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classDisplay.html">Display</a>* ViewManager::getDisplay </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Gives current display. </p><dl class="section return"><dt>Returns</dt><dd>pointer to display object </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8201bca571eb89c02dc0fd6c1da5018e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::initializeScreens </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calls initializeScreenElements method for every screen added to screens. Sets the first screen as the activeScreen. </p>
+
+</div>
+</div>
+<a class="anchor" id="a9ce139d86ba73580c327cd2eac4763b4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::playSample </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>sampleName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>volume</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>playOnce</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Calls playSample method from soundModule_ to play the sample with the given name. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sampleName</td><td>name of the sample </td></tr>
+    <tr><td class="paramname">volume</td><td>volume </td></tr>
+    <tr><td class="paramname">playOnce</td><td>defines if the sample should be played once or continuosly </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a32c0f403834b720da90683066be6facc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::resizeDisplay </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newHeight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calls resizeDisplay method from the display setResolution from the game. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newWidth</td><td>width of the screen after resize </td></tr>
+    <tr><td class="paramname">newHeight</td><td>height of the screen after resize </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a0f797d9cb4e2306276dd4419d20d3fc7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Realizes Allegro loop which fires events. </p>
+
+</div>
+</div>
+<a class="anchor" id="ac340733c77d4d0ed4dbe453a86b465b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ViewManager::updateScreensAfterDisplayChanges </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Calls updateScreenAfterDisplayChange method for every screen added to screens. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/View/<a class="el" href="ViewManager_8h_source.html">ViewManager.h</a></li>
 <li>src/View/ViewManager.cpp</li>

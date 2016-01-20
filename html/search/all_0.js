@@ -10,6 +10,7 @@ var searchData=
   ['actorsgenerator',['ActorsGenerator',['../classActorsGenerator.html',1,'']]],
   ['actortests',['ActorTests',['../classActorTests.html',1,'']]],
   ['actortypecomponent',['ActorTypeComponent',['../classActorTypeComponent.html',1,'']]],
+  ['adddrawableobject',['addDrawableObject',['../classScene.html#a962104754fdb9efc987b339ac124f0bd',1,'Scene']]],
   ['allegroeventinterpreter',['AllegroEventInterpreter',['../classAllegroEventInterpreter.html',1,'']]],
   ['allegrotogamekeymapper',['AllegroToGameKeyMapper',['../classAllegroToGameKeyMapper.html',1,'']]],
   ['asteroidcollisioncomponent',['AsteroidCollisionComponent',['../classAsteroidCollisionComponent.html',1,'']]],

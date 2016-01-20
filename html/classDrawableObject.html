@@ -90,6 +90,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">DrawableObject Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="DrawableObject_8h_source.html">DrawableObject.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -162,13 +164,63 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getTintB</b> ()</td></
 <tr class="memitem:ae0f50ac01b3d4192abdb5dd89de805a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0f50ac01b3d4192abdb5dd89de805a2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setTintB</b> (int newTintB)</td></tr>
 <tr class="separator:ae0f50ac01b3d4192abdb5dd89de805a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a173f6a4ac4aa12157cccef15089db4d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a173f6a4ac4aa12157cccef15089db4d3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setTint</b> (int newTintR, int newTintG, int newTintB)</td></tr>
+<tr class="memitem:a173f6a4ac4aa12157cccef15089db4d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDrawableObject.html#a173f6a4ac4aa12157cccef15089db4d3">setTint</a> (int newTintR, int newTintG, int newTintB)</td></tr>
 <tr class="separator:a173f6a4ac4aa12157cccef15089db4d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf15c4092f15bd7d42edfc2cdda6cac7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf15c4092f15bd7d42edfc2cdda6cac7"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>DrawableObject</b> (int x, int y, const char *path=NULL, const char *t=NULL, float a=0.0f, float z=1.0f, int tx=0, int ty=0)</td></tr>
 <tr class="separator:adf15c4092f15bd7d42edfc2cdda6cac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Basic object which is used to be drawn on <a class="el" href="classDisplay.html">Display</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a173f6a4ac4aa12157cccef15089db4d3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawableObject::setTint </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newTintR</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newTintG</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>newTintB</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Sets tint arguments - changes in colors of the bitmap. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tint</td><td>for R color </td></tr>
+    <tr><td class="paramname">tint</td><td>for G color </td></tr>
+    <tr><td class="paramname">tint</td><td>for B color </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/View/<a class="el" href="DrawableObject_8h_source.html">DrawableObject.h</a></li>
 <li>src/View/DrawableObject.cpp</li>
