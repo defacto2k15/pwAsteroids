@@ -6,8 +6,8 @@
 #define PWASTEROIDS_MYCONTACTLISTENER_H
 
 
-#include <lib/Box2D/Dynamics/b2WorldCallbacks.h>
-#include <lib/Box2D/Dynamics/Contacts/b2Contact.h>
+#include <Box2D/Dynamics/b2WorldCallbacks.h>
+#include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <iostream>
 class ContactComponentsContainer;
 

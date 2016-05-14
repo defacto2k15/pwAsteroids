@@ -57,8 +57,8 @@ if(UNIX)
     TARGET_LINK_LIBRARIES( pwAsteroids boost_system )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_thread )
     TARGET_LINK_LIBRARIES( pwAsteroids boost_python )
+    TARGET_LINK_LIBRARIES( pwAsteroids "${PROJECT_SOURCE_DIR}/lib/libBox2D.a" ) 
 
-    TARGET_LINK_LIBRARIES( pwAsteroids /home/defacto/ProgrammingProjects/pwAsteroids/lib/libBox2D.a) # todo repair
 
 else()
     SET_TARGET_PROPERTIES(pwAsteroids PROPERTIES ENVIRONMENT_DEBUG "PATH=${allegropath}/bin;%PATH%")
@@ -115,6 +115,7 @@ endif()
 # endif()
 
 include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+include_directories(pwAsteroids ${CMAKE_CURRENT_SOURCE_DIR})
 
 # we may or may not want to build tests
 option(BuildTests "BuildTests" OFF)
@@ -143,7 +144,7 @@ if(BuildTests)
     set_target_properties("${TEST_EXECUTABLE_NAME}" PROPERTIES COMPILE_DEFINITIONS "TESTING=1")
     # Set link libraries (order matters)
     target_link_libraries("${TEST_EXECUTABLE_NAME}" gmock gtest pthread ${Boost_LIBRARIES} )
-    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" /home/defacto/ProgrammingProjects/pwAsteroids/lib/libBox2D.a) # todo repair
+    TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" lib/libBox2D.a) 
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" ${Boost_LIBRARIES} )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_system )
     TARGET_LINK_LIBRARIES( "${TEST_EXECUTABLE_NAME}" boost_python )
