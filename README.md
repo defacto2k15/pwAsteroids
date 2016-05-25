@@ -1,4 +1,4 @@
-# ${1:pwAsteroids}
+# pwAsteroids
 Gra z prost¿ logik¿ zainspirowan¿ klasycznymi asteroids z lat 70tych. Celem projektu by¿a próba zaimplementowania prostego programu z u¿yciem wzorca Enriry-component-system, inspirowanego tym u¿ywanym w Unity3D. Dodatkowym (i osi¿gni¿tym) celem by¿o dodanie wbudowanego intepretera j¿zyka Python, który dzia¿a¿ jak konsola do debugowania. W pierwotnych za¿o¿eniach projekt mia¿ by¿ tworzony u¿ywaj¿c technik TDD z dodatkowymi testami "regresyjnymi" sterowanymi przez konsol¿, ale z powodu braku czasu oraz innych trudno¿ci ten punkt opuszczono.
 
 ## Kompilacja na systemach Linuxowych 
